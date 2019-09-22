@@ -6,22 +6,19 @@ CoordMode, Mouse, Screen;
 :*:;pycode::import code; code.interact(local={{}**locals(), **globals(){}})
 :*:;mci::mvn clean install
 :*:;mcsi::mvn clean install -DskipTests
-:*:;gcd::cd ~/git/coleman.ui/
-:*:;grb::git rebase -i HEAD~
-:*:;gfa::git fetch --all
-:*:;grh::git reset --hard
-:*:;gcb::git checkout
-:*:;gtag::git tag ""{LEFT}
-:*:;gadd::git add{SPACE}
-:*:;gcom::git commit -m ""{LEFT}
-:*:;gpl::git pull 
-:*:;gph::git push 
-:*:;glog::git log --oneline
-:*:;gpr::git pull origin master --rebase
-:*:;gst::git status
 
+:*:;yy::{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}{ENTER}
+:*:;zz::reset{ENTER}
+:*:;pp::ping google.com -t{ENTER}
 :*:;xp::xargs -I{{}{}}
 :*:;tlh::tail -f -n {+}0 $(ls -t | head -1)
+:*:;etlh::tail -f -n {+}0 $(find /. 2>/dev/null | grep hadoop | grep syslog$ | head -1)
+:*:;ltlh::tail -F -n {+}0 'C:\Users\jguzman2\dont_upload\logs.txt'
+
+:*:c;tlh::tail -f -n {+}0 $(ls -t | head -1) | colorizer{ENTER}
+:*:c;etlh::tail -f -n {+}0 $(find /. 2>/dev/null | grep hadoop | grep syslog$ | head -1) | colorizer{ENTER}
+:*:c;ltlh::tail -F -n {+}0 'C:\Users\jguzman2\dont_upload\logs.txt' | colorizer{ENTER}
+
 :*:;clh::cat $(ls -t | head -1)
 
 :*:;jprint::
@@ -32,11 +29,11 @@ CoordMode, Mouse, Screen;
 	Return
 }
 
-:*:;rg::
-{
-	Run "C:\Program Files\Git\git-bash.exe"
-	Return
-}
+:*:;initc::
+FileRead, clipboard, %A_ScriptDir%\colorizer.sh.txt
+MsgBox, Pasting:`n%clipboard%
+SendInput, +{Insert}{Enter}
+return
 
 ; ^SPACE:: Winset, Alwaysontop, , A
 ; ^UP:: WinSet, Style, +0xC00000, A

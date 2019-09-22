@@ -1,0 +1,2 @@
+x="asdasd"
+echo $x

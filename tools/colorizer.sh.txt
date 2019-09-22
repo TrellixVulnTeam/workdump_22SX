@@ -1,0 +1,9 @@
+# Usage: edit regex_* expressions and pipe output to colorizer; Reduced into one sed because tail -f bugs out on long pipes
+regex_red='Exception.*'
+regex_green='status=[A-Z]*\|Got an.*'
+regex_yellow='ResultProcessor.*'
+color_norm="$(printf '\033[0m')"
+color_red="$(printf '\033[0;1;31m')"
+color_green="$(printf '\033[0;1;32m')"
+color_yellow="$(printf '\033[0;1;33m')"
+alias colorizer='sed -e "s/${regex_yellow}/${color_yellow}&${color_norm}/g" -e "s/${regex_red}/${color_red}&${color_norm}/g" -e "s/${regex_green}/${color_green}&${color_norm}/g"'
