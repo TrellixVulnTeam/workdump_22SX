@@ -1,0 +1,135 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim} % for comments
+\usepackage[margin=0.5in]{geometry} % for margins
+\usepackage{amsmath} % for math
+\usepackage{amssymb} % for math
+\usepackage{latexsym} % for math
+\usepackage{mathtools} % for math
+\usepackage{mathrsfs} % for math
+\usepackage{cancel} % for math
+
+\usepackage{mleftright} % for left right
+\mleftright
+
+\title{Mathematical Logic Notes}
+\author{John Paul Guzman}
+\date{ }
+\begin{document}
+\maketitle
+%\tableofcontents
+
+\chapter{Trigonometric Identities}
+	===================================================================================================================
+\section{Fundamental Identities}
+	- $x^2 + y^2 = r^2$ \\ % <Construction with 4 translated right triangles>
+	- $tan(x) = \frac{sin(x)}{cos(x)}$ \\
+	- $sin(-x) = -sin(x)$ \\
+	- $cos(-x) = cos(x)$ \\
+	===================================================================================================================
+\section{Pythagorean identities}
+	- $sin^2(x) + cos^2(x) = 1$ \\
+	- $1 = sec^2(x) - tan^2(x)$ \\
+	- $1 = csc^2(x) - cot^2(x)$ \\
+	===================================================================================================================
+\section{Sum and difference formulas}
+	- $sin(a+b) = sin(a) cos(b) + cos(a) + sin(b)$ \\ % <Construction with 2 stacked right triangles>
+	- $sin(a-b) = sin(a) cos(b) - cos(a) + sin(b)$ \\
+	- $cos(a+b) = cos(a) cos(b) - sin(a) + sin(b)$ \\
+	- $cos(a-b) = cos(a) cos(b) + sin(a) + sin(b)$ \\
+	===================================================================================================================
+\section{Double-angle and half-angle formulas}
+	- $sin(2a) = 2 sin(a) cos(a)$ \\
+	- $cos(2a) = cos^2(a) - sin^2(a)$ \\
+	- $sin(a/2) = \sqrt{(1/2) (1 - cos(a))}$ \\
+	- $cos(a/2) = \sqrt{(1/2) (1 + cos(a))}$ \\
+	===================================================================================================================
+\section{Tangent angle formulas}
+	- $tan(a+b) = \frac{tan(a) + tan(b)}{1 - tan(a) tan(b)}$ \\
+	- $tan(a-b) = \frac{tan(a) - tan(b)}{1 + tan(a) tan(b)}$ \\
+	- $tan(2a) = \frac{2 tan(a)}{1 - tan^2(a)}$ \\
+	- $tan(a/2) = \frac{1 - cos(a)}{sin(a)}$ \\
+	===================================================================================================================
+\section{Products as sums formulas}
+	- $sin(a) cos(b) = (1/2) (sin(a+b) + sin(a-b))$ \\
+	- $cos(a) sin(b) = (1/2) (sin(a+b) - sin(a-b))$ \\
+	- $cos(a) cos(b) = (1/2) (cos(a+b) + cos(a-b))$ \\
+	- $sin(a) sin(b) = (-1/2) (cos(a+b) - cos(a-b))$ \\
+	===================================================================================================================
+\section{Sums as products formulas}
+	- $sin(a) + sin(b) = 2 sin((1/2) (a + b)) cos((1/2) (a - b))$ \\
+	- $sin(a) - sin(b) = 2 sin((1/2) (a - b)) cos((1/2) (a + b))$ \\
+	- $cos(a) + cos(b) = 2 cos((1/2) (a + b)) cos((1/2) (a - b))$ \\
+	- $cos(a) - cos(b) = -2 sin((1/2) (a + b)) sin((1/2) (a - b))$ \\
+	===================================================================================================================
+
+
+
+\begin{comment}
+TODO:
+- maybe dont abbreviate
+-\txt formatting
+-definitions should be iff
+	===================================================================================================================
+
+Hotkeys:
+Ctrl+R: find reference
+Ctrl+K, Ctrl+1: code fold all
+Ctrl+K, Ctrl+J: code unfold all
+Ctrl+Shift+[: code fold
+Ctrl+Shift+]: code unfold
+Ctrl+Shift+Right-click+Drag: block select
+Ctrl+Space: display auto-complete
+Tab: tab trigger auto-complete
+Shift+Tab: force tab
+
+=== math.sublime-completions ===
+{ "completions": [
+
+{ "trigger": "fl\t\\forall", "contents": "\\forall " },
+{ "trigger": "es\t\\exists", "contents": "\\exists " },
+{ "trigger": "ev\t\\equiv", "contents": "\\equiv " },
+{ "trigger": "es\t\\implies", "contents": "\\implies " },
+{ "trigger": "if\t\\iff", "contents": "\\iff " },
+{ "trigger": "and\t\\land", "contents": "\\land " },
+{ "trigger": "or\t\\lor", "contents": "\\lor " },
+{ "trigger": "not\t\\lnot", "contents": "\\lnot " },
+{ "trigger": "dr\t\\vdash", "contents": "\\vdash " },
+{ "trigger": "md\t\\vDash", "contents": "\\vDash " },
+{ "trigger": "cl\t\\mathcal", "contents": "\\mathcal{}" },
+{ "trigger": "fk\t\\mathfrak", "contents": "\\mathfrak{}" },
+{ "trigger": "mb\t\\mathbb", "contents": "\\mathbb{}" },
+{ "trigger": "nit\t\\inot", "contents": "\\inot " },
+{ "trigger": "cr\t\\contr", "contents": "\\contr " },
+{ "trigger": "phr\t\\placeholder", "contents": "\\placeholder" },
+
+{ "trigger": "vdc\t\\vdc{_i}{i=1}{Arity()}", "contents": "\\vdc{_i}{i=1}{Arity()}" },
+{ "trigger": "sb\t\\sub{}{}{}", "contents": "\\sub{}{}{}" },
+{ "trigger": "sq\t\\subseteq", "contents": "\\subseteq " },
+{ "trigger": "cp\t\\cup", "contents": "\\cup " },
+{ "trigger": "rw\t\\rightarrow", "contents": "\\rightarrow " },
+
+{ "trigger": "a\t\\alpha", "contents": "\\alpha " },
+{ "trigger": "b\t\\beta", "contents": "\\beta " },
+{ "trigger": "g\t\\gamma", "contents": "\\gamma " },
+{ "trigger": "f\t\\phi", "contents": "\\phi " },
+{ "trigger": "s\t\\psi", "contents": "\\psi " },
+{ "trigger": "m\t\\sigma", "contents": "\\sigma " },
+{ "trigger": "t\t\\theta", "contents": "\\theta " },
+
+{ "trigger": "A\t\\Alpha", "contents": "\\Alpha " },
+{ "trigger": "B\t\\Beta", "contents": "\\Beta " },
+{ "trigger": "G\t\\Gamma", "contents": "\\Gamma " },
+{ "trigger": "F\t\\Phi", "contents": "\\Phi " },
+{ "trigger": "S\t\\Psi", "contents": "\\Psi " },
+{ "trigger": "M\t\\Sigma", "contents": "\\Sigma " },
+{ "trigger": "T\t\\Theta", "contents": "\\Theta " },
+
+] }
+=== math.sublime-completions ===
+
+\end{comment}
+
+\end{document}
+
+
