@@ -20,6 +20,7 @@
 %\tableofcontents
 
 \chapter{Trigonometric Identities}
+	- Reference: https://www.themathpage.com/aTrig/trigonometric-identities.htm \\
 	===================================================================================================================
 \section{Fundamental Identities}
 	- $x^2 + y^2 = r^2$ \\ % <Construction with 4 translated right triangles>
@@ -43,6 +44,8 @@
 	- $cos(2a) = cos^2(a) - sin^2(a)$ \\
 	- $sin(a/2) = \sqrt{(1/2) (1 - cos(a))}$ \\
 	- $cos(a/2) = \sqrt{(1/2) (1 + cos(a))}$ \\
+	- $sin^2(a) = (1/2) (1 - cos(2a))$ \\
+	- $cos^2(a) = (1/2) (1 + cos(2a))$ \\
 	===================================================================================================================
 \section{Tangent angle formulas}
 	- $tan(a+b) = \frac{tan(a) + tan(b)}{1 - tan(a) tan(b)}$ \\
@@ -63,6 +66,39 @@
 	- $cos(a) - cos(b) = -2 sin((1/2) (a + b)) sin((1/2) (a - b))$ \\
 	===================================================================================================================
 
+\chapter{Calculus}
+	- Reference: http://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx \\
+	===================================================================================================================
+\section{Limits}
+	- Given $a, L \in \mathbb{R}$: \\
+	- $(\lim_{x \to a} f(x) = L) \iff \forall_{\epsilon > 0} \exists_{\delta > 0} (0 < |x - a| < \delta \implies |f(x) - L| < \epsilon)$ \\
+	- $Continuous(f, a) \iff (\lim_{x \to a} f(x) = f(a) \land f(a) \in \mathbb{R})$ \\
+	- $Continuous(f, A) \iff \forall_{a \in A} Continuous(f, a)$ \\
+	===================================================================================================================
+\subsection{Limit properties}
+	- Given $a, L, M \in \mathbb{R}$, $(\lim_{x \to a} f(x) = L)$, $(\lim_{x \to a} g(x) = M)$: \\
+	- $\lim_{x \to a} (f(x) \pm g(x)) = \lim_{x \to a} f(x) \pm \lim_{x \to a} g(x) = L + M$ \\ % $\epsilon = \epsilon_f + \epsilon_g, \delta = min(\delta_f, \delta_g)$
+	- $\lim_{x \to a} c = c$ \\ % $\delta > 0$
+	- $\lim_{x \to a} (c f(x)) = c \lim_{x \to a} f(x) = c L$ \\ % $\epsilon = c \epsilon_f$
+	- $\lim_{x \to a} (f(x) g(x)) = \lim_{x \to a} f(x) \lim_{x \to a} g(x) = L M$ \\ % $\epsilon = \epsilon_{f - L} \epsilon{g - M}, \delta = min(\delta_{f - L}, _{g - M})$
+	- $\lim_{x \to a} (f(x) / g(x)) = \lim_{x \to a} f(x) / \lim_{x \to a} g(x) = L / M$ \\ % $\epsilon_1 = |M| / 2, \epsilon_2 = |M|^2 \epsilon / 2, \delta
+	===================================================================================================================
+\section{Derivatives}
+	- $\frac{df(x)}{dx} = \lim_{h \rightarrow 0} \frac{f(x+h) - f(x)}{h}$ \\
+	- $Differentiable(f, a) \iff (\frac{df(x)}{dx}(a) \in \mathbb{R})$
+	- $Differentiable(f, A) \iff \forall_{a \in A} Differentiable(f, a)$ \\
+	===================================================================================================================
+\subsection{Derivative properties} % <From derivative and limit properties>
+	- $Differentiable(f, a) \implies Continuous(f, a)$ \\
+	- $\frac{d(f(x) \pm g(x))}{dx} = \frac{df(x)}{dx} \pm \frac{dg(x)}{dx}$ \\
+	- $\frac{dc}{dx} = 0$ \\
+	- $\frac{d(c f(x))}{dx} = c \frac{df(x)}{dx}$ \\
+	- $\frac{d(f(x) g(x))}{dx} = \frac{f(x)}{dx} g(x) + f(x) \frac{dg(x)}{dx}$ \\
+	- $\frac{d(f(x) / g(x))}{dx} =  \frac{\frac{f(x)}{dx} g(x) - f(x) \frac{dg(x)}{dx}}{(g(x))^2}$ \\
+	
+	- TODO: LOGARITHMIC, CHAIN RULE, POWER RULE, ...
+	===================================================================================================================
+\section{Integrals}
 
 
 \begin{comment}
