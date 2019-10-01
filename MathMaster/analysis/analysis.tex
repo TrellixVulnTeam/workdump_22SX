@@ -76,12 +76,17 @@
 	- $Continuous(f, A) \iff \forall_{a \in A} Continuous(f, a)$ \\
 	===================================================================================================================
 \subsection{Limit properties}
+	- References: \\
+		-- http://tutorial.math.lamar.edu/Classes/CalcI/ProofTrigDeriv.aspx \\
 	- Given $a, L, M \in \mathbb{R}$, $(\lim_{x \to a} f(x) = L)$, $(\lim_{x \to a} g(x) = M)$: \\
 	- $\lim_{x \to a} (f(x) \pm g(x)) = \lim_{x \to a} f(x) \pm \lim_{x \to a} g(x) = L + M$ \\ % $\epsilon = \epsilon_f + \epsilon_g, \delta = min(\delta_f, \delta_g)$
 	- $\lim_{x \to a} c = c$ \\ % $\delta > 0$
 	- $\lim_{x \to a} (c f(x)) = c \lim_{x \to a} f(x) = c L$ \\ % $\epsilon = c \epsilon_f$
 	- $\lim_{x \to a} (f(x) g(x)) = \lim_{x \to a} f(x) \lim_{x \to a} g(x) = L M$ \\ % $\epsilon = \epsilon_{f - L} \epsilon{g - M}, \delta = min(\delta_{f - L}, _{g - M})$
 	- $\lim_{x \to a} (f(x) / g(x)) = \lim_{x \to a} f(x) / \lim_{x \to a} g(x) = L / M$ \\ % $\epsilon_1 = |M| / 2, \epsilon_2 = |M|^2 \epsilon / 2, \delta
+	- $(f(x) \leq h(x) \leq g(x) \land \lim_{x \to a} f(x) = \lim_{x \to a} g(x) = L) \implies \lim_{x \to a} h(x) = L$ \\
+	- $\lim_{\theta \to 0} \frac{sin(\theta)}{\theta} = 1$ \\
+	- $\lim_{\theta \to 0} \frac{cos(\theta) - 1}{\theta} = 0$ \\	
 	===================================================================================================================
 \section{Derivatives}
 	- $\frac{df(x)}{dx} = \lim_{h \rightarrow 0} \frac{f(x+h) - f(x)}{h}$ \\
@@ -89,30 +94,32 @@
 	- $Differentiable(f, A) \iff \forall_{a \in A} Differentiable(f, a)$ \\
 	===================================================================================================================
 \subsection{Derivative properties} % <From derivative and limit properties>
+	- References: \\
+		-- http://tutorial.math.lamar.edu/Classes/CalcI/DerivativeProofs.aspx#Extras_DerPf_ChainRule \\
+		-- http://tutorial.math.lamar.edu/Classes/CalcI/DiffExpLogFcns.aspx \\
+	- $\lim_{h \to 0} (\frac{e^h - 1}{h} = 1)$ \\
+	- $e^{ln(x)} = x$ \\
 	- $Differentiable(f, a) \implies Continuous(f, a)$ \\
 	- $\frac{d(f(x) \pm g(x))}{dx} = \frac{df(x)}{dx} \pm \frac{dg(x)}{dx}$ \\
 	- $\frac{dc}{dx} = 0$ \\
 	- $\frac{d(c f(x))}{dx} = c \frac{df(x)}{dx}$ \\
 	- $\frac{d(f(x) g(x))}{dx} = \frac{f(x)}{dx} g(x) + f(x) \frac{dg(x)}{dx}$ \\
 	- $\frac{d(f(x) / g(x))}{dx} =  \frac{\frac{f(x)}{dx} g(x) - f(x) \frac{dg(x)}{dx}}{(g(x))^2}$ \\
-	===================================================================================================================
-\subsection{Derivative properties from chain rule} % http://tutorial.math.lamar.edu/Classes/CalcI/DerivativeProofs.aspx#Extras_DerPf_ChainRule ; http://math2.org/math/derivatives/tableof.htm
-	- $\frac{df(g(x))}{dx} = \frac{df(g(x))}{dg(x)} \frac{dg(x)}{dx}$ \\ % use definitions, \bar{f} = \delta f or f, \bar{g} = \delta g or g to catch undefined cases 
 	- $\frac{d(f^{-1}(x))}{dx} = \frac{1}{\frac{df(x)}{dx}(f^{-1}(x))}$ \\
-	- $ln(e^x) = e^{ln(x)} = x$ \\
-	- $\lim_{h \to 0} (\frac{e^h - 1}{h} = 1)$ \\
-	- $\frac{d(x^{-1})}{dx} = ln|x|$ \\ % <From definition of e???>
-	- $\frac{d(e^x)}{dx} = e^x$ \\
+	- $\frac{df(g(x))}{dx} = \frac{df(g(x))}{dg(x)} \frac{dg(x)}{dx}$ \\ % use definitions, \bar{f} = \delta f or f, \bar{g} = \delta g or g to catch undefined
+	- $\frac{d(e^x)}{dx} = e^x$ \\ % <From definition of e>
+	- $\frac{d(x^{-1})}{dx} = ln|x|$ \\
 	- $\frac{d(x^c)}{dx} = c x^{c-1}$ \\
+	- $\frac{dsin(x)}{dx} = cos(x)$ \\
 	===================================================================================================================
+
 \section{Integrals}
 
 
 \begin{comment}
 TODO:
-- maybe dont abbreviate
--\txt formatting
--definitions should be iff
+- LINK REFERENCES !!!
+- REWORK NOTES FOCUS ON STRUCTURE OVER CHEATSHEET
 	===================================================================================================================
 
 Hotkeys:
