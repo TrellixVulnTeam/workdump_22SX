@@ -1,0 +1,22 @@
+#!/bin/bash
+set -x
+url=${1:-$(termux-clipboard-get)}
+cd "/storage/6B98-12F6/Android/data/com.termux/files"
+echo "Enter resolution: "
+read res
+echo "Enter subdirectory: "
+read dir
+echo "Enter prefix: "
+read pre
+if [ -n "${dir}" ]; then
+mkdir "${dir}" ; cd "${dir}"
+fi
+if [ "${res}" == "0" ]; then
+youtube-dl -ci -o "${pre}%(title)s.%(ext)s" --extract-audio --audio-format mp3 ${url}
+elif [ -z "${res}" ]; then
+youtube-dl -ci -o "${pre}%(title)s.%(ext)s" ${url}
+else
+youtube-dl -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "bestvideo[height<=${res}]+bestaudio/best[height<=${res}]" ${url}
+fi
+termux-vibrate -d 2000 -f
+
