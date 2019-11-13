@@ -12,11 +12,11 @@ if [ -n "${dir}" ]; then
 mkdir "${dir}" ; cd "${dir}"
 fi
 if [ "${res}" == "0" ]; then
-youtube-dl -ci -o "${pre}%(title)s.%(ext)s" --extract-audio --audio-format mp3 ${url}
+youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --extract-audio --audio-format mp3 ${url}
 elif [ -z "${res}" ]; then
-youtube-dl -ci -o "${pre}%(title)s.%(ext)s" ${url}
+youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" ${url}
 else
-youtube-dl -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "bestvideo[height<=${res}]+bestaudio/best[height<=${res}]" ${url}
+youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "bestvideo[height<=${res}]+bestaudio/best[height<=${res}]" ${url}
 fi
 termux-vibrate -d 2000 -f
 
