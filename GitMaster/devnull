@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "C:\Users\jguzman2\AppData\Local\Programs\Python\Python37\Scripts\exrex-script.py", line 11, in <module>
+    load_entry_point('exrex==0.10.5', 'console_scripts', 'exrex')()
+  File "C:\Users\jguzman2\AppData\Local\Programs\Python\Python37\Scripts\exrex.py", line 523, in __main__
+    args['output'].write(s)
+OSError: [Errno 22] Invalid argument
