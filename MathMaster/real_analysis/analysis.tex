@@ -1,0 +1,69 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+ 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=green
+    filecolor=cyan,      
+    urlcolor=magenta,
+}
+
+\urlstyle{same}
+
+\usepackage{enumitem}
+\setlist[enumerate]{label*=\arabic*.}
+\setlist{nolistsep}
+
+\usepackage{stix}
+
+\newcommand{\ann}[1]{(( #1 ))}
+\newcommand{\df}[2]{\hypertarget{#1}{\textcolor{red}{\ann{#2} #1}}}
+\newcommand{\wff}[2]{\hypertarget{#1}{\textcolor{red}{\ann{#2} #1}}}
+\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{blue}{#1}}}
+\newcommand{\pipe}{$\vrectangleblack$}
+
+ 
+\begin{document}
+ 
+\tableofcontents
+ 
+\chapter{First Chapter}
+
+\begin{enumerate}
+  \item First
+  \begin{enumerate}
+    \item Second
+    \item Third
+  \end{enumerate}
+  \item Fourth
+\end{enumerate}
+
+
+This will be an empty chapter and I will put some text here
+ 
+\begin{equation}
+\label{eq:1}
+\sum_{i=0}^{\infty} a_i x^i
+\end{equation}
+ 
+The equation \ref{eq:1} shows a sum that is divergent. This formula 
+will later be used in the page \pageref{second}.
+ 
+For further references \pipe see \href{http://www.sharelatex.com}{Something 
+Linky} or go to the next url: \url{http://www.sharelatex.com} or open 
+the next file \href{run:./file.txt}{File.txt}
+ 
+It's also possible to link directly any word or 
+\hypertarget{thesentence}{any sentence} in your document.
+\df{supwithit}{Sup With It Theorem}
+
+If you read this text, you will get no information.  Really?  
+Is there no information?
+\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ 
+For instance \hyperlink{thesentence}{this sentence}.
+\rf{supwithit}
+ 
+\end{document}

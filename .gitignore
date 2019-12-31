@@ -1,3 +1,10 @@
+# LaTex build files
+*.aux
+*.log
+*.out
+*.synctex,gz
+*.toc
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,0 +1,5 @@
+# texlive install infrastructure only (portable)
+# kpsewhich --engine=pdftex pdflatex.fmt ?? maybe, or just use xetex over pdftex build
+
+tlmgr option repository http://mirror.ctan.org/systems/texlive/tlnet
+tlgmr install latex-bin xetex amscls amsfonts amsmath atbegshi atveryend bibtex bigintcalc bitset booktabs caption dvipdfmx dvips ec etexcmds etoolbox fancyvrb float fontspec framed geometry gettitlestring graphics graphics-def gsftopk helvetic hycolor hyperref inconsolata infwarerr intcalc kvdefinekeys kvoptions kvsetkeys latexmk letltxmacro lm ltxcmds luaotfload makeindex mathspec metafont mfware natbib oberdiek pdfescape pdftexcmds refcount rerunfilecheck tex times titling tools uniquecounter upquote url xkeyval zapfding standalone preview xcolor mathtools cancel mleftright
