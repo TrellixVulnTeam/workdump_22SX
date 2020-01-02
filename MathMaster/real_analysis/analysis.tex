@@ -1,6 +1,7 @@
 \documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage[margin=0.5in]{geometry} % for margins
  
 \usepackage{hyperref}
 \hypersetup{
@@ -17,19 +18,51 @@
 \setlist[enumerate]{label*=\arabic*.}
 \setlist{nolistsep}
 
+\usepackage{amsmath}
 \usepackage{stix}
 
-\newcommand{\ann}[1]{(( #1 ))}
-\newcommand{\df}[2]{\hypertarget{#1}{\textcolor{red}{\ann{#2} #1}}}
-\newcommand{\wff}[2]{\hypertarget{#1}{\textcolor{red}{\ann{#2} #1}}}
-\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{blue}{#1}}}
+\newcommand{\abr}{:=}
 \newcommand{\pipe}{$\vrectangleblack$}
+\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
 
- 
+\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.19,0.19,0.19}}  
+\newcommand{\settextcolour}{\color[rgb]{0.77,0.77,0.77}}    
+\newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
+
+
 \begin{document}
- 
+
+\invertbackgroundtext % "keep_focus_delay": 1
 \tableofcontents
- 
+
+\chapter{Philosopherers}
+(1.5) \\
+$\df{OrderTrichotomy}(<, S) \abr \forall_{x, y \in S}(x < y \veebar x = y \veebar y < x)$ \\
+$\df{OrderTransitivity}(<, S) \abr \forall_{x, y, z \in S}((x < y \land y < z) \implies x < z)$ \\
+$\df{Order}(<, S) \abr \rf{OrderTrichotomy}(<, S) \land \rf{OrderTransitivity}(<, S)$ \\
+(1.7) \\
+$\df{BoundedAbove}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(x \leq \beta)$ \\
+$\df{BoundedBelow}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(\beta \leq x)$ \\
+$\df{UpperBound}(\beta, E, S, <) \abr \rf{BoundedAbove}(E, S, <) \land \beta \in S \land \forall_{x \in E}(x \leq \beta)$ \\
+$\df{LowerBound}(\beta, E, S, <) \abr \rf{BoundedBelow}(E, S, <) \land \beta \in S \land \forall_{x \in E}(\beta \leq x)$ \\
+(1.8) \\
+$\df{LUB}(\alpha, E, S, <) \abr $
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{First Chapter}
 
 \begin{enumerate}
@@ -43,19 +76,19 @@
 
 
 This will be an empty chapter and I will put some text here
- 
+
 \begin{equation}
 \label{eq:1}
 \sum_{i=0}^{\infty} a_i x^i
 \end{equation}
- 
+
 The equation \ref{eq:1} shows a sum that is divergent. This formula 
 will later be used in the page \pageref{second}.
- 
+
 For further references \pipe see \href{http://www.sharelatex.com}{Something 
 Linky} or go to the next url: \url{http://www.sharelatex.com} or open 
 the next file \href{run:./file.txt}{File.txt}
- 
+
 It's also possible to link directly any word or 
 \hypertarget{thesentence}{any sentence} in your document.
 \df{supwithit}{Sup With It Theorem}
