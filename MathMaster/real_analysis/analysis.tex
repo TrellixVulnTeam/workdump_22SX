@@ -21,39 +21,76 @@
 \usepackage{amsmath}
 \usepackage{stix}
 
+\usepackage{mleftright} % for left right
+\mleftright
+\delimitershortfall-1sp
+
+%\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+%\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+%\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
+\newcommand{\df}[1]{#1}
+\newcommand{\rf}[1]{#1}
+\newcommand{\wff}[1]{#1}
 \newcommand{\abr}{:=}
 \newcommand{\pipe}{$\vrectangleblack$}
-\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
+\newcommand{\pr}[1]{\left(#1\right)}
 
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.19,0.19,0.19}}  
 \newcommand{\settextcolour}{\color[rgb]{0.77,0.77,0.77}}    
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 
 
+% "sumatra": "C:\\Users\\guzma\\Downloads\\PortableInstallations\\PortableGit\\usr\\bin\\echo.exe", "keep_focus_delay": 0
 \begin{document}
 
-\invertbackgroundtext % "keep_focus_delay": 1
+\invertbackgroundtext 
+
 \tableofcontents
 
 \chapter{Philosopherers}
-(1.5) \\
+% (1.5) \\
 $\df{OrderTrichotomy}(<, S) \abr \forall_{x, y \in S}(x < y \veebar x = y \veebar y < x)$ \\
-$\df{OrderTransitivity}(<, S) \abr \forall_{x, y, z \in S}((x < y \land y < z) \implies x < z)$ \\
+$\df{OrderTransitivity}(<, S) \abr \forall_{x, y, z \in S}\pr{(x < y \land y < z) \implies x < z}$ \\
 $\df{Order}(<, S) \abr \rf{OrderTrichotomy}(<, S) \land \rf{OrderTransitivity}(<, S)$ \\
-(1.7) \\
+% (1.7) \\
 $\df{BoundedAbove}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(x \leq \beta)$ \\
 $\df{BoundedBelow}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(\beta \leq x)$ \\
 $\df{UpperBound}(\beta, E, S, <) \abr \rf{BoundedAbove}(E, S, <) \land \beta \in S \land \forall_{x \in E}(x \leq \beta)$ \\
 $\df{LowerBound}(\beta, E, S, <) \abr \rf{BoundedBelow}(E, S, <) \land \beta \in S \land \forall_{x \in E}(\beta \leq x)$ \\
-(1.8) \\
-$\df{LUB}(\alpha, E, S, <) \abr $
+% (1.8) \\
+$\df{LUB}(\alpha, E, S, <) \abr \rf{UpperBound}(\alpha, E, S, <) \land \forall_{\gamma}\pr{\gamma < \alpha \implies \lnot \rf{UpperBound}(\gamma, E, S, <)}$ \\
+$\df{GLB}(\alpha, E, S, <) \abr \rf{LowerBound}(\alpha, E, S, <) \land \forall_{\beta}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, E, S, <)}$ \\
+% (1.10) \\
+$\df{LUBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedAbove}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{LUB}(\alpha, E, S, <)}}$ \\
+$\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedBelow}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{GLB}(\alpha, E, S, <)}}$ \\
+% (1.11) \\
+\wff{LUBPropertyImpliesGLBProperty} $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$ \\
+\begin{enumerate}
+  \item $\rf{LUBProperty}(S, <) \implies \ldots$
+  \begin{enumerate}
+    \item $\forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedAbove}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{LUB}(\alpha, E, S, <)}}$
+    \item $(\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)) \implies \ldots$
+    \begin{enumerate}
+      \item $|B| = 1 \implies \ldots$
+      \begin{enumerate}
+        \item $\{u\} \abr B$
+        \item $\rf{GLB}(u, B, S, <)$
+        \item $\exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
+      \end{enumerate}
+      \item $|B| = 1 \implies \exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
+      \item $|B| \neq 1 \implies \ldots$
+      \begin{enumerate}
+        \item $|B| > 1$ shit to think about
+        
+      \end{enumerate}
+      \item $L \abr \{s \in S | \rf{LowerBound}(s, B, S, <)\}$
+      \item $?? \emptyset \neq L$
 
 
-
-
-
+    \end{enumerate}
+  \end{enumerate}
+  \item Fourth
+\end{enumerate}
 
 
 
