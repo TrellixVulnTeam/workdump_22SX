@@ -26,13 +26,13 @@
 \delimitershortfall-1sp
 
 %\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-%\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+%\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{(#1)}}}
 %\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
 \newcommand{\df}[1]{#1}
+\newcommand{\wff}[1]{(#1)}
 \newcommand{\rf}[1]{#1}
-\newcommand{\wff}[1]{#1}
 \newcommand{\abr}{:=}
-\newcommand{\pipe}{$\vrectangleblack$}
+\newcommand{\pipe}{$\phantom{(}\vrectangleblack\phantom{)}$}
 \newcommand{\pr}[1]{\left(#1\right)}
 
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.19,0.19,0.19}}  
@@ -73,20 +73,25 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
     \begin{enumerate}
       \item $|B| = 1 \implies \ldots$
       \begin{enumerate}
-        \item $\{u\} \abr B$
-        \item $\rf{GLB}(u, B, S, <)$
-        \item $\exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
+        \item $\exists_{u'}(u' \in B)$ \pipe $u \abr choice(\{u' | u' \in B\})$ \pipe $B = \{u\}$
+        \item $\rf{GLB}(u, B, S, <)$ \pipe $\exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
       \end{enumerate}
       \item $|B| = 1 \implies \exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
       \item $|B| \neq 1 \implies \ldots$
       \begin{enumerate}
-        \item $|B| > 1$ shit to think about
-        
+      	\item $L \abr \{s \in S | \rf{LowerBound}(s, B, S, <)\}$
+        \item $|B| > 1$ \pipe $\exists_{{b_1}' \in B} \exists_{{b_0}' \in B}({b_0}' < {b_1}')$ \pipe $b_1 \abr choice\pr{\{{b_1}' \in B | \exists_{{b_0}' \in B}({b_0}' < {b_1}')\}}$
+        \item $\lnot LowerBound(b_1, B, S, <)$ \pipe $b_1 \notin L$ \pipe $L \subset S$
+        \item $\exists_{\delta' \in S}\pr{LowerBound(\delta', B, S, <)}$ \pipe $\delta \abr choice\pr{\delta' \in S | \pr{LowerBound(\delta', B, S, <)}}$
+        \item $\delta \in L$ \pipe $\emptyset \neq L$
+        \item $\emptyset \neq L \subset S$
+        \item ----
+        \item $\forall_{y \in L}\pr{LowerBound(y, B, S, <)}$ \pipe $\forall_{y \in L}\pr{\rf{BoundedBelow}(E, S, <) \land y \in S \land \forall_{x \in E}(y \leq x)}$
+        % TODO expand all abr, check if definition is convenient for proofs
       \end{enumerate}
-      \item $L \abr \{s \in S | \rf{LowerBound}(s, B, S, <)\}$
-      \item $?? \emptyset \neq L$
-
-
+      \item $|B| \neq 1 \implies \exists_{\beta_1 \in S}\pr{\rf{GLB}(\beta_1, B, S, <)}$
+	  \item $\pr{|B| = 1 \implies \exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}} \land \pr{|B| \neq 1 \implies \exists_{\beta_1 \in S}\pr{\rf{GLB}(\beta_1, B, S, <)}}$
+	  \item $(|B| = 1 \lor |B| \neq 1) \implies \exists_{\beta \in S}\pr{\rf{GLB}(\beta, B, S, <)}$ \pipe $\exists_{\beta \in S}\pr{\rf{GLB}(\beta, B, S, <)}$
     \end{enumerate}
   \end{enumerate}
   \item Fourth
