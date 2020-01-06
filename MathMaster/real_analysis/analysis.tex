@@ -38,6 +38,7 @@
 \renewlist{enumerate}{enumerate}{8}
 
 \usepackage{amsmath}
+\usepackage{bbold}
 \usepackage{stix}
 
 \usepackage{mleftright} % for left right
@@ -153,10 +154,13 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
   \end{enumerate}
   \lit $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$
 \end{enumerate}
-
-
-FUCKING DONE
-
+% (1.12) \\
+$\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, z \in F} (\\
+x + y \in F \land x * y \in F \land \\
+x + y = y + x \land x * y = y * x \land \\
+(x + y) + z = x + (y + z) \land (x * y) * z = x * (y * z) \land \\
+\mathbb{0} + x = x \land (\mathbb{1} \neq 0 \land \mathbb{1} * x = x) \land \\
+\exists_{-x \in F}) \pr{x + (-x) = \mathbb{0}} \land () \land$
 
 
 
