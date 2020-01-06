@@ -15,8 +15,27 @@
 \urlstyle{same}
 
 \usepackage{enumitem}
-\setlist[enumerate]{label*=\arabic*.}
-\setlist{nolistsep}
+\setlist[enumerate]{align=left, %, label*=\arabic*.}
+  leftmargin=3.0mm, %
+  rightmargin=0.0mm, %
+  listparindent=0.0mm, %
+  labelwidth=0.0mm, %
+  labelsep=0.0mm, %
+  itemindent=0.0mm, %
+}
+\setlist[enumerate,1]{label=(\arabic*)\phantom{))}}
+\setlist[enumerate,2]{label=(\arabic{enumi}.\arabic*)\phantom{))}}
+\setlist[enumerate,3]{label=(\arabic{enumi}.\arabic{enumii}.\arabic*)\phantom{))}}
+\setlist[enumerate,4]{label=(\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic*)\phantom{))}}
+\setlist[enumerate,5]{label=(\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.\arabic*)\phantom{))}}
+\setlist[enumerate,6]{label=(\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.\arabic{enumv}.\arabic*)\phantom{))}}
+\setlist[enumerate,7]{label=(\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.\arabic{enumv}.\arabic{enumvi}.\arabic*)\phantom{))}}
+\setlist[enumerate,8]{label=(\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.\arabic{enumv}.\arabic{enumvi}.\arabic{enumvii}.\arabic*)\phantom{))}}
+
+\setlist{nolistsep,after=}
+\setlistdepth{8}
+\renewlist{itemize}{itemize}{8}
+\renewlist{enumerate}{enumerate}{8}
 
 \usepackage{amsmath}
 \usepackage{stix}
@@ -25,20 +44,36 @@
 \mleftright
 \delimitershortfall-1sp
 
-%\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-%\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{(#1)}}}
-%\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
-\newcommand{\df}[1]{#1}
-\newcommand{\wff}[1]{(#1)}
-\newcommand{\rf}[1]{#1}
+\newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
+\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{((#1))}\phantom{--}}}
+\newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
+%\newcommand{\df}[1]{#1}
+%\newcommand{\wff}[1]{((#1))\phantom{--}}
+%\newcommand{\rf}[1]{#1}
 \newcommand{\abr}{:=}
 \newcommand{\pipe}{$\phantom{(}\vrectangleblack\phantom{)}$}
 \newcommand{\pr}[1]{\left(#1\right)}
 
-\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.19,0.19,0.19}}  
-\newcommand{\settextcolour}{\color[rgb]{0.77,0.77,0.77}}    
+\usepackage{xifthen}% provides \isempty test
+\newcommand{\ann}[2]{%
+  \hfill %
+  $\stackrel%
+  {\hbox{\scriptsize{\ifthenelse{\isempty{#1}}%
+    {\phantom{from}}%
+    {from: #1}}}}%
+  {\hbox{\scriptsize{\ifthenelse{\isempty{#2}}%
+    {\phantom{wts}}%
+    {wts: #2}}}}$%
+  \ }
+
+\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
+\newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 
+%\usepackage[author={Max Schlepzig}]{pdfcomment}
+%Here we\pdfcomment[icon=Insert]{insert: miss} a word!
+
+\newenvironment{lit}{\item \vspace{.75mm} \hrule \vspace{.75mm}}
 
 % "sumatra": "C:\\Users\\guzma\\Downloads\\PortableInstallations\\PortableGit\\usr\\bin\\echo.exe", "keep_focus_delay": 0
 \begin{document}
@@ -55,8 +90,8 @@ $\df{Order}(<, S) \abr \rf{OrderTrichotomy}(<, S) \land \rf{OrderTransitivity}(<
 % (1.7) \\
 $\df{BoundedAbove}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(x \leq \beta)$ \\
 $\df{BoundedBelow}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(\beta \leq x)$ \\
-$\df{UpperBound}(\beta, E, S, <) \abr \rf{BoundedAbove}(E, S, <) \land \beta \in S \land \forall_{x \in E}(x \leq \beta)$ \\
-$\df{LowerBound}(\beta, E, S, <) \abr \rf{BoundedBelow}(E, S, <) \land \beta \in S \land \forall_{x \in E}(\beta \leq x)$ \\
+$\df{UpperBound}(\beta, E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \beta \in S \land \forall_{x \in E}(x \leq \beta)$ \\
+$\df{LowerBound}(\beta, E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \beta \in S \land \forall_{x \in E}(\beta \leq x)$ \\
 % (1.8) \\
 $\df{LUB}(\alpha, E, S, <) \abr \rf{UpperBound}(\alpha, E, S, <) \land \forall_{\gamma}\pr{\gamma < \alpha \implies \lnot \rf{UpperBound}(\gamma, E, S, <)}$ \\
 $\df{GLB}(\alpha, E, S, <) \abr \rf{LowerBound}(\alpha, E, S, <) \land \forall_{\beta}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, E, S, <)}$ \\
@@ -66,39 +101,61 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
 % (1.11) \\
 \wff{LUBPropertyImpliesGLBProperty} $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$ \\
 \begin{enumerate}
-  \item $\rf{LUBProperty}(S, <) \implies \ldots$
+  \lit $\rf{LUBProperty}(S, <) \implies \ldots$    \ann{}{2}
   \begin{enumerate}
-    \item $\forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedAbove}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{LUB}(\alpha, E, S, <)}}$
-    \item $(\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)) \implies \ldots$
+    \lit $\pr{\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)} \implies \ldots$    \ann{}{1.2}
     \begin{enumerate}
-      \item $|B| = 1 \implies \ldots$
+      \lit $\rf{Order}(<, S) \land \exists_{\delta' \in S}\pr{\rf{LowerBound}(\delta', B, S, <)}$    \ann{1.1}{}
+      \lit $|B| = 1 \implies \ldots$    \ann{}{1.1.3}
       \begin{enumerate}
-        \item $\exists_{u'}(u' \in B)$ \pipe $u \abr choice(\{u' | u' \in B\})$ \pipe $B = \{u\}$
-        \item $\rf{GLB}(u, B, S, <)$ \pipe $\exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
+        \lit $\exists_{u'}(u' \in B)$ \pipe $u \abr choice(\{u' | u' \in B\})$ \pipe $B = \{u\}$ \pipe $\rf{GLB}(u, B, S, <)$    \ann{1.1.2}{}
+        \lit $\exists_{\epsilon_0 \in S}\pr{\rf{GLB}(\epsilon_0, B, S, <)}$
       \end{enumerate}
-      \item $|B| = 1 \implies \exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}$
-      \item $|B| \neq 1 \implies \ldots$
+      \lit $|B| = 1 \implies \exists_{\epsilon_0 \in S}\pr{\rf{GLB}(\epsilon_0, B, S, <)}$
+      \lit $|B| \neq 1 \implies \ldots$    \ann{}{1.1.5}
       \begin{enumerate}
-      	\item $L \abr \{s \in S | \rf{LowerBound}(s, B, S, <)\}$
-        \item $|B| > 1$ \pipe $\exists_{{b_1}' \in B} \exists_{{b_0}' \in B}({b_0}' < {b_1}')$ \pipe $b_1 \abr choice\pr{\{{b_1}' \in B | \exists_{{b_0}' \in B}({b_0}' < {b_1}')\}}$
-        \item $\lnot LowerBound(b_1, B, S, <)$ \pipe $b_1 \notin L$ \pipe $L \subset S$
-        \item $\exists_{\delta' \in S}\pr{LowerBound(\delta', B, S, <)}$ \pipe $\delta \abr choice\pr{\delta' \in S | \pr{LowerBound(\delta', B, S, <)}}$
-        \item $\delta \in L$ \pipe $\emptyset \neq L$
-        \item $\emptyset \neq L \subset S$
-        \item ----
-        \item $\forall_{y \in L}\pr{LowerBound(y, B, S, <)}$ \pipe $\forall_{y \in L}\pr{\rf{BoundedBelow}(E, S, <) \land y \in S \land \forall_{x \in E}(y \leq x)}$
-        % TODO expand all abr, check if definition is convenient for proofs
+        \lit $\forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedAbove}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{LUB}(\alpha, E, S, <)}}$    \ann{1}{}
+        \lit $L \abr \{s \in S | \rf{LowerBound}(s, B, S, <)\}$
+        \lit $|B| > 1 \land \rf{OrderTrichotomy}(<, S)$ \pipe $\exists_{{b_1}' \in B} \exists_{{b_0}' \in B}({b_0}' < {b_1}')$    \ann{1.1.1}{1.1.4.7}
+        \lit $b_1 \abr choice\pr{\{{b_1}' \in B | \exists_{{b_0}' \in B}({b_0}' < {b_1}')\}}$ \pipe $\lnot \rf{LowerBound}(b_1, B, S, <)$    \ann{1.1.4.2}{}
+        \lit $b_1 \notin L$ \pipe $L \subset S$
+        \lit $\delta \abr choice\pr{\{\delta' \in S | \rf{LowerBound}(\delta', B, S, <)\}}$ \pipe $\delta \in L$ \pipe $\emptyset \neq L$    \ann{1.1}{}
+        \lit $\emptyset \neq L \subset S$
+        \lit $\forall_{y \in L}\pr{\rf{LowerBound}(y, B, S, <)}$ \pipe $\forall_{y \in L} \forall_{x \in B}(y \leq x)$    \ann{1.1.4.2}{1.1.4.10}
+        \lit $\forall_{x \in B}\pr{x \in S \land \forall_{y \in L}(y \leq x)}$ \pipe $\forall_{x \in B}\pr{\rf{UpperBound}(x, L, S, <)}$
+        \lit $\exists_{x \in S}\pr{\rf{UpperBound}(x, L, S, <)}$ \pipe $\rf{BoundedAbove}(L, S, <)$
+        \lit $\emptyset \neq L \subset S \land \rf{BoundedAbove}(L, S, <)$
+        \lit $\exists_{\alpha' \in S}\pr{\rf{LUB}(\alpha', L, S, <)}$ \pipe $\alpha \abr choice\pr{\{\alpha' \in S | \pr{\rf{LUB}(\alpha', L, S, <)}\}}$    \ann{1.1.4.1}{1.1.4.21}
+        \lit $\forall_{x}\pr{x \in B \implies \rf{UpperBound}(x, L, S, <)}$    \ann{1.1.4.9}{1.1.4.17}
+        \lit $\forall_{x}\pr{\lnot \rf{UpperBound}(x, L, S, <) \implies x \notin B}$
+        \lit $\gamma < \alpha \implies \ldots$    \ann{}{1.1.4.16}
+        \begin{enumerate}
+          \lit $\lnot \rf{UpperBound}(\gamma, L, S, <)$ \pipe $\gamma \notin B$    \ann{1.1.4.12, 1.1.4.14}{}
+        \end{enumerate}
+        \lit $\gamma < \alpha \implies \gamma \notin B$ \pipe $\gamma \in B \implies \gamma \geq \alpha$
+        \lit $\forall_{\gamma \in B}(\alpha \leq \gamma)$ \pipe $\rf{LowerBound}(\alpha, B, S, <)$
+        \lit $\alpha < \beta \implies \ldots$    \ann{}{1.1.4.19}
+        \begin{enumerate}
+          \lit $\forall_{y \in L}(y \leq \alpha < \beta)$ \pipe $\forall_{y \in L}(y \neq \beta)$   \ann{1.1.4.12}{}
+          \lit $\beta \neq L$ \pipe $\lnot \rf{LowerBound}(\beta, B, S, <)$
+        \end{enumerate}
+        \lit $\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, B, S, <)$ \pipe $\forall_{\beta \in S}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, B, S, <)}$
+        \lit $\rf{LowerBound}(\alpha, B, S, <) \land \forall_{\beta \in S}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, B, S, <)}$    \ann{1.1.4.17, 1.1.4.19}{}
+        \lit $\rf{GLB}(\alpha, B, S, <)$ \pipe $\exists_{\epsilon_1 \in S}\pr{\rf{GLB}(\epsilon_1, B, S, <)}$
       \end{enumerate}
-      \item $|B| \neq 1 \implies \exists_{\beta_1 \in S}\pr{\rf{GLB}(\beta_1, B, S, <)}$
-	  \item $\pr{|B| = 1 \implies \exists_{\beta_0 \in S}\pr{\rf{GLB}(\beta_0, B, S, <)}} \land \pr{|B| \neq 1 \implies \exists_{\beta_1 \in S}\pr{\rf{GLB}(\beta_1, B, S, <)}}$
-	  \item $(|B| = 1 \lor |B| \neq 1) \implies \exists_{\beta \in S}\pr{\rf{GLB}(\beta, B, S, <)}$ \pipe $\exists_{\beta \in S}\pr{\rf{GLB}(\beta, B, S, <)}$
+      \lit $|B| \neq 1 \implies \exists_{\epsilon_1 \in S}\pr{\rf{GLB}(\epsilon_1, B, S, <)}$
+    \lit $\pr{|B| = 1 \implies \exists_{\epsilon_0 \in S}\pr{\rf{GLB}(\epsilon_0, B, S, <)}} \land \pr{|B| \neq 1 \implies \exists_{\epsilon_1 \in S}\pr{\rf{GLB}(\epsilon_1, B, S, <)}}$    \ann{1.1.3, 1.1.5}{}
+    \lit $(|B| = 1 \lor |B| \neq 1) \implies \exists_{\epsilon \in S}\pr{\rf{GLB}(\epsilon, B, S, <)}$ \pipe $\exists_{\epsilon \in S}\pr{\rf{GLB}(\epsilon, B, S, <)}$
     \end{enumerate}
+    \lit $\pr{\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)} \implies \exists_{\epsilon \in S}\pr{\rf{GLB}(\epsilon, B, S, <)}$
+    \lit $\forall_{B}\pr{\pr{\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)} \implies \exists_{\epsilon \in S}\pr{\rf{GLB}(\epsilon, B, S, <)}}$
+    \lit $\rf{GLBProperty}(S, <)$
   \end{enumerate}
-  \item Fourth
+  \lit $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$
 \end{enumerate}
 
 
-
+FUCKING DONE
 
 
 
@@ -108,12 +165,12 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
 \chapter{First Chapter}
 
 \begin{enumerate}
-  \item First
+  \lit First
   \begin{enumerate}
-    \item Second
-    \item Third
+    \lit Second
+    \lit Third
   \end{enumerate}
-  \item Fourth
+  \lit Fourth
 \end{enumerate}
 
 
