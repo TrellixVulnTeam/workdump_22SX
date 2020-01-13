@@ -46,7 +46,7 @@
 \delimitershortfall-1sp
 
 \newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-\newcommand{\wff}[1]{\hypertarget{#1}{\textcolor{red}{((#1))}\phantom{--}}}
+\newcommand{\wff}[1]{\hypertarget{#1}{\fbox{\textcolor{red}{#1}}\phantom{--}}}
 \newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
 %\newcommand{\df}[1]{#1}
 %\newcommand{\wff}[1]{((#1))\phantom{--}}
@@ -54,18 +54,19 @@
 \newcommand{\abr}{:=}
 \newcommand{\pipe}{$\phantom{(}\vrectangleblack\phantom{)}$}
 \newcommand{\pr}[1]{\left(#1\right)}
+\newcommand{\thmcontext}[1]{\centerline{\\ ************************ #1 ************************ \\}}
 
 \usepackage{xifthen}% provides \isempty test
 \newcommand{\ann}[2]{%
   \hfill %
   $\stackrel%
-  {\hbox{\scriptsize{\ifthenelse{\isempty{#1}}%
+  {\hbox{\tiny{\ifthenelse{\isempty{#1}}%
     {\phantom{from}}%
     {from: #1}}}}%
-  {\hbox{\scriptsize{\ifthenelse{\isempty{#2}}%
+  {\hbox{\tiny{\ifthenelse{\isempty{#2}}%
     {\phantom{wts}}%
     {wts: #2}}}}$%
-  \ }
+\ }
 
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
 \newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
@@ -84,23 +85,27 @@
 \tableofcontents
 
 \chapter{Philosopherers}
-% (1.5) \\
+(1.5) \\
 $\df{OrderTrichotomy}(<, S) \abr \forall_{x, y \in S}(x < y \veebar x = y \veebar y < x)$ \\
 $\df{OrderTransitivity}(<, S) \abr \forall_{x, y, z \in S}\pr{(x < y \land y < z) \implies x < z}$ \\
 $\df{Order}(<, S) \abr \rf{OrderTrichotomy}(<, S) \land \rf{OrderTransitivity}(<, S)$ \\
-% (1.7) \\
+
+(1.7) \\
 $\df{BoundedAbove}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(x \leq \beta)$ \\
 $\df{BoundedBelow}(E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \exists_{\beta \in S} \forall_{x \in E}(\beta \leq x)$ \\
 $\df{UpperBound}(\beta, E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \beta \in S \land \forall_{x \in E}(x \leq \beta)$ \\
 $\df{LowerBound}(\beta, E, S, <) \abr \rf{Order}(<, S) \land E \subset S \land \beta \in S \land \forall_{x \in E}(\beta \leq x)$ \\
-% (1.8) \\
+
+(1.8) \\
 $\df{LUB}(\alpha, E, S, <) \abr \rf{UpperBound}(\alpha, E, S, <) \land \forall_{\gamma}\pr{\gamma < \alpha \implies \lnot \rf{UpperBound}(\gamma, E, S, <)}$ \\
 $\df{GLB}(\alpha, E, S, <) \abr \rf{LowerBound}(\alpha, E, S, <) \land \forall_{\beta}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, E, S, <)}$ \\
-% (1.10) \\
+
+(1.10) \\
 $\df{LUBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedAbove}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{LUB}(\alpha, E, S, <)}}$ \\
 $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land \rf{BoundedBelow}(E, S, <)} \implies \exists_{\alpha \in S}\pr{\rf{GLB}(\alpha, E, S, <)}}$ \\
-% (1.11) \\
-\wff{LUBPropertyImpliesGLBProperty} $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$ \\
+
+(1.11) \\
+\wff{LUBPropertyImpliesGLBProperty} $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$
 \begin{enumerate}
   \lit $\rf{LUBProperty}(S, <) \implies \ldots$    \ann{}{2}
   \begin{enumerate}
@@ -152,26 +157,149 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
     \lit $\forall_{B}\pr{\pr{\emptyset \neq B \subset S \land \rf{BoundedBelow}(B, S, <)} \implies \exists_{\epsilon \in S}\pr{\rf{GLB}(\epsilon, B, S, <)}}$
     \lit $\rf{GLBProperty}(S, <)$
   \end{enumerate}
-  \lit $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$
-\end{enumerate}
-% (1.12) \\
+  \lit $\rf{LUBProperty}(S, <) \implies \rf{GLBProperty}(S, <)$ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, z \in F} (\\
-
-)$
-
+(1.12) \\
 $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, z \in F}\left(\begin{array}{ll}
-  x + y \in F \land x * y \in F \land \\
-  x + y = y + x \land x * y = y * x \land \\
-  (x + y) + z = x + (y + z) \land (x * y) * z = x * (y * z) \land \\
-  \mathbb{0} + x = x \land (\mathbb{1} \neq 0 \land \mathbb{1} * x = x) \land \\
-  \exists_{-x \in F} \pr{x + (-x) = \mathbb{0}} \land () \land
- \\\end{array}\right)$
+  x + y \in F \hfill \land \hfill x * y \in F \hfill \land \hfill \\
+  x + y = y + x \hfill \land \hfill x * y = y * x \hfill \land \hfill \\
+  (x + y) + z = x + (y + z) \hfill \land \hfill (x * y) * z = x * (y * z) \hfill \land \hfill \\
+  \mathbb{1} \neq \mathbb{0} \hfill \land \hfill x * (y + z) = (x * y) + (x * z) \hfill \land \hfill \\
+  \mathbb{0} + x = x \hfill \land \hfill \mathbb{1} * x = x \hfill \land \hfill \\
+  \exists_{-x \in F} \pr{x + (-x) = \mathbb{0}} \hfill \land \hfill \pr{x \neq \mathbb{0} \implies \exists_{1/x \in F}\pr{x * (1/x) = \mathbb{1}}}
+\end{array}\right)$ \\
+
+\thmcontext{$\pr{\rf{Field}(F, +, *) \land x, y, z \in F} \implies \ldots$}
+(1.14.a) \\
+\wff{AdditiveCancellation} $(x + y = x + z) \implies y = z$
+\begin{enumerate}
+  \lit $y = \mathbb{0} + y = \pr{x + (-x)} + y = \pr{(-x) + x} + y = (-x) + (x + y) = \ldots$
+  \lit $(-x) + (x + z) = \pr{(-x) + x} + z = \pr{x + (-x)} + z = \mathbb{0} + z = z$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.14.b) \\
+\wff{AdditiveIdentityUniqueness} $(x + y = x) \implies y = \mathbb{0}$ 
+\begin{enumerate}
+  \lit $x + y = x = \mathbb{0} + x = x + \mathbb{0}$
+  \lit $y = 0$    \ann{\rf{AdditiveCancellation}}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.14.c) \\
+\wff{AdditiveInverseUniqueness} $(x + y = \mathbb{0}) \implies y = -x$
+\begin{enumerate}
+  \lit $x + y = \mathbb{0} = x + (-x)$
+  \lit $y = -x$    \ann{\rf{AdditiveCancellation}}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.14.d) \\
+\wff{DoubleNegative} $x = -(-x)$
+\begin{enumerate}
+  \lit $\mathbb{0} = x + (-x) = (-x) + x$ \pipe $\mathbb{0} = (-x) + x$
+  \lit $x = -(-x)$    \ann{\rf{AdditiveInverseUniqueness}}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.15.a) \\
+\wff{MultiplicativeCancellation} $(x \neq 0 \land x * y = x * z) \implies y = z$    \phantom{TODO}--- \\
+
+(1.15.b) \\
+\wff{MultiplicativeIdentityUniqueness} $(x \neq 0 \land x * y = x) \implies y = \mathbb{1}$    \phantom{TODO}--- \\
+
+(1.15.c) \\
+\wff{MultiplicativeInverseUniqueness} $(x \neq 0 \land x * y = \mathbb{1}) \implies y = 1/x$    \phantom{TODO}--- \\
+
+(1.15.d) \\
+\wff{DoubleReciprocal} $(x \neq 0) \implies x = 1/(1/x)$    \phantom{TODO}--- \\
+
+(1.16.a) \\
+\wff{Domination} $\mathbb{0} * x = \mathbb{0}$
+\begin{enumerate}
+  \lit $\mathbb{0} * x = (\mathbb{0} + \mathbb{0}) * x = \mathbb{0} * x + \mathbb{0} * x$ \pipe $\mathbb{0} * x =  \mathbb{0} * x + \mathbb{0} * x$
+  \lit $\mathbb{0} * x = \mathbb{0}$    \ann{\rf{AdditiveIdentityUniqueness}}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.16.b) \\
+\wff{NonDomination} $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies x * y \neq \mathbb{0}$
+\begin{enumerate}
+  \lit $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(x * y = 0) \implies \ldots$
+    \begin{enumerate}
+      \lit $\mathbb{1} = \mathbb{1} * \mathbb{1} = \pr{x * (1/x)} * \pr{y * (1/y)} = (x * y) * \pr{(1/x) * (1/y)} = \mathbb{0} * \pr{(1/x) * (1/y)} = \mathbb{0}$    \ann{1, 1.1, \rf{Domination}}{}
+      \lit $\mathbb{1} = \mathbb{0} \land \mathbb{1} \neq \mathbb{0}$    $\smashtimes$
+    \end{enumerate}
+  \lit $(x * y = 0) \implies \bot$ \pipe $x * y \neq 0$
+  \end{enumerate}
+  \lit $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies x * y \neq 0$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.16.c) \\
+\wff{NegationCommutativity} $(-x) * y = -(x * y) = x * (-y)$
+\begin{enumerate}
+  \lit $x * y + (-x) * y = (x + -x) * y = \mathbb{0} * y = \mathbb{0}$ \pipe $x * y + (-x) * y = \mathbb{0}$    \ann{\rf{Domination}}{2}
+  \lit $(-x) * y = -(x * y)$    \ann{\rf{AdditiveInverseUniqueness}}{}
+  \lit $x * y + x * (-y) = x * (y + -y) = x * \mathbb{0} = \mathbb{0}$ \pipe $x * y + x * (-y) = \mathbb{0}$    \ann{\rf{Domination}}{4}
+  \lit $x * (-y) = -(x * y)$    \ann{\rf{AdditiveInverseUniqueness}}{}
+  \lit $(-x) * y = -(x * y) = x * (-y)$    \ann{2, 4}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.16.d) \\
+\wff{NegativeMultiplication} $(-x) * (-y) = x * y$
+\begin{enumerate}
+  \lit $(-x) * (-y) = -\pr{x * (-y)} = -\pr{-(x * y)} = x * y$    \ann{\rf{NegationCommutativity}, \rf{DoubleNegative}}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.17) \\
+$\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
+  \rf{Field}(F, +, *) \hfill \land \hfill \rf{Order}(<, F) \hfill \land \hfill \\
+  \forall_{x, y, z \in F}(y < z \implies x + y < x + z) \hfill \land \hfill \\
+  \forall_{x, y \in F}\pr{(x > \mathbb{0} \land y > \mathbb{0}) \implies x * y > \mathbb{0}}
+\end{array}\right)$ \\
+
+\thmcontext{$\pr{\rf{OrderedField}(F, +, *, <) \land x, y, z \in F} \implies \ldots$}
+(1.18.a) \\
+\wff{NegationFlipsOrder} $x > \mathbb{0} \iff -x < \mathbb{0}$
+\begin{enumerate}
+  \lit $x > \mathbb{0} \implies \ldots$
+  \begin{enumerate}
+    \lit $\mathbb{0} = (-x) + x > (-x) + \mathbb{0} = -x$ \pipe $\mathbb{0} > -x$ \pipe $-x < \mathbb{0}$
+  \end{enumerate}
+  \lit $x > \mathbb{0} \implies -x < \mathbb{0}$
+  \lit $-x < \mathbb{0} \implies \ldots$
+  \begin{enumerate}
+    \lit $\mathbb{0} = x + (-x) < x + \mathbb{0} = x$ \pipe $\mathbb{0} < x$ \pipe $x > \mathbb{0}$
+  \end{enumerate}
+  \lit $-x < \mathbb{0} \implies x > \mathbb{0}$
+  \lit $x > \mathbb{0} \implies -x < \mathbb{0} \land -x < \mathbb{0} \implies x > \mathbb{0}$ \pipe $x > \mathbb{0} \iff -x < \mathbb{0}$    \ann{2, 4}{}
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+(1.18.a) \\
+\wff{PositiveFactorPreservesOrder} $(x > \mathbb{0} \land y < z) \implies x * y < x * z$
+\begin{enumerate}
+  \lit $(x > \mathbb{0} \land y < z) \implies \ldots$
+  \begin{enumerate}
+    \lit $(-y) + z > (-y) + y = \mathbb{0}$ \pipe $z + (-y) = \mathbb{0}$
+    \lit $x * (z + (-y)) > \mathbb{0}$ \pipe $x * z + x * (-y) > \mathbb{0}$
+    \lit $x * z = \mathbb{0} + x * z = \pr{x * y + -(x * y)} + x * z = \pr{x * y + x * (-y)} + x * z = \ldots$    \ann{\rf{NegationCommutativity}}{}
+    \lit $x * y + \pr{x * z + x * (-y)} > x * y + \mathbb{0} = x * y$    \ann{1.2}{}
+    \lit $x * z > x * y$    \ann{1.3, 1.4}{}
+  \end{enumerate}
+    \lit $(x > \mathbb{0} \land y < z) \implies x * z > x * y$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 
 
 
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{First Chapter}
 
 \begin{enumerate}
