@@ -80,7 +80,8 @@
 % "sumatra": "C:\\Users\\guzma\\Downloads\\PortableInstallations\\PortableGit\\usr\\bin\\echo.exe", "keep_focus_delay": 0
 \begin{document}
 
-\invertbackgroundtext 
+\invertbackgroundtext
+\setlength{\parindent}{0pt}
 
 \tableofcontents
 
@@ -171,54 +172,47 @@ $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, 
 \end{array}\right)$ \\
 
 \thmcontext{$\pr{\rf{Field}(F, +, *) \land x, y, z \in F} \implies \ldots$}
-(1.14.a) \\
+(1.14) \\
 \wff{AdditiveCancellation} $(x + y = x + z) \implies y = z$
 \begin{enumerate}
   \lit $y = \mathbb{0} + y = \pr{x + (-x)} + y = \pr{(-x) + x} + y = (-x) + (x + y) = \ldots$    \ann{\rf{Field}}{}
   \lit $(-x) + (x + z) = \pr{(-x) + x} + z = \pr{x + (-x)} + z = \mathbb{0} + z = z$    \ann{\rf{Field}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.14.b) \\
 \wff{AdditiveIdentityUniqueness} $(x + y = x) \implies y = \mathbb{0}$ 
 \begin{enumerate}
   \lit $x + y = x = \mathbb{0} + x = x + \mathbb{0}$    \ann{\rf{Field}}{}
   \lit $y = 0$    \ann{\rf{AdditiveCancellation}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.14.c) \\
 \wff{AdditiveInverseUniqueness} $(x + y = \mathbb{0}) \implies y = -x$
 \begin{enumerate}
   \lit $x + y = \mathbb{0} = x + (-x)$    \ann{\rf{Field}}{}
   \lit $y = -x$    \ann{\rf{AdditiveCancellation}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.14.d) \\
 \wff{DoubleNegative} $x = -(-x)$
 \begin{enumerate}
   \lit $\mathbb{0} = x + (-x) = (-x) + x$ \pipe $\mathbb{0} = (-x) + x$    \ann{\rf{Field}}{}
   \lit $x = -(-x)$    \ann{\rf{AdditiveInverseUniqueness}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.15.a) \\
+(1.15) \\
 \wff{MultiplicativeCancellation} $(x \neq 0 \land x * y = x * z) \implies y = z$    \phantom{TODO}--- \\
 
-(1.15.b) \\
 \wff{MultiplicativeIdentityUniqueness} $(x \neq 0 \land x * y = x) \implies y = \mathbb{1}$    \phantom{TODO}--- \\
 
-(1.15.c) \\
 \wff{MultiplicativeInverseUniqueness} $(x \neq 0 \land x * y = \mathbb{1}) \implies y = 1/x$    \phantom{TODO}--- \\
 
-(1.15.d) \\
 \wff{DoubleReciprocal} $(x \neq 0) \implies x = 1/(1/x)$    \phantom{TODO}--- \\
 
-(1.16.a) \\
+(1.16) \\
 \wff{Domination} $\mathbb{0} * x = \mathbb{0}$
 \begin{enumerate}
   \lit $\mathbb{0} * x = (\mathbb{0} + \mathbb{0}) * x = \mathbb{0} * x + \mathbb{0} * x$ \pipe $\mathbb{0} * x =  \mathbb{0} * x + \mathbb{0} * x$    \ann{\rf{Field}}{}
   \lit $\mathbb{0} * x = \mathbb{0}$    \ann{\rf{AdditiveIdentityUniqueness}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.16.b) \\
 \wff{NonDomination} $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies x * y \neq \mathbb{0}$
 \begin{enumerate}
   \lit $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies \ldots$
@@ -233,7 +227,6 @@ $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, 
   \lit $(x \neq \mathbb{0} \land y \neq \mathbb{0}) \implies x * y \neq 0$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.16.c) \\
 \wff{NegationCommutativity} $(-x) * y = -(x * y) = x * (-y)$
 \begin{enumerate}
   \lit $x * y + (-x) * y = (x + -x) * y = \mathbb{0} * y = \mathbb{0}$ \pipe $x * y + (-x) * y = \mathbb{0}$    \ann{\rf{Field}, \rf{Domination}}{2}
@@ -243,7 +236,6 @@ $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, 
   \lit $(-x) * y = -(x * y) = x * (-y)$    \ann{2, 4}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.16.d) \\
 \wff{NegativeMultiplication} $(-x) * (-y) = x * y$
 \begin{enumerate}
   \lit $(-x) * (-y) = -\pr{x * (-y)} = -\pr{-(x * y)} = x * y$    \ann{\rf{NegationCommutativity}, \rf{DoubleNegative}}{}
@@ -257,7 +249,7 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
 \end{array}\right)$ \\
 
 \thmcontext{$\pr{\rf{OrderedField}(F, +, *, <) \land x, y, z \in F} \implies \ldots$}
-(1.18.a) \\
+(1.18) \\
 \wff{NegationOnOrder} $x > \mathbb{0} \iff -x < \mathbb{0}$
 \begin{enumerate}
   \lit $x > \mathbb{0} \implies \ldots$
@@ -273,7 +265,6 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
   \lit $x > \mathbb{0} \implies -x < \mathbb{0} \land -x < \mathbb{0} \implies x > \mathbb{0}$ \pipe $x > \mathbb{0} \iff -x < \mathbb{0}$    \ann{2, 4}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.18.b) \\
 \wff{PositiveFactorPreservesOrder} $(x > \mathbb{0} \land y < z) \implies x * y < x * z$
 \begin{enumerate}
   \lit $(x > \mathbb{0} \land y < z) \implies \ldots$
@@ -287,7 +278,6 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
   \lit $(x > \mathbb{0} \land y < z) \implies x * z > x * y$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.18.c) \\
 \wff{NegativeFactorFlipsOrder} $(x < \mathbb{0} \land y < z) \implies x * y > x * z$
 \begin{enumerate}
   \lit $(x < \mathbb{0} \land y < z) \implies \ldots$
@@ -300,7 +290,6 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
   \lit $(x < \mathbb{0} \land y < z) \implies x * y > x * z$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.18.d) \\
 \wff{SquareIsPositive} $(x \neq \mathbb{0}) \implies x * x > \mathbb{0}$
 \begin{enumerate}
   \lit $(x > \mathbb{0}) \implies x * x > 0$    \ann{\rf{OrderedField}}{}
@@ -312,13 +301,11 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
   \lit $x \neq \mathbb{0} \implies (x > \mathbb{0} \lor x < \mathbb{0}) \implies x * x > \mathbb{0}$ \pipe $x \neq \mathbb{0} \implies x * x > \mathbb{0}$    \ann{\rf{OrderTrichotomy}, 1, 3}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.18.d) \\
 \wff{OneIsPositive} $\mathbb{1} > \mathbb{0}$
 \begin{enumerate}
   \lit $\mathbb{1} \neq \mathbb{0}$ \pipe $\mathbb{1} = \mathbb{1} * \mathbb{1} > \mathbb{0}$    \ann{\rf{Field}, \rf{SquareIsPositive}}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-(1.18.e) \\
 \wff{ReciprocationOnOrder} $(0 < x < y) \implies 0 < 1/y < 1/x$
 \begin{enumerate}
   \lit $(0 < x < y) \implies \ldots$
@@ -333,17 +320,79 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 (1.19) \\
+\wff{FieldQ} $\rf{OrderedField}(\mathbb{Q}, +, *, <)$    \phantom{TODO}--- \\
+
 $\df{Subfield}(K, F, +, *) \abr \rf{Field}(F, +, *) \land K \subset F \land \rf{Field}(K, +, *)$ \\
 $\df{OrderedSubfield}(K, F, +, *, <) \abr \rf{OrderedField}(F, +, *, <) \land K \subset F \land \rf{OrderedField}(K, +, *, <)$ \\
-\wff{ExistenceOfR} $\exists_{\mathbb{R}}\pr{\rf{LUBProperty}(\mathbb{R}, <) \land \rf{OrderedSubfield}(\mathbb{Q}, \mathbb{R}, +, *, <)}$
-Plan:
-  - 
-  -
-  -
-  -
-  -
+$\df{CutI}(\alpha) \abr \emptyset \neq \alpha \subset \mathbb{Q}$ \\
+$\df{CutII}(\alpha) \abr \forall_{p \in \alpha} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \alpha)$ \\
+$\df{CutIII}(\alpha) \abr \forall_{p \in \alpha} \exists_{r \in \alpha}(p < r)$ \\
+$\df{SetR} \abr \mathbb{R} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}(\alpha) \land \rf{CutII}(\alpha) \land \rf{CutIII}(\alpha)\}$ \\
+
+\wff{CutCorollaryI} $(\alpha \in \mathbb{R} \land p \in \alpha \land q \in \mathbb{Q} \land q \notin \alpha) \implies p < q$
 \begin{enumerate}
-  \lit OH BOI
+  \lit $(\alpha \in \mathbb{R} \land p \in \alpha \land q \in \mathbb{Q} \land q \notin \alpha) \implies \ldots$
+  \begin{enumerate}
+    \lit $\forall_{p' \in \alpha} \forall_{q' \in \mathbb{Q}}(q' < p' \implies q' \in \alpha)$    \ann{\rf{CutII}, 1}{}
+    \lit $q < p \implies q \in \alpha$ \pipe $q \notin \alpha \implies q \geq p$    \ann{1}{}
+    \lit $(q \notin \alpha) \implies \ldots$
+    \begin{enumerate}
+      \lit $q \geq p$    \ann{1.2}{}
+      \lit $(q = p) \implies (p \in \alpha \land p \notin \alpha) \implies \bot$ \pipe $q \neq p$    \ann{1, 1.3}{}
+      \lit $q \geq p \land q \neq p$ \pipe $p < q$
+    \end{enumerate}
+    \lit $q \notin \alpha \implies p < q$ \pipe $p < q$    \ann{1}{}
+  \end{enumerate}
+  \lit $(\alpha \in \mathbb{R} \land p \in \alpha \land q \in \mathbb{Q} \land q \notin \alpha) \implies p < q$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+\wff{CutCorollaryII} $(\alpha \in \mathbb{R} \land r, s \in \mathbb{Q} \land r < s \land r \notin \alpha) \implies s \notin \alpha$
+\begin{enumerate}
+  \lit $(\alpha \in \mathbb{R} \land r, s \in \mathbb{Q} \land r < s \land r \notin \alpha) \implies \ldots$
+  \begin{enumerate}
+    \lit $\forall_{s' \in \alpha} \forall_{r' \in \mathbb{Q}}(r' < s' \implies r' \in \alpha)$    \ann{\rf{CutII}, 1}{}
+    \lit $s \in \alpha \implies \pr{r \in \mathbb{Q} \implies \pr{r < s \implies r \in \alpha}}$ \pipe $s \in \alpha \implies r \in \alpha$    \ann{1, 1.1}{}
+    \lit $r \notin \alpha \implies s \notin \alpha$ \pipe $s \notin \alpha$    \ann{1, 1.2}{}
+  \end{enumerate}
+  \lit $(\alpha \in \mathbb{R} \land r, s \in \mathbb{Q} \land r < s \land r \notin \alpha) \implies s \notin \alpha$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$\df{<R}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \beta$ \\
+
+\wff{OrderTrichotomyR} $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<R})$
+\begin{enumerate}
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
+  \begin{enumerate}
+    \lit $\lnot(\alpha <R \beta \lor \alpha = \beta) \implies \ldots$
+    \begin{enumerate}
+      \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<R}, 1.1}{}
+    \end{enumerate}
+    \lit $\lnot(\alpha <R \beta \lor \alpha = \beta) \implies \beta <R \alpha$
+  \end{enumerate}
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies (\alpha <R \beta \veebar \alpha = \beta \veebar \alpha <R \beta)$
+  \lit $\forall_{\alpha, \beta \in \mathbb{R}}(\alpha <R \beta \veebar \alpha = \beta \veebar \alpha <R \beta)$
+  \lit $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<R})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+\wff{OrderTransitivityR} $\rf{OrderTransitivity}(\mathbb{R}, \rf{<R})$
+\begin{enumerate}
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
+  \begin{enumerate}
+    \lit 123123
+  \end{enumerate}
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha <R \beta \land \beta <R \gamma) \implies \alpha <R \gamma}$
+  \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha <R \beta \land \beta <R \gamma) \implies \alpha <R \gamma}$
+  \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<R})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+\wff{OrderR} $\rf{Order}(<R, \mathbb{R})$    \phantom{TODO}--- \\
+
+
+
+
+\wff{ExistenceOfR} $\exists_{\mathbb{R}}\pr{\rf{LUBProperty}(\mathbb{R}, <) \land \rf{OrderedSubfield}(\mathbb{Q}, \mathbb{R}, +, *, <)}$
+\begin{enumerate}
+  \lit 123123
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
@@ -353,6 +402,10 @@ Plan:
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TODO:
+- name all properties
+- hyperlink all definitions ???
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{First Chapter}
 
