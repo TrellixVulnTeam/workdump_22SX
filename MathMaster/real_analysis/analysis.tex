@@ -357,35 +357,50 @@ $\df{SetR} \abr \mathbb{R} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}(\alpha) \lan
   \lit $(\alpha \in \mathbb{R} \land r, s \in \mathbb{Q} \land r < s \land r \notin \alpha) \implies s \notin \alpha$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$\df{<R}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \beta$ \\
+$\df{<<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \beta$ \\
 
-\wff{OrderTrichotomyR} $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<R})$
+\wff{OrderTrichotomyR} $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<<})$
 \begin{enumerate}
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit $\lnot(\alpha <R \beta \lor \alpha = \beta) \implies \ldots$
+    \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \implies \ldots$
     \begin{enumerate}
-      \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<R}, 1.1}{}
+      \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<<}, 1.1}{}
+      \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr \{p' | p' \in \alpha \land p' \notin \beta\}$
+      \lit $q \in \beta \implies \ldots$
+      \begin{enumerate}
+      	\lit 123123
+      \end{enumerate}
+      \lit $q \in \beta \implies q \in \alpha$
+      \lit $\forall_{q \in \beta}(q \in \alpha)$ \pipe $\beta \subseteq \alpha$
+      \lit $\beta \subset \alpha$ \pipe $\beta << \alpha$
     \end{enumerate}
-    \lit $\lnot(\alpha <R \beta \lor \alpha = \beta) \implies \beta <R \alpha$
+    \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \implies \beta << \alpha$
+    \lit $\ldots$
+    \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \lor (\alpha << \beta \lor \alpha = \beta)$ \pipe $(\beta << \alpha) \lor (\alpha << \beta \lor \alpha = \beta)$
+    \lit $\ldots$
+    \lit $\alpha = \beta \implies \lnot(\alpha << \beta \lor \beta << \alpha$
+    \lit $\alpha << \beta \implies \lnot(\alpha = \beta \lor \beta << \alpha$
+    \lit $\beta << \alpha \implies  \lnot(\alpha = \beta \lor \alpha << \beta)$
+    \lit $\alpha << \beta \veebar \alpha = \beta \veebar \alpha << \beta$
   \end{enumerate}
-  \lit $(\alpha, \beta \in \mathbb{R}) \implies (\alpha <R \beta \veebar \alpha = \beta \veebar \alpha <R \beta)$
-  \lit $\forall_{\alpha, \beta \in \mathbb{R}}(\alpha <R \beta \veebar \alpha = \beta \veebar \alpha <R \beta)$
-  \lit $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<R})$
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies (\alpha << \beta \veebar \alpha = \beta \veebar \alpha << \beta)$
+  \lit $\forall_{\alpha, \beta \in \mathbb{R}}(\alpha << \beta \veebar \alpha = \beta \veebar \alpha << \beta)$
+  \lit $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<<})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{OrderTransitivityR} $\rf{OrderTransitivity}(\mathbb{R}, \rf{<R})$
+\wff{OrderTransitivityR} $\rf{OrderTransitivity}(\mathbb{R}, \rf{<<})$
 \begin{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
     \lit 123123
   \end{enumerate}
-  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha <R \beta \land \beta <R \gamma) \implies \alpha <R \gamma}$
-  \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha <R \beta \land \beta <R \gamma) \implies \alpha <R \gamma}$
-  \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<R})$
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha << \beta \land \beta << \gamma) \implies \alpha << \gamma}$
+  \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha << \beta \land \beta << \gamma) \implies \alpha << \gamma}$
+  \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<<})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{OrderR} $\rf{Order}(<R, \mathbb{R})$    \phantom{TODO}--- \\
+\wff{OrderR} $\rf{Order}(<<, \mathbb{R})$    \phantom{TODO}--- \\
 
 
 
