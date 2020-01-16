@@ -366,21 +366,21 @@ $\df{<<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \
     \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \implies \ldots$
     \begin{enumerate}
       \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<<}, 1.1}{}
-      \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr \{p' | p' \in \alpha \land p' \notin \beta\}$
+      \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr choice(\{p' | p' \in \alpha \land p' \notin \beta\})$
       \lit $q \in \beta \implies \ldots$
       \begin{enumerate}
-      	\lit 123123
+        \lit $p, q \in \mathbb{Q}$
+        \lit $q < p$    \ann{\rf{CutCorollaryI}}{}
+        \lit $q \in \alpha$    \ann{\rf{CutII}}{}
       \end{enumerate}
       \lit $q \in \beta \implies q \in \alpha$
       \lit $\forall_{q \in \beta}(q \in \alpha)$ \pipe $\beta \subseteq \alpha$
       \lit $\beta \subset \alpha$ \pipe $\beta << \alpha$
     \end{enumerate}
     \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \implies \beta << \alpha$
-    \lit $\ldots$
     \lit $\lnot(\alpha << \beta \lor \alpha = \beta) \lor (\alpha << \beta \lor \alpha = \beta)$ \pipe $(\beta << \alpha) \lor (\alpha << \beta \lor \alpha = \beta)$
-    \lit $\ldots$
-    \lit $\alpha = \beta \implies \lnot(\alpha << \beta \lor \beta << \alpha$
-    \lit $\alpha << \beta \implies \lnot(\alpha = \beta \lor \beta << \alpha$
+    \lit $\alpha = \beta \implies \lnot(\alpha << \beta \lor \beta << \alpha)$
+    \lit $\alpha << \beta \implies \lnot(\alpha = \beta \lor \beta << \alpha)$
     \lit $\beta << \alpha \implies  \lnot(\alpha = \beta \lor \alpha << \beta)$
     \lit $\alpha << \beta \veebar \alpha = \beta \veebar \alpha << \beta$
   \end{enumerate}
@@ -393,14 +393,41 @@ $\df{<<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \
 \begin{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit 123123
+    \lit $(\alpha << \beta \land \beta << \gamma) \implies \ldots$
+    \begin{enumerate}
+    	\lit $\alpha \subset \beta \land \beta \subset \gamma$
+    	\lit $\forall_{a \in \alpha}(a \in \beta) \land \forall_{b \in \beta}(b \in \gamma)$
+    	\lit $\forall_{a \in \alpha}(\alpha \in \gamma)$ \pipe $\alpha \subset \gamma$ \pipe $\alpha << \gamma$
+    \end{enumerate}
+    \lit $(\alpha << \beta \land \beta << \gamma) \implies \alpha << \gamma$    
   \end{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha << \beta \land \beta << \gamma) \implies \alpha << \gamma}$
   \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha << \beta \land \beta << \gamma) \implies \alpha << \gamma}$
   \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<<})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{OrderR} $\rf{Order}(<<, \mathbb{R})$    \phantom{TODO}--- \\
+\wff{OrderR} $\rf{Order}(<<, \mathbb{R})$    \ann{\rf{OrderTrichotomyR}, \rf{OrderTransitivityR}{}} \\
+
+\wff{LUBPropertyR} $\rf{LUBProperty}(\mathbb{R}, <<)$
+\begin{enumerate}
+	\lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <<)} \implies \ldots$
+	\begin{enumerate}
+		\lit $\gamma \abr \{p \in \mathbb{Q} | \exists_{\alpha \in A}(p \in \alpha)\}$
+		\lit $A \neq \emptyset$ \pipe $\exists_{\alpha'}(\alpha' \in A)$ \pipe $\alpha \abr choice(\{\alpha' | \alpha' \in A\})$
+		\lit $\alpha \neq \emptyset$ \pipe $\exists_{a'}(a' \in \alpha)$ \pipe $a \abr choice(\{a' | a' \in \alpha\})$
+		\lit $a \in \gamma$ \pipe $\gamma \neq \emptyset$
+		\lit $\ldots$
+		\lit $\exists_{\beta}\pr{\rf{UpperBound}(b, A, \mathbb{R}, <<)}$
+		\lit $\ldots$
+		\lit $\gamma \subset \mathbb{R}$
+		\lit $\rf{CutI}(\gamma) \land \rf{CutII}(\gamma) \land \rf{CutIII}(\gamma)$ \pipe $\gamma \in \mathbb{R}$
+		\lit $\rf{UpperBound}(\gamma, A, \mathbb{R}, <<)$
+		\lit $123123$
+		\lit $\forall_{\beta_2}(\beta_2 < \gamma \implies \lnot \rf{UpperBound}(\beta_2, A, \mathbb{R}, <<))$
+		\lit $\rf{LUB}(\gamma, A, \mathbb{R}, <<)$
+	\end{enumerate}	
+	\lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <<)} \implies \exists_{\gamma \in S}\pr{\rf{LUB}(\gamma, A, \mathbb{R}, <<)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 
@@ -419,6 +446,7 @@ $\df{<<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 TODO:
+- MORE EXPLICIT MODUS PONENS ON OrderTrichotomyR ???
 - name all properties
 - hyperlink all definitions ???
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
