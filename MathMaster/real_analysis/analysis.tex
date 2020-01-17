@@ -46,7 +46,7 @@
 \delimitershortfall-1sp
 
 \newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
-\newcommand{\wff}[1]{\hypertarget{#1}{\fbox{\textcolor{red}{#1}}\phantom{--}}}
+\newcommand{\wff}[1]{\hypertarget{#1}{\fbox{\textcolor{red}{$#1$}}\phantom{--}}}
 \newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
 %\newcommand{\df}[1]{#1}
 %\newcommand{\wff}[1]{((#1))\phantom{--}}
@@ -62,10 +62,10 @@
   $\stackrel%
   {\hbox{\tiny{\ifthenelse{\isempty{#1}}%
     {\phantom{from}}%
-    {from: #1}}}}%
+    {from: $#1$}}}}%
   {\hbox{\tiny{\ifthenelse{\isempty{#2}}%
     {\phantom{wts}}%
-    {wts: #2}}}}$%
+    {wts: $#2$}}}}$%
 \ }
 
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
@@ -320,14 +320,14 @@ $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 (1.19) \\
-\wff{FieldQ} $\rf{OrderedField}(\mathbb{Q}, +, *, <)$    \phantom{TODO}--- \\
+\wff{OrderedFieldQ} $\rf{OrderedField}(\mathbb{Q}, +, *, <)$    \phantom{TODO}--- \\
 
 $\df{Subfield}(K, F, +, *) \abr \rf{Field}(F, +, *) \land K \subset F \land \rf{Field}(K, +, *)$ \\
 $\df{OrderedSubfield}(K, F, +, *, <) \abr \rf{OrderedField}(F, +, *, <) \land K \subset F \land \rf{OrderedField}(K, +, *, <)$ \\
 $\df{CutI}(\alpha) \abr \emptyset \neq \alpha \subset \mathbb{Q}$ \\
 $\df{CutII}(\alpha) \abr \forall_{p \in \alpha} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \alpha)$ \\
 $\df{CutIII}(\alpha) \abr \forall_{p \in \alpha} \exists_{r \in \alpha}(p < r)$ \\
-$\df{SetR} \abr \mathbb{R} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}(\alpha) \land \rf{CutII}(\alpha) \land \rf{CutIII}(\alpha)\}$ \\
+$\df{\mathbb{R}} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}(\alpha) \land \rf{CutII}(\alpha) \land \rf{CutIII}(\alpha)\}$ \\
 
 \wff{CutCorollaryI} $(\alpha \in \mathbb{R} \land p \in \alpha \land q \in \mathbb{Q} \land q \notin \alpha) \implies p < q$
 \begin{enumerate}
@@ -357,15 +357,15 @@ $\df{SetR} \abr \mathbb{R} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}(\alpha) \lan
   \lit $(\alpha \in \mathbb{R} \land r, s \in \mathbb{Q} \land r < s \land r \notin \alpha) \implies s \notin \alpha$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$\df{<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \beta$ \\
+$\df{<_{\mathbb{R}}}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \beta$ \\
 
-\wff{OrderTrichotomyR} $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<})$
+\wff{OrderTrichotomyR} $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<_{\mathbb{R}}})$
 \begin{enumerate}
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit $\lnot(\alpha < \beta \lor \alpha = \beta) \implies \ldots$
+    \lit $\lnot(\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta) \implies \ldots$
     \begin{enumerate}
-      \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<}, 1.1}{}
+      \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<_{\mathbb{R}}}, 1.1}{}
       \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr choice(\{p' | p' \in \alpha \land p' \notin \beta\})$
       \lit $q \in \beta \implies \ldots$
       \begin{enumerate}
@@ -375,49 +375,49 @@ $\df{<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \b
       \end{enumerate}
       \lit $q \in \beta \implies q \in \alpha$
       \lit $\forall_{q \in \beta}(q \in \alpha)$ \pipe $\beta \subseteq \alpha$
-      \lit $\beta \subset \alpha$ \pipe $\beta < \alpha$
+      \lit $\beta \subset \alpha$ \pipe $\beta <_{\mathbb{R}} \alpha$
     \end{enumerate}
-    \lit $\lnot(\alpha < \beta \lor \alpha = \beta) \implies \beta < \alpha$
-    \lit $\lnot(\alpha < \beta \lor \alpha = \beta) \lor (\alpha < \beta \lor \alpha = \beta)$ \pipe $(\beta < \alpha) \lor (\alpha < \beta \lor \alpha = \beta)$
-    \lit $\alpha = \beta \implies \lnot(\alpha < \beta \lor \beta < \alpha)$
-    \lit $\alpha < \beta \implies \lnot(\alpha = \beta \lor \beta < \alpha)$
-    \lit $\beta < \alpha \implies  \lnot(\alpha = \beta \lor \alpha < \beta)$
-    \lit $\alpha < \beta \veebar \alpha = \beta \veebar \alpha < \beta$
+    \lit $\lnot(\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta) \implies \beta <_{\mathbb{R}} \alpha$
+    \lit $\lnot(\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta) \lor (\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta)$ \pipe $(\beta <_{\mathbb{R}} \alpha) \lor (\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta)$
+    \lit $\alpha = \beta \implies \lnot(\alpha <_{\mathbb{R}} \beta \lor \beta <_{\mathbb{R}} \alpha)$
+    \lit $\alpha <_{\mathbb{R}} \beta \implies \lnot(\alpha = \beta \lor \beta <_{\mathbb{R}} \alpha)$
+    \lit $\beta <_{\mathbb{R}} \alpha \implies  \lnot(\alpha = \beta \lor \alpha <_{\mathbb{R}} \beta)$
+    \lit $\alpha <_{\mathbb{R}} \beta \veebar \alpha = \beta \veebar \alpha <_{\mathbb{R}} \beta$
   \end{enumerate}
-  \lit $(\alpha, \beta \in \mathbb{R}) \implies (\alpha < \beta \veebar \alpha = \beta \veebar \alpha < \beta)$
-  \lit $\forall_{\alpha, \beta \in \mathbb{R}}(\alpha < \beta \veebar \alpha = \beta \veebar \alpha < \beta)$
-  \lit $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<})$
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies (\alpha <_{\mathbb{R}} \beta \veebar \alpha = \beta \veebar \alpha <_{\mathbb{R}} \beta)$
+  \lit $\forall_{\alpha, \beta \in \mathbb{R}}(\alpha <_{\mathbb{R}} \beta \veebar \alpha = \beta \veebar \alpha <_{\mathbb{R}} \beta)$
+  \lit $\rf{OrderTrichotomy}(\mathbb{R}, \rf{<_{\mathbb{R}}})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{OrderTransitivityR} $\rf{OrderTransitivity}(\mathbb{R}, \rf{<})$
+\wff{OrderTransitivityR} $\rf{OrderTransitivity}(\mathbb{R}, \rf{<_{\mathbb{R}}})$
 \begin{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit $(\alpha < \beta \land \beta < \gamma) \implies \ldots$
+    \lit $(\alpha <_{\mathbb{R}} \beta \land \beta <_{\mathbb{R}} \gamma) \implies \ldots$
     \begin{enumerate}
       \lit $\alpha \subset \beta \land \beta \subset \gamma$
       \lit $\forall_{a \in \alpha}(a \in \beta) \land \forall_{b \in \beta}(b \in \gamma)$
-      \lit $\forall_{a \in \alpha}(\alpha \in \gamma)$ \pipe $\alpha \subset \gamma$ \pipe $\alpha < \gamma$
+      \lit $\forall_{a \in \alpha}(\alpha \in \gamma)$ \pipe $\alpha \subset \gamma$ \pipe $\alpha <_{\mathbb{R}} \gamma$
     \end{enumerate}
-    \lit $(\alpha < \beta \land \beta < \gamma) \implies \alpha < \gamma$    
+    \lit $(\alpha <_{\mathbb{R}} \beta \land \beta <_{\mathbb{R}} \gamma) \implies \alpha <_{\mathbb{R}} \gamma$    
   \end{enumerate}
-  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha < \beta \land \beta < \gamma) \implies \alpha < \gamma}$
-  \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha < \beta \land \beta < \gamma) \implies \alpha < \gamma}$
-  \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<})$
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha <_{\mathbb{R}} \beta \land \beta <_{\mathbb{R}} \gamma) \implies \alpha <_{\mathbb{R}} \gamma}$
+  \lit $\forall_{\alpha, \beta, \gamma \in \mathbb{R}}\pr{(\alpha <_{\mathbb{R}} \beta \land \beta <_{\mathbb{R}} \gamma) \implies \alpha <_{\mathbb{R}} \gamma}$
+  \lit $\rf{OrderTransitivity}(\mathbb{R}, \rf{<_{\mathbb{R}}})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{OrderR} $\rf{Order}(<, \mathbb{R})$    \ann{\rf{OrderTrichotomyR}, \rf{OrderTransitivityR}{}} \\
+\wff{OrderR} $\rf{Order}(<_{\mathbb{R}}, \mathbb{R})$    \ann{\rf{OrderTrichotomyR}, \rf{OrderTransitivityR}{}} \\
 
-\wff{LUBPropertyR} $\rf{LUBProperty}(\mathbb{R}, <)$
+\wff{LUBPropertyR} $\rf{LUBProperty}(\mathbb{R}, <_{\mathbb{R}})$
 \begin{enumerate}
-  \lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <)} \implies \ldots$
+  \lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <_{\mathbb{R}})} \implies \ldots$
   \begin{enumerate}
     \lit $\gamma \abr \{p \in \mathbb{Q} | \exists_{\alpha \in A}(p \in \alpha)\}$
     \lit $A \neq \emptyset$ \pipe $\exists_{\alpha}(\alpha \in A)$ \pipe $\alpha_0 \abr choice(\{\alpha | \alpha \in A\})$
     \lit $\alpha_0 \neq \emptyset$ \pipe $\exists_{a}(a \in \alpha_0)$ \pipe $a_0 \abr choice(\{a | a \in \alpha_0\})$ \pipe $a_0 \in \gamma$ \pipe $\gamma \neq \emptyset$
-    \lit $\rf{BoundedAbove}(A, \mathbb{R}, <)$ \pipe $\exists_{\beta}\pr{\rf{UpperBound}(\beta, A, \mathbb{R}, <)}$
-    \lit $\beta_0 \abr choice(\{\beta | \rf{UpperBound}(\beta, A, \mathbb{R}, <)\})$
-    \lit $\rf{UpperBound}(\beta_0, A, \mathbb{R}, <)$ \pipe $\forall_{\alpha \in A}(\alpha \leq \beta_0)$ \pipe $\forall_{\alpha \in A}(\alpha \subseteq \beta_0)$
+    \lit $\rf{BoundedAbove}(A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\exists_{\beta}\pr{\rf{UpperBound}(\beta, A, \mathbb{R}, <_{\mathbb{R}})}$
+    \lit $\beta_0 \abr choice(\{\beta | \rf{UpperBound}(\beta, A, \mathbb{R}, <_{\mathbb{R}})\})$
+    \lit $\rf{UpperBound}(\beta_0, A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \beta_0)$ \pipe $\forall_{\alpha \in A}(\alpha \subseteq \beta_0)$
     \lit $\forall_{\alpha \in A} \forall_{a \in \alpha}(a \in \beta_0)$ \pipe $\forall_{a \in \gamma}(a \in \beta_0)$ \pipe $\gamma \subseteq \beta_0$
     \lit $\beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subseteq \beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subseteq \mathbb{Q}$
     \lit $\emptyset \neq \gamma \subset \mathbb{Q}$ \pipe $\rf{CutI}(\gamma)$
@@ -436,27 +436,58 @@ $\df{<}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alpha \subset \b
     \end{enumerate}
     \lit $p \in \gamma \implies \exists_{r \in \gamma}(p < r)$ \pipe $\forall_{p \in \gamma} \exists_{r \in \gamma}(p < r)$ \pipe $\rf{CutIII}(\gamma)$
     \lit $\rf{CutI}(\gamma) \land \rf{CutII}(\gamma) \land \rf{CutIII}(\gamma)$ \pipe $\gamma \in \mathbb{R}$
-    \lit $\forall_{\alpha \in A}(\alpha \subseteq \gamma)$ \pipe $\forall_{\alpha \in A}(\alpha \leq \gamma)$ \pipe $\rf{UpperBound}(\gamma, A, \mathbb{R}, <)$
-    \lit $\delta < \gamma \implies \ldots$
+    \lit $\forall_{\alpha \in A}(\alpha \subseteq \gamma)$ \pipe $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \gamma)$
+    \lit $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \gamma) \land \gamma \in \mathbb{R}$ \pipe $\rf{UpperBound}(\gamma, A, \mathbb{R}, <_{\mathbb{R}})$
+    \lit $\delta <_{\mathbb{R}} \gamma \implies \ldots$
     \begin{enumerate}
       \lit $\delta \subset \gamma$ \pipe $\exists_{s}(s \in \gamma \land s \notin \delta)$ \pipe $s_0 \abr choice(\{s \in \mathbb{Q} | s \in \gamma \land s \notin \delta\})$
       \lit $s_0 \in \gamma$ \pipe $\exists_{\alpha \in A}(s_0 \in \alpha)$ \pipe $\alpha_3 \abr choice(\{\alpha \in A | s_0 \in \alpha\})$
       \lit $s_0 \in \alpha_3 \land s_0 \notin \delta$ \pipe $\exists_{s \in \mathbb{Q}}(s \in \alpha_3 \land s \notin \delta)$
-      \lit $\delta \geq \alpha_3 \implies \ldots$
+      \lit $\delta \geq_{\mathbb{R}} \alpha_3 \implies \ldots$
       \begin{enumerate}
         \lit $\alpha_3 \subseteq \delta$ \pipe $\forall_{s \in \mathbb{Q}}(s \in \alpha_3 \implies s \in \delta)$ \pipe $\lnot \exists_{s \in \mathbb{Q}}(s \in \alpha_3 \land s \notin \delta)$
         \lit $\lnot \exists_{s \in \mathbb{Q}}(s \in \alpha_3 \land s \notin \delta) \land \exists_{s \in \mathbb{Q}}(s \in \alpha_3 \land s \notin \delta)$ \pipe $\bot$
       \end{enumerate}
-      \lit $\delta \geq \alpha_3 \implies \bot$ \pipe $\delta < \alpha_3$ \pipe $\exists_{\alpha \in A}(\delta < \alpha)$ \pipe $\exists_{\alpha \in A}\pr{\lnot(\alpha \leq \delta)}$
-      \lit $\lnot \forall_{\alpha \in A}(\alpha \leq \delta)$ \pipe $\lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <)$
+      \lit $\delta \geq_{\mathbb{R}} \alpha_3 \implies \bot$ \pipe $\delta <_{\mathbb{R}} \alpha_3$ \pipe $\exists_{\alpha \in A}(\delta <_{\mathbb{R}} \alpha)$ \pipe $\exists_{\alpha \in A}\pr{\lnot(\alpha \leq_{\mathbb{R}} \delta)}$
+      \lit $\lnot \forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \delta)$ \pipe $\lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <_{\mathbb{R}})$
     \end{enumerate}
-    \lit $\delta < \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <))$ \pipe $\forall_{\delta}\pr{\delta < \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <)}$
-    \lit $\rf{UpperBound}(\gamma, A, \mathbb{R}, <) \land \forall_{\delta}\pr{\delta < \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <)}$ \pipe $\rf{LUB}(\delta, A, \mathbb{R}, <)$
+    \lit $\delta <_{\mathbb{R}} \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <_{\mathbb{R}}))$ \pipe $\forall_{\delta}\pr{\delta <_{\mathbb{R}} \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <_{\mathbb{R}})}$
+    \lit $\rf{UpperBound}(\gamma, A, \mathbb{R}, <_{\mathbb{R}}) \land \forall_{\delta}\pr{\delta <_{\mathbb{R}} \gamma \implies \lnot \rf{UpperBound}(\delta, A, \mathbb{R}, <_{\mathbb{R}})}$
+    \lit $\rf{LUB}(\gamma, A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\exists_{\gamma \in S}\pr{\rf{LUB}(\gamma, A, \mathbb{R}, <_{\mathbb{R}})}$
   \end{enumerate}  
-  \lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <)} \implies \exists_{\gamma \in S}\pr{\rf{LUB}(\gamma, A, \mathbb{R}, <)}$
-  \lit $UNIVERSAL CLOSURE$
-  \lit $\rf{LUBProperty}(\mathbb{R}, <)$
+  \lit $\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <_{\mathbb{R}})} \implies \exists_{\gamma \in S}\pr{\rf{LUB}(\gamma, A, \mathbb{R}, <_{\mathbb{R}})}$
+  \lit $\forall_{A}\pr{\pr{\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <_{\mathbb{R}})} \implies \exists_{\gamma \in S}\pr{\rf{LUB}(\gamma, A, \mathbb{R}, <_{\mathbb{R}})}}$ \pipe $\rf{LUBProperty}(\mathbb{R}, <_{\mathbb{R}})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$\df{+_{\mathbb{R}}}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land (\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$ \\
+$\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
+
+\wff{0R} $0_{\mathbb{R}} \in \mathbb{R}$
+\begin{enumerate}
+  \lit $-1 \in 0_{\mathbb{R}} \land 1 \notin 0_{\mathbb{R}}$ \pipe $\emptyset \neq 0_{\mathbb{R}} \subseteq \mathbb{Q}$ \pipe $\rf{CutI}(0_{\mathbb{R}})$
+  \lit $(x \in 0_{\mathbb{R}} \land y \in \mathbb{Q} \land y < x) \implies y < x < 0 \implies y < 0 \implies y \in 0_{\mathbb{R}}$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \forall_{y \in \mathbb{Q}} (y < x \implies y \in 0_{\mathbb{R}})$ \pipe $\rf{CutII}(0_{\mathbb{R}})$
+  \lit $y \abr x / 2$ \pipe $(x \in 0_{\mathbb{R}}) \implies (x < y < 0) \implies \exists_{y \in 0_{\mathbb{R}}}(x < y)$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \exists_{y \in 0_{\mathbb{R}}}(x < y)$ \pipe $\rf{CutIII}(0_{\mathbb{R}})$
+  \lit $\rf{CutI}(0_{\mathbb{R}}) \land \rf{CutII}(0_{\mathbb{R}}) \land \rf{CutIII}(0_{\mathbb{R}})$ \pipe $0_{\mathbb{R}} \in \mathbb{R}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+\wff{Field+R} $\rf{Field^+}(\mathbb{R})$
+\begin{enumerate}
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$
+    \lit $\emptyset \neq \alpha \subseteq \mathbb{Q} \land \emptyset \neq \alpha \subseteq \mathbb{Q}$
+    \lit $\exists_{a}(a \in \alpha) \land \exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a | a \in \alpha\}), b_0 \abr choice(\{b | b \in \beta\})$
+    \lit $\exists_{x \notin \alpha} \land \exists_{y}(y \notin \beta)$
+  \end{enumerate}
+  \lit $(\alpha, \beta \in \mathbb{R}) \implies \pr{(\alpha +_{\mathbb{R}} \beta) \in \mathbb{R}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+
+
+
+
+
+
 
 
 
