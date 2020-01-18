@@ -1,13 +1,5 @@
 { "completions": [
 
-{ "trigger": "fl\t\\forall", "contents": "\\forall " },
-{ "trigger": "es\t\\exists", "contents": "\\exists " },
-{ "trigger": "ev\t\\equiv", "contents": "\\equiv " },
-{ "trigger": "es\t\\implies", "contents": "\\implies " },
-{ "trigger": "if\t\\iff", "contents": "\\iff " },
-{ "trigger": "and\t\\land", "contents": "\\land " },
-{ "trigger": "or\t\\lor", "contents": "\\lor " },
-{ "trigger": "not\t\\lnot", "contents": "\\lnot " },
 { "trigger": "dr\t\\vdash", "contents": "\\vdash " },
 { "trigger": "md\t\\vDash", "contents": "\\vDash " },
 { "trigger": "cl\t\\mathcal", "contents": "\\mathcal{}" },
@@ -23,33 +15,16 @@
 { "trigger": "cp\t\\cup", "contents": "\\cup " },
 { "trigger": "rw\t\\rightarrow", "contents": "\\rightarrow " },
 
-{ "trigger": "a\t\\alpha", "contents": "\\alpha " },
-{ "trigger": "b\t\\beta", "contents": "\\beta " },
-{ "trigger": "g\t\\gamma", "contents": "\\gamma " },
-{ "trigger": "f\t\\phi", "contents": "\\phi " },
-{ "trigger": "s\t\\psi", "contents": "\\psi " },
-{ "trigger": "m\t\\sigma", "contents": "\\sigma " },
-{ "trigger": "t\t\\theta", "contents": "\\theta " },
-
-{ "trigger": "A\t\\Alpha", "contents": "\\Alpha " },
-{ "trigger": "B\t\\Beta", "contents": "\\Beta " },
-{ "trigger": "G\t\\Gamma", "contents": "\\Gamma " },
-{ "trigger": "F\t\\Phi", "contents": "\\Phi " },
-{ "trigger": "S\t\\Psi", "contents": "\\Psi " },
-{ "trigger": "M\t\\Sigma", "contents": "\\Sigma " },
-{ "trigger": "T\t\\Theta", "contents": "\\Theta " },
 
 
-
-
-
+{ "trigger": "tmp1\t\\tmp1", "contents": "_{\\mathbb{R}}" },
 { "trigger": "df\t\\df", "contents": "\\df{}" },
 { "trigger": "wff\t\\wff", "contents": "\\wff{}" },
 { "trigger": "rf\t\\rf", "contents": "\\rf{}" },
 { "trigger": "ann\t\\ann", "contents": "    \\ann{}{}" },
 { "trigger": "et\t\\emptyset", "contents": "\\emptyset " },
-{ "trigger": "in\t\\in", "contents": "\\in " },
-{ "trigger": "st\t\\subset", "contents": "\\subset " },
+{ "trigger": "ins\t\\in", "contents": "\\in " },
+{ "trigger": "sbt\t\\subset", "contents": "\\subset " },
 { "trigger": "sq\t\\subseteq", "contents": "\\subseteq " },
 { "trigger": "nt\t\\not", "contents": "\\not " },
 { "trigger": "lt\t\\lnot", "contents": "\\lnot " },
@@ -63,8 +38,8 @@
 { "trigger": "pr\t\\pr", "contents": "\\pr{}" },
 { "trigger": "pe\t\\pipe", "contents": "\\pipe " },
 { "trigger": "abr\t\\abr", "contents": "\\abr " },
-{ "trigger": "set\t\\set", "contents": "\\{ | \\}" },
-{ "trigger": "ce\t\\choice", "contents": "choice(\\{ | \\})" },
+{ "trigger": "set\t\\set", "contents": "\\\\{ | \\\\}" },
+{ "trigger": "ce\t\\choice", "contents": "choice(\\\\{ | \\\\})" },
 { "trigger": "li\t\\lit", "contents": "\\lit " },
 { "trigger": "enr\t\\enumerate", "contents": "\\begin{enumerate}\n\\end{enumerate}\n" },
 { "trigger": "enro\t\\enumerate_outer", "contents": "\\begin{enumerate}\n\\end{enumerate} \\vspace{.75mm} \\hrule \\vspace{.75mm} \\ \\\\\\ \n" },
