@@ -417,8 +417,8 @@ $\df{<_{\mathbb{R}}}(\alpha, \beta) \abr \alpha, \beta \in \mathbb{R} \land \alp
     \lit $\alpha_0 \neq \emptyset$ \pipe $\exists_{a}(a \in \alpha_0)$ \pipe $a_0 \abr choice(\{a | a \in \alpha_0\})$ \pipe $a_0 \in \gamma$ \pipe $\gamma \neq \emptyset$
     \lit $\rf{BoundedAbove}(A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\exists_{\beta}\pr{\rf{UpperBound}(\beta, A, \mathbb{R}, <_{\mathbb{R}})}$
     \lit $\beta_0 \abr choice(\{\beta | \rf{UpperBound}(\beta, A, \mathbb{R}, <_{\mathbb{R}})\})$
-    \lit $\rf{UpperBound}(\beta_0, A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \beta_0)$ \pipe $\forall_{\alpha \in A}(\alpha \subseteq \beta_0)$
-    \lit $\forall_{\alpha \in A} \forall_{a \in \alpha}(a \in \beta_0)$ \pipe $\forall_{a \in \gamma}(a \in \beta_0)$ \pipe $\gamma \subseteq \beta_0$
+    \lit $\rf{UpperBound}(\beta_0, A, \mathbb{R}, <_{\mathbb{R}})$ \pipe $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \beta_0)$ \pipe $\forall_{\alpha \in A}(\alpha \subseteq \beta_0)$ \pipe $\forall_{\alpha \in A} \forall_{a \in \alpha}(a \in \beta_0)$
+    \lit $(\alpha \in A \land a \in \alpha) \iff a \in \gamma$ \pipe $\forall_{a \in \gamma}(a \in \beta_0)$ \pipe $\gamma \subseteq \beta_0$
     \lit $\beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subseteq \beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subseteq \mathbb{Q}$
     \lit $\emptyset \neq \gamma \subset \mathbb{Q}$ \pipe $\rf{CutI}(\gamma)$
     \lit $(p \in \gamma \land q \in \mathbb{Q} \land q < p) \implies \ldots$
@@ -475,17 +475,54 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
     \lit $(\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$
-    \lit $\emptyset \neq \alpha \subseteq \mathbb{Q} \land \emptyset \neq \alpha \subseteq \mathbb{Q}$
-    \lit $\exists_{a}(a \in \alpha) \land \exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a | a \in \alpha\}), b_0 \abr choice(\{b | b \in \beta\})$
-    \lit $\exists_{x \notin \alpha} \land \exists_{y}(y \notin \beta)$
+    \lit $\emptyset \neq \alpha \subset \mathbb{Q} \land \emptyset \neq \beta \subset \mathbb{Q}$
+    \lit $\exists_{a}(a \in \alpha)$ ; $\exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a | a \in \alpha\})$ ; $b_0 \abr choice(\{b | b \in \beta\})$ \pipe $a_0  + b_0 \in \alpha +_{\mathbb{R}} \beta$
+    \lit $\exists_{x}(x \notin \alpha)$ ; $\exists_{y}(y \notin \beta)$ \pipe $x_0 \abr choice(\{x | x \notin \alpha\})$ ; $y_0 \abr choice(\{y | y \notin \beta\})$
+    \lit $\forall_{r \in \alpha}(r < x_0)$ ; $\forall_{s \in \beta}(s < y_0)$ \pipe $\forall_{r \in \alpha} \forall_{s \in \beta}(r + s < x_0 + y_0)$ \pipe $x_0 + y_0 \not \in \alpha +_{\mathbb{R}} \beta$
+    \lit $\emptyset \neq \alpha +_{\mathbb{R}} \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}(\alpha +_{\mathbb{R}} \beta)$
+    \lit $(p \in \alpha +_{\mathbb{R}} \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_0, s_0) \abr choice({(r, s) \in \alpha \times \beta | p = r + s})$
+      \lit $q < p = r_0 + s_0$ \pipe $(q - s_0) < r_0$ \pipe $(q - s_0) \in \alpha$
+      \lit $s_0 \in \beta$ \pipe $q = (q - s_0) + s_0 \in \alpha +_{\mathbb{R}} \beta$ \pipe $q \in \alpha +_{\mathbb{R}} \beta$
+    \end{enumerate}
+    \lit $(p \in \alpha +_{\mathbb{R}} \beta \land q \in \mathbb{Q} \land q < p) \implies q \in \alpha +_{\mathbb{R}} \beta$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} \beta} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \alpha +_{\mathbb{R}} \beta)$ \pipe $\rf{CutII}(\alpha +_{\mathbb{R}} \beta)$
+    \lit $p \in \alpha \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_1, s_1) \abr choice(\{(r, s) \in \alpha \times \beta | p = r + s\})$
+      \lit $r_1 \in \alpha$ \pipe $\exists_{t \in \alpha}(r_1 < t)$ \pipe $t_0 \abr choice(\{t \in \alpha | r_1 < t\})$
+      \lit $s_1 \in \beta$ \pipe $t + s_1 \in \alpha +_{\mathbb{R}} \beta \land p = r_1 + s_1 < t + s_1$ \pipe $\exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$
+    \end{enumerate}
+    \lit $p \in \alpha \implies \exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} \beta} \exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$\pipe $\rf{CutIII}(\alpha +_{\mathbb{R}} \beta)$
+    \lit $\rf{CutI}(\alpha +_{\mathbb{R}} \beta) \land \rf{CutII}(\alpha +_{\mathbb{R}} \beta) \land \rf{CutIII}(\alpha +_{\mathbb{R}} \beta)$ \pipe $\alpha +_{\mathbb{R}} \beta \in \mathbb{R}$
   \end{enumerate}
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \pr{(\alpha +_{\mathbb{R}} \beta) \in \mathbb{R}}$
+  \lit $\alpha +_{\mathbb{R}} \beta = \{r + s | r \in \alpha \land s \in \beta\} = \{s + r | s \in \beta \land r \in \alpha\} = \beta +_{\mathbb{R}} \alpha$
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \{(a + b) + c | a \in \alpha \land b \in \beta \land c \in \gamma\} = \ldots$
+    \lit $\{a + (b + c) | a \in \alpha \land b \in \beta \land c \in \gamma\} = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)$
+  \end{enumerate}
+  \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies (\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)$
+  \lit $\alpha \in \mathbb{R} \implies \ldots$
+  \begin{enumerate}
+    \lit $(r \in \alpha \land s \in 0_{\mathbb{R}}) \implies \ldots$
+    \begin{enumerate}
+      \lit $s < 0$ \pipe $r + s < r + 0 = r$ \pipe $r + s < r$ \pipe $r + s \in \alpha$
+    \end{enumerate}
+    \lit $(r \in \alpha \land s \in 0_{\mathbb{R}}) \implies r + s \in \alpha$ \pipe $\forall_{r \in \alpha} \forall_{s \in 0_{\mathbb{R}}}(r + s \in \alpha)$
+    \lit $(r \in \alpha \land s \in 0_{\mathbb{R}}) \iff (r + s \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}})$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}}(p \in \alpha)$ \pipe $\alpha +_{\mathbb{R}} 0_{\mathbb{R}} \subseteq \alpha$
+    \lit $p \in \alpha \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{r \in \alpha}(p < r)$ \pipe $r_2 \abr choice(\{r \in \alpha | p < r\})$
+      \lit $p < r_2$ \pipe $p - r_2 < r_2 - r_2 = 0$ \pipe $(p - r_2 )< 0$ \pipe $(p - r_2) \in 0_{\mathbb{R}}$
+      \lit $r_2 \in \alpha$ \pipe $p = r_2 + (p - r_2) \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$ \pipe $p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$
+    \end{enumerate}
+    \lit $p \in \alpha \implies p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$ \pipe $\forall_{p \in \alpha}(p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}})$ \pipe $\alpha \subseteq \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$
+    \lit $\alpha +_{\mathbb{R}} 0_{\mathbb{R}} \subseteq \alpha \land \alpha \subseteq \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$ \pipe $0_{\mathbb{R}} +_{\mathbb{R}} \alpha = \alpha$
+    \lit EXISTS ADDITIVE INVERSE
+  \end{enumerate}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-
-
-
-
 
 
 
