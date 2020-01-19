@@ -41,8 +41,8 @@
 { "trigger": "set\t\\set", "contents": "\\\\{ | \\\\}" },
 { "trigger": "ce\t\\choice", "contents": "choice(\\\\{ | \\\\})" },
 { "trigger": "li\t\\lit", "contents": "\\lit " },
-{ "trigger": "enr\t\\enumerate", "contents": "\\begin{enumerate}\n\\end{enumerate}\n" },
-{ "trigger": "enro\t\\enumerate_outer", "contents": "\\begin{enumerate}\n\\end{enumerate} \\vspace{.75mm} \\hrule \\vspace{.75mm} \\ \\\\\\ \n" },
+{ "trigger": "enr\t\\enumerate", "contents": "\\begin{enumerate}\n  \\lit \n\\end{enumerate}\n\\lit" },
+{ "trigger": "enro\t\\enumerate_outer", "contents": "\\begin{enumerate}\n  \\lit \n\\end{enumerate} \\vspace{.75mm} \\hrule \\vspace{.75mm} \\ \\\\\\ \n" },
 
 { "trigger": "aa\t\\alpha", "contents": "\\alpha " },
 { "trigger": "ba\t\\beta", "contents": "\\beta " },
