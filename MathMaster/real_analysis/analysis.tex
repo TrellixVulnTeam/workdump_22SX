@@ -523,7 +523,24 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
     \lit $\alpha \in \mathbb{R} \implies \ldots$
     \begin{enumerate}
       \lit $\beta \abr \{p \in \mathbb{Q} | \exists_{r > 0}(-p - r \notin \alpha)\}$
-      \lit $fucking cheese$
+      \lit $\alpha \subset \mathbb{Q}$ \pipe $\exists_{s \in \mathbb{Q}}(s \notin \alpha)$ \pipe $s_0 \abr choice(\{s | s \notin \alpha\})$ \pipe $p_0 \abr -s_0 - 1$
+      \lit $-p_0 - 1 = -(-s_0 - 1) - 1 = s_0 \notin \alpha$ \pipe $-p_0 - 1 \notin \alpha$ \pipe $\exists_{r > 0}(-p_0 - r \notin \alpha)$ \pipe $p_0 \in \beta$
+      \lit $\emptyset \neq \alpha$ \pipe $\exists_{q \in \alpha}$ \pipe $q_0 \abr choice(\{q \in \mathbb{Q} | q \in \alpha\})$
+      \lit $r > 0 \implies \ldots$
+      \begin{enumerate}
+        \lit $q_0 \in \alpha$ \pipe $-(-q_0) - r = q_0 - r < q_0$ \pipe $-(-q_0) - r < q_0$ \pipe $-(-q_0) - r \in \alpha$
+       \end{enumerate}
+      \lit $\forall_{r > 0}\pr{-(-q_0) - r \in \alpha}$ \pipe $\lnot \exists_{r > 0}(-(-q_0) -r \notin \alpha)$ \pipe $-q_0 \notin \beta$
+      \lit $\emptyset \neq \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}(\beta)$
+      \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
+      \begin{enumerate}
+        \lit $r > 0 \implies \ldots$
+        \begin{enumerate}
+          \lit page 30
+        \end{enumerate}
+        \lit $r > 0 \implies something \in \alpha$ \pipe $\forall_{r > 0}(something \in \alpha)$ \pipe $\lnot \exists_{r > 0}(something \notin \alpha)$ \pipe $something \in \beta$
+      \end{enumerate}
+      \lit 123123
     \end{enumerate}
     \lit $\alpha \in \mathbb{R} \implies \exists_{-\alpha \in \mathbb{R}}\pr{\alpha + (-\alpha) = 0_{\mathbb{R}}}$
   \end{enumerate}
