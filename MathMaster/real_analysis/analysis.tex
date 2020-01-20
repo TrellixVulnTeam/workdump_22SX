@@ -534,13 +534,12 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
       \lit $\emptyset \neq \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}(\beta)$
       \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
       \begin{enumerate}
-        \lit $r > 0 \implies \ldots$
-        \begin{enumerate}
-          \lit page 30
-        \end{enumerate}
-        \lit $r > 0 \implies something \in \alpha$ \pipe $\forall_{r > 0}(something \in \alpha)$ \pipe $\lnot \exists_{r > 0}(something \notin \alpha)$ \pipe $something \in \beta$
+        \lit $p \in \beta$ \pipe $\exists_{r > 0}(-p - r \notin \alpha)$ \pipe $r_0 \abr choice(\{r > 0 | -p - r \notin \alpha\})$
+        \lit $q < p$ \pipe $-p - r < -q - r$
+        \lit $-q -r \notin \alpha$ \pipe $q \in \beta$
       \end{enumerate}
-      \lit 123123
+      \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies q \in \beta$ \pipe $\forall_{p \in \beta} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \beta)$ \pipe $\rf{CutII}(\beta)$
+      \lit ... page 30 CUT III
     \end{enumerate}
     \lit $\alpha \in \mathbb{R} \implies \exists_{-\alpha \in \mathbb{R}}\pr{\alpha + (-\alpha) = 0_{\mathbb{R}}}$
   \end{enumerate}
@@ -570,6 +569,7 @@ TODO:
 - hyperlink all definitions ???
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/Book%3A_Mathematical_Reasoning_-_Writing_and_Proof_(Sundstrom)
 \chapter{Abstract Algebra}
 % https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/Book%3A_Mathematical_Reasoning_-_Writing_and_Proof_(Sundstrom)/6%3A_Functions/6.3%3A_Injections%2C_Surjections%2C_and_Bijections
 $Relation(f, X) \abr f \subseteq X$ \\
@@ -586,6 +586,7 @@ $Injective(f, X, Y) \abr Function(f, X, Y) \land \forall_{x_1, x_2 \in X}(x_1 \n
 $Surjective(f, X, Y) \abr Function(f, X, Y) \land \forall_{y \in Y} \exists_{x \in X}(y = f(x))$ \\ % or Onto
 $Bijective(f, X, Y) \abr Injective(f, X, Y) \land Surjective(f, X, Y)$ \\ % or One-to-One Correspondence
 
+TODO: Definition properties
 Surjective Equivalent: $(Range(f) = Codomain(f)) \implies Surjective(f)$ \\
 
 
