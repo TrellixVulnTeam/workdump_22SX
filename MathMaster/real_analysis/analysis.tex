@@ -529,7 +529,7 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
       \lit $r > 0 \implies \ldots$
       \begin{enumerate}
         \lit $q_0 \in \alpha$ \pipe $-(-q_0) - r = q_0 - r < q_0$ \pipe $-(-q_0) - r < q_0$ \pipe $-(-q_0) - r \in \alpha$
-       \end{enumerate}
+      \end{enumerate}
       \lit $\forall_{r > 0}\pr{-(-q_0) - r \in \alpha}$ \pipe $\lnot \exists_{r > 0}(-(-q_0) -r \notin \alpha)$ \pipe $-q_0 \notin \beta$
       \lit $\emptyset \neq \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}(\beta)$
       \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
@@ -553,9 +553,14 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
       \lit $\rf{CutI}(\beta) \land \rf{CutII}(\beta) \land \rf{CutIII}(\beta)$ \pipe $\beta \in \mathbb{R}$
       \lit $(r \in \alpha \land s \in \beta) \implies \ldots$
       \begin{enumerate}
-        \lit $s \in \beta$ \pipe $\exists_{}$
+        \lit $s \in \beta$ \pipe $\exists_{r > 0}(-s - r \notin \alpha)$ \pipe $r_2 \abr choice(\{r > 0 | -s - r \notin \alpha\})$
+        \lit $r_2 > 0$ \pipe $-s - r_2 < -s + r_2 - r_2 = -s$ \pipe $-s - r_2 < -s$
+        \lit $\alpha \in \mathbb{R} \land -s -r_2 \notin \alpha \land -s - r_2 < -s$ \pipe $-s \notin \alpha$ \pipe
+        \lit $-s - r_2 < -s$
+        \lit $\beta \in \mathbb{R} \land $
         \lit since b in R, use cut corollary
         \lit ...
+        \lit dont fuck up r with r_2
       \end{enumerate}
       \lit $(r \in \alpha \land s \in \beta) \implies \ldots$
     \end{enumerate}
