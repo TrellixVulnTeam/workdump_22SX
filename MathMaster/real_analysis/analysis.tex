@@ -553,16 +553,18 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
       \lit $\rf{CutI}(\beta) \land \rf{CutII}(\beta) \land \rf{CutIII}(\beta)$ \pipe $\beta \in \mathbb{R}$
       \lit $(r \in \alpha \land s \in \beta) \implies \ldots$
       \begin{enumerate}
-        \lit $s \in \beta$ \pipe $\exists_{r > 0}(-s - r \notin \alpha)$ \pipe $r_2 \abr choice(\{r > 0 | -s - r \notin \alpha\})$
-        \lit $r_2 > 0$ \pipe $-s - r_2 < -s + r_2 - r_2 = -s$ \pipe $-s - r_2 < -s$
-        \lit $\alpha \in \mathbb{R} \land -s -r_2 \notin \alpha \land -s - r_2 < -s$ \pipe $-s \notin \alpha$ \pipe
-        \lit $-s - r_2 < -s$
-        \lit $\beta \in \mathbb{R} \land $
-        \lit since b in R, use cut corollary
-        \lit ...
-        \lit dont fuck up r with r_2
+        \lit $s \in \beta$ \pipe $\exists_{t > 0}(-s - t \notin \alpha)$ \pipe $t_1 \abr choice(\{t > 0 | -s - t \notin \alpha\})$ \pipe $-s - t_1 < -s$
+        \lit $\alpha \in \mathbb{R} \land s, t_1 \in \mathbb{Q} \land -s - t_1 < -s \land -s - t_1 \notin \alpha$ \pipe $-s \notin \alpha$
+        \lit $\alpha \in \mathbb{R} \land r \in \alpha \land -s \notin \alpha$ \pipe $r < -s$ \pipe $r + s < 0$ \pipe $r + s \in 0_{\mathbb{R}}$
       \end{enumerate}
-      \lit $(r \in \alpha \land s \in \beta) \implies \ldots$
+      \lit $(r \in \alpha \land s \in \beta) \implies r + s \in 0_\mathbb{R}$ \pipe $\forall_{(r, s) \in \alpha \times \beta}(r + s \in 0_{\mathbb{R}})$ \pipe $\alpha +_{\mathbb{R}} \beta \subseteq 0_{\mathbb{R}}$
+      \lit $v \in 0_{\mathbb{R}} \implies \ldots$
+      \begin{enumerate}
+        \lit $w \abr -v/2$ \pipe $w > 0$
+        \lit $\exists_{n \in \mathbb{Z}}(n w \in \alpha \land (n + 1) w \notin \alpha)$ \pipe $n_0 \abr choice(\{n \in \mathbb{Z} | n w \in \alpha \land (n + 1) w \notin \alpha\})$    \ann{ARCHIMEDEAN PROPERTY OF Q OR MAYBE LUB???}{}
+        \lit 123123
+      \end{enumerate}
+      \lit $v \in 0_{\mathbb{R}} \implies \ldots$
     \end{enumerate}
     \lit $\alpha \in \mathbb{R} \implies \exists_{-\alpha \in \mathbb{R}}\pr{\alpha + (-\alpha) = 0_{\mathbb{R}}}$
   \end{enumerate}
