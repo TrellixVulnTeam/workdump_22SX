@@ -470,7 +470,7 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
   \lit $\rf{CutI}(0_{\mathbb{R}}) \land \rf{CutII}(0_{\mathbb{R}}) \land \rf{CutIII}(0_{\mathbb{R}})$ \pipe $0_{\mathbb{R}} \in \mathbb{R}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\wff{Field+R} $\rf{Field^+}(\mathbb{R})$
+\wff{Field+R} $\rf{Field^+}(\mathbb{R})$ TODO: SPLITUP
 \begin{enumerate}
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
@@ -560,11 +560,13 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
       \lit $(r \in \alpha \land s \in \beta) \implies r + s \in 0_\mathbb{R}$ \pipe $\forall_{(r, s) \in \alpha \times \beta}(r + s \in 0_{\mathbb{R}})$ \pipe $\alpha +_{\mathbb{R}} \beta \subseteq 0_{\mathbb{R}}$
       \lit $v \in 0_{\mathbb{R}} \implies \ldots$
       \begin{enumerate}
-        \lit $w \abr -v/2$ \pipe $w > 0$
-        \lit $\exists_{n \in \mathbb{Z}}(n w \in \alpha \land (n + 1) w \notin \alpha)$ \pipe $n_0 \abr choice(\{n \in \mathbb{Z} | n w \in \alpha \land (n + 1) w \notin \alpha\})$    \ann{ARCHIMEDEAN PROPERTY OF Q OR MAYBE LUB???}{}
-        \lit 123123
-      \end{enumerate}
-      \lit $v \in 0_{\mathbb{R}} \implies \ldots$
+        \lit $v < 0$ \pipe $w_0 \abr -v/2$ \pipe $w > 0$
+        \lit $\exists_{n \in \mathbb{Z}}(n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha)$ \pipe $n_0 \abr choice(\{n \in \mathbb{Z} | n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha\})$    \ann{ARCHIMEDEAN PROPERTY OF Q + LUB???}{}
+        \lit $p_0 \abr -(n_0 + 2) w_0$ \pipe $-p_0 - w_0 = (n_0 + 2) w_0 - w_0 = (n_0 + 1) w_0 \notin \alpha$ \pipe $-p_0 - w_0 \notin \alpha$ \pipe $p_0 \in \beta$
+        \lit $n_0 w_0 \in \alpha \land p_0 \in \beta$ \pipe $n_0 w_0 + p_0 = n_0 (-v/2) + -(n_0 + 2) -v/2 = v \in \alpha +_{\mathbb{R}} \beta$
+      \end{enumerate}      
+      \lit $v \in 0_{\mathbb{R}} \implies v \in \alpha +_{\mathbb{R}} \beta$ \pipe $\forall _{v \in 0_{\mathbb{R}}}(v \in \alpha +_{\mathbb{R}} \beta)$ \pipe $0_{\mathbb{R}} \subseteq \alpha +_{\mathbb{R}} \beta$
+      \lit $\alpha +_{\mathbb{R}} \beta \subseteq 0_{\mathbb{R}} \land 0_{\mathbb{R}} \subseteq \alpha +_{\mathbb{R}} \beta$ \pipe $\alpha +_{\mathbb{R}} \beta = 0_{\mathbb{R}}$ \pipe $\exists_{-\alpha \in \mathbb{R}}(\alpha + (-\alpha) = 0_{\mathbb{R}})$
     \end{enumerate}
     \lit $\alpha \in \mathbb{R} \implies \exists_{-\alpha \in \mathbb{R}}\pr{\alpha + (-\alpha) = 0_{\mathbb{R}}}$
   \end{enumerate}
@@ -628,7 +630,7 @@ $A B * \ldots \ldots \ldots$
 
 $(A B C)^{-1} = C^{-1} B^{-1} A^{-1}$
 
-$A^$
+$A^123123$
 
 TODO PROOFS
 
