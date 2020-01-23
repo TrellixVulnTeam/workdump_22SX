@@ -613,21 +613,26 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 \begin{enumerate}
   \lit $(x, y \in \mathbb{R} \land x > 0) \implies \ldots$
   \begin{enumerate}
-     \lit $A \abr \{n x | n \in \mathbb{N}^+\}$ \pipe $\emptyset \neq A \subset \mathbb{R}$
-     \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \ldots$
-     \begin{enumerate}
-       \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y)$ \pipe $\forall_{n \in \mathbb{N}^+}(n x \leq y)$
-       \lit $\rf{UpperBound}(y, A, \mathbb{R}, <)$ \pipe $\rf{BoundedAbove}(A, \mathbb{R}, <)$
-       \lit $\rf{LUBProperty}(\mathbb{R}, <) \land \emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <)$ \pipe $\exists_{\alpha \in \mathbb{R}}(\rf{LUB}(\alpha, A, \mathbb{R}, <))$
-       \lit $\alpha_0 \abr choice(\{\alpha \in \mathbb{R} | \rf{LUB}(\alpha, A, \mathbb{R}, <)\})$
-       \lit $x > 0$ \pipe $\alpha_0 - x < \alpha_0$
-       \lit $\rf{LUB}(\alpha_0, A, \mathbb{R}, <) \land \alpha_0 - x < \alpha_0$ \pipe $\lnot \rf{UpperBound}(\alpha_0 - x, A, \mathbb{R}, <)$ \pipe $\exists_{a \in A}(\alpha_0 - x < a)$ \pipe $a_0 choice(\{a \in A | \alpha_0 - x < a\})$
-       \lit $\exists_{m \in \mathbb{N}^+}(m x = a_0)$ ...
-       $a \in \alpha_0 \iff \exists_{123123}$
-     \end{enumerate}
-     \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \bot$ \pipe $\exists_{n \in \mathbb{N}^+}(n x > y)$
+    \lit $A \abr \{n x | n \in \mathbb{N}^+\}$ \pipe $\emptyset \neq A \subset \mathbb{R}$
+    \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \ldots$
+    \begin{enumerate}
+      \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y)$ \pipe $\forall_{n \in \mathbb{N}^+}(n x \leq y)$
+      \lit $\rf{UpperBound}(y, A, \mathbb{R}, <)$ \pipe $\rf{BoundedAbove}(A, \mathbb{R}, <)$
+      \lit $\rf{LUBProperty}(\mathbb{R}, <) \land \emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <)$ \pipe $\exists_{\alpha \in \mathbb{R}}(\rf{LUB}(\alpha, A, \mathbb{R}, <))$
+      \lit $\alpha_0 \abr choice(\{\alpha \in \mathbb{R} | \rf{LUB}(\alpha, A, \mathbb{R}, <)\})$
+      \lit $x > 0$ \pipe $\alpha_0 - x < \alpha_0$
+      \lit $\rf{LUB}(\alpha_0, A, \mathbb{R}, <) \land \alpha_0 - x < \alpha_0$ \pipe $\lnot \rf{UpperBound}(\alpha_0 - x, A, \mathbb{R}, <)$
+      \lit $\exists_{c \in A}(\alpha_0 - x < c)$ \pipe $c_0 \abr choice(\{c \in A | \alpha_0 - x < c\})$
+      \lit $c_0 \in A$ \pipe $\exists_{m \in \mathbb{N}^+}(m x = c_0)$ \pipe $m_0 \abr choice(\{m \in \mathbb{N}^+ | m x = c_0\})$
+      \lit $\alpha_0 - x < c_0 = m_0 x$ \pipe $\alpha_0 - x < m_0 x$ \pipe $\alpha_0 < (m_0 + 1) x$
+      \lit $m_0 + 1 \in \mathbb{N}^+$ \pipe $(m_0 + 1) x \in A$
+      \lit $\alpha_0 < (m_0 + 1) x \land (m_0 + 1) x \in A$ \pipe $\exists_{c \in A}(\alpha_0 < c)$
+      \lit $\rf{LUB}(\alpha_0, A, \mathbb{R}, <)$ \pipe $\rf{UpperBound}(\alpha_0, A, \mathbb{R}, <)$ \pipe $\forall_{c \in A}(c \leq \alpha_0)$ \pipe $\lnot \exists_{c \in A}(\alpha_0 < c)$
+      \lit $\exists_{c \in A}(\alpha_0 < c) \land \lnot \exists_{c \in A}(\alpha_0 < c)$ \pipe $\bot$
+    \end{enumerate}
+    \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \bot$ \pipe $\exists_{n \in \mathbb{N}^+}(n x > y)$
   \end{enumerate}
-  \lit 123123
+  \lit $(x, y \in \mathbb{R} \land x > 0) \implies \exists_{n \in \mathbb{N}^+}(n x > y)$ \pipe $\forall_{x, y \in \mathbb{R}}\pr{x > 0 \implies \exists_{n \in \mathbb{N}^+}(n x > y)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 \wff{QDensityInR} $\forall_{x, y \in \mathbb{R}}\pr{x < y \implies \exists_{p \in \mathbb{Q}}(x < p < y)}$
