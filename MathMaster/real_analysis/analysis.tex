@@ -655,9 +655,16 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 (1.21) \\
-\wff{Root} $123123$
+\wff{Root} $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}(y^n = x)$
 \begin{enumerate}
-  \lit 123123
+  \lit $0 < y_1 < y_2 \implies 0 < {y_1}^n < {y_2}^n$ UNIQUENESS ...
+  \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \ldots$
+  \begin{enumerate}
+    \lit $E \abr \{t \in \mathbb{R} | t > 0 \land t^n < x\}$ 
+    \lit $t_0 \abr x / (1 + x)$ \pipe $0 < t_0 < 1 \land t_0 = x / (1 + x) < x$ \pipe $t_0 > 0 \land {t_0}^n \leq t_0 < x$
+    \lit 123123
+  \end{enumerate}
+  \lit $E \abr \{t \in \mathbb{R} | t > 0 \land t^n < x\}$ 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
