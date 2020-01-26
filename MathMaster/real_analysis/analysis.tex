@@ -686,9 +686,27 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
   \lit $\emptyset \neq E \subset \mathbb{R} \land \rf{BoundedAbove}(E, \mathbb{R}, <)$ \pipe $\exists_{y \in \mathbb{R}}(\rf{LUB}(y, E, \mathbb{R}, <))$ \pipe $y_0 \abr choice(\{y \in \mathbb{R} | \rf{LUB}(y, E, \mathbb{R}, <)\})$
   \lit $y^n < x \implies \ldots$
   \begin{enumerate}
-    \lit LARGE COMBIANTION IS A NON ISSUE FUCKTARD
+    \lit $k_0 \abr \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $k \in \mathbb{R}$
+    \lit $y^n < x$ \pipe $0 < x - y^n$
+    \lit $n > 0 \land y > 0$ \pipe $0 < n (y + 1)^{n - 1}$ \pipe $0 < \frac{x - y^n}{n (y + 1)^{n - 1}} = k_0$ \pipe $0 < k_0$
+    \lit $0, 1, k_0 \in \mathbb{R} \land (0 < 1 \land 0 < k_0)$ \pipe $\exists_{h \in \mathbb{Q}}(0 < h < min(1, k_0))$ \pipe $h_0 \abr choice(\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\})$
+    \lit $0 < h_0 < 1 \land h_0 < k_0 = \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $h_0 n (y + 1)^{n - 1} < x - y^n$
+    \lit $(y + h_0)^n - y^n < (y + h_0 - y) n (y + h_0)^{n - 1} = h_0 n (y + h_0)^{n - 1} < h_0 n (y + 1)^{n - 1} < x - y^n$
+    \lit $(y + h_0)^n - y^n < x - y^n$ \pipe $(y + h_0)^n < x$
+    \lit $y > 0 \land h_0 > 0$ \pipe $(y + h_0) > 0$
+    \lit $(y + h_0) > 0 \land (y + h_0)^n < x$ \pipe $(y + h_0)^n \in E \land y + h_0 > y$ \pipe $\exists_{e \in E}(e > y)$
+    \lit $\rf{LUB}(y, E, \mathbb{R}, <)$ \pipe $\rf{UpperBound}(y, E, \mathbb{R}, <)$ \pipe $\forall_{e \in E}(e \leq y)$ \pipe $\lnot \exists_{e \in E}(e > y)$
+    \lit $\exists_{e \in E}(e > y) \land \lnot \exists_{e \in E}(e > y)$ \pipe $\bot$
   \end{enumerate}
-  \lit $y^n < x \implies \bot$
+  \lit $y^n < x \implies \bot$ \pipe $y^n \geq x$
+  \lit $y^n > x \implies \ldots$
+  \begin{enumerate}
+    \lit 123123
+  \end{enumerate}
+  \lit $y^n > x \implies \bot$ \pipe $y^n \leq x$
+  \lit ($y^n < x \veebar y^n = x \veebar x < y^n) \land( y^n \geq x) \land (y^n \leq x)$ \pipe $y^n = x$
+  \lit $y^n = x \land y \in \mathbb{R}$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
+  DONE
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
