@@ -736,11 +736,36 @@ $(Function(f, X, Y) \land A \subseteq X \land B \subseteq Y) \implies \ldots$
 $Injective(f, X, Y) \abr Function(f, X, Y) \land \forall_{x_1, x_2 \in X}(x_1 \neq x_2 \implies f(x_1) \neq f(x_2))$ \\ % or One-to-One
 $Surjective(f, X, Y) \abr Function(f, X, Y) \land \forall_{y \in Y} \exists_{x \in X}(y = f(x))$ \\ % or Onto
 $Bijective(f, X, Y) \abr Injective(f, X, Y) \land Surjective(f, X, Y)$ \\ % or One-to-One Correspondence
+\wff{Surjective Equivalent} $(Range(f) = Codomain(f)) \implies Surjective(f)$ \\
 
-TODO: Definition properties
-Surjective Equivalent: $(Range(f) = Codomain(f)) \implies Surjective(f)$ \\
+$(Function(f, X, Y) \land Function(g, Y, Z)) \implies (f \circ g)(x) \abr f(g(x)); Function(f \circ g, X, Z)$ \\
 
+\wff{Properties of Functions} $(Function(f, A, B) \land Function(g, B, C) \land Function(h, C, D)) \implies \ldots$
+\begin{enumerate}
+  \lit $h \circ (g \circ f) = (h \circ g) \circ f$
+  \lit $(Injective(f) \land Injective(g)) \implies Injective(g \circ f)$
+  \lit $(Surjective(f) \land Surjective(g)) \implies Surjective(g \circ f)$
+  \lit $(Bijective(f, A, B)) \implies \exists_{f^{-1}}(Function(f^-1, B, A) \land \forall_{a \in A}(f^{-1}(f(a)) = a) \land \forall_{b \in B}(f(f^{-1}(b)) = b))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$\df{|}(a, b) \abr a, b \in \mathbb{Z} \land a \neq 0 \land \exists_{c \in \mathbb{Z}}(b = a c)$ \\
+
+\wff{Divisibility Theorems} $(a, b, c, m, x, y \in \mathbb{Z}) \implies \ldots$
+\begin{enumerate}
+  \lit $(a | b) \implies a | b c$
+  \lit $(a | b \land b | c) \implies a | c$
+  \lit $(a | b \land b | c) \implies a | (b x + c y)$
+  \lit $(a | b \land b | a) \implies a = \pm b$
+  \lit $(a | b \land a > 0 \land b > 0) \implies (a \leq b)$
+  \lit $(a | b) \iff (m \neq 0 \land m a | m b)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+\wff{Division Algorithm} $(a, b \in \mathbb{Z} \land a > 0) \implies \exists!_{q, r \in \mathbb{Z}}(b = a q + r)$ \\
+
+$\df{CD}(a, b, c) \abr a, b, c \in \mathbb{Z} \land a | b \land a | c$ \\
+$\df{GCD}(a, b, c) \abr CD(a, b, c) \land \forall_{d}((d | b \land d | c) \implies d | a)$
+
+\wff{GCD Equivalent} $123123$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra}
