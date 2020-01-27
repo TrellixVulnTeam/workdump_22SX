@@ -655,7 +655,7 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 (1.21) \\
-\wff{RootLemma} $(0 < a < b) \implies b^n - a^n \leq (b - a) n b^{n - 1}$
+\wff{RootExistenceInRLemma} $(0 < a < b) \implies b^n - a^n \leq (b - a) n b^{n - 1}$
 \begin{enumerate}
   \lit $(0 < a < b) \implies \ldots$
   \begin{enumerate}
@@ -667,7 +667,7 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
   \lit $(0 < a < b) \implies b^n - a^n \leq (b - a) n b^{n - 1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-\wff{Root} $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}(y^n = x)$
+\wff{RootExistenceInR} $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}(y^n = x)$
 \begin{enumerate}
   \lit $0 < y_1 < y_2 \implies 0 < {y_1}^n < {y_2}^n$ UNIQUENESS ...
   \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \ldots$
@@ -686,10 +686,10 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
   \lit $\emptyset \neq E \subset \mathbb{R} \land \rf{BoundedAbove}(E, \mathbb{R}, <)$ \pipe $\exists_{y \in \mathbb{R}}(\rf{LUB}(y, E, \mathbb{R}, <))$ \pipe $y_0 \abr choice(\{y \in \mathbb{R} | \rf{LUB}(y, E, \mathbb{R}, <)\})$
   \lit $y^n < x \implies \ldots$
   \begin{enumerate}
-    \lit $k_0 \abr \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $k \in \mathbb{R}$
+    \lit $k_0 \abr \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $k_0 \in \mathbb{R}$
     \lit $y^n < x$ \pipe $0 < x - y^n$
     \lit $n > 0 \land y > 0$ \pipe $0 < n (y + 1)^{n - 1}$ \pipe $0 < \frac{x - y^n}{n (y + 1)^{n - 1}} = k_0$ \pipe $0 < k_0$
-    \lit $0, 1, k_0 \in \mathbb{R} \land (0 < 1 \land 0 < k_0)$ \pipe $\exists_{h \in \mathbb{Q}}(0 < h < min(1, k_0))$ \pipe $h_0 \abr choice(\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\})$
+    \lit $0, min(1, k_0) \in \mathbb{R} \land 0 < min(1, k_0)$ \pipe $\exists_{h \in \mathbb{Q}}(0 < h < min(1, k_0))$ \pipe $h_0 \abr choice(\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\})$
     \lit $0 < h_0 < 1 \land h_0 < k_0 = \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $h_0 n (y + 1)^{n - 1} < x - y^n$
     \lit $(y + h_0)^n - y^n < (y + h_0 - y) n (y + h_0)^{n - 1} = h_0 n (y + h_0)^{n - 1} < h_0 n (y + 1)^{n - 1} < x - y^n$
     \lit $(y + h_0)^n - y^n < x - y^n$ \pipe $(y + h_0)^n < x$
@@ -701,6 +701,7 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
   \lit $y^n < x \implies \bot$ \pipe $y^n \geq x$
   \lit $y^n > x \implies \ldots$
   \begin{enumerate}
+    \lit $k_1 \abr \frac{y^n - x}{n y^{n - 1}}$ \pipe $k_1 \in \mathbb{R}$
     \lit 123123
   \end{enumerate}
   \lit $y^n > x \implies \bot$ \pipe $y^n \leq x$
