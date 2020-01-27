@@ -128,8 +128,8 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
         \lit $b_1 \notin L$ \pipe $L \subset S$
         \lit $\delta \abr choice\pr{\{\delta' \in S | \rf{LowerBound}(\delta', B, S, <)\}}$ \pipe $\delta \in L$ \pipe $\emptyset \neq L$    \ann{1.1.1}{}
         \lit $\emptyset \neq L \subset S$    \ann{1.1.4.5, 1.1.4.6}{}
-        \lit $\forall_{y \in L}\pr{\rf{LowerBound}(y, B, S, <)}$ \pipe $\forall_{y \in L} \forall_{x \in B}(y \leq x)$    \ann{\rf{LowerBound}, 1.1.4.2}{1.1.4.10}
-        \lit $\forall_{x \in B}\pr{x \in S \land \forall_{y \in L}(y \leq x)}$ \pipe $\forall_{x \in B}\pr{\rf{UpperBound}(x, L, S, <)}$    \ann{\rf{UpperBound}}{}
+        \lit $\forall_{y \in L}\pr{\rf{LowerBound}(y_0, B, S, <)}$ \pipe $\forall_{y \in L} \forall_{x \in B}(y_0 \leq x)$    \ann{\rf{LowerBound}, 1.1.4.2}{1.1.4.10}
+        \lit $\forall_{x \in B}\pr{x \in S \land \forall_{y \in L}(y_0 \leq x)}$ \pipe $\forall_{x \in B}\pr{\rf{UpperBound}(x, L, S, <)}$    \ann{\rf{UpperBound}}{}
         \lit $\exists_{x \in S}\pr{\rf{UpperBound}(x, L, S, <)}$ \pipe $\rf{BoundedAbove}(L, S, <)$
         \lit $\emptyset \neq L \subset S \land \rf{BoundedAbove}(L, S, <)$    \ann{1.1.4.7, 1.1.4.10}{}
         \lit $\exists_{\alpha' \in S}\pr{\rf{LUB}(\alpha', L, S, <)}$ \pipe $\alpha \abr choice\pr{\{\alpha' \in S | \pr{\rf{LUB}(\alpha', L, S, <)}\}}$    \ann{1.1.4.1}{1.1.4.21}
@@ -143,7 +143,7 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
         \lit $\forall_{\gamma \in B}(\alpha \leq \gamma)$ \pipe $\rf{LowerBound}(\alpha, B, S, <)$    \ann{\rf{LowerBound}}{}
         \lit $\alpha < \beta \implies \ldots$    \ann{}{1.1.4.19}
         \begin{enumerate}
-          \lit $\forall_{y \in L}(y \leq \alpha < \beta)$ \pipe $\forall_{y \in L}(y \neq \beta)$   \ann{\rf{LUB}, 1.1.4.12, 1.1.4.18}{}
+          \lit $\forall_{y \in L}(y_0 \leq \alpha < \beta)$ \pipe $\forall_{y \in L}(y_0 \neq \beta)$   \ann{\rf{LUB}, 1.1.4.12, 1.1.4.18}{}
           \lit $\beta \notin L$ \pipe $\lnot \rf{LowerBound}(\beta, B, S, <)$    \ann{1.1.4.2}{}
         \end{enumerate}
         \lit $\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, B, S, <)$ \pipe $\forall_{\beta \in S}\pr{\alpha < \beta \implies \lnot \rf{LowerBound}(\beta, B, S, <)}$
@@ -165,8 +165,8 @@ $\df{GLBProperty}(S, <) \abr \forall_{E}\pr{\pr{\emptyset \neq E \subset S \land
 $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, z \in F}\left(\begin{array}{ll}
   x + y \in F \hfill \land \hfill x * y \in F \hfill \land \hfill \\
   x + y = y + x \hfill \land \hfill x * y = y * x \hfill \land \hfill \\
-  (x + y) + z = x + (y + z) \hfill \land \hfill (x * y) * z = x * (y * z) \hfill \land \hfill \\
-  \mathbb{1} \neq \mathbb{0} \hfill \land \hfill x * (y + z) = (x * y) + (x * z) \hfill \land \hfill \\
+  (x + y) + z = x + (y_0 + z) \hfill \land \hfill (x * y) * z = x * (y_0 * z) \hfill \land \hfill \\
+  \mathbb{1} \neq \mathbb{0} \hfill \land \hfill x * (y_0 + z) = (x * y) + (x * z) \hfill \land \hfill \\
   \mathbb{0} + x = x \hfill \land \hfill \mathbb{1} * x = x \hfill \land \hfill \\
   \exists_{-x \in F} \pr{x + (-x) = \mathbb{0}} \hfill \land \hfill \pr{x \neq \mathbb{0} \implies \exists_{1/x \in F}\pr{x * (1/x) = \mathbb{1}}}
 \end{array}\right)$ \\
@@ -228,7 +228,7 @@ $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, 
 \begin{enumerate}
   \lit $x * y + (-x) * y = (x + -x) * y = \mathbb{0} * y = \mathbb{0}$ \pipe $x * y + (-x) * y = \mathbb{0}$    \ann{\rf{Field}, \rf{Domination}}{2}
   \lit $(-x) * y = -(x * y)$    \ann{\rf{AdditiveInverseUniqueness}}{}
-  \lit $x * y + x * (-y) = x * (y + -y) = x * \mathbb{0} = \mathbb{0}$ \pipe $x * y + x * (-y) = \mathbb{0}$    \ann{\rf{Field}, \rf{Domination}}{4}
+  \lit $x * y + x * (-y) = x * (y_0 + -y) = x * \mathbb{0} = \mathbb{0}$ \pipe $x * y + x * (-y) = \mathbb{0}$    \ann{\rf{Field}, \rf{Domination}}{4}
   \lit $x * (-y) = -(x * y)$    \ann{\rf{AdditiveInverseUniqueness}}{}
   \lit $(-x) * y = -(x * y) = x * (-y)$    \ann{2, 4}{}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
@@ -241,7 +241,7 @@ $\df{Field}(F, +, *) \abr \exists_{\mathbb{0}, \mathbb{1} \in F} \forall_{x, y, 
 (1.17) \\
 $\df{OrderedField}(F, +, *, <) \abr \left(\begin{array}{ll}
   \rf{Field}(F, +, *) \hfill \land \hfill \rf{Order}(<, F) \hfill \land \hfill \\
-  \forall_{x, y, z \in F}(y < z \implies x + y < x + z) \hfill \land \hfill \\
+  \forall_{x, y, z \in F}(y_0 < z \implies x + y < x + z) \hfill \land \hfill \\
   \forall_{x, y \in F}\pr{(x > \mathbb{0} \land y > \mathbb{0}) \implies x * y > \mathbb{0}}
 \end{array}\right)$ \\
 
@@ -462,7 +462,7 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
 \wff{0InR} $0_{\mathbb{R}} \in \mathbb{R}$
 \begin{enumerate}
   \lit $-1 \in 0_{\mathbb{R}} \land 1 \notin 0_{\mathbb{R}}$ \pipe $\emptyset \neq 0_{\mathbb{R}} \subseteq \mathbb{Q}$ \pipe $\rf{CutI}(0_{\mathbb{R}})$
-  \lit $(x \in 0_{\mathbb{R}} \land y \in \mathbb{Q} \land y < x) \implies y < x < 0 \implies y < 0 \implies y \in 0_{\mathbb{R}}$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \forall_{y \in \mathbb{Q}} (y < x \implies y \in 0_{\mathbb{R}})$ \pipe $\rf{CutII}(0_{\mathbb{R}})$
+  \lit $(x \in 0_{\mathbb{R}} \land y \in \mathbb{Q} \land y < x) \implies y < x < 0 \implies y < 0 \implies y \in 0_{\mathbb{R}}$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \forall_{y \in \mathbb{Q}} (y_0 < x \implies y \in 0_{\mathbb{R}})$ \pipe $\rf{CutII}(0_{\mathbb{R}})$
   \lit $y \abr x / 2$ \pipe $(x \in 0_{\mathbb{R}}) \implies (x < y < 0) \implies \exists_{y \in 0_{\mathbb{R}}}(x < y)$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \exists_{y \in 0_{\mathbb{R}}}(x < y)$ \pipe $\rf{CutIII}(0_{\mathbb{R}})$
   \lit $\rf{CutI}(0_{\mathbb{R}}) \land \rf{CutII}(0_{\mathbb{R}}) \land \rf{CutIII}(0_{\mathbb{R}})$ \pipe $0_{\mathbb{R}} \in \mathbb{R}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
@@ -474,7 +474,7 @@ $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
     \lit $(\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$
     \lit $\emptyset \neq \alpha \subset \mathbb{Q} \land \emptyset \neq \beta \subset \mathbb{Q}$
     \lit $\exists_{a}(a \in \alpha)$ ; $\exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a | a \in \alpha\})$ ; $b_0 \abr choice(\{b | b \in \beta\})$ \pipe $a_0  + b_0 \in \alpha +_{\mathbb{R}} \beta$
-    \lit $\exists_{x}(x \notin \alpha)$ ; $\exists_{y}(y \notin \beta)$ \pipe $x_0 \abr choice(\{x | x \notin \alpha\})$ ; $y_0 \abr choice(\{y | y \notin \beta\})$
+    \lit $\exists_{x}(x \notin \alpha)$ ; $\exists_{y}(y_0 \notin \beta)$ \pipe $x_0 \abr choice(\{x | x \notin \alpha\})$ ; $y_0 \abr choice(\{y | y \notin \beta\})$
     \lit $\forall_{r \in \alpha}(r < x_0)$ ; $\forall_{s \in \beta}(s < y_0)$ \pipe $\forall_{r \in \alpha} \forall_{s \in \beta}(r + s < x_0 + y_0)$ \pipe $x_0 + y_0 \not \in \alpha +_{\mathbb{R}} \beta$
     \lit $\emptyset \neq \alpha +_{\mathbb{R}} \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}(\alpha +_{\mathbb{R}} \beta)$
     \lit $(p \in \alpha +_{\mathbb{R}} \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
@@ -617,7 +617,7 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
     \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \ldots$
     \begin{enumerate}
       \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y)$ \pipe $\forall_{n \in \mathbb{N}^+}(n x \leq y)$
-      \lit $\rf{UpperBound}(y, A, \mathbb{R}, <)$ \pipe $\rf{BoundedAbove}(A, \mathbb{R}, <)$
+      \lit $\rf{UpperBound}(y_0, A, \mathbb{R}, <)$ \pipe $\rf{BoundedAbove}(A, \mathbb{R}, <)$
       \lit $\rf{LUBProperty}(\mathbb{R}, <) \land \emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}(A, \mathbb{R}, <)$ \pipe $\exists_{\alpha \in \mathbb{R}}(\rf{LUB}(\alpha, A, \mathbb{R}, <))$
       \lit $\alpha_0 \abr choice(\{\alpha \in \mathbb{R} | \rf{LUB}(\alpha, A, \mathbb{R}, <)\})$
       \lit $x > 0$ \pipe $\alpha_0 - x < \alpha_0$
@@ -639,14 +639,14 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 \begin{enumerate}
   \lit $(x, y \in \mathbb{R} \land x < y) \implies \ldots$
   \begin{enumerate}
-    \lit $x < y$ \pipe $y - x > 0$ \pipe $\exists_{n \in \mathbb{N}^+}(n (y - x) > 1)$ \pipe $n_0 \abr choice(\{n \in \mathbb{N}^+ | n (y - x) > 1\})$ \pipe $n_0 (y - x) > 1$
+    \lit $x < y$ \pipe $y - x > 0$ \pipe $\exists_{n \in \mathbb{N}^+}(n (y_0 - x) > 1)$ \pipe $n_0 \abr choice(\{n \in \mathbb{N}^+ | n (y_0 - x) > 1\})$ \pipe $n_0 (y_0 - x) > 1$
     \lit $1 > 0$ \pipe $\exists_{m \in \mathbb{N}^+}(m (1) > n_0 x)$ \pipe $m_1 \abr choice(\{m \in \mathbb{N}^+ | m (1) > n_0 x\})$ \pipe $m_1 > n_0 x$
     \lit $1 > 0$ \pipe $\exists_{m \in \mathbb{N}^+}(m (1) > -n_0 x)$ \pipe $m_2 \abr choice(\{m \in \mathbb{N}^+ | m (1) > -n_0 x\})$ \pipe $m_2 > -n_0 x$ \pipe $-m_2 < n_0 x$
     \lit $-m_2 < n_0 x < m_1$
     \lit $m_1, m_2 \in \mathbb{N}^+$ \pipe $|m_1 - (-m_2)| \geq 2$
     \lit $-m_2 < n_0 x < m_1 \land |m_1 - (-m_2)| \geq 2$ \pipe $\exists_{m \in \mathbb{Z}}(-m_2 < m < m_1 \land m - 1 \leq n_0 x < m)$
     \lit $m_0 \abr choice(\{m \in \mathbb{Z} | -m_2 < m < m_1 \land m - 1 \leq n_0 x < m\})$ \pipe $-m_2 < m_0 < m_1 \land m_0 - 1 \leq n_0 x < m_0$
-    \lit $(n_0 (y - x) > 1) \land (m_0 - 1 \leq n_0 x < m_0)$ \pipe $n_0 x < m_0 \leq 1 + n_0 x < n_0 y$ \pipe $n_0 x < m_0 < n_0 y$
+    \lit $(n_0 (y_0 - x) > 1) \land (m_0 - 1 \leq n_0 x < m_0)$ \pipe $n_0 x < m_0 \leq 1 + n_0 x < n_0 y$ \pipe $n_0 x < m_0 < n_0 y$
     \lit $n_0 \in \mathbb{N}^+$ \pipe $n_0 > 0$ \pipe $x < m_0 / n_0 < y$
     \lit $m_0, n_0 \in \mathbb{Z}$ \pipe $m_0 / n_0 \in \mathbb{Q}$
     \lit $m_0 / n_0 \in \mathbb{Q} \land x < m_0 / n_0 < y$ \pipe $\exists_{p \in \mathbb{Q}}(x < p < y)$
@@ -667,50 +667,82 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
   \lit $(0 < a < b) \implies b^n - a^n \leq (b - a) n b^{n - 1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-\wff{RootExistenceInR} $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}(y^n = x)$
+\wff{RootExistenceInR} $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}({y_0}^n = x)$
 \begin{enumerate}
-  \lit $0 < y_1 < y_2 \implies 0 < {y_1}^n < {y_2}^n$ UNIQUENESS ...
   \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \ldots$
   \begin{enumerate}
     \lit $E \abr \{t \in \mathbb{R} | t > 0 \land t^n < x\}$ 
-    \lit $t_0 \abr x / (1 + x)$ \pipe $0 < t_0 < 1 \land t_0 = x / (1 + x) < x$ \pipe $t_0 > 0 \land {t_0}^n \leq t_0 < x$ \pipe $t_0 \in E$ \pipe $\emptyset \neq E$
-    \lit $t_1 \abr choice(\{t \in \mathbb{R} | t > 1 + x\})$ \pipe ${t_1}^n > t_1 > 1 + x > x$ \pipe ${t_1}^n > x$
-    \lit $t_1 \notin E$ \pipe $E \subset \mathbb{R}$ \pipe $\emptyset \neq E \subset \mathbb{R}$
+    \lit $t_0 \abr x / (1 + x)$
+    \lit $1 + x > x > 0$ \pipe $t_0 = x / (1 + x) > 0$ \pipe $t_0 > 0$
+    \lit $1 = (1 + x) / (1 + x) > x / (1 + x) = t_0$ \pipe $1 > t_0$
+    \lit $0 < t_0 < 1$ \pipe ${t_0}^n \leq t_0$
+    \lit $x < 0$ \pipe $1 + x > 1$ \pipe $x > x / (1 + x) = t_0$ \pipe $x > t_0$
+    \lit ${t_0}^n \leq t_0 < x$ \pipe ${t_0}^n < x$
+    \lit $t_0 > 0 \land {t_0}^n < x$ \pipe $t_0 \in E$ \pipe $\emptyset \neq E$
+    \lit $t_1 \abr choice(\{t \in \mathbb{R} | t > 1 + x\})$ \pipe $t_1 > 1 + x$
+    \lit $t_1 > 1 + x$ \pipe ${t_1}^n \geq t_1 > 1 + x > x$ \pipe ${t_1}^n > x$ \pipe $\lnot({t_1}^n < x)$ \pipe $t_1 \notin E$ \pipe $E \subset \mathbb{R}$
+    \lit $\emptyset \neq E \land E \subset \mathbb{R}$ \pipe $\emptyset \neq E \subset \mathbb{R}$
     \lit $t \in E \implies \ldots$
     \begin{enumerate}
-      \lit $t^n < x$
-      \lit ${t_1}^n > x$ \pipe $t^n < x < {t_1}^n$ \pipe $t < t_1$
+      \lit $t^n < x \land {t_1}^n > x$ \pipe $t^n < x < {t_1}^n$ \pipe $t < t_1$
     \end{enumerate}
     \lit $t \in E \implies t < t_1$ \pipe $\forall_{t \in E}(t \leq t_1)$ \pipe $\rf{UpperBound}(t_1, E, \mathbb{R}, <)$ \pipe $\rf{BoundedAbove}(E, \mathbb{R}, <)$
+    \lit $\rf{LUBProperty}(\mathbb{R}, <) \land \emptyset \neq E \subset \mathbb{R} \land \rf{BoundedAbove}(E, \mathbb{R}, <)$ \pipe $\exists_{y \in \mathbb{R}}(\rf{LUB}(y_0, E, \mathbb{R}, <))$
+    \lit $y_0 \abr choice(\{y \in \mathbb{R} | \rf{LUB}(y, E, \mathbb{R}, <)\})$
+    \lit $\rf{LUB}(y_0, E, \mathbb{R}, <) \land t_0 \in E$ \pipe $0 < t_0 < y_0$ \pipe $y_0 > 0$
+    \lit ${y_0}^n < x \implies \ldots$
+    \begin{enumerate}
+      \lit $k_0 \abr \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}$ \pipe $k_0 \in \mathbb{R}$
+      \lit ${y_0}^n < x$ \pipe $0 < x - {y_0}^n$
+      \lit $n > 0 \land y_0 > 0$ \pipe $0 < n (y_0 + 1)^{n - 1}$
+      \lit $0 < x - {y_0}^n \land 0 < n (y_0 + 1)^{n - 1}$ \pipe $0 < \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}} = k_0$ \pipe $0 < k_0$
+      \lit $\forall_{x', y' \in \mathbb{R}}\pr{x' < y' \implies \exists_{p' \in \mathbb{Q}}(x' < p' < y')} \land 0, min(1, k_0) \in \mathbb{R} \land 0 < min(1, k_0)$
+      \lit $\exists_{h \in \mathbb{Q}}(0 < h < min(1, k_0))$ \pipe $h_0 \abr choice(\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\})$
+      \lit $0 < h_0 < 1 \land h_0 < k_0 = \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}$
+      \lit $0 < n (y_0 + 1)^{n - 1} \land h_0 < k_0 = \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}$ \pipe $h_0 n (y_0 + 1)^{n - 1} < x - {y_0}^n$
+      \lit $n > 0 \land y_0 > 0$ \pipe $0 < n (y_0 + 1)^{n - 1}$ \pipe $h_0 n (y_0 + 1)^{n - 1} < x - {y_0}^n$
+      \lit $(y_0 + h_0)^n - {y_0}^n < (y_0 + h_0 - y_0) n (y_0 + h_0)^{n - 1} = h_0 n (y_0 + h_0)^{n - 1} < h_0 n (y_0 + 1)^{n - 1} < x - {y_0}^n$
+      \lit $(y_0 + h_0)^n - {y_0}^n < x - {y_0}^n$ \pipe $(y_0 + h_0)^n < x$
+      \lit $y_0 > 0 \land h_0 > 0$ \pipe $(y_0 + h_0) > h_0 > 0$
+      \lit $(y_0 + h_0) > 0 \land (y_0 + h_0)^n < x$ \pipe $(y_0 + h_0)^n \in E$
+      \lit $(y_0 + h_0)^n \in E \land y_0 + h_0 > y_0$ \pipe $\exists_{e \in E}(e > y_0)$
+      \lit $\rf{LUB}(y_0, E, \mathbb{R}, <)$ \pipe $\rf{UpperBound}(y_0, E, \mathbb{R}, <)$ \pipe $\forall_{e \in E}(e \leq y_0)$ \pipe $\lnot \exists_{e \in E}(e > y_0)$
+      \lit $\exists_{e \in E}(e > y_0) \land \lnot \exists_{e \in E}(e > y_0)$ \pipe $\bot$
+    \end{enumerate}
+    \lit ${y_0}^n < x \implies \bot$ \pipe ${y_0}^n \geq x$
+    \lit ${y_0}^n > x \implies \ldots$
+    \begin{enumerate}
+      \lit $k_1 \abr \frac{{y_0}^n - x}{n {y_0}^{n - 1}}$ \pipe $k_1 \in \mathbb{R} \land k_1 n {y_0}^{n - 1} = {y_0}^n - x$
+      \lit $0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}$ \pipe ${y_0}^n - x < {y_0}^n \leq n {y_0}^n$ \pipe ${y_0}^n - x < n {y_0}^n$
+      \lit $k_1 = \frac{{y_0}^n - x}{n {y_0}^{n - 1}} < \frac{n {y_0}^n}{n {y_0}^{n - 1}} = y_0$ \pipe $k_1 < y_0$
+      \lit ${y_0}^n > x$ \pipe ${y_0}^n - x > 0$
+      \lit $n > 0 \land y_0 > 0$ \pipe $0 < n {y_0}^{n - 1}$
+      \lit $0 < {y_0}^n - x \land 0 < n {y_0}^{n - 1}$ \pipe $0 < \frac{{y_0}^n - x}{n {y_0}^{n - 1}} = k_1$ \pipe $0 < k_1$
+      \lit $k_1 < y_0 \land 0 < k_1$ \pipe $0 < k_1 < y_0$
+      \lit $t \geq y_0 - k_1 \implies \ldots$
+      \begin{enumerate}
+        \lit $t \geq y_0 - k_1$ \pipe $t^n \geq (y_0 - k_1)^n$ \pipe $-t^n \leq -(y_0 - k_1)^n$ \pipe ${y_0}^n - t^n \leq {y_0}^n - (y_0 - k_1)^n$
+        \lit ${y_0}^n - (y_0 - k_1)^n < (y_0 - y_0 + k_1) n {y_0}^{n - 1} = k_1 n {y_0}^{n - 1} = {y_0}^n - x$
+        \lit ${y_0}^n - t^n < {y_0}^n - x$ \pipe $-t^n < -x$ \pipe $t_n > x$ \pipe $\lnot(t_n < x)$ \pipe $t \notin E$
+      \end{enumerate}
+      \lit $t \geq y_0 - k_1 \implies t \notin E$ \pipe $t \in E \implies t < y_0 - k_1$
+      \lit $\forall_{t \in E}(t \leq y_0 - k_1)$ \pipe $\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
+      \lit $\rf{LUB}(y_0, E, \mathbb{R}, <)$ \pipe $\forall_{z \in \mathbb{R}}(z < y_0 \implies \lnot \rf{UpperBound}(z, E, \mathbb{R}, <))$
+      \lit $k_1 > 0$ \pipe $y - k_1 < y_0$ \pipe $\lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
+      \lit $\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <) \land \lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$ \pipe $\bot$
+    \end{enumerate}
+    \lit ${y_0}^n > x \implies \bot$ \pipe ${y_0}^n \leq x$
+    \lit $({y_0}^n < x \veebar {y_0}^n = x \veebar x < {y_0}^n) \land( {y_0}^n \geq x) \land ({y_0}^n \leq x)$ \pipe ${y_0}^n = x$
+    \lit ${y_0}^n = x \land y_0 \in \mathbb{R}$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
+    \lit $y_1, y_2 \abr choice(\{y \in \mathbb{R} | y^n = x\})$ \pipe $y_1 \neq y_2 \implies \ldots$
+    \begin{enumerate}
+      \lit $(y_1 < y_2) \veebar (y_2 < y_1)$ \pipe $(x = {y_1}^n < {y_2}^n = x) \veebar (x = {y_2}^n < {y_1}^n = x)$ \pipe $(x < x) \veebar (x > x)$ \pipe $\bot \veebar \bot$ \pipe $\bot$
+    \end{enumerate}
+    \lit $y_1 \neq y_2 \implies \bot$ \pipe $y_1 = y_2$ \pipe $\forall_{a, b \in \mathbb{R}}((a^n = x \land b^n = x) \implies a = b)$
+    \lit $\exists_{y \in \mathbb{R}}(y^n = x) \land \forall_{a, b \in \mathbb{R}}((a^n = x \land b^n = x) \implies a = b)$ \pipe $\exists!_{y \in \mathbb{R}}(y^n = x)$
   \end{enumerate}
-  \lit $\emptyset \neq E \subset \mathbb{R} \land \rf{BoundedAbove}(E, \mathbb{R}, <)$ \pipe $\exists_{y \in \mathbb{R}}(\rf{LUB}(y, E, \mathbb{R}, <))$ \pipe $y_0 \abr choice(\{y \in \mathbb{R} | \rf{LUB}(y, E, \mathbb{R}, <)\})$
-  \lit $y^n < x \implies \ldots$
-  \begin{enumerate}
-    \lit $k_0 \abr \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $k_0 \in \mathbb{R}$
-    \lit $y^n < x$ \pipe $0 < x - y^n$
-    \lit $n > 0 \land y > 0$ \pipe $0 < n (y + 1)^{n - 1}$ \pipe $0 < \frac{x - y^n}{n (y + 1)^{n - 1}} = k_0$ \pipe $0 < k_0$
-    \lit $0, min(1, k_0) \in \mathbb{R} \land 0 < min(1, k_0)$ \pipe $\exists_{h \in \mathbb{Q}}(0 < h < min(1, k_0))$ \pipe $h_0 \abr choice(\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\})$
-    \lit $0 < h_0 < 1 \land h_0 < k_0 = \frac{x - y^n}{n (y + 1)^{n - 1}}$ \pipe $h_0 n (y + 1)^{n - 1} < x - y^n$
-    \lit $(y + h_0)^n - y^n < (y + h_0 - y) n (y + h_0)^{n - 1} = h_0 n (y + h_0)^{n - 1} < h_0 n (y + 1)^{n - 1} < x - y^n$
-    \lit $(y + h_0)^n - y^n < x - y^n$ \pipe $(y + h_0)^n < x$
-    \lit $y > 0 \land h_0 > 0$ \pipe $(y + h_0) > 0$
-    \lit $(y + h_0) > 0 \land (y + h_0)^n < x$ \pipe $(y + h_0)^n \in E \land y + h_0 > y$ \pipe $\exists_{e \in E}(e > y)$
-    \lit $\rf{LUB}(y, E, \mathbb{R}, <)$ \pipe $\rf{UpperBound}(y, E, \mathbb{R}, <)$ \pipe $\forall_{e \in E}(e \leq y)$ \pipe $\lnot \exists_{e \in E}(e > y)$
-    \lit $\exists_{e \in E}(e > y) \land \lnot \exists_{e \in E}(e > y)$ \pipe $\bot$
-  \end{enumerate}
-  \lit $y^n < x \implies \bot$ \pipe $y^n \geq x$
-  \lit $y^n > x \implies \ldots$
-  \begin{enumerate}
-    \lit $k_1 \abr \frac{y^n - x}{n y^{n - 1}}$ \pipe $k_1 \in \mathbb{R}$
-    \lit 123123
-  \end{enumerate}
-  \lit $y^n > x \implies \bot$ \pipe $y^n \leq x$
-  \lit ($y^n < x \veebar y^n = x \veebar x < y^n) \land( y^n \geq x) \land (y^n \leq x)$ \pipe $y^n = x$
-  \lit $y^n = x \land y \in \mathbb{R}$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
-  DONE
+  \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \exists!_{y \in \mathbb{R}}(y^n = x)$ \pipe $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}({y_0}^n = x)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-
 
 
 
@@ -735,7 +767,7 @@ $(Function(f, X, Y) \land A \subseteq X \land B \subseteq Y) \implies \ldots$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Injective(f, X, Y) \abr Function(f, X, Y) \land \forall_{x_1, x_2 \in X}(x_1 \neq x_2 \implies f(x_1) \neq f(x_2))$ \\ % or One-to-One
-$Surjective(f, X, Y) \abr Function(f, X, Y) \land \forall_{y \in Y} \exists_{x \in X}(y = f(x))$ \\ % or Onto
+$Surjective(f, X, Y) \abr Function(f, X, Y) \land \forall_{y \in Y} \exists_{x \in X}(y_0 = f(x))$ \\ % or Onto
 $Bijective(f, X, Y) \abr Injective(f, X, Y) \land Surjective(f, X, Y)$ \\ % or One-to-One Correspondence
 \wff{Surjective Equivalent} $(Range(f) = Codomain(f)) \implies Surjective(f)$ \\
 
