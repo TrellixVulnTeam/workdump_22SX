@@ -607,6 +607,7 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 \wff{QROrderedSubfieldOfR} $\rf{OrderedSubfield}(\mathbb{Q}_{\mathbb{R}}, \mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}})$    \phantom{TODO}--- \\
 \wff{QIsomorphicToQR} $\mathbb{Q}_{\mathbb{R}} \simeq \mathbb{Q}$    \phantom{TODO}--- \\
 \wff{ExistenceOfR} $\exists_{\mathbb{R}}\pr{\rf{LUBProperty}(\mathbb{R}, <_{\mathbb{R}}) \land \rf{OrderedSubfield}(\mathbb{Q}, \mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}})}$    \phantom{TODO}--- \\
+\wff{OrderedFieldR} $\rf{OrderedField}(\mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}})$    \phantom{TODO}--- \\
 
 (1.20) \\
 \wff{ArchimedeanPropertyOfR} $\forall_{x, y \in \mathbb{R}}\pr{x > 0 \implies \exists_{n \in \mathbb{N}^+}(n x > y)}$
@@ -746,16 +747,41 @@ $\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathb
 
 \wff{RootExistenceInRCorollary} $\forall_{0 < a \in \mathbb{R}} \forall_{0 < b \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}}((a b)^{1 / n} = a^{1 / n} b^{1 / n})$    \phantom{TODO}--- \\
 
+$\df{ExtendedRealSystem}(\bar{\mathbb{R}}, +, *, <) \abr \left(\begin{array}{ll}
+  \bar{\mathbb{R}} = \mathbb{R} \cup \{-\infty, +\infty\} \hfill \land \hfill -\infty < x < \infty \hfill \land \hfill \\
+  x + \infty = +\infty \hfill \land \hfill x - \infty = -\infty \hfill \land \hfill \frac{x}{+\infty} = \frac{x}{-\infty} = 0 \hfill \land \hfill \\
+  (x > 0) \implies (x * (+\infty) = +\infty \land x *(-\infty) = -\infty) \hfill \land \hfill \\
+  (x < 0) \implies (x * (+\infty) = -\infty \land x *(-\infty) = +\infty)
+\end{array}\right)$ \\
 
+$\df{\mathbb{C}} \abr \{\langle a, b \rangle \in \mathbb{R} \times \mathbb{R}\}$ \\
+$\df{+_{\mathbb{C}}}(\langle a, b \rangle, \langle c, d \rangle) \abr \langle a +_{\mathbb{R}} c, b +_{\mathbb{R}} d \rangle$ \\
+$\df{*_{\mathbb{C}}}(\langle a, b \rangle, \langle c, d \rangle) \abr \langle a *_{\mathbb{R}} c - b *_{\mathbb{R}} d, a *_{\mathbb{R}} d + b *_{\mathbb{R}} c \rangle$ \\
 
+\wff{FieldC} $\rf{Field}(\mathbb{C}, +_{\mathbb{C}}, *_{\mathbb{C}})$    \phantom{TODO}--- \\
+\wff{RSubfieldC} $\rf{Subfield}(\mathbb{R}, \mathbb{C}, +, *)$    \phantom{TODO}--- \\
 
+$\df{i} \abr \langle 0, 1 \rangle \in \mathbb{C}$ \\
 
+\wff{iProperty} $i^2 = -1$    \phantom{TODO}--- \\
+\wff{CProperty} $(a, b \in \mathbb{R}) \implies (\langle a, b \rangle = a + b i)$    \phantom{TODO}--- \\
 
+$\df{Conjugate}(\overline{a + b i}) \abr a - b i$ \\
 
+\wff{ConjugateProperties} $(w, z \in \mathbb{C}) \implies \ldots$    \phantom{TODO}--- \\
+\begin{enumerate}
+  \lit $\overline{z + w} = \overline{z} + \overline{w}$
+  \lit $\overline{z * w} = \overline{z} * \overline{w}$
+  \lit $Re(z) = (1 / 2) (z + \overline{z}) \land Im(z) = (1 / 2) (z - \overline{z})$
+  \lit $0 \leq z * \overline{z} \in \mathbb{R}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$\df{AbsoluteValueC}(|z|) = (z * \overline{z})^{1 / 2}$
 
-
-
+\wff{AbsoluteValueProperties} $(z, w \in \mathbb{C}) \implies \ldots$    \phantom{TODO}--- \\
+\begin{enumerate}
+  \lit 123123
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
