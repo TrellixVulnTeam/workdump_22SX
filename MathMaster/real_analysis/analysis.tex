@@ -706,7 +706,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
     \lit $\rf{CompletenessOfR}$ \pipe $\rf{LUBProperty}(\mathbb{R}, <)$
     \lit $\pr{\rf{LUBProperty}(\mathbb{R}, <)} \land (\emptyset \neq E \subset \mathbb{R}) \land \pr{\rf{BoundedAbove}(E, \mathbb{R}, <)}$ \pipe $\exists_{y \in \mathbb{R}}\pr{\rf{LUB}(y, E, \mathbb{R}, <)}$ \cont
     \lit \cont $y_0 \abr choice\pr{\{y \in \mathbb{R} | \rf{LUB}(y, E, \mathbb{R}, <)\}}$ \pipe $\rf{LUB}(y_0, E, \mathbb{R}, <)$
-    \lit $\pr{\rf{LUB}(y_0, E, \mathbb{R}, <)} \land (t_0 \in E) \land (t_0 > 0)$ \pipe $0 < t_0 \leq y_0$ \pipe $y_0 > 0$
+    \lit $\pr{\rf{LUB}(y_0, E, \mathbb{R}, <)} \land (t_0 \in E) \land (t_0 > 0)$ \pipe $0 < t_0 \leq y_0 \in \mathbb{R}$ \pipe $0 < y_0 \in \mathbb{R}$
     \lit ${y_0}^n < x \implies \ldots$
     \begin{enumerate}
       \lit $k_0 \abr \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}$ \pipe $k_0 \in \mathbb{R}$
@@ -730,36 +730,39 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
       \lit $\pr{\exists_{e \in E}(e > y_0)} \land \pr{\lnot \exists_{e \in E}(e > y_0)}$ \pipe $\bot$
     \end{enumerate}
     \lit ${y_0}^n < x \implies \bot$ \pipe ${y_0}^n \geq x$
-    \lit ${y_0}^n > x \implies \ldots$ 123123
+    \lit ${y_0}^n > x \implies \ldots$
     \begin{enumerate}
-      \lit $k_1 \abr \frac{{y_0}^n - x}{n {y_0}^{n - 1}}$ \pipe $k_1 \in \mathbb{R} \land k_1 n {y_0}^{n - 1} = {y_0}^n - x$
-      \lit $0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}$ \pipe ${y_0}^n - x < {y_0}^n \leq n {y_0}^n$ \pipe ${y_0}^n - x < n {y_0}^n$
-      \lit $k_1 = \frac{{y_0}^n - x}{n {y_0}^{n - 1}} < \frac{n {y_0}^n}{n {y_0}^{n - 1}} = y_0$ \pipe $k_1 < y_0$
-      \lit ${y_0}^n > x$ \pipe ${y_0}^n - x > 0$
-      \lit $n > 0 \land y_0 > 0$ \pipe $0 < n {y_0}^{n - 1}$
-      \lit $0 < {y_0}^n - x \land 0 < n {y_0}^{n - 1}$ \pipe $0 < \frac{{y_0}^n - x}{n {y_0}^{n - 1}} = k_1$ \pipe $0 < k_1$
-      \lit $k_1 < y_0 \land 0 < k_1$ \pipe $0 < k_1 < y_0$
+      \lit $k_1 \abr \frac{{y_0}^n - x}{n {y_0}^{n - 1}}$ \pipe $(k_1 \in \mathbb{R}) \land (k_1 n {y_0}^{n - 1} = {y_0}^n - x)$
+      \lit $(0 < x) \land (0 < n \in \mathbb{Z})$ \pipe ${y_0}^n - x < {y_0}^n \leq n {y_0}^n$ \pipe ${y_0}^n - x < n {y_0}^n$
+      \lit ${y_0}^n - x < n {y_0}^n$ \pipe $k_1 = \frac{{y_0}^n - x}{n {y_0}^{n - 1}} < \frac{n {y_0}^n}{n {y_0}^{n - 1}} = y_0$ \pipe $k_1 < y_0$
+      \lit ${y_0}^n > x$ \pipe $0 < {y_0}^n - x$
+      \lit $(n > 0) \land (y_0 > 0)$ \pipe $0 < n {y_0}^{n - 1}$
+      \lit $(0 < {y_0}^n - x) \land 0 < (n {y_0}^{n - 1})$ \pipe $0 < \frac{{y_0}^n - x}{n {y_0}^{n - 1}} = k_1$ \pipe $0 < k_1$
+      \lit $(k_1 < y_0) \land (0 < k_1)$ \pipe $(0 < k_1 < y_0) \land (0 < y_0 - k_1 < y_0)$
       \lit $t \geq y_0 - k_1 \implies \ldots$
       \begin{enumerate}
         \lit $t \geq y_0 - k_1$ \pipe $t^n \geq (y_0 - k_1)^n$ \pipe $-t^n \leq -(y_0 - k_1)^n$ \pipe ${y_0}^n - t^n \leq {y_0}^n - (y_0 - k_1)^n$
-        \lit ${y_0}^n - (y_0 - k_1)^n < (y_0 - y_0 + k_1) n {y_0}^{n - 1} = k_1 n {y_0}^{n - 1} = {y_0}^n - x$
-        \lit ${y_0}^n - t^n < {y_0}^n - x$ \pipe $-t^n < -x$ \pipe $t_n > x$ \pipe $\lnot(t_n < x)$ \pipe $t \notin E$
+        \lit $\rf{RootLemma1} \land (0 < y_0 - k_1 < y_0)$ \pipe ${y_0}^n - (y_0 - k_1)^n < k_1 n {y_0}^{n - 1}$
+        \lit $\pr{{y_0}^n - t^n \leq {y_0}^n - (y_0 - k_1)^n} \land \pr{{y_0}^n - (y_0 - k_1)^n < k_1 n {y_0}^{n - 1}}$ \pipe ${y_0}^n - t^n < k_1 n {y_0}^{n - 1}$
+        \lit $(k_1 n {y_0}^{n - 1} = {y_0}^n - x) \land ({y_0}^n - t^n < k_1 n {y_0}^{n - 1})$ \pipe ${y_0}^n - t^n < {y_0}^n - x$ \pipe $-t^n < -x$ \pipe $t^n > x$
+        \lit $\pr{t \in E \iff (t \in \mathbb{R} \land t > 0 \land t^n < x)} \land (t^n > x)$ \pipe $t \notin E$
       \end{enumerate}
-      \lit $t \geq y_0 - k_1 \implies t \notin E$ \pipe $t \in E \implies t < y_0 - k_1$
-      \lit $\forall_{t \in E}(t \leq y_0 - k_1)$ \pipe $\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
-      \lit $\rf{LUB}(y_0, E, \mathbb{R}, <)$ \pipe $\forall_{z \in \mathbb{R}}\pr{z < y_0 \implies \lnot \rf{UpperBound}(z, E, \mathbb{R}, <)}$
-      \lit $k_1 > 0$ \pipe $y - k_1 < y_0$ \pipe $\lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
-      \lit $\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <) \land \lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$ \pipe $\bot$
+      \lit $t \geq y_0 - k_1 \implies t \notin E$ \pipe $t \in E \implies t < y_0 - k_1$ \pipe $\forall_{t \in E}(t \leq y_0 - k_1)$ \pipe $\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
+      \lit $\pr{\rf{LUB}(y_0, E, \mathbb{R}, <) \land (y_0 - k_1 < y_0)}$ \pipe $\lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)$
+      \lit $\pr{\rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)} \land \pr{\lnot \rf{UpperBound}(y_0 - k_1, E, \mathbb{R}, <)}$ \pipe $\bot$
     \end{enumerate}
     \lit ${y_0}^n > x \implies \bot$ \pipe ${y_0}^n \leq x$
-    \lit $({y_0}^n < x \veebar {y_0}^n = x \veebar x < {y_0}^n) \land( {y_0}^n \geq x) \land ({y_0}^n \leq x)$ \pipe ${y_0}^n = x$
-    \lit ${y_0}^n = x \land y_0 \in \mathbb{R}$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
-    \lit $y_1, y_2 \abr choice(\{y \in \mathbb{R} | y^n = x\})$ \pipe $y_1 \neq y_2 \implies \ldots$
+    \lit $\rf{Order}(\mathbb{R}, <)$ \pipe $\rf{OrderTrichotomy}(\mathbb{R}, <)$
+    \lit $\pr{\rf{OrderTrichotomy}(\mathbb{R}, <)} \land({y_0}^n \geq x) \land ({y_0}^n \leq x)$ \pipe ${y_0}^n = x$
+    \lit $({y_0}^n = x) \land (y_0 \in \mathbb{R})$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
+    \lit $y_1, y_2 \abr choice(\{y \in \mathbb{R} | y^n = x\})$
+    \lit $y_1 \neq y_2 \implies \ldots$
     \begin{enumerate}
-      \lit $(y_1 < y_2) \veebar (y_2 < y_1)$ \pipe $(x = {y_1}^n < {y_2}^n = x) \veebar (x = {y_2}^n < {y_1}^n = x)$ \pipe $(x < x) \veebar (x > x)$ \pipe $\bot \veebar \bot$ \pipe $\bot$
+      \lit $\pr{\rf{OrderTrichotomy}(\mathbb{R}, <)} \land (y_1 \neq y_2)$ \pipe $(y_1 < y_2) \veebar (y_2 < y_1)$ \cont
+      \lit \cont $(x = {y_1}^n < {y_2}^n = x) \veebar (x = {y_2}^n < {y_1}^n = x)$ \pipe $(x < x) \veebar (x > x)$ \pipe $\bot \veebar \bot$ \pipe $\bot$
     \end{enumerate}
     \lit $y_1 \neq y_2 \implies \bot$ \pipe $y_1 = y_2$ \pipe $\forall_{a, b \in \mathbb{R}}\pr{(a^n = x \land b^n = x) \implies a = b}$
-    \lit $\exists_{y \in \mathbb{R}}(y^n = x) \land \forall_{a, b \in \mathbb{R}}\pr{(a^n = x \land b^n = x) \implies a = b}$ \pipe $\exists!_{y \in \mathbb{R}}(y^n = x)$
+    \lit $\pr{\exists_{y \in \mathbb{R}}(y^n = x)} \land \pr{\forall_{a, b \in \mathbb{R}}\pr{(a^n = x \land b^n = x) \implies a = b}}$ \pipe $\exists!_{y \in \mathbb{R}}(y^n = x)$
   \end{enumerate}
   \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \exists!_{y \in \mathbb{R}}(y^n = x)$ \pipe $\forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \mathbb{Z}} \exists!_{0 < y \in \mathbb{R}}({y_0}^n = x)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -805,7 +808,6 @@ $\df{AbsoluteValueProperties} \abr (z, w \in \mathbb{C}) \implies \ldots$    \ph
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 TODO:
-- CALL WFFS DEFINITION BUT ABREVIATING ONLY WFF/RELATIONS AND NOT TERMS OR FUNCTIONS
 - MORE EXPLICIT MODUS PONENS ON OrderTrichotomyR ???
 - name all properties
 - hyperlink all definitions ???
