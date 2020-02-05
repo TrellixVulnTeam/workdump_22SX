@@ -859,31 +859,119 @@ $\df{GCD Equivalent} \abr 123123$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra}
 
-$EquivalentSystem() \ldots$
+$Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
+$+(A, B) \abr (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) \land \pr{Matrix(A, m, n)} \land \pr{Matrix(B, m, n)}$ \\
+$*(r, A) \abr (r * A = [r a_{i, j}]_{m \times n}) \land \pr{Matrix(A, m, n)}$ \\
+$*(A, B) \abr \pr{A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n}} \land \pr{Matrix(A, m, p)} \land \pr{Matrix(B, p, n)}$ \\
+$\phantom{ }^T(A) \abr (A^T = [a_{j, i}]_{n \times m}) \land \pr{Matrix(A, m, n)}$ \\
 
-$(A B)^T = B^T A^T$ \\
-$Sym(A) \abr A^T = A$ \\
-$Skew(A) \abr A^T = -A$ \\
+$AddCom \abr A + B = B + A$ \pipe $\leftarrow$ $A + B = [a_{i, j} + b_{i, j}] = [b_{i, j} + a_{i, j}] = B + A$ \\
+$AddAssoc \abr (A + B) + C = A + (B + C)$ \pipe $\leftarrow$ $(A + B) + C = [(a_{i, j} + b_{i, j}) + c_{i, j}] = [a_{i, j} + (b_{i, j} + c_{i, j})] = A + (B + C)$ \\
+$AddId \abr A + O = A = O + A$ \pipe $\leftarrow$ $A + O = [a_{i, j} + 0] = A = [0 + a_{i, j}] = O + A$ \\
+$AddInv \abr A + (-A) = O = (-A) + A$ \pipe $\leftarrow$ $A + (-A) = [a_{i, j} - a_{i, j}] = O = [-a_{i, j} + a_{i, j}] = (-A) + A$ \\
 
-$(B = A + A^T) \implies Sym(B)$ \\
-$(B = A - A^T) \implies Skew(B)$ \\
-$A = (1/2) (A + A^T) + (1/2) (A - A^T) = Sym(B_1) + Skew(B_2)$ \\
+$MulAssoc \abr (A * B) * C = A * (B * C)$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit $(A * B) * C = \left[\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, j})\right] * C = \left[\sum_{k_2 = 1}^{p_2}\pr{\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2}) c_{k_2, j}}\right] = \left[\sum_{k_2 = 1}^{p_2} \sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = $ \cont
+  \lit \cont $\left[\sum_{k_1 = 1}^{p_1} \sum_{k_2 = 1}^{p_2}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = \left[\sum_{k_1 = 1}^{p_1}\pr{a_{i, k_1} \sum_{k_2 = 1}^{p_2}(b_{k_1, k_2} c_{k_2, j})}\right] = \ldots = A * (B * C)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Invertible(A) \abr \exists_{A^{-1}}(A A^{-1} = I = A^{-1} A)$ \\
+$LeftDist \abr (A + B) * C = A * C + B * C$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit $(A + B) * C = [a_{i, j} + b_{i, j}] * C = \left[\sum_{k = 1}^{p}\pr{(a_{i, k} + b_{i, k}) c_{k, j}}\right] = $ \cont
+  \lit \cont $\left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j} + b_{i, k} c_{k, j})\right] = \left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j})\right] + \left[\sum_{k = 1}^{p}(b_{i, k} c_{k, j})\right] = A * C + B * C$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A) \land Invertible(B)} \implies \pr{Invertible(A B) \land (A B)^{-1} = B^{-1} A^{-1}}$ \\
-$\pr{Invertible(A)} \implies \pr{Invertible(A^{-1}) \land (A^{-1})^{-1} = A}$ \\
-$\pr{Invertible(A)} \implies \pr{Invertible(A^T) \land (A^T)^{-1} = (A^{-1})^T}$ \\
+$RightDist \abr C * (A + B) * C = C * A + C * B$    \phantom{TODO}--- \\
+$Scalar1 \abr r (s A) = (r s) A = s (r A)$    \phantom{TODO}--- \\
+$Scalar2 \abr A (r b) = r (A B)$    \phantom{TODO}--- \\
+$Scalar3 \abr (r + s) A = r A + r S$    \phantom{TODO}--- \\
+$Scalar4 \abr r (A + B) = r A + r B$    \phantom{TODO}--- \\
+
+$Trans1 \abr A = (A^T)^T$ \pipe $\leftarrow$ $A = [a_{i, j}] = [a_{j, i}]^T = ([a_{i, j}]^T)^T = (A^T)^T$ \\
+$Trans2 \abr (A + B)^T = A^T + B ^T$    \phantom{TODO}--- \\
+$Trans3 \abr (A * B)^T = B^T * A^T$ \pipe $\leftarrow$ $(A * B)^T = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]^T = \left[\sum_{k = 1}^{p}(a_{j, k} b_{k, i})\right] = \left[\sum_{k = 1}^{p}(b_{k, i} a_{j, k})\right] =  \left[\sum_{k = 1}^{p}(b^T_{i, k} a^T_{k, j})\right] = B^T * A^T$ \\
+
+$Sym(A) \abr A = A^T$ ; $SkewSym(A) \abr A = -A^T$ \\
+$SymGen \abr Sym(A + A^T)$ \pipe $\leftarrow$ $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$ \\
+$SkewSymGem \abr SkewSym(A - A^T)$ \pipe $\leftarrow$ $-(A - A^T)^T = -\pr{A^T - (A^T)^T} = -(A^T - A) = (A - A^T)$ \\
+$SymDec \abr A = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T)$    \phantom{TODO}--- \\
+
+$Square(A) \abr Matrix(A, n, n)$ \\
+$Diagonal(A) \abr \pr{Square(A)} \land (i \neq j \implies a_{i, j} = 0)$ \\
+$Scalar(A) \abr \pr{Diagonal(A)} \land (a_{i, i} = k)$ \\
+$I \abr \pr{Scalar(I)} \land (i_{d, d} = 1)$ \\
+$MulId \abr A * I = A = I * A$    \phantom{TODO}--- \\
+
+$UpperTriangular(A) \abr \pr{Square(A)} \land (i > \implies a_{i, j} = 0)$ \\
+$LowerTriangular(A) \abr \pr{Square(A)} \land (i < j \implies a_{i, j} = 0)$ \\
+
+$Invertible(A) \abr \exists_{A^{-1}}(A * A^{-1} = I = A^{-1} * A)$ \\
+$UniqueInverse \abr \pr{(A * B_1 = I) \land (A * B_2 = I)} \implies B_1 = B_2$    \phantom{TODO}--- \\
+$Inv1 \abr \pr{Invertible(A) \land Invertible(B)} \implies (A * B)^{-1} = B^{-1} * A^{-1}$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit $(A * B) * (A * B)^{-1} = I$ \pipe $B * (A * B)^{-1} = A^{-1}$ \pipe $(A * B)^{-1} = B^{-1} * A^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+$Inv2 \abr \pr{Invertible(A)} \implies \pr{\pr{Invertible(A^{-1}) \land (A = (A^{-1})^{-1}}}$    \phantom{TODO}--- \\
+$InvTrans \abr \pr{Invertible(A)} \implies \pr{\pr{Invertible(A^T) \land ((A^T)^{-1} = (A^{-1})^T}}$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Sys(A, X, B) \abr (A * X = B) \land \pr{Matrix(A, m, n)} \land \pr{Matrix(X, n, 1)} \land \pr{Matrix(B, m, 1)}$ \\
+$Sol(X, A, B) \abr Sys(A, X, B)$ \\
+$TrivSol(X, A, B) \abr \pr{Sol(X, A, B)} \land (a_{i. j} = 0)$ \\
 
 $RREF(A) \abr (Definition 1.18)$ \\
 $ElementaryRowOperation(\phi) \abr (Definition 1.19)$ \\
-$RowEquivalent(A, B) \abr \exists_{\Phi}\pr{\forall_{\phi \in \Phi}\pr{ElementaryRowOperation(\phi)} \land |\Phi| \in \mathbb{N} \land \Phi(A) = B}$ \\
+$RowEquiv(A, B) \abr \exists_{\Phi}\pr{\forall_{\phi \in \Phi}\pr{ElementaryRowOperation(\phi)} \land |\Phi| \in \mathbb{N} \land \Phi(A) = B}$ \\
 
-By Gauss-Jordan Elimination: $NonZero(A) \implies \exists_{B}\pr{RREF(B) \land RowEquivalent(A, B)}$ \\
+$(A \neq O) \implies \pr{\exists_{B}\pr{RREF(B) \land RowEquiv(A, B)}}$ (By Gauss-Jordan Elimination)    \phantom{TODO}--- \\
+$\pr{Sys(A, X_1, B) \land Sys(C, X_2, D) \land RowEquiv([A|B], [C|D])} \implies (X_1 = X_2)$ (By algebra on systems of equations)    \phantom{TODO}--- \\
+$\pr{RowEquiv(A, B)} \implies \pr{Sys(A, X_1, O) \land Sys(B, X_1, O)}$ (Corollary)    \phantom{TODO}--- \\
+$(m < n) \implies \pr{\exists_{X}\pr{\lnot TrivSol(X, A, O)}}$ \pipe $\pr{\forall_{X}(TrivSol(X, A, O)} \implies (m \geq n)$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit Let B = GaussJordan(A) and let r be the number of non-zero rows of B \pipe $r \leq m$
+  \lit $(r \leq m) \land (m < n)$ \pipe $r < n$ \pipe $0 < n - r$
+  \lit The solution of B will have r fixed variables and n - r free variables which is also more then zero
+  \lit The solution of B will have at least one free variable that can be non-zero, i.e., non-trivial
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$\pr{A X = B \land C X = D \land RowEquivalent([A|B], [C|D])} \implies ([A X = B] \equiv [C X = D])$ \\
-$\pr{RowEquivalent(A, B)} \implies ([A X = \mathbb{O}] \equiv [B X = \mathbb{O}])$ \\
+$Elem(A) \abr RowEquiv(A, I)$ \\
+$\pr{Elem_i(A)} \implies \pr{Invertible(A) \land Elem_i(A^{-1})}$ \\
+$\pr{ElementaryRowOperation(\phi) \land \pr{B = \phi(A)}} \implies \pr{Elem(E) \land B = E * A} $ \\
+$\pr{RowEquiv(A, B)} \iff \pr{B = \Pi(E_i) * A}$ \\
+$\pr{RowEquiv(I, B)} \iff \pr{B = \Pi(E_i)}$ \\
 
+$\pr{\forall_{X}(TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit Let B = GaussJordan(A) \pipe $RowEquiv(A, B)$ 
+  \lit $\forall_{X}(TrivSol(X, B, O)$ \pipe $n \geq n$ \pipe $n = n$ \pipe $B = I$
+  \lit $RowEquiv(A, B)$ \pipe $RowEquiv(A, I)$ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$ \pipe $\leftarrow$
+\begin{enumerate}
+  \lit $Invertible(A) \implies \ldots$
+  \begin{enumerate}
+    \lit $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$
+    \lit $\forall_{X}(TrivSol(X, A, O)$ \pipe $RowEquiv(A, I)$ \pipe $A = \Pi(E_i)$
+  \end{enumerate}
+  \lit $A = \Pi(E_i) \implies \ldots$
+  \begin{enumerate}
+    \lit $\Pi({E_{-i}}^{-1}) = A^{-1}$ \pipe $Invertible(A)$
+  \end{enumerate}
+  \lit $\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)})$ \pipe $\leftarrow$ $\pr{RowEquiv(I, B) \iff B = \Pi(E_i)} \land \pr{\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}}$ \\
+
+$\pr{\forall_{X}\pr{TrivSol(X, A, O)}} \implies \pr{Invertible(A)}$ \pipe $\leftarrow$
+\begin{enumerate}
+   \lit $\pr{\pr{\forall_{X}\pr{TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}} \land \pr{\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)}}}$
+ \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$\pr{Invertible(A)} \implies \pr{\forall_{X}\pr{TrivSol(X, A, O)}}$ \pipe $\leftarrow$ $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$ \\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
