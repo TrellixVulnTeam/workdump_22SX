@@ -859,6 +859,8 @@ $\df{GCD Equivalent} \abr 123123$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra}
 
+BASE ON ADVANCED BOOK
+
 $Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
 $\mathcal{M}_{m, n} \abr \{A : Matrix(A, m, n)\}$ \\
 $+(A, B) \abr ((Matrix(A, m, n)) \land (Matrix(B, m, n))) \implies (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) $ \\
@@ -923,12 +925,18 @@ $InvTrans \abr \forall_{A : Invertible(A)}((A^T)^{-1} = (A^{-1})^T)$ \pipe $\Lef
   \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-
-
 $RowOp(\phi) \abr (Definition 1.19)$ \\
 $RowEquiv(A, B) \abr \exists_{\Phi : |\Phi| \in \mathbb{N}}((\forall_{\phi \in \Phi}(RowOp(\phi))) \land (\Phi(A) = B))$ \\
 $RREF(A) \abr (Definition 1.18)$ \\
 $GaussJordan \abr \forall_{A} \exists!_{B}(RREF(B) \land RowEquiv(A, B))$    \phantom{TODO}--- \\
+
+############################################################################
+TRASH CAN
+############################################################################
+
+$Sys(A, X, B) \abr (A * X = B) \land (Matrix(A, m, n)) \land (Matrix(X, n, 1)) \land (Matrix(B, m, 1))$ \\
+$Sol(X, A, B) \abr Sys(A, X, B)$ \\
+$TrivSol(X, A, B) \abr (Sol(X, A, B)) \land (x_{i, 1} = 0)$ \\
 $SysAlgebra \abr \forall_{A, B, C, D, X}((RowEquiv([A|B], [C|D])) \implies (Sys(A, X, B) \iff Sys(C, X, D)))$    \phantom{TODO}--- \\
 $SysAlgebraCorollary \abr \forall_{A, B, X}((RowEquiv(A, B)) \implies (Sys(A, X, O) \iff Sys(B, X, O)))$    \phantom{TODO}--- \\
 $TrivSolLemma \abr (m < n) \implies (\exists_{X}(\lnot TrivSol(X, A, O)))$ \pipe $(\forall_{X}(TrivSol(X, A, O)) \implies (m \geq n)$ \pipe $\Leftarrow$
@@ -941,9 +949,9 @@ $TrivSolLemma \abr (m < n) \implies (\exists_{X}(\lnot TrivSol(X, A, O)))$ \pipe
   \lit The solution of B will have at least one free variable that can be non-zero, i.e., non-trivial
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Sys(A, X, B) \abr (A * X = B) \land (Matrix(A, m, n)) \land (Matrix(X, n, 1)) \land (Matrix(B, m, 1))$ \\
-$Sol(X, A, B) \abr Sys(A, X, B)$ \\
-$TrivSol(X, A, B) \abr (Sol(X, A, B)) \land (x_{i, 1} = 0)$ \\
+############################################################################
+TRASH CAN
+############################################################################
 
 $Elem(A, n) \abr RowEquiv(A, I_n)$ \\
 $RowOpAsElem \abr \forall_{\phi : RowOp(\phi)}((E = \phi(I)) \implies (\phi(A) = E * A))$ \\
@@ -951,35 +959,6 @@ $RowEquiv2 \abr RowEquiv(A, B) \iff \exists_{E : |E| \in \mathbb{N}}(A = \Pi_{E_
 $(Elem_i(A)) \implies (Invertible(A) \land Elem_i(A^{-1}))$ \\
 $(RowEquiv(A, B)) \iff (B = \Pi(E_i) * A)$ \\
 $(RowEquiv(I, B)) \iff (B = \Pi(E_i))$ \\
-
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
- FUCKING BRAIN FART PIECE OF SHIT FUCKING FUCKER
 
 
 
