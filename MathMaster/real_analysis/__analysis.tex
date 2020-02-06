@@ -116,24 +116,24 @@ $\df{LUBPropertyImpliesGLBProperty} \abr \rf{LUBProperty}[S, <] \implies \rf{GLB
       \lit $\rf{Order}[<, S] \land \exists_{\delta' \in S}(\rf{LowerBound}[\delta', B, S, <])$    \ann{\rf{BoundedBelow}, 1.1}{}
       \lit $|B| = 1 \implies \ldots$    \ann{}{1.1.3}
       \begin{enumerate}
-        \lit $\exists_{u'}(u' \in B)$ \pipe $u \abr choice(\{u' | u' \in B\})$ \pipe $B = \{u\}$    \ann{1.1.2}{}
+        \lit $\exists_{u'}(u' \in B)$ \pipe $u \abr choice(\{u' : u' \in B\})$ \pipe $B = \{u\}$    \ann{1.1.2}{}
         \lit $\rf{GLB}[u, B, S, <]$ \pipe $\exists_{\epsilon_0 \in S}(\rf{GLB}[\epsilon_0, B, S, <])$
       \end{enumerate}
       \lit $|B| = 1 \implies \exists_{\epsilon_0 \in S}(\rf{GLB}[\epsilon_0, B, S, <])$
       \lit $|B| \neq 1 \implies \ldots$    \ann{}{1.1.5}
       \begin{enumerate}
         \lit $\forall_{E}\pr{(\emptyset \neq E \subset S \land \rf{BoundedAbove}[E, S, <]) \implies \exists_{\alpha \in S}(\rf{LUB}[\alpha, E, S, <])}$    \ann{\rf{LUBProperty}, 1}{}
-        \lit $L \abr \{s \in S | \rf{LowerBound}[s, B, S, <]\}$
+        \lit $L \abr \{s \in S : \rf{LowerBound}[s, B, S, <]\}$
         \lit $|B| > 1 \land \rf{OrderTrichotomy}[<, S]$ \pipe $\exists_{{b_1}' \in B} \exists_{{b_0}' \in B}({b_0}' < {b_1}')$    \ann{\rf{Order}, 1.1.1}{1.1.4.7}
-        \lit $b_1 \abr choice\pr{\{{b_1}' \in B | \exists_{{b_0}' \in B}({b_0}' < {b_1}')\}}$ \pipe $\lnot \rf{LowerBound}[b_1, B, S, <]$    \ann{1.1.4.2}{}
+        \lit $b_1 \abr choice\pr{\{{b_1}' \in B : \exists_{{b_0}' \in B}({b_0}' < {b_1}')\}}$ \pipe $\lnot \rf{LowerBound}[b_1, B, S, <]$    \ann{1.1.4.2}{}
         \lit $b_1 \notin L$ \pipe $L \subset S$
-        \lit $\delta \abr choice(\{\delta' \in S | \rf{LowerBound}[\delta', B, S, <]\})$ \pipe $\delta \in L$ \pipe $\emptyset \neq L$    \ann{1.1.1}{}
+        \lit $\delta \abr choice(\{\delta' \in S : \rf{LowerBound}[\delta', B, S, <]\})$ \pipe $\delta \in L$ \pipe $\emptyset \neq L$    \ann{1.1.1}{}
         \lit $\emptyset \neq L \subset S$    \ann{1.1.4.5, 1.1.4.6}{}
         \lit $\forall_{y \in L}(\rf{LowerBound}[y_0, B, S, <])$ \pipe $\forall_{y \in L} \forall_{x \in B}(y_0 \leq x)$    \ann{\rf{LowerBound}, 1.1.4.2}{1.1.4.10}
         \lit $\forall_{x \in B}\pr{x \in S \land \forall_{y \in L}(y_0 \leq x)}$ \pipe $\forall_{x \in B}(\rf{UpperBound}[x, L, S, <])$    \ann{\rf{UpperBound}}{}
         \lit $\exists_{x \in S}(\rf{UpperBound}[x, L, S, <])$ \pipe $\rf{BoundedAbove}[L, S, <]$
         \lit $\emptyset \neq L \subset S \land \rf{BoundedAbove}[L, S, <]$    \ann{1.1.4.7, 1.1.4.10}{}
-        \lit $\exists_{\alpha' \in S}(\rf{LUB}[\alpha', L, S, <])$ \pipe $\alpha \abr choice\pr{\{\alpha' \in S | (\rf{LUB}[\alpha', L, S, <])\}}$    \ann{1.1.4.1}{1.1.4.21}
+        \lit $\exists_{\alpha' \in S}(\rf{LUB}[\alpha', L, S, <])$ \pipe $\alpha \abr choice\pr{\{\alpha' \in S : (\rf{LUB}[\alpha', L, S, <])\}}$    \ann{1.1.4.1}{1.1.4.21}
         \lit $\forall_{x}(x \in B \implies \rf{UpperBound}[x, L, S, <])$    \ann{1.1.4.9}{1.1.4.17}
         \lit $\forall_{x}(\lnot \rf{UpperBound}[x, L, S, <] \implies x \notin B)$
         \lit $\gamma < \alpha \implies \ldots$    \ann{}{1.1.4.16}
@@ -325,7 +325,7 @@ $\df{OrderedSubfield}[K, F, +, *, <] \abr \rf{OrderedField}[F, +, *, <] \land K 
 $\df{CutI}[\alpha] \abr \emptyset \neq \alpha \subset \mathbb{Q}$ \\
 $\df{CutII}[\alpha] \abr \forall_{p \in \alpha} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \alpha)$ \\
 $\df{CutIII}[\alpha] \abr \forall_{p \in \alpha} \exists_{r \in \alpha}(p < r)$ \\
-$\df{\mathbb{R}} \abr \{\alpha \in \mathbb{Q} | \rf{CutI}[\alpha] \land \rf{CutII}[\alpha] \land \rf{CutIII}[\alpha]\}$ \\
+$\df{\mathbb{R}} \abr \{\alpha \in \mathbb{Q} : \rf{CutI}[\alpha] \land \rf{CutII}[\alpha] \land \rf{CutIII}[\alpha]\}$ \\
 
 $\df{CutCorollaryI} \abr (\alpha \in \mathbb{R} \land p \in \alpha \land q \in \mathbb{Q} \land q \notin \alpha) \implies p < q$
 \begin{enumerate}
@@ -364,7 +364,7 @@ $\df{OrderTrichotomyOfR} \abr \rf{OrderTrichotomy}[\mathbb{R}, \rf{<_{\mathbb{R}
     \lit $\lnot(\alpha <_{\mathbb{R}} \beta \lor \alpha = \beta) \implies \ldots$
     \begin{enumerate}
       \lit $\alpha \not \subset \beta \land \alpha \neq \beta$    \ann{\rf{<_{\mathbb{R}}}, 1.1}{}
-      \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr choice(\{p' | p' \in \alpha \land p' \notin \beta\})$
+      \lit $\exists_{p'}(p' \in \alpha \land p' \notin \beta)$ \pipe $p \abr choice(\{p' : p' \in \alpha \land p' \notin \beta\})$
       \lit $q \in \beta \implies \ldots$
       \begin{enumerate}
         \lit $p, q \in \mathbb{Q}$
@@ -410,25 +410,25 @@ $\df{LUBPropertyOfR} \abr \rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}]$
 \begin{enumerate}
   \lit $(\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}[A, \mathbb{R}, <_{\mathbb{R}}]) \implies \ldots$
   \begin{enumerate}
-    \lit $\gamma \abr \{p \in \mathbb{Q} | \exists_{\alpha \in A}(p \in \alpha)\}$
-    \lit $A \neq \emptyset$ \pipe $\exists_{\alpha}(\alpha \in A)$ \pipe $\alpha_0 \abr choice(\{\alpha | \alpha \in A\})$
-    \lit $\alpha_0 \neq \emptyset$ \pipe $\exists_{a}(a \in \alpha_0)$ \pipe $a_0 \abr choice(\{a | a \in \alpha_0\})$ \pipe $a_0 \in \gamma$ \pipe $\gamma \neq \emptyset$
+    \lit $\gamma \abr \{p \in \mathbb{Q} : \exists_{\alpha \in A}(p \in \alpha)\}$
+    \lit $A \neq \emptyset$ \pipe $\exists_{\alpha}(\alpha \in A)$ \pipe $\alpha_0 \abr choice(\{\alpha : \alpha \in A\})$
+    \lit $\alpha_0 \neq \emptyset$ \pipe $\exists_{a}(a \in \alpha_0)$ \pipe $a_0 \abr choice(\{a : a \in \alpha_0\})$ \pipe $a_0 \in \gamma$ \pipe $\gamma \neq \emptyset$
     \lit $\rf{BoundedAbove}[A, \mathbb{R}, <_{\mathbb{R}}]$ \pipe $\exists_{\beta}(\rf{UpperBound}[\beta, A, \mathbb{R}, <_{\mathbb{R}}])$
-    \lit $\beta_0 \abr choice(\{\beta | \rf{UpperBound}[\beta, A, \mathbb{R}, <_{\mathbb{R}}]\})$
+    \lit $\beta_0 \abr choice(\{\beta : \rf{UpperBound}[\beta, A, \mathbb{R}, <_{\mathbb{R}}]\})$
     \lit $\rf{UpperBound}[\beta_0, A, \mathbb{R}, <_{\mathbb{R}}]$ \pipe $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \beta_0)$ \pipe $\forall_{\alpha \in A}(\alpha \subseteq \beta_0)$ \pipe $\forall_{\alpha \in A} \forall_{a \in \alpha}(a \in \beta_0)$
     \lit $(\alpha \in A \land a \in \alpha) \iff a \in \gamma$ \pipe $\forall_{a \in \gamma}(a \in \beta_0)$ \pipe $\gamma \subseteq \beta_0$
     \lit $\beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subseteq \beta_0 \subset \mathbb{Q}$ \pipe $\gamma \subset \mathbb{Q}$
     \lit $\emptyset \neq \gamma \subset \mathbb{Q}$ \pipe $\rf{CutI}[\gamma]$
     \lit $(p \in \gamma \land q \in \mathbb{Q} \land q < p) \implies \ldots$
     \begin{enumerate}
-      \lit $p \in \gamma$ \pipe $\exists_{\alpha \in A}(p \in \alpha)$ \pipe $\alpha_1 \abr choice(\{\alpha \in A | p \in \alpha\})$
+      \lit $p \in \gamma$ \pipe $\exists_{\alpha \in A}(p \in \alpha)$ \pipe $\alpha_1 \abr choice(\{\alpha \in A : p \in \alpha\})$
       \lit $p \in \alpha_1 \land q \in \mathbb{Q} \land q < p$ \pipe $q \in \alpha_1$ \pipe $q \in \gamma$
     \end{enumerate}
     \lit $(p \in \gamma \land q \in \mathbb{Q} \land q < p) \implies q \in \gamma$ \pipe $\forall_{p \in \gamma} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \gamma)$ \pipe $\rf{CutII}[\gamma]$
     \lit $p \in \gamma \implies \ldots$
     \begin{enumerate}
-      \lit $\exists_{\alpha \in A}(p \in \alpha)$ \pipe $\alpha_2 \abr choice(\{\alpha \in A | p \in \alpha\})$
-      \lit $\alpha_2 \in \mathbb{R}$ \pipe $\rf{CutII}[\alpha_2]$ \pipe $\exists_{r \in \alpha_2}(p < r)$ \pipe $r_0 \abr choice(\{r \in \alpha_2 | p < r\})$
+      \lit $\exists_{\alpha \in A}(p \in \alpha)$ \pipe $\alpha_2 \abr choice(\{\alpha \in A : p \in \alpha\})$
+      \lit $\alpha_2 \in \mathbb{R}$ \pipe $\rf{CutII}[\alpha_2]$ \pipe $\exists_{r \in \alpha_2}(p < r)$ \pipe $r_0 \abr choice(\{r \in \alpha_2 : p < r\})$
       \lit $r_0 \in \alpha_2$ \pipe $r_0 \in \gamma$
       \lit $p < r_0$ \pipe $p < r_0 \land r_0 \in \gamma$ \pipe $\exists_{r \in \gamma}(p < r)$
     \end{enumerate}
@@ -438,8 +438,8 @@ $\df{LUBPropertyOfR} \abr \rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}]$
     \lit $\forall_{\alpha \in A}(\alpha \leq_{\mathbb{R}} \gamma) \land \gamma \in \mathbb{R}$ \pipe $\rf{UpperBound}[\gamma, A, \mathbb{R}, <_{\mathbb{R}}]$
     \lit $\delta <_{\mathbb{R}} \gamma \implies \ldots$
     \begin{enumerate}
-      \lit $\delta \subset \gamma$ \pipe $\exists_{s}(s \in \gamma \land s \notin \delta)$ \pipe $s_0 \abr choice(\{s \in \mathbb{Q} | s \in \gamma \land s \notin \delta\})$
-      \lit $s_0 \in \gamma$ \pipe $\exists_{\alpha \in A}(s_0 \in \alpha)$ \pipe $\alpha_3 \abr choice(\{\alpha \in A | s_0 \in \alpha\})$
+      \lit $\delta \subset \gamma$ \pipe $\exists_{s}(s \in \gamma \land s \notin \delta)$ \pipe $s_0 \abr choice(\{s \in \mathbb{Q} : s \in \gamma \land s \notin \delta\})$
+      \lit $s_0 \in \gamma$ \pipe $\exists_{\alpha \in A}(s_0 \in \alpha)$ \pipe $\alpha_3 \abr choice(\{\alpha \in A : s_0 \in \alpha\})$
       \lit $s_0 \in \alpha_3 \land s_0 \notin \delta$ \pipe $\exists_{s \in \mathbb{Q}}(s \in \alpha_3 \land s \notin \delta)$
       \lit $\delta \geq_{\mathbb{R}} \alpha_3 \implies \ldots$
       \begin{enumerate}
@@ -457,8 +457,8 @@ $\df{LUBPropertyOfR} \abr \rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}]$
   \lit $\forall_{A}\pr{(\emptyset \neq A \subset \mathbb{R} \land \rf{BoundedAbove}[A, \mathbb{R}, <_{\mathbb{R}}]) \implies \exists_{\gamma \in S}(\rf{LUB}[\gamma, A, \mathbb{R}, <_{\mathbb{R}}])}$ \pipe $\rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$\df{+_{\mathbb{R}}}[\alpha, \beta] \abr \alpha, \beta \in \mathbb{R} \land (\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$ \\
-$\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 0\}$ \\
+$\df{+_{\mathbb{R}}}[\alpha, \beta] \abr \alpha, \beta \in \mathbb{R} \land (\alpha +_{\mathbb{R}} \beta) = \{r + s : r \in \alpha \land s \in \beta\}$ \\
+$\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} : x < 0\}$ \\
 
 $\df{0InR} \abr 0_{\mathbb{R}} \in \mathbb{R}$
 \begin{enumerate}
@@ -472,23 +472,23 @@ $\df{FieldAdditionClosureOfR} \abr (\alpha, \beta \in \mathbb{R}) \implies \pr{(
 \begin{enumerate}
   \lit $(\alpha, \beta \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit $(\alpha +_{\mathbb{R}} \beta) = \{r + s | r \in \alpha \land s \in \beta\}$
+    \lit $(\alpha +_{\mathbb{R}} \beta) = \{r + s : r \in \alpha \land s \in \beta\}$
     \lit $\emptyset \neq \alpha \subset \mathbb{Q} \land \emptyset \neq \beta \subset \mathbb{Q}$
-    \lit $\exists_{a}(a \in \alpha)$ ; $\exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a | a \in \alpha\})$ ; $b_0 \abr choice(\{b | b \in \beta\})$ \pipe $a_0  + b_0 \in \alpha +_{\mathbb{R}} \beta$
-    \lit $\exists_{x}(x \notin \alpha)$ ; $\exists_{y}(y_0 \notin \beta)$ \pipe $x_0 \abr choice(\{x | x \notin \alpha\})$ ; $y_0 \abr choice(\{y | y \notin \beta\})$
+    \lit $\exists_{a}(a \in \alpha)$ ; $\exists_{b}(b \in \beta)$ \pipe $a_0 \abr choice(\{a : a \in \alpha\})$ ; $b_0 \abr choice(\{b : b \in \beta\})$ \pipe $a_0  + b_0 \in \alpha +_{\mathbb{R}} \beta$
+    \lit $\exists_{x}(x \notin \alpha)$ ; $\exists_{y}(y_0 \notin \beta)$ \pipe $x_0 \abr choice(\{x : x \notin \alpha\})$ ; $y_0 \abr choice(\{y : y \notin \beta\})$
     \lit $\forall_{r \in \alpha}(r < x_0)$ ; $\forall_{s \in \beta}(s < y_0)$ \pipe $\forall_{r \in \alpha} \forall_{s \in \beta}(r + s < x_0 + y_0)$ \pipe $x_0 + y_0 \not \in \alpha +_{\mathbb{R}} \beta$
     \lit $\emptyset \neq \alpha +_{\mathbb{R}} \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}[\alpha +_{\mathbb{R}} \beta]$
     \lit $(p \in \alpha +_{\mathbb{R}} \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
     \begin{enumerate}
-      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_0, s_0) \abr choice\pr{{(r, s) \in \alpha \times \beta | p = r + s}}$
+      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_0, s_0) \abr choice\pr{{(r, s) \in \alpha \times \beta : p = r + s}}$
       \lit $q < p = r_0 + s_0$ \pipe $(q - s_0) < r_0$ \pipe $(q - s_0) \in \alpha$
       \lit $s_0 \in \beta$ \pipe $q = (q - s_0) + s_0 \in \alpha +_{\mathbb{R}} \beta$ \pipe $q \in \alpha +_{\mathbb{R}} \beta$
     \end{enumerate}
     \lit $(p \in \alpha +_{\mathbb{R}} \beta \land q \in \mathbb{Q} \land q < p) \implies q \in \alpha +_{\mathbb{R}} \beta$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} \beta} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \alpha +_{\mathbb{R}} \beta)$ \pipe $\rf{CutII}[\alpha +_{\mathbb{R}} \beta]$
     \lit $p \in \alpha \implies \ldots$
     \begin{enumerate}
-      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_1, s_1) \abr choice\pr{\{(r, s) \in \alpha \times \beta | p = r + s\}}$
-      \lit $r_1 \in \alpha$ \pipe $\exists_{t \in \alpha}(r_1 < t)$ \pipe $t_0 \abr choice(\{t \in \alpha | r_1 < t\})$
+      \lit $\exists_{r \in \alpha} \exists_{s \in \beta}(p = r + s)$ \pipe $(r_1, s_1) \abr choice\pr{\{(r, s) \in \alpha \times \beta : p = r + s\}}$
+      \lit $r_1 \in \alpha$ \pipe $\exists_{t \in \alpha}(r_1 < t)$ \pipe $t_0 \abr choice(\{t \in \alpha : r_1 < t\})$
       \lit $s_1 \in \beta$ \pipe $t + s_1 \in \alpha +_{\mathbb{R}} \beta \land p = r_1 + s_1 < t + s_1$ \pipe $\exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$
     \end{enumerate}
     \lit $p \in \alpha \implies \exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} \beta} \exists_{r \in \alpha +_{\mathbb{R}} \beta}(p < r)$\pipe $\rf{CutIII}[\alpha +_{\mathbb{R}} \beta]$
@@ -499,15 +499,15 @@ $\df{FieldAdditionClosureOfR} \abr (\alpha, \beta \in \mathbb{R}) \implies \pr{(
 
 $\df{FieldAdditionCommutativityOfR} \abr (\alpha, \beta \in \mathbb{R}) \implies (\alpha +_{\mathbb{R}} \beta = \beta +_{\mathbb{R}} \alpha)$
 \begin{enumerate}
-  \lit $\alpha +_{\mathbb{R}} \beta = \{r + s | r \in \alpha \land s \in \beta\} = \{s + r | s \in \beta \land r \in \alpha\} = \beta +_{\mathbb{R}} \alpha$
+  \lit $\alpha +_{\mathbb{R}} \beta = \{r + s : r \in \alpha \land s \in \beta\} = \{s + r : s \in \beta \land r \in \alpha\} = \beta +_{\mathbb{R}} \alpha$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $\df{FieldAdditionAssociativityOfR} \abr (\alpha, \beta, \gamma \in \mathbb{R}) \implies \pr{(\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)}$
 \begin{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies \ldots$
   \begin{enumerate}
-    \lit $(\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \{(a + b) + c | a \in \alpha \land b \in \beta \land c \in \gamma\} = \ldots$
-    \lit $\{a + (b + c) | a \in \alpha \land b \in \beta \land c \in \gamma\} = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)$
+    \lit $(\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \{(a + b) + c : a \in \alpha \land b \in \beta \land c \in \gamma\} = \ldots$
+    \lit $\{a + (b + c) : a \in \alpha \land b \in \beta \land c \in \gamma\} = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)$
   \end{enumerate}
   \lit $(\alpha, \beta, \gamma \in \mathbb{R}) \implies (\alpha +_{\mathbb{R}} \beta) +_{\mathbb{R}} \gamma = \alpha +_{\mathbb{R}} (\beta +_{\mathbb{R}} \gamma)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
@@ -524,7 +524,7 @@ $\df{FieldAdditionIdentityOfR} \abr (\alpha \in \mathbb{R}) \implies 0_{\mathbb{
     \lit $(r \in \alpha \land s \in 0_{\mathbb{R}}) \iff (r + s \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}})$ \pipe $\forall_{p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}}(p \in \alpha)$ \pipe $\alpha +_{\mathbb{R}} 0_{\mathbb{R}} \subseteq \alpha$
     \lit $p \in \alpha \implies \ldots$
     \begin{enumerate}
-      \lit $\exists_{r \in \alpha}(p < r)$ \pipe $r_2 \abr choice(\{r \in \alpha | p < r\})$
+      \lit $\exists_{r \in \alpha}(p < r)$ \pipe $r_2 \abr choice(\{r \in \alpha : p < r\})$
       \lit $p < r_2$ \pipe $p - r_2 < r_2 - r_2 = 0$ \pipe $(p - r_2 )< 0$ \pipe $(p - r_2) \in 0_{\mathbb{R}}$
       \lit $r_2 \in \alpha$ \pipe $p = r_2 + (p - r_2) \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$ \pipe $p \in \alpha +_{\mathbb{R}} 0_{\mathbb{R}}$
     \end{enumerate}
@@ -538,10 +538,10 @@ $\df{FieldAdditionInverseOfR} \abr (\alpha \in \mathbb{R}) \implies \exists_{-\a
 \begin{enumerate}
   \lit $\alpha \in \mathbb{R} \implies \ldots$
   \begin{enumerate}
-    \lit $\beta \abr \{p \in \mathbb{Q} | \exists_{r > 0}(-p - r \notin \alpha)\}$
-    \lit $\alpha \subset \mathbb{Q}$ \pipe $\exists_{s \in \mathbb{Q}}(s \notin \alpha)$ \pipe $s_0 \abr choice(\{s | s \notin \alpha\})$ \pipe $p_0 \abr -s_0 - 1$
+    \lit $\beta \abr \{p \in \mathbb{Q} : \exists_{r > 0}(-p - r \notin \alpha)\}$
+    \lit $\alpha \subset \mathbb{Q}$ \pipe $\exists_{s \in \mathbb{Q}}(s \notin \alpha)$ \pipe $s_0 \abr choice(\{s : s \notin \alpha\})$ \pipe $p_0 \abr -s_0 - 1$
     \lit $-p_0 - 1 = -(-s_0 - 1) - 1 = s_0 \notin \alpha$ \pipe $-p_0 - 1 \notin \alpha$ \pipe $\exists_{r > 0}(-p_0 - r \notin \alpha)$ \pipe $p_0 \in \beta$
-    \lit $\emptyset \neq \alpha$ \pipe $\exists_{q \in \alpha}$ \pipe $q_0 \abr choice(\{q \in \mathbb{Q} | q \in \alpha\})$
+    \lit $\emptyset \neq \alpha$ \pipe $\exists_{q \in \alpha}$ \pipe $q_0 \abr choice(\{q \in \mathbb{Q} : q \in \alpha\})$
     \lit $r > 0 \implies \ldots$
     \begin{enumerate}
       \lit $q_0 \in \alpha$ \pipe $-(-q_0) - r = q_0 - r < q_0$ \pipe $-(-q_0) - r < q_0$ \pipe $-(-q_0) - r \in \alpha$
@@ -550,14 +550,14 @@ $\df{FieldAdditionInverseOfR} \abr (\alpha \in \mathbb{R}) \implies \exists_{-\a
     \lit $\emptyset \neq \beta \subset \mathbb{Q}$ \pipe $\rf{CutI}[\beta]$
     \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies \ldots$
     \begin{enumerate}
-      \lit $p \in \beta$ \pipe $\exists_{r > 0}(-p - r \notin \alpha)$ \pipe $r_0 \abr choice(\{r > 0 | -p - r \notin \alpha\})$
+      \lit $p \in \beta$ \pipe $\exists_{r > 0}(-p - r \notin \alpha)$ \pipe $r_0 \abr choice(\{r > 0 : -p - r \notin \alpha\})$
       \lit $q < p$ \pipe $-p - r < -q - r$
       \lit $-q -r \notin \alpha$ \pipe $q \in \beta$
     \end{enumerate}
     \lit $(p \in \beta \land q \in \mathbb{Q} \land q < p) \implies q \in \beta$ \pipe $\forall_{p \in \beta} \forall_{q \in \mathbb{Q}}(q < p \implies q \in \beta)$ \pipe $\rf{CutII}[\beta]$
     \lit $p \in \beta \implies \ldots$
     \begin{enumerate}
-      \lit $p \in \beta$ \pipe $\exists_{r > 0}(-p - r \notin \alpha)$ \pipe $r_1 \abr choice(\{r > 0 | -p - r \notin \alpha\})$
+      \lit $p \in \beta$ \pipe $\exists_{r > 0}(-p - r \notin \alpha)$ \pipe $r_1 \abr choice(\{r > 0 : -p - r \notin \alpha\})$
       \lit $t_0 \abr p + (r_1 / 2)$
       \lit $r_1 > 0$ \pipe $r_1 / 2 > 0$
       \lit $t_0 > t_0 - (r_1 / 2) = p$ \pipe $t_0 > p$
@@ -569,7 +569,7 @@ $\df{FieldAdditionInverseOfR} \abr (\alpha \in \mathbb{R}) \implies \exists_{-\a
     \lit $\rf{CutI}[\beta] \land \rf{CutII}[\beta] \land \rf{CutIII}[\beta]$ \pipe $\beta \in \mathbb{R}$
     \lit $(r \in \alpha \land s \in \beta) \implies \ldots$
     \begin{enumerate}
-      \lit $s \in \beta$ \pipe $\exists_{t > 0}(-s - t \notin \alpha)$ \pipe $t_1 \abr choice(\{t > 0 | -s - t \notin \alpha\})$ \pipe $-s - t_1 < -s$
+      \lit $s \in \beta$ \pipe $\exists_{t > 0}(-s - t \notin \alpha)$ \pipe $t_1 \abr choice(\{t > 0 : -s - t \notin \alpha\})$ \pipe $-s - t_1 < -s$
       \lit $\alpha \in \mathbb{R} \land s, t_1 \in \mathbb{Q} \land -s - t_1 < -s \land -s - t_1 \notin \alpha$ \pipe $-s \notin \alpha$
       \lit $\alpha \in \mathbb{R} \land r \in \alpha \land -s \notin \alpha$ \pipe $r < -s$ \pipe $r + s < 0$ \pipe $r + s \in 0_{\mathbb{R}}$
     \end{enumerate}
@@ -577,7 +577,7 @@ $\df{FieldAdditionInverseOfR} \abr (\alpha \in \mathbb{R}) \implies \exists_{-\a
     \lit $v \in 0_{\mathbb{R}} \implies \ldots$
     \begin{enumerate}
       \lit $v < 0$ \pipe $w_0 \abr -v/2$ \pipe $w > 0$
-      \lit $\exists_{n \in \mathbb{Z}}\pr{n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha}$ \pipe $n_0 \abr choice\pr{\{n \in \mathbb{Z} | n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha\}}$    \ann{ARCHIMEDEAN PROPERTY OF Q + LUB???}{}
+      \lit $\exists_{n \in \mathbb{Z}}\pr{n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha}$ \pipe $n_0 \abr choice\pr{\{n \in \mathbb{Z} : n w_0 \in \alpha \land (n + 1) w_0 \notin \alpha\}}$    \ann{ARCHIMEDEAN PROPERTY OF Q + LUB???}{}
       \lit $p_0 \abr -(n_0 + 2) w_0$ \pipe $-p_0 - w_0 = (n_0 + 2) w_0 - w_0 = (n_0 + 1) w_0 \notin \alpha$ \pipe $-p_0 - w_0 \notin \alpha$ \pipe $p_0 \in \beta$
       \lit $n_0 w_0 \in \alpha \land p_0 \in \beta$ \pipe $n_0 w_0 + p_0 = n_0 (-v/2) + -(n_0 + 2) -v/2 = v \in \alpha +_{\mathbb{R}} \beta$
     \end{enumerate}      
@@ -589,7 +589,7 @@ $\df{FieldAdditionInverseOfR} \abr (\alpha \in \mathbb{R}) \implies \exists_{-\a
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $\df{*_{\mathbb{R}}}[\alpha, \beta] \abr $    \phantom{TODO}--- \\
-$\df{1_{\mathbb{R}}} \abr \{x \in \mathbb{Q} | x < 1\}$ \\
+$\df{1_{\mathbb{R}}} \abr \{x \in \mathbb{Q} : x < 1\}$ \\
 
 $\df{1IsNot0} \abr 0_{\mathbb{R}} \neq 1_{\mathbb{R}}$    \phantom{TODO}--- \\
 $\df{1InR} \abr 1_{\mathbb{R}} \in \mathbb{R}$    \phantom{TODO}--- \\
@@ -604,7 +604,7 @@ $\df{FieldDistributativityOfR} \abr (\alpha, \beta, \gamma \in \mathbb{R}) \impl
 $\df{FieldWithR} \abr \rf{Field}[\mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}]$    \phantom{TODO}--- \\
 $\df{OrderedFieldWithR} \abr \rf{OrderedField}[\mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}}]$    \phantom{TODO}--- \\
 
-$\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} | r < q\} | q \in \mathbb{Q}\}$ \\
+$\df{\mathbb{Q}_{\mathbb{R}}} \abr \{\{r \in \mathbb{Q} : r < q\} : q \in \mathbb{Q}\}$ \\
 $\df{QROrderedSubfieldOfR} \abr \rf{OrderedSubfield}[\mathbb{Q}_{\mathbb{R}}, \mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}}]$    \phantom{TODO}--- \\
 $\df{QIsomorphicToQR} \abr \mathbb{Q}_{\mathbb{R}} \simeq \mathbb{Q}$    \phantom{TODO}--- \\
 $\df{CompletenessOfR} \abr \exists_{\mathbb{R}}(\rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}] \land \rf{OrderedSubfield}[\mathbb{Q}, \mathbb{R}, +_{\mathbb{R}}, *_{\mathbb{R}}, <_{\mathbb{R}}])$    \phantom{TODO}--- \\
@@ -614,19 +614,19 @@ $\df{ArchimedeanPropertyOfR} \abr \forall_{x, y \in \mathbb{R}}\pr{x > 0 \implie
 \begin{enumerate}
   \lit $(x, y \in \mathbb{R} \land x > 0) \implies \ldots$
   \begin{enumerate}
-    \lit $A \abr \{n x | n \in \mathbb{N}^+\}$ \pipe $(\emptyset \neq A \subset \mathbb{R}) \land \pr{a \in A \iff \exists_{m \in \mathbb{N}^+}(m x = a)}$
+    \lit $A \abr \{n x : n \in \mathbb{N}^+\}$ \pipe $(\emptyset \neq A \subset \mathbb{R}) \land \pr{a \in A \iff \exists_{m \in \mathbb{N}^+}(m x = a)}$
     \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y) \implies \ldots$
     \begin{enumerate}
       \lit $\lnot \exists_{n \in \mathbb{N}^+}(n x > y)$ \pipe $\forall_{n \in \mathbb{N}^+}(n x \leq y)$ \pipe $\rf{UpperBound}[y_0, A, \mathbb{R}, <]$ \pipe $\rf{BoundedAbove}[A, \mathbb{R}, <]$
       \lit $\rf{CompletenessOfR}$ \pipe $\rf{LUBProperty}[\mathbb{R}, <]$
       \lit $(\rf{LUBProperty}[\mathbb{R}, <]) \land (\emptyset \neq A \subset \mathbb{R}) \land (\rf{BoundedAbove}[A, \mathbb{R}, <])$ \pipe $\exists_{\alpha \in \mathbb{R}}(\rf{LUB}[\alpha, A, \mathbb{R}, <])$ \cont
-      \lit \cont $\alpha_0 \abr choice(\{\alpha \in \mathbb{R} | \rf{LUB}[\alpha, A, \mathbb{R}, <]\})$ \pipe $\rf{LUB}[\alpha_0, A, \mathbb{R}, <]$
+      \lit \cont $\alpha_0 \abr choice(\{\alpha \in \mathbb{R} : \rf{LUB}[\alpha, A, \mathbb{R}, <]\})$ \pipe $\rf{LUB}[\alpha_0, A, \mathbb{R}, <]$
       \lit $x > 0$ \pipe $\alpha_0 - x < \alpha_0$
       \lit $(\alpha_0 - x < \alpha_0) \land (\rf{LUB}[\alpha_0, A, \mathbb{R}, <])$ \pipe $\lnot \rf{UpperBound}[\alpha_0 - x, A, \mathbb{R}, <]$
       \lit $\lnot \rf{UpperBound}[\alpha_0 - x, A, \mathbb{R}, <]$ \pipe $\exists_{c \in A}(\alpha_0 - x < c)$ \cont
-      \lit \cont $c_0 \abr choice(\{c \in A | \alpha_0 - x < c\})$ \pipe $(c_0 \in A) \land (\alpha_0 - x < c_0)$
+      \lit \cont $c_0 \abr choice(\{c \in A : \alpha_0 - x < c\})$ \pipe $(c_0 \in A) \land (\alpha_0 - x < c_0)$
       \lit $(c_0 \in A) \land \pr{a \in A \iff \exists_{m \in \mathbb{N}^+}(m x = a)}$ \pipe $\exists_{m \in \mathbb{N}^+}(m x = c_0)$ \cont
-      \lit \cont $m_0 \abr choice(\{m \in \mathbb{N}^+ | m x = c_0\})$ \pipe $(m_0 \in \mathbb{N}^+) \land (m_0 x = c_0)$
+      \lit \cont $m_0 \abr choice(\{m \in \mathbb{N}^+ : m x = c_0\})$ \pipe $(m_0 \in \mathbb{N}^+) \land (m_0 x = c_0)$
       \lit $(\alpha_0 - x < c_0) \land (m_0 x = c_0)$ \pipe $\alpha_0 - x < c_0 = m_0 x$ \pipe $\alpha_0 < m_0 x + x$ \pipe $\alpha_0 < (m_0 + 1) x$
       \lit $m_0 \in \mathbb{N}^+$ \pipe $m_0 + 1 \in \mathbb{N}^+$
       \lit $(m_0 + 1 \in \mathbb{N}^+) \land \pr{a \in A \iff \exists_{m \in \mathbb{N}^+}(m x = a)}$ \pipe $(m_0 + 1) x \in A$
@@ -645,16 +645,16 @@ $\df{QDenseInR} \abr \forall_{x, y \in \mathbb{R}}\pr{x < y \implies \exists_{p 
   \begin{enumerate}
     \lit $x < y$ \pipe $(0 < y - x) \land (y - x \in \mathbb{R})$
     \lit $\rf{ArchimedeanPropertyOfR} \land (0 < y - x) \land (y - x, 1 \in \mathbb{R})$ \pipe $\exists_{n \in \mathbb{N}^+}\pr{n (y - x) > 1}$ \cont
-    \lit \cont $n_0 \abr choice\pr{\{n \in \mathbb{N}^+ | n (y - x) > 1\}}$ \pipe $(n_0 \in \mathbb{N}^+) \land \pr{n_0 (y - x) > 1}$
+    \lit \cont $n_0 \abr choice\pr{\{n \in \mathbb{N}^+ : n (y - x) > 1\}}$ \pipe $(n_0 \in \mathbb{N}^+) \land \pr{n_0 (y - x) > 1}$
     \lit $(n_0 \in \mathbb{N}^+) \land (x \in \mathbb{R})$ \pipe $n_0 x, -n_0 x \in \mathbb{R}$
     \lit $\rf{ArchimedeanPropertyOfR} \land (1 > 0) \land (n_0 x, 1 \in \mathbb{\mathbb{R}})$ \pipe $\exists_{m \in \mathbb{N}^+}\pr{m (1) > n_0 x}$ \cont
-    \lit \cont $m_1 \abr choice\pr{\{m \in \mathbb{N}^+ | m (1) > n_0 x\}}$ \pipe $(m_1 \in \mathbb{N}^+) \land (m_1 > n_0 x)$
+    \lit \cont $m_1 \abr choice\pr{\{m \in \mathbb{N}^+ : m (1) > n_0 x\}}$ \pipe $(m_1 \in \mathbb{N}^+) \land (m_1 > n_0 x)$
     \lit $\rf{ArchimedeanPropertyOfR} \land (1 > 0) \land (-n_0 x, 1 \in \mathbb{\mathbb{R}})$ \pipe $\exists_{m \in \mathbb{N}^+}\pr{m (1) > -n_0 x}$ \cont
-    \lit \cont $m_2 \abr choice\pr{\{m \in \mathbb{N}^+ | m (1) > -n_0 x\}}$ \pipe $(m_2 \in \mathbb{N}^+) \land (m_2 > -n_0 x)$
+    \lit \cont $m_2 \abr choice\pr{\{m \in \mathbb{N}^+ : m (1) > -n_0 x\}}$ \pipe $(m_2 \in \mathbb{N}^+) \land (m_2 > -n_0 x)$
     \lit $(m_1 > n_0 x) \land (m_2 > -n_0 x)$ \pipe $-m_2 < n_0 x < m_1$
     \lit $m_1, m_2 \in \mathbb{N}^+$ \pipe $|m_1 - (-m_2)| \geq 2$
     \lit $(-m_2 < n_0 x < m_1) \land \pr{|m_1 - (-m_2)| \geq 2}$ \pipe $\exists_{m \in \mathbb{Z}}\pr{(-m_2 < m < m_1) \land (m - 1 \leq n_0 x < m)}$ \cont
-    \lit \cont $m_0 \abr choice\pr{\{m \in \mathbb{Z} | (-m_2 < m < m_1) \land (m - 1 \leq n_0 x < m)\}}$ \pipe $(-m_2 < m_0 < m_1) \land (m_0 - 1 \leq n_0 x < m_0)$
+    \lit \cont $m_0 \abr choice\pr{\{m \in \mathbb{Z} : (-m_2 < m < m_1) \land (m - 1 \leq n_0 x < m)\}}$ \pipe $(-m_2 < m_0 < m_1) \land (m_0 - 1 \leq n_0 x < m_0)$
     \lit $\pr{n_0 (y - x) > 1} \land (m_0 - 1 \leq n_0 x < m_0)$ \pipe $n_0 x < m_0 \leq 1 + n_0 x < n_0 y$ \pipe $n_0 x < m_0 < n_0 y$
     \lit $(n_0 \in \mathbb{N}^+) \land (n_0 x < m_0 < n_0 y)$ \pipe $x < m_0 / n_0 < y$
     \lit $m_0, n_0 \in \mathbb{Z}$ \pipe $m_0 / n_0 \in \mathbb{Q}$
@@ -680,7 +680,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
 \begin{enumerate}
   \lit $(0 < x \in \mathbb{R} \land 0 < n \in \mathbb{Z}) \implies \ldots$
   \begin{enumerate}
-    \lit $E \abr \{t \in \mathbb{R} | t > 0 \land t^n < x\}$ \pipe $t \in E \iff (t \in \mathbb{R} \land t > 0 \land t^n < x)$
+    \lit $E \abr \{t \in \mathbb{R} : t > 0 \land t^n < x\}$ \pipe $t \in E \iff (t \in \mathbb{R} \land t > 0 \land t^n < x)$
     \lit $t_0 \abr x / (1 + x)$ \pipe $\pr{t_0 = x / (1 + x)} \land (t_0 \in \mathbb{R})$
     \lit $0 < x$ \pipe $0 < x < 1 + x$ \pipe $t_0 = x / (1 + x) > 0$ \pipe $t_0 > 0$
     \lit $1 = (1 + x) / (1 + x) > x / (1 + x) = t_0$ \pipe $1 > t_0$
@@ -689,7 +689,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
     \lit $0 < x$ \pipe $x > x / (1 + x) = t_0$ \pipe $x > t_0$
     \lit $({t_0}^n \leq t_0) \land (x > t_0)$ \pipe ${t_0}^n < x$
     \lit $\pr{t \in E \iff (t \in \mathbb{R} \land t > 0 \land t^n < x)} \land (t_0 \in \mathbb{R}) \land (t_0 > 0) \land ({t_0}^n < x)$ \pipe $t_0 \in E$ \pipe $\emptyset \neq E$
-    \lit $t_1 \abr choice(\{t \in \mathbb{R} | t > 1 + x\})$ \pipe $(t_1 \in \mathbb{R}) \land (t_1 > 1 + x)$
+    \lit $t_1 \abr choice(\{t \in \mathbb{R} : t > 1 + x\})$ \pipe $(t_1 \in \mathbb{R}) \land (t_1 > 1 + x)$
     \lit $x > 0$ \pipe $t_1 > 1 + x > 1$ \pipe $t_1 > 1$ \pipe ${t_1}^n \geq t_1$
     \lit $({t_1}^n \geq t_1) \land (t_1 > 1 + x) \land (1 > 0)$ \pipe ${t_1}^n \geq t_1 > 1 + x > x$ \pipe ${t_1}^n > x$
     \lit $\pr{t \in E \iff (t \in \mathbb{R} \land t > 0 \land t^n < x)} \land ({t_1}^n > x)$ \pipe $t_1 \notin E$ \pipe $E \subset \mathbb{R}$
@@ -702,7 +702,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
     \lit $t \in E \implies t < t_1$ \pipe $\forall_{t \in E}(t \leq t_1)$ \pipe $\rf{UpperBound}[t_1, E, \mathbb{R}, <]$ \pipe $\rf{BoundedAbove}[E, \mathbb{R}, <]$
     \lit $\rf{CompletenessOfR}$ \pipe $\rf{LUBProperty}[\mathbb{R}, <]$
     \lit $(\rf{LUBProperty}[\mathbb{R}, <]) \land (\emptyset \neq E \subset \mathbb{R}) \land (\rf{BoundedAbove}[E, \mathbb{R}, <])$ \pipe $\exists_{y \in \mathbb{R}}(\rf{LUB}[y, E, \mathbb{R}, <])$ \cont
-    \lit \cont $y_0 \abr choice(\{y \in \mathbb{R} | \rf{LUB}[y, E, \mathbb{R}, <]\})$ \pipe $\rf{LUB}[y_0, E, \mathbb{R}, <]$
+    \lit \cont $y_0 \abr choice(\{y \in \mathbb{R} : \rf{LUB}[y, E, \mathbb{R}, <]\})$ \pipe $\rf{LUB}[y_0, E, \mathbb{R}, <]$
     \lit $(\rf{LUB}[y_0, E, \mathbb{R}, <]) \land (t_0 \in E) \land (t_0 > 0)$ \pipe $0 < t_0 \leq y_0 \in \mathbb{R}$ \pipe $0 < y_0 \in \mathbb{R}$
     \lit ${y_0}^n < x \implies \ldots$
     \begin{enumerate}
@@ -712,7 +712,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
       \lit $(0 < x - {y_0}^n) \land \pr{0 < n (y_0 + 1)^{n - 1}}$ \pipe $0 < \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}} = k_0$ \pipe $0 < k_0$
       \lit $(0 < 1 \in \mathbb{R}) \land (0 < k_0 \in \mathbb{R})$ \pipe $0 < min(1, k_0) \in \mathbb{R}$ 
       \lit $\rf{QDenseInR} \land \pr{0, min(1, k_0) \in \mathbb{R}} \land \pr{0 < min(1, k_0)}$ \pipe $\exists_{h \in \mathbb{Q}}\pr{0 < h < min(1, k_0)}$ \cont
-      \lit \cont $h_0 \abr choice\pr{\{h \in \mathbb{Q} | 0 < h < min(1, k_0)\}}$ \pipe $(0 < h_0 < 1) \land \pr{h_0 < k_0 = \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}}$
+      \lit \cont $h_0 \abr choice\pr{\{h \in \mathbb{Q} : 0 < h < min(1, k_0)\}}$ \pipe $(0 < h_0 < 1) \land \pr{h_0 < k_0 = \frac{x - {y_0}^n}{n (y_0 + 1)^{n - 1}}}$
       \lit $(y_0 > 0) \land (h_0 > 0)$ \pipe $0 < y_0 < y_0 + h_0$
       \lit $\rf{RootLemma} \land (0 < y_0 < y_0 + h_0)$ \pipe $(y_0 + h_0)^n - {y_0}^n < h_0 n (y_0 + h_0)^{n - 1}$
       \lit $h_0 < 1$ \pipe $h_0 n (y_0 + h_0)^{n - 1} < h_0 n (y_0 + 1)^{n - 1}$
@@ -752,7 +752,7 @@ $\df{RootExistenceInR} \abr \forall_{0 < x \in \mathbb{R}} \forall_{0 < n \in \m
     \lit $\rf{Order}[\mathbb{R}, <]$ \pipe $\rf{OrderTrichotomy}[\mathbb{R}, <]$
     \lit $(\rf{OrderTrichotomy}[\mathbb{R}, <]) \land({y_0}^n \geq x) \land ({y_0}^n \leq x)$ \pipe ${y_0}^n = x$
     \lit $({y_0}^n = x) \land (y_0 \in \mathbb{R})$ \pipe $\exists_{y \in \mathbb{R}}(y^n = x)$
-    \lit $y_1, y_2 \abr choice(\{y \in \mathbb{R} | y^n = x\})$
+    \lit $y_1, y_2 \abr choice(\{y \in \mathbb{R} : y^n = x\})$
     \lit $y_1 \neq y_2 \implies \ldots$
     \begin{enumerate}
       \lit $(\rf{OrderTrichotomy}[\mathbb{R}, <]) \land (y_1 \neq y_2)$ \pipe $(y_1 < y_2) \veebar (y_2 < y_1)$ \cont
@@ -818,7 +818,7 @@ $Function(f, X, Y) \abr X \neq \emptyset \neq Y \land Relation(f, X \times Y) \l
 $\pr{Function(f, X, Y) \land A \subseteq X \land B \subseteq Y} \implies \ldots$
 \begin{enumerate}
   \lit $Domain(f) \abr X; Codomain(f) \abr Y$ % behaves like types
-  \lit $Image(f, A) \abr \{f(a) | a \in A\}; Preimage(f, B) \abr \{a | f(a) \in B\}$
+  \lit $Image(f, A) \abr \{f(a) : a \in A\}; Preimage(f, B) \abr \{a : f(a) \in B\}$
   \lit $Range(f) \abr Image\pr{Domain(f)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
@@ -851,8 +851,8 @@ $\df{Divisibility Theorems} \abr (a, b, c, m, x, y \in \mathbb{Z}) \implies \ldo
 
 $\df{Division Algorithm} \abr (a, b \in \mathbb{Z} \land a > 0) \implies \exists!_{q, r \in \mathbb{Z}}(b = a q + r)$ \\
 
-$\df{CD}(a, b, c) \abr a, b, c \in \mathbb{Z} \land a | b \land a | c$ \\
-$\df{GCD}(a, b, c) \abr CD(a, b, c) \land \forall_{d}\pr{(d | b \land d | c) \implies d | a}$
+$\df{CD}(a, b, c) \abr a, b, c \in \mathbb{Z} \land a : b \land a : c$ \\
+$\df{GCD}(a, b, c) \abr CD(a, b, c) \land \forall_{d}\pr{(d : b \land d : c) \implies d : a}$
 
 $\df{GCD Equivalent} \abr 123123$
 
@@ -860,76 +860,92 @@ $\df{GCD Equivalent} \abr 123123$
 \chapter{Linear Algebra}
 
 $Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
-$+(A, B) \abr (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) \land \pr{Matrix(A, m, n)} \land \pr{Matrix(B, m, n)}$ \\
-$*(r, A) \abr (r * A = [r a_{i, j}]_{m \times n}) \land \pr{Matrix(A, m, n)}$ \\
-$*(A, B) \abr \pr{A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n}} \land \pr{Matrix(A, m, p)} \land \pr{Matrix(B, p, n)}$ \\
-$\phantom{ }^T(A) \abr (A^T = [a_{j, i}]_{n \times m}) \land \pr{Matrix(A, m, n)}$ \\
+$\mathcal{M}_{m, n} \abr \{A : Matrix(A, m, n)\}$ \\
+$+(A, B) \abr \pr{\pr{Matrix(A, m, n)} \land \pr{Matrix(B, m, n)}} \implies (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) $ \\
+$*(r, A) \abr \pr{(r \in \mathbb{R}) \land \pr{Matrix(A, m, n)}} \implies (r * A = [r a_{i, j}]_{m \times n})$ \\
+$*(A, B) \abr \pr{\pr{Matrix(A, m, p)} \land \pr{Matrix(B, p, n)}} \implies \pr{A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n}}$ \\
+$\phantom{ }^T(A) \abr \pr{Matrix(A, m, n)} \implies (A^T = [a_{j, i}]_{n \times m})$ \\
 
-$AddCom \abr A + B = B + A$ \pipe $\leftarrow$ $A + B = [a_{i, j} + b_{i, j}] = [b_{i, j} + a_{i, j}] = B + A$ \\
-$AddAssoc \abr (A + B) + C = A + (B + C)$ \pipe $\leftarrow$ $(A + B) + C = [(a_{i, j} + b_{i, j}) + c_{i, j}] = [a_{i, j} + (b_{i, j} + c_{i, j})] = A + (B + C)$ \\
-$AddId \abr A + O = A = O + A$ \pipe $\leftarrow$ $A + O = [a_{i, j} + 0] = A = [0 + a_{i, j}] = O + A$ \\
-$AddInv \abr A + (-A) = O = (-A) + A$ \pipe $\leftarrow$ $A + (-A) = [a_{i, j} - a_{i, j}] = O = [-a_{i, j} + a_{i, j}] = (-A) + A$ \\
+$AddCom \abr \forall_{A, B \in \mathcal{M}}(A + B = B + A)$ \pipe $\Leftarrow$ $A + B = [a_{i, j} + b_{i, j}] = [b_{i, j} + a_{i, j}] = B + A$ \\
+$AddAssoc \abr \forall_{A, B, C \in \mathcal{M}}\pr{(A + B) + C = A + (B + C)}$ \pipe $\Leftarrow$ $(A + B) + C = [(a_{i, j} + b_{i, j}) + c_{i, j}] = [a_{i, j} + (b_{i, j} + c_{i, j})] = A + (B + C)$ \\
+$AddId \abr \forall_{A \in \mathcal{M}} \exists!_{O \in \mathcal{M}}(A + O = A = O + A)$    \phantom{TODO}--- \\ % \pipe $\Leftarrow$ $A + O = [a_{i, j} + 0] = A = [0 + a_{i, j}] = O + A$ \\
+$AddInv \abr \forall_{A \in \mathcal{M}} \exists!_{(-A) \in \mathcal{M}}\pr{A + (-A) = O = (-A) + A}$    \phantom{TODO}--- \\ % \pipe $\Leftarrow$ $A + (-A) = [a_{i, j} - a_{i, j}] = O = [-a_{i, j} + a_{i, j}] = (-A) + A$ \\
 
-$MulAssoc \abr (A * B) * C = A * (B * C)$ \pipe $\leftarrow$
+$MulAssoc \abr \forall_{A, B, C \in \mathcal{M}}\pr{(A * B) * C = A * (B * C)}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $(A * B) * C = \left[\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, j})\right] * C = \left[\sum_{k_2 = 1}^{p_2}\pr{\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2}) c_{k_2, j}}\right] = \left[\sum_{k_2 = 1}^{p_2} \sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = $ \cont
   \lit \cont $\left[\sum_{k_1 = 1}^{p_1} \sum_{k_2 = 1}^{p_2}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = \left[\sum_{k_1 = 1}^{p_1}\pr{a_{i, k_1} \sum_{k_2 = 1}^{p_2}(b_{k_1, k_2} c_{k_2, j})}\right] = \ldots = A * (B * C)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LeftDist \abr (A + B) * C = A * C + B * C$ \pipe $\leftarrow$
+$LeftDist \abr \forall_{A, B, C \in \mathcal{M}}\pr{(A + B) * C = A * C + B * C}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $(A + B) * C = [a_{i, j} + b_{i, j}] * C = \left[\sum_{k = 1}^{p}\pr{(a_{i, k} + b_{i, k}) c_{k, j}}\right] = $ \cont
   \lit \cont $\left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j} + b_{i, k} c_{k, j})\right] = \left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j})\right] + \left[\sum_{k = 1}^{p}(b_{i, k} c_{k, j})\right] = A * C + B * C$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RightDist \abr C * (A + B) * C = C * A + C * B$    \phantom{TODO}--- \\
-$Scalar1 \abr r (s A) = (r s) A = s (r A)$    \phantom{TODO}--- \\
-$Scalar2 \abr A (r b) = r (A B)$    \phantom{TODO}--- \\
-$Scalar3 \abr (r + s) A = r A + r S$    \phantom{TODO}--- \\
-$Scalar4 \abr r (A + B) = r A + r B$    \phantom{TODO}--- \\
+$RightDist \abr \forall_{A, B, C \in \mathcal{M}}\pr{C * (A + B) * C = C * A + C * B}$    \phantom{TODO}--- \\
+$Scalar1 \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}\pr{r (s A) = (r s) A = s (r A)}$    \phantom{TODO}--- \\
+$Scalar2 \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}\pr{A (r B) = r (A * B)}$    \phantom{TODO}--- \\
+$Scalar3 \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}\pr{(r + s) A = r A + s A}$    \phantom{TODO}--- \\
+$Scalar4 \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}\pr{r (A + B) = r A + r B}$    \phantom{TODO}--- \\
 
-$Trans1 \abr A = (A^T)^T$ \pipe $\leftarrow$ $A = [a_{i, j}] = [a_{j, i}]^T = ([a_{i, j}]^T)^T = (A^T)^T$ \\
-$Trans2 \abr (A + B)^T = A^T + B ^T$    \phantom{TODO}--- \\
-$Trans3 \abr (A * B)^T = B^T * A^T$ \pipe $\leftarrow$ $(A * B)^T = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]^T = \left[\sum_{k = 1}^{p}(a_{j, k} b_{k, i})\right] = \left[\sum_{k = 1}^{p}(b_{k, i} a_{j, k})\right] =  \left[\sum_{k = 1}^{p}(b^T_{i, k} a^T_{k, j})\right] = B^T * A^T$ \\
+$Trans1 \abr \forall_{A \in \mathcal{M}}\pr{A = (A^T)^T}$ \pipe $\Leftarrow$ $A = [a_{i, j}] = [a_{j, i}]^T = ([a_{i, j}]^T)^T = (A^T)^T$ \\
+$Trans2 \abr \forall_{A, B \in \mathcal{M}}\pr{(A + B)^T = A^T + B ^T}$    \phantom{TODO}--- \\
+$Trans3 \abr \forall_{A, B \in \mathcal{M}}\pr{(A * B)^T = B^T * A^T}$ \pipe $\Leftarrow$ 
+\begin{enumerate}
+  \lit $(A * B)^T = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]^T = \left[\sum_{k = 1}^{p}(a_{j, k} b_{k, i})\right] = \left[\sum_{k = 1}^{p}(b_{k, i} a_{j, k})\right] =  \left[\sum_{k = 1}^{p}(b^T_{i, k} a^T_{k, j})\right] = B^T * A^T$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Sym(A) \abr A = A^T$ ; $SkewSym(A) \abr A = -A^T$ \\
-$SymGen \abr Sym(A + A^T)$ \pipe $\leftarrow$ $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$ \\
-$SkewSymGem \abr SkewSym(A - A^T)$ \pipe $\leftarrow$ $-(A - A^T)^T = -\pr{A^T - (A^T)^T} = -(A^T - A) = (A - A^T)$ \\
-$SymDec \abr A = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T)$    \phantom{TODO}--- \\
+$Sym(A) \abr A = A^T$ \\
+$SkewSym(A) \abr A = -A^T$ \\
+$SymGen \abr \forall_{A \in \mathcal{M}}\pr{Sym(A + A^T)}$ \pipe $\Leftarrow$ $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$ \\
+$SkewSymGem \abr \forall_{A \in \mathcal{M}}\pr{SkewSym(A - A^T)}$ \pipe $\Leftarrow$ $-(A - A^T)^T = -\pr{A^T - (A^T)^T} = -(A^T - A) = (A - A^T)$ \\
+$SymDec \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym(B)} \exists!_{C : SkewSym(C)}\pr{A = B + C = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T)}$    \phantom{TODO}--- \\
 
-$Square(A) \abr Matrix(A, n, n)$ \\
-$Diagonal(A) \abr \pr{Square(A)} \land (i \neq j \implies a_{i, j} = 0)$ \\
-$Scalar(A) \abr \pr{Diagonal(A)} \land (a_{i, i} = k)$ \\
-$I \abr \pr{Scalar(I)} \land (i_{d, d} = 1)$ \\
-$MulId \abr A * I = A = I * A$    \phantom{TODO}--- \\
-
+$Square(A, n) \abr Matrix(A, n, n)$ \\
 $UpperTriangular(A) \abr \pr{Square(A)} \land (i > \implies a_{i, j} = 0)$ \\
 $LowerTriangular(A) \abr \pr{Square(A)} \land (i < j \implies a_{i, j} = 0)$ \\
+$Diagonal(A, n) \abr \pr{Square(A, n)} \land (i \neq j \implies a_{i, j} = 0)$ \\
+$Scalar(A, n, k) \abr \pr{Diagonal(A, n)} \land (a_{i, i} = k)$ \\
+$I_n \abr Scalar(I, n, 1)$ \\
+$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$    \phantom{TODO}--- \\
 
-$Invertible(A) \abr \exists_{A^{-1}}(A * A^{-1} = I = A^{-1} * A)$ \\
-$UniqueInverse \abr \pr{(A * B_1 = I) \land (A * B_2 = I)} \implies B_1 = B_2$    \phantom{TODO}--- \\
-$Inv1 \abr \pr{Invertible(A) \land Invertible(B)} \implies (A * B)^{-1} = B^{-1} * A^{-1}$ \pipe $\leftarrow$
+$Invertible(A) \abr \pr{Square(A, n)} \land \pr{\exists_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$ \\
+$Inv1 \abr \forall_{A : Invertible(A)}\pr{\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$    \phantom{TODO}--- \\
+$Inv2 \abr \forall_{A : Invertible(A)} \forall_{B : Invertible(B)}\pr{(A * B)^{-1} = B^{-1} * A^{-1}}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $(A * B) * (A * B)^{-1} = I$ \pipe $B * (A * B)^{-1} = A^{-1}$ \pipe $(A * B)^{-1} = B^{-1} * A^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-$Inv2 \abr \pr{Invertible(A)} \implies \pr{\pr{Invertible(A^{-1}) \land (A = (A^{-1})^{-1}}}$    \phantom{TODO}--- \\
-$InvTrans \abr \pr{Invertible(A)} \implies \pr{\pr{Invertible(A^T) \land ((A^T)^{-1} = (A^{-1})^T}}$ \pipe $\leftarrow$
+
+$Inv3 \abr \forall_{A : Invertible(A)}\pr{(A^{-1})^{-1} = A}$    \phantom{TODO}--- \\
+$InvTrans \abr \forall_{A : Invertible(A)}\pr{(A^T)^{-1} = (A^{-1})^T}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Sys(A, X, B) \abr (A * X = B) \land \pr{Matrix(A, m, n)} \land \pr{Matrix(X, n, 1)} \land \pr{Matrix(B, m, 1)}$ \\
 $Sol(X, A, B) \abr Sys(A, X, B)$ \\
-$TrivSol(X, A, B) \abr \pr{Sol(X, A, B)} \land (a_{i. j} = 0)$ \\
+$TrivSol(X, A, B) \abr \pr{Sol(X, A, B)} \land (x_{i, 1} = 0)$ \\
 
 $RREF(A) \abr (Definition 1.18)$ \\
-$ElementaryRowOperation(\phi) \abr (Definition 1.19)$ \\
-$RowEquiv(A, B) \abr \exists_{\Phi}\pr{\forall_{\phi \in \Phi}\pr{ElementaryRowOperation(\phi)} \land |\Phi| \in \mathbb{N} \land \Phi(A) = B}$ \\
+$RowOp(\phi) \abr (Definition 1.19)$ \\
+$RowEquiv(A, B) \abr \exists_{\Phi : |\Phi| \in \mathbb{N}}\pr{\pr{\forall_{\phi \in \Phi}\pr{RowOp(\phi)}} \land \pr{\Phi(A) = B}}$ \\
 
-$(A \neq O) \implies \pr{\exists_{B}\pr{RREF(B) \land RowEquiv(A, B)}}$ (By Gauss-Jordan Elimination)    \phantom{TODO}--- \\
-$\pr{Sys(A, X_1, B) \land Sys(C, X_2, D) \land RowEquiv([A|B], [C|D])} \implies (X_1 = X_2)$ (By algebra on systems of equations)    \phantom{TODO}--- \\
-$\pr{RowEquiv(A, B)} \implies \pr{Sys(A, X_1, O) \land Sys(B, X_1, O)}$ (Corollary)    \phantom{TODO}--- \\
-$(m < n) \implies \pr{\exists_{X}\pr{\lnot TrivSol(X, A, O)}}$ \pipe $\pr{\forall_{X}(TrivSol(X, A, O)} \implies (m \geq n)$ \pipe $\leftarrow$
+$Elem(A, n) \abr RowEquiv(A, I_n)$ \\
+$RowOpIsElem \abr \forall_{\phi : RowOp(\phi)}\pr{\pr{E = \phi(I)} \implies \pr{\phi(A) = E * A}}$ \\
+$RowEquiv2 \abr RowEquiv(A, B) \iff \exists_{E : |E| \in \mathbb{N}}\pr{A = \Pi_{E_i \in E}(E_i) * B}$ \\
+
+
+$\pr{Elem_i(A)} \implies \pr{Invertible(A) \land Elem_i(A^{-1})}$ \\
+$\pr{RowEquiv(A, B)} \iff \pr{B = \Pi(E_i) * A}$ \\
+$\pr{RowEquiv(I, B)} \iff \pr{B = \Pi(E_i)}$ \\
+
+
+$GaussJordan \abr \forall_{A} \exists!_{B}\pr{RREF(B) \land RowEquiv(A, B)}$    \phantom{TODO}--- \\
+$SysAlgebra \abr \forall_{A, B, C, D, X}\pr{\pr{RowEquiv([A|B], [C|D])} \implies \pr{Sys(A, X, B) \iff Sys(C, X, D)}}$    \phantom{TODO}--- \\
+$SysAlgebraCorollary \abr \forall_{A, B, X}\pr{\pr{RowEquiv(A, B)} \implies \pr{Sys(A, X, O) \iff Sys(B, X, O)}}$    \phantom{TODO}--- \\
+
+$TrivSolLemma \abr (m < n) \implies \pr{\exists_{X}\pr{\lnot TrivSol(X, A, O)}}$ \pipe $\pr{\forall_{X}(TrivSol(X, A, O)} \implies (m \geq n)$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit Let B = GaussJordan(A) and let r be the number of non-zero rows of B \pipe $r \leq m$
   \lit $(r \leq m) \land (m < n)$ \pipe $r < n$ \pipe $0 < n - r$
@@ -937,20 +953,16 @@ $(m < n) \implies \pr{\exists_{X}\pr{\lnot TrivSol(X, A, O)}}$ \pipe $\pr{\foral
   \lit The solution of B will have at least one free variable that can be non-zero, i.e., non-trivial
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Elem(A) \abr RowEquiv(A, I)$ \\
-$\pr{Elem_i(A)} \implies \pr{Invertible(A) \land Elem_i(A^{-1})}$ \\
-$\pr{ElementaryRowOperation(\phi) \land \pr{B = \phi(A)}} \implies \pr{Elem(E) \land B = E * A} $ \\
-$\pr{RowEquiv(A, B)} \iff \pr{B = \Pi(E_i) * A}$ \\
-$\pr{RowEquiv(I, B)} \iff \pr{B = \Pi(E_i)}$ \\
 
-$\pr{\forall_{X}(TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}$ \pipe $\leftarrow$
+
+$\pr{\forall_{X}(TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit Let B = GaussJordan(A) \pipe $RowEquiv(A, B)$ 
   \lit $\forall_{X}(TrivSol(X, B, O)$ \pipe $n \geq n$ \pipe $n = n$ \pipe $B = I$
   \lit $RowEquiv(A, B)$ \pipe $RowEquiv(A, I)$ 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$ \pipe $\leftarrow$
+$\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $Invertible(A) \implies \ldots$
   \begin{enumerate}
@@ -964,19 +976,20 @@ $\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$ \pipe $\leftarrow$
   \lit $\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)})$ \pipe $\leftarrow$ $\pr{RowEquiv(I, B) \iff B = \Pi(E_i)} \land \pr{\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}}$ \\
+$\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)})$ \pipe $\Leftarrow$ $\pr{RowEquiv(I, B) \iff B = \Pi(E_i)} \land \pr{\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}}$ \\
 
-$\pr{\forall_{X}\pr{TrivSol(X, A, O)}} \implies \pr{Invertible(A)}$ \pipe $\leftarrow$
+$\pr{\forall_{X}\pr{TrivSol(X, A, O)}} \implies \pr{Invertible(A)}$ \pipe $\Leftarrow$
 \begin{enumerate}
    \lit $\pr{\pr{\forall_{X}\pr{TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}} \land \pr{\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)}}}$
  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A)} \implies \pr{\forall_{X}\pr{TrivSol(X, A, O)}}$ \pipe $\leftarrow$ $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$ \\
+$\pr{Invertible(A)} \implies \pr{\forall_{X}\pr{TrivSol(X, A, O)}}$ \pipe $\Leftarrow$ $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$ \\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 
+% $\exists_{x} \forall_{y}\pr{\pr{P(y)} \iff (y = x)}$
 % DUMP
 % This will be an empty chapter and I will put some text here
 % \begin{equation}
