@@ -863,6 +863,14 @@ BASE ON ADVANCED BOOK
 
 $Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
 $\mathcal{M}_{m, n} \abr \{A : Matrix(A, m, n)\}$ \\
+$O_{m, n} \abr (Matrix(O, m, n)) \land (a_{i, j} = 0)$ \\
+$Square(A, n) \abr Matrix(A, n, n)$ \\
+$UpperTriangular(A) \abr (Square(A)) \land (i > j \implies a_{i, j} = 0)$ \\
+$LowerTriangular(A) \abr (Square(A)) \land (i < j \implies a_{i, j} = 0)$ \\
+$Diagonal(A, n) \abr (Square(A, n)) \land (i \neq j \implies a_{i, j} = 0)$ \\
+$Scalar(A, n, k) \abr (Diagonal(A, n)) \land (a_{i, i} = k)$ \\
+$I_n \abr Scalar(I, n, 1)$ \\
+
 $+(A, B) \abr ((Matrix(A, m, n)) \land (Matrix(B, m, n))) \implies (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) $ \\
 $*(r, A) \abr ((r \in \mathbb{R}) \land (Matrix(A, m, n))) \implies (r * A = [r a_{i, j}]_{m \times n})$ \\
 $*(A, B) \abr ((Matrix(A, m, p)) \land (Matrix(B, p, n))) \implies (A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n})$ \\
@@ -879,6 +887,7 @@ $MulAssoc \abr \forall_{A, B, C \in \mathcal{M}}((A * B) * C = A * (B * C))$ \pi
   \lit \cont $\left[\sum_{k_1 = 1}^{p_1} \sum_{k_2 = 1}^{p_2}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = \left[\sum_{k_1 = 1}^{p_1}(a_{i, k_1} \sum_{k_2 = 1}^{p_2}(b_{k_1, k_2} c_{k_2, j}))\right] = \ldots = A * (B * C)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$    \phantom{TODO}--- \\
 $LeftDist \abr \forall_{A, B, C \in \mathcal{M}}((A + B) * C = A * C + B * C)$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $(A + B) * C = [a_{i, j} + b_{i, j}] * C = \left[\sum_{k = 1}^{p}((a_{i, k} + b_{i, k}) c_{k, j})\right] = $ \cont
@@ -904,13 +913,7 @@ $SymGen \abr \forall_{A \in \mathcal{M}}(Sym(A + A^T))$ \pipe $\Leftarrow$ $(A +
 $SkewSymGem \abr \forall_{A \in \mathcal{M}}(SkewSym(A - A^T))$ \pipe $\Leftarrow$ $-(A - A^T)^T = -(A^T - (A^T)^T) = -(A^T - A) = (A - A^T)$ \\
 $SymDec \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym(B)} \exists!_{C : SkewSym(C)}(A = B + C = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T))$    \phantom{TODO}--- \\
 
-$Square(A, n) \abr Matrix(A, n, n)$ \\
-$UpperTriangular(A) \abr (Square(A)) \land (i > \implies a_{i, j} = 0)$ \\
-$LowerTriangular(A) \abr (Square(A)) \land (i < j \implies a_{i, j} = 0)$ \\
-$Diagonal(A, n) \abr (Square(A, n)) \land (i \neq j \implies a_{i, j} = 0)$ \\
-$Scalar(A, n, k) \abr (Diagonal(A, n)) \land (a_{i, i} = k)$ \\
-$I_n \abr Scalar(I, n, 1)$ \\
-$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$    \phantom{TODO}--- \\
+
 
 $Invertible(A) \abr (Square(A, n)) \land (\exists_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A))$ \\
 $Inv1 \abr \forall_{A : Invertible(A)}(\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A))$    \phantom{TODO}--- \\
