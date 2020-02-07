@@ -16,7 +16,7 @@ youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --extract-aud
 elif [ -z "${res}" ]; then
 youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" ${url}
 elif [ "${res}" == "worst" ]; then
-youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "worstaudio+worstvideo/worst" ${url}
+youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "worstvideo+worstaudio/worst" ${url}
 else
 youtube-dl --no-check-certificate -ci -o "${pre}%(title)s.%(ext)s" --write-sub -f "bestvideo[height<=${res}]+bestaudio/best[height<=${res}]" ${url}
 fi
