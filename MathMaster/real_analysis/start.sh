@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-qpdfview __analysis.pdf &
-qpdfview rudin/RudinW.PrinciplesOfMathematicalAnalysis3e1976600Dpi.pdf &
+set -x
+if [ -x "$(command -v evince)" ]; then
+    viewer="evince"
+else
+    viewer="qpdfview"
+fi
+
+"${viewer}" __analysis.pdf &
+"${viewer}" rudin/RudinW.PrinciplesOfMathematicalAnalysis3e1976600Dpi.pdf &
