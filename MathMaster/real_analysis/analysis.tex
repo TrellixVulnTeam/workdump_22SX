@@ -859,8 +859,6 @@ $\df{GCD Equivalent} \abr 123123$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra}
 
-BASE ON ADVANCED BOOK
-
 $Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
 $\mathcal{M}_{m, n} \abr \{A : Matrix(A, m, n)\}$ \\
 $O_{m, n} \abr (Matrix(O, m, n)) \land (a_{i, j} = 0)$ \\
@@ -876,60 +874,144 @@ $*(r, A) \abr ((r \in \mathbb{R}) \land (Matrix(A, m, n))) \implies (r * A = [r 
 $*(A, B) \abr ((Matrix(A, m, p)) \land (Matrix(B, p, n))) \implies (A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n})$ \\
 $\phantom{ }^T(A) \abr (Matrix(A, m, n)) \implies (A^T = [a_{j, i}]_{n \times m})$ \\
 
-$AddCom \abr \forall_{A, B \in \mathcal{M}}(A + B = B + A)$ \pipe $\Leftarrow$ $A + B = [a_{i, j} + b_{i, j}] = [b_{i, j} + a_{i, j}] = B + A$ \\
-$AddAssoc \abr \forall_{A, B, C \in \mathcal{M}}((A + B) + C = A + (B + C))$ \pipe $\Leftarrow$ $(A + B) + C = [(a_{i, j} + b_{i, j}) + c_{i, j}] = [a_{i, j} + (b_{i, j} + c_{i, j})] = A + (B + C)$ \\
-$AddId \abr \forall_{A \in \mathcal{M}} \exists!_{O \in \mathcal{M}}(A + O = A = O + A)$    \phantom{TODO}--- \\ % \pipe $\Leftarrow$ $A + O = [a_{i, j} + 0] = A = [0 + a_{i, j}] = O + A$ \\
-$AddInv \abr \forall_{A \in \mathcal{M}} \exists!_{(-A) \in \mathcal{M}}(A + (-A) = O = (-A) + A)$    \phantom{TODO}--- \\ % \pipe $\Leftarrow$ $A + (-A) = [a_{i, j} - a_{i, j}] = O = [-a_{i, j} + a_{i, j}] = (-A) + A$ \\
+$AddCom \abr \forall_{A, B \in \mathcal{M}}(A + B = B + A)$
+\begin{enumerate}
+  \lit $A + B = [a_{i, j} + b_{i, j}] = [b_{i, j} + a_{i, j}] = B + A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$MulAssoc \abr \forall_{A, B, C \in \mathcal{M}}((A * B) * C = A * (B * C))$ \pipe $\Leftarrow$
+$AddAssoc \abr \forall_{A, B, C \in \mathcal{M}}((A + B) + C = A + (B + C))$
+\begin{enumerate}
+  \lit $(A + B) + C = [(a_{i, j} + b_{i, j}) + c_{i, j}] = [a_{i, j} + (b_{i, j} + c_{i, j})] = A + (B + C)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$AddId \abr \forall_{A \in \mathcal{M}} \exists!_{O \in \mathcal{M}}(A + O = A = O + A)$
+\begin{enumerate}
+  \lit $A + O = [a_{i, j} + 0] = A = [0 + a_{i, j}] = O + A$
+  \lit $A + O_1 = A = A + O_2$ \pipe $O_1 = O_2$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$AddInv \abr \forall_{A \in \mathcal{M}} \exists!_{(-A) \in \mathcal{M}}(A + (-A) = O = (-A) + A)$
+\begin{enumerate}
+  \lit $A + (-A) = [a_{i, j} - a_{i, j}] = O = [-a_{i, j} + a_{i, j}] = (-A) + A$
+  \lit $A + (-A_1) = O = A + (-A_2)$ \pipe $-A_1 = -A_2$ \pipe $A_1 = A_2$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$MulAssoc \abr \forall_{A, B, C \in \mathcal{M}}((A * B) * C = A * (B * C))$
 \begin{enumerate}
   \lit $(A * B) * C = \left[\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, j})\right] * C = \left[\sum_{k_2 = 1}^{p_2}(\sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2}) c_{k_2, j})\right] = \left[\sum_{k_2 = 1}^{p_2} \sum_{k_1 = 1}^{p_1}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = $ \cont
   \lit \cont $\left[\sum_{k_1 = 1}^{p_1} \sum_{k_2 = 1}^{p_2}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = \left[\sum_{k_1 = 1}^{p_1}(a_{i, k_1} \sum_{k_2 = 1}^{p_2}(b_{k_1, k_2} c_{k_2, j}))\right] = \ldots = A * (B * C)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$    \phantom{TODO}--- \\
-$LeftDist \abr \forall_{A, B, C \in \mathcal{M}}((A + B) * C = A * C + B * C)$ \pipe $\Leftarrow$
+$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$
+\begin{enumerate}
+  \lit $A * I_n = \left[\sum_{k = 1}^{n}\left(a_{i, k} 
+    \left(\begin{cases} 
+      1 & k = j \\
+      0 & k \neq j 
+    \end{cases}\right)
+  \right)\right] = [a_{i, j}] = A$
+  \lit $TODO = A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ScalAssoc \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}(r (s A) = (r s) A = s (r A))$
+\begin{enumerate}
+  \lit $r (s A) = r [s a_{i, j}] = [r s a_{i, j}]$
+  \lit $(r s) A = [r s a_{i, j}]$
+  \lit $s (r A) = s [r a_{i, j}] = [s r a_{i, j}] = [r s a_{i, j}]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$TransCancel \abr \forall_{A \in \mathcal{M}}(A = (A^T)^T)$
+\begin{enumerate}
+  \lit $A = [a_{i, j}] = [a_{j, i}]^T = ([a_{i, j}]^T)^T = (A^T)^T$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ScalMulCom \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}((r A) * B = r (A * B) = A * (r B))$
+\begin{enumerate}
+  \lit $(r A) * B = [r a_{i, l}] * [b_{l, j}] = \left[\sum_{k = 1}^{p}(r a_{i, k} b_{k, j})\right] = r (A * B)$
+  \lit $A * (r B) = [a_{i, l}] * [r b_{l, j}] = \left[\sum_{k = 1}^{p}(a_{i, k} r b_{k, j})\right] = \left[\sum_{k = 1}^{p}(r a_{i, k} b_{k, j})\right] = r (A * B)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ScalDistLeft \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}((r + s) A = r A + s A)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ScalDistRight \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}(r (A + B) = r A + r B)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$MulDistRight \abr \forall_{A, B, C \in \mathcal{M}}((A + B) * C = A * C + B * C)$
 \begin{enumerate}
   \lit $(A + B) * C = [a_{i, j} + b_{i, j}] * C = \left[\sum_{k = 1}^{p}((a_{i, k} + b_{i, k}) c_{k, j})\right] = $ \cont
   \lit \cont $\left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j} + b_{i, k} c_{k, j})\right] = \left[\sum_{k = 1}^{p}(a_{i, k} c_{k, j})\right] + \left[\sum_{k = 1}^{p}(b_{i, k} c_{k, j})\right] = A * C + B * C$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RightDist \abr \forall_{A, B, C \in \mathcal{M}}(C * (A + B) * C = C * A + C * B)$    \phantom{TODO}--- \\
-$Scalar1 \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}(r (s A) = (r s) A = s (r A))$    \phantom{TODO}--- \\
-$Scalar2 \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}(A (r B) = r (A * B))$    \phantom{TODO}--- \\
-$Scalar3 \abr \forall_{r, s \in \mathbb{R}} \forall_{A \in \mathcal{M}}((r + s) A = r A + s A)$    \phantom{TODO}--- \\
-$Scalar4 \abr \forall_{r \in \mathbb{R}} \forall_{A, B \in \mathcal{M}}(r (A + B) = r A + r B)$    \phantom{TODO}--- \\
+$MulDistLeft \abr \forall_{A, B, C \in \mathcal{M}}(C * (A + B) = C * A + C * B)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Trans1 \abr \forall_{A \in \mathcal{M}}(A = (A^T)^T)$ \pipe $\Leftarrow$ $A = [a_{i, j}] = [a_{j, i}]^T = ([a_{i, j}]^T)^T = (A^T)^T$ \\
-$Trans2 \abr \forall_{A, B \in \mathcal{M}}((A + B)^T = A^T + B ^T)$    \phantom{TODO}--- \\
-$Trans3 \abr \forall_{A, B \in \mathcal{M}}((A * B)^T = B^T * A^T)$ \pipe $\Leftarrow$ 
+$TransAddDist \abr \forall_{A, B \in \mathcal{M}}((A + B)^T = A^T + B ^T)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$TransMulDist \abr \forall_{A, B \in \mathcal{M}}((A * B)^T = B^T * A^T)$
 \begin{enumerate}
   \lit $(A * B)^T = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]^T = \left[\sum_{k = 1}^{p}(a_{j, k} b_{k, i})\right] = \left[\sum_{k = 1}^{p}(b_{k, i} a_{j, k})\right] =  \left[\sum_{k = 1}^{p}(b^T_{i, k} a^T_{k, j})\right] = B^T * A^T$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Sym(A) \abr A = A^T$ \\
 $SkewSym(A) \abr A = -A^T$ \\
-$SymGen \abr \forall_{A \in \mathcal{M}}(Sym(A + A^T))$ \pipe $\Leftarrow$ $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$ \\
-$SkewSymGem \abr \forall_{A \in \mathcal{M}}(SkewSym(A - A^T))$ \pipe $\Leftarrow$ $-(A - A^T)^T = -(A^T - (A^T)^T) = -(A^T - A) = (A - A^T)$ \\
-$SymDec \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym(B)} \exists!_{C : SkewSym(C)}(A = B + C = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T))$    \phantom{TODO}--- \\
-
-
-
 $Invertible(A) \abr (Square(A, n)) \land (\exists_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A))$ \\
-$Inv1 \abr \forall_{A : Invertible(A)}(\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A))$    \phantom{TODO}--- \\
-$Inv2 \abr \forall_{A : Invertible(A)} \forall_{B : Invertible(B)}((A * B)^{-1} = B^{-1} * A^{-1})$ \pipe $\Leftarrow$
+
+$SymGen \abr \forall_{A \in \mathcal{M}}(Sym(A + A^T))$
+\begin{enumerate}
+  \lit $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SkewSymGen \abr \forall_{A \in \mathcal{M}}(SkewSym(A - A^T))$
+\begin{enumerate}
+  \lit $-(A - A^T)^T = -(A^T - (A^T)^T) = -(A^T - A) = (A - A^T)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SymDecomp \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym(B)} \exists!_{C : SkewSym(C)}(A = B + C)$
+\begin{enumerate}
+  \lit $B \abr (1 / 2) * (A + A^T)$ ; $C \abr (1 / 2) * (A - A^T)$
+  \lit $SymGen(B) \land SkewSymGen(C)$
+  \lit $A = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T) = B + C$
+  \lit $(1 / 2) * (A_1 + {A_1}^T) = (1 / 2) * (A_2 + {A_2}^T)$ \pipe $A_1 = A_2$
+  \lit $(1 / 2) * (A_3 - {A_3}^T) = (1 / 2) * (A_4 - {A_4}^T)$ \pipe $A_3 = A_4$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvId \abr \forall_{A : Invertible(A)}(\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A))$
+\begin{enumerate}
+  \lit ${A^{-1}}_{1} = {A^{-1}}_{1} * I_n = {A^{-1}}_{1} * (A * {A^{-1}}_{2}) = ({A^{-1}}_{1} * A) * {A^{-1}}_{2} = I_n * {A^{-1}}_{2} = {A^{-1}}_{2}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvCancel \abr \forall_{A : Invertible(A)}((A^{-1})^{-1} = A)$
+\begin{enumerate}
+  \lit $(A * A^{-1})^{-1} = {I_n}^{-1} = I_n$
+  \lit ($A^{-1})^{-1} * A^{-1} = I_n$ \pipe $A^{-1})^{-1} = I_n * A = A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvDist \abr \forall_{A : Invertible(A)} \forall_{B : Invertible(B)}((A * B)^{-1} = B^{-1} * A^{-1})$
 \begin{enumerate}
   \lit $(A * B) * (A * B)^{-1} = I$ \pipe $B * (A * B)^{-1} = A^{-1}$ \pipe $(A * B)^{-1} = B^{-1} * A^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Inv3 \abr \forall_{A : Invertible(A)}((A^{-1})^{-1} = A)$    \phantom{TODO}--- \\
 $InvTrans \abr \forall_{A : Invertible(A)}((A^T)^{-1} = (A^{-1})^T)$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RowOp(\phi) \abr (Definition 1.19)$ \\
-$RowEquiv(A, B) \abr \exists_{\Phi : |\Phi| \in \mathbb{N}}((\forall_{\phi \in \Phi}(RowOp(\phi))) \land (\Phi(A) = B))$ \\
+$RowOp(\phi, A) \abr (\phi \equiv RowSwap(A)) \lor (\phi \equiv RowScale(A)) \lor (\phi \equiv RowCombine(A))$ \\
+$RowOps(\langle \Phi \rangle_1^n, A) \abr \forall_{i < n}(((i = 1) \implies RowOp(\phi_i, A)) \land ((i > 1) \implies RowOps(\langle \Phi \rangle_i^n), \phi_i(A)))$ \\
+$RowEquiv(A, B) \abr \exists_{\langle \Phi \rangle_1^n}((RowOps(\langle \Phi \rangle_1^n, A)) \land (\langle \Phi \rangle_1^n(A) = B))$ \\
+
+CONTHERE p 30
+
 $RREF(A) \abr (Definition 1.18)$ \\
 $GaussJordan \abr \forall_{A} \exists!_{B}(RREF(B) \land RowEquiv(A, B))$    \phantom{TODO}--- \\
 
@@ -937,9 +1019,24 @@ $GaussJordan \abr \forall_{A} \exists!_{B}(RREF(B) \land RowEquiv(A, B))$    \ph
 TRASH CAN
 %############################################################################
 
-$Sys(A, X, B) \abr (A * X = B) \land (Matrix(A, m, n)) \land (Matrix(X, n, 1)) \land (Matrix(B, m, 1))$ \\
-$Sol(X, A, B) \abr Sys(A, X, B)$ \\
-$TrivSol(X, A, B) \abr (Sol(X, A, B)) \land (x_{i, 1} = 0)$ \\
+$Sys(A, B) \abr (Matrix(A, m, n)) \land (Matrix(B, m, 1))$ \\
+$Sol(X, A, B) \abr (Sys(A, B)) \land (Matrix(X, n, 1)) \land (A * X = B)$ \\
+$ConsistentSys(A, B) \abr (Sys(A, B)) \land \exists_{X}(Sol(X, A, B))$ \\
+
+$TrivSol(X, A) \abr (Sol(X, A, O)) \land (X = O)$ \\
+$NonTrivSol(X, A) \abr (Sol(X, A, O)) \land (X \neq O)$ \\
+
+$HomoSysProps \abr (Sys(A, O)) \implies \ldots$
+\begin{enumerate}
+  \lit $u_0 \abr O$ ; $u_1 \abr choice(\{X \in \mathcal{M} | X \neq O\})$ ; $k \abr choice(\mathbb{R})$
+  \lit $TrivSol(u_0, A)$
+  \lit $(NonTrivSol(u_1, A)) \implies (Sol(u_1 + k u_0))$
+  \lit $(TrivSol(\overrightarrow{X}, A)) \implies (TrivSol(LC(\overrightarrow{X}), A))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+
+
 $SysAlgebra \abr \forall_{A, B, C, D, X}((RowEquiv([A|B], [C|D])) \implies (Sys(A, X, B) \iff Sys(C, X, D)))$    \phantom{TODO}--- \\
 $SysAlgebraCorollary \abr \forall_{A, B, X}((RowEquiv(A, B)) \implies (Sys(A, X, O) \iff Sys(B, X, O)))$    \phantom{TODO}--- \\
 $TrivSolLemma \abr (m < n) \implies (\exists_{X}(\lnot TrivSol(X, A, O)))$ \pipe $(\forall_{X}(TrivSol(X, A, O)) \implies (m \geq n)$ \pipe $\Leftarrow$
