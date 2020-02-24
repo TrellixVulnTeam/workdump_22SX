@@ -1020,6 +1020,8 @@ $HomoSysProps \abr (Sys(A, O)) \implies \ldots$
   \lit $(TrivSol(\overrightarrow{X}, A)) \implies (TrivSol(LC(\overrightarrow{X}), A))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$ElemMat(E) \abr (E = Swap(I_n, i, j)) \lor (Scale_*(I_n, i, c)) \lor (Combine_*(I_n, i, c, j))$ \\
+$RowEquiv(A, B) \abr \exists_{\overrightarrow{E}}( B = E * A)$ ASDASDASD
 TODO: Skip RowOp and go straight to ElemMatrices, Remark RowOp as ``working definition ONLY!''
 $RowOp(\phi, A) \abr (\phi \equiv RowSwap(A)) \lor (\phi \equiv RowScale_*(A)) \lor (\phi \equiv RowCombine_*(A))$ \\
 $RowOps(\langle \Phi \rangle_1^n, A) \abr \forall_{i < n}(((i = 1) \implies RowOp(\phi_i, A)) \land ((i > 1) \implies RowOps(\langle \Phi \rangle_i^{n - 1}), \phi_n(A)))$ \\
