@@ -1006,23 +1006,9 @@ $InvTrans \abr \forall_{A : Invertible(A)}((A^T)^{-1} = (A^{-1})^T)$ \pipe $\Lef
   \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RowOp(\phi, A) \abr (\phi \equiv RowSwap(A)) \lor (\phi \equiv RowScale(A)) \lor (\phi \equiv RowCombine(A))$ \\
-$RowOps(\langle \Phi \rangle_1^n, A) \abr \forall_{i < n}(((i = 1) \implies RowOp(\phi_i, A)) \land ((i > 1) \implies RowOps(\langle \Phi \rangle_i^n), \phi_i(A)))$ \\
-$RowEquiv(A, B) \abr \exists_{\langle \Phi \rangle_1^n}((RowOps(\langle \Phi \rangle_1^n, A)) \land (\langle \Phi \rangle_1^n(A) = B))$ \\
-
-CONTHERE p 30
-
-$RREF(A) \abr (Definition 1.18)$ \\
-$GaussJordan \abr \forall_{A} \exists!_{B}(RREF(B) \land RowEquiv(A, B))$    \phantom{TODO}--- \\
-
-%############################################################################
-TRASH CAN
-%############################################################################
-
 $Sys(A, B) \abr (Matrix(A, m, n)) \land (Matrix(B, m, 1))$ \\
 $Sol(X, A, B) \abr (Sys(A, B)) \land (Matrix(X, n, 1)) \land (A * X = B)$ \\
 $ConsistentSys(A, B) \abr (Sys(A, B)) \land \exists_{X}(Sol(X, A, B))$ \\
-
 $TrivSol(X, A) \abr (Sol(X, A, O)) \land (X = O)$ \\
 $NonTrivSol(X, A) \abr (Sol(X, A, O)) \land (X \neq O)$ \\
 
@@ -1033,6 +1019,37 @@ $HomoSysProps \abr (Sys(A, O)) \implies \ldots$
   \lit $(NonTrivSol(u_1, A)) \implies (Sol(u_1 + k u_0))$
   \lit $(TrivSol(\overrightarrow{X}, A)) \implies (TrivSol(LC(\overrightarrow{X}), A))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO: Skip RowOp and go straight to ElemMatrices, Remark RowOp as ``working definition ONLY!''
+$RowOp(\phi, A) \abr (\phi \equiv RowSwap(A)) \lor (\phi \equiv RowScale_*(A)) \lor (\phi \equiv RowCombine_*(A))$ \\
+$RowOps(\langle \Phi \rangle_1^n, A) \abr \forall_{i < n}(((i = 1) \implies RowOp(\phi_i, A)) \land ((i > 1) \implies RowOps(\langle \Phi \rangle_i^{n - 1}), \phi_n(A)))$ \\
+$RowEquiv(A, B) \abr \exists_{\langle \Phi \rangle_1^n}((RowOps(\langle \Phi \rangle_1^n, A)) \land (B = \langle \Phi \rangle_1^n(A)))$ \\
+$ElemMat(E) \abr E = \exists_{\phi}((RowOp(\phi, I_n)) \land (E = \phi(I_n)))$ \\
+$ElemMats(\langle F \rangle) \abr \forall_{E \in \langle F \rangle}(ElemMat(E))$ \\
+
+$ElemMatInv \abr \forall_{E} \exists!_{E^{-1}}((ElemMat(E)) \implies (E * E^{-1} = I_n = E^{-1} * E))$
+\begin{enumerate}
+  \lit $E-RowSwap(E) \implies TODO$ ; $E-RowScale_*(E) \implies TODO$ ; $E-RowCombine_*(E) \implies TODO$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RowEquivElemProd \abr \forall_{A, B \in \mathcal{M}}(RowEquiv(A, B) \implies \exists_{\langle F \rangle}(ElemMats(\langle F \rangle)) \land (B = \langle F \rangle * A))$
+\begin{enumerate}
+  \lit $B = \langle \Phi \rangle(A)$
+  \lit $\langle F \rangle = \langle E | (\phi \in \Phi) \land (E = \phi(I_n)) \rangle$
+  \lit $B = \langle \Phi \rangle(A) = \langle F \rangle * A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RowEquivSys \abr \forall_{A, B, C, D \in \mathcal{M}} \forall_{\langle F \rangle | ElemMats(\langle F \rangle)}((Sys(A, B)) \land (Sys(C, D)) \land ())$
+
+
+
+$RREF(A) \abr (Definition 1.18)$ \\
+$GaussJordan \abr \forall_{A} \exists!_{B}(RREF(B) \land RowEquiv(A, B))$    \phantom{TODO}--- \\
+
+%############################################################################
+TRASH CAN
+%############################################################################
+
 
 
 
