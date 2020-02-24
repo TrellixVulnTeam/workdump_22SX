@@ -859,20 +859,21 @@ $\df{GCD Equivalent} \abr 123123$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra}
 
-$Matrix(A, m, n) \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
-$\mathcal{M}_{m, n} \abr \{A : Matrix(A, m, n)\}$ \\
-$O_{m, n} \abr \pr{Matrix(O, m, n)} \land (a_{i, j} = 0)$ \\
-$Square(A, n) \abr Matrix(A, n, n)$ \\
-$UpperTriangular(A) \abr \pr{Square(A)} \land (i > j \implies a_{i, j} = 0)$ \\
-$LowerTriangular(A) \abr \pr{Square(A)} \land (i < j \implies a_{i, j} = 0)$ \\
-$Diagonal(A, n) \abr \pr{Square(A, n)} \land (i \neq j \implies a_{i, j} = 0)$ \\
-$Scalar(A, n, k) \abr \pr{Diagonal(A, n)} \land (a_{i, i} = k)$ \\
-$I_n \abr Scalar(I, n, 1)$ \\
+% ([a-zA-Z]+?)\\pr{(.+?)\}    $1[$2]
+$Matrix[A, m, n] \abr [a_{i, j}]_{m \times n} \abr \text{m rows, n columns of real numbers}$ \\
+$\mathcal{M}_{m, n} \abr \{A : Matrix[A, m, n]\}$ \\
+$O_{m, n} \abr (Matrix[O, m, n]) \land (a_{i, j} = 0)$ \\
+$Square[A, n] \abr Matrix[A, n, n]$ \\
+$UpperTriangular[A] \abr (Square[A]) \land (i > j \implies a_{i, j} = 0)$ \\
+$LowerTriangular[A] \abr (Square[A]) \land (i < j \implies a_{i, j} = 0)$ \\
+$Diagonal[A, n] \abr (Square[A, n]) \land (i \neq j \implies a_{i, j} = 0)$ \\
+$Scalar[A, n, k] \abr (Diagonal[A, n]) \land (a_{i, i} = k)$ \\
+$I_n \abr Scalar[I, n, 1]$ \\
 
-$+(A, B) \abr \pr{\pr{Matrix(A, m, n)} \land \pr{Matrix(B, m, n)}} \implies (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) $ \\
-$*(r, A) \abr \pr{(r \in \mathbb{R}) \land \pr{Matrix(A, m, n)}} \implies (r * A = [r a_{i, j}]_{m \times n})$ \\
-$*(A, B) \abr \pr{\pr{Matrix(A, m, p)} \land \pr{Matrix(B, p, n)}} \implies \pr{A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n}}$ \\
-$\phantom{ }^T(A) \abr \pr{Matrix(A, m, n)} \implies (A^T = [a_{j, i}]_{n \times m})$ \\
+$+(A, B) \abr \pr{(Matrix[A, m, n]) \land (Matrix[B, m, n])} \implies (A + B = [a_{i, j} + b_{i, j}]_{m \times n}) $ \\
+$*(r, A) \abr \pr{(r \in \mathbb{R}) \land (Matrix[A, m, n])} \implies (r * A = [r a_{i, j}]_{m \times n})$ \\
+$*(A, B) \abr \pr{(Matrix[A, m, p]) \land (Matrix[B, p, n])} \implies \pr{A * B = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]_{m \times n}}$ \\
+$\phantom{ }^T[A] \abr (Matrix[A, m, n]) \implies (A^T = [a_{j, i}]_{n \times m})$ \\
 
 $AddCom \abr \forall_{A, B \in \mathcal{M}}(A + B = B + A)$
 \begin{enumerate}
@@ -902,7 +903,7 @@ $MulAssoc \abr \forall_{A, B, C \in \mathcal{M}}\pr{(A * B) * C = A * (B * C)}$
   \lit \cont $\left[\sum_{k_1 = 1}^{p_1} \sum_{k_2 = 1}^{p_2}(a_{i, k_1} b_{k_1, k_2} c_{k_2, j})\right] = \left[\sum_{k_1 = 1}^{p_1}\pr{a_{i, k_1} \sum_{k_2 = 1}^{p_2}(b_{k_1, k_2} c_{k_2, j})}\right] = \ldots = A * (B * C)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$MulId \abr \forall_{A : Square(A, n)}(A * I_n = A = I_n * A)$
+$MulId \abr \forall_{A : Square[A, n]}(A * I_n = A = I_n * A)$
 \begin{enumerate}
   \lit $A * I_n = \left[\sum_{k = 1}^{n}\left(a_{i, k} 
     \left(\begin{cases} 
@@ -962,89 +963,151 @@ $TransMulDist \abr \forall_{A, B \in \mathcal{M}}\pr{(A * B)^T = B^T * A^T}$
   \lit $(A * B)^T = \left[\sum_{k = 1}^{p}(a_{i, k} b_{k, j})\right]^T = \left[\sum_{k = 1}^{p}(a_{j, k} b_{k, i})\right] = \left[\sum_{k = 1}^{p}(b_{k, i} a_{j, k})\right] =  \left[\sum_{k = 1}^{p}(b^T_{i, k} a^T_{k, j})\right] = B^T * A^T$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Sym(A) \abr A = A^T$ \\
-$SkewSym(A) \abr A = -A^T$ \\
-$Invertible(A) \abr \pr{Square(A, n)} \land \pr{\exists_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$ \\
+$Sym[A] \abr A = A^T$ \\
+$SkewSym[A] \abr A = -A^T$ \\
+$Invertible[A] \abr (Square[A, n]) \land \pr{\exists_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$ \\
 
-$SymGen \abr \forall_{A \in \mathcal{M}}\pr{Sym(A + A^T)}$
+$SymGen \abr \forall_{A \in \mathcal{M}}(Sym[A + A^T])$
 \begin{enumerate}
   \lit $(A + A^T)^T = A^T + (A^T)^T = A^T + A = A + A^T$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SkewSymGen \abr \forall_{A \in \mathcal{M}}\pr{SkewSym(A - A^T)}$
+$SkewSymGen \abr \forall_{A \in \mathcal{M}}(SkewSym[A - A^T])$
 \begin{enumerate}
   \lit $-(A - A^T)^T = -\pr{A^T - (A^T)^T} = -(A^T - A) = (A - A^T)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SymDecomp \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym(B)} \exists!_{C : SkewSym(C)}(A = B + C)$
+$SymDecomp \abr \forall_{A \in \mathcal{M}} \exists!_{B : Sym[B]} \exists!_{C : SkewSym[C]}(A = B + C)$
 \begin{enumerate}
   \lit $B \abr (1 / 2) * (A + A^T)$ ; $C \abr (1 / 2) * (A - A^T)$
-  \lit $SymGen(B) \land SkewSymGen(C)$
+  \lit $SymGen[B] \land SkewSymGen[C]$
   \lit $A = (1 / 2) * (A + A^T) + (1 / 2) * (A - A^T) = B + C$
   \lit $(1 / 2) * (A_1 + {A_1}^T) = (1 / 2) * (A_2 + {A_2}^T)$ \pipe $A_1 = A_2$
   \lit $(1 / 2) * (A_3 - {A_3}^T) = (1 / 2) * (A_4 - {A_4}^T)$ \pipe $A_3 = A_4$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$InvId \abr \forall_{A : Invertible(A)}\pr{\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$
+$InvId \abr \forall_{A : Invertible[A]}\pr{\exists!_{A^{-1} \in \mathcal{M}}(A * A^{-1} = I_n = A^{-1} * A)}$
 \begin{enumerate}
   \lit ${A^{-1}}_{1} = {A^{-1}}_{1} * I_n = {A^{-1}}_{1} * (A * {A^{-1}}_{2}) = ({A^{-1}}_{1} * A) * {A^{-1}}_{2} = I_n * {A^{-1}}_{2} = {A^{-1}}_{2}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$InvCancel \abr \forall_{A : Invertible(A)}\pr{(A^{-1})^{-1} = A}$
+$InvCancel \abr \forall_{A : Invertible[A]}\pr{(A^{-1})^{-1} = A}$
 \begin{enumerate}
   \lit $(A * A^{-1})^{-1} = {I_n}^{-1} = I_n$
   \lit ($A^{-1})^{-1} * A^{-1} = I_n$ \pipe $A^{-1})^{-1} = I_n * A = A$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$InvDist \abr \forall_{A : Invertible(A)} \forall_{B : Invertible(B)}\pr{(A * B)^{-1} = B^{-1} * A^{-1}}$
+$InvDist \abr \forall_{A : Invertible[A]} \forall_{B : Invertible[B]}\pr{(A * B)^{-1} = B^{-1} * A^{-1}}$
 \begin{enumerate}
   \lit $(A * B) * (A * B)^{-1} = I$ \pipe $B * (A * B)^{-1} = A^{-1}$ \pipe $(A * B)^{-1} = B^{-1} * A^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$InvTrans \abr \forall_{A : Invertible(A)}\pr{(A^T)^{-1} = (A^{-1})^T}$ \pipe $\Leftarrow$
+$InvTrans \abr \forall_{A : Invertible[A]}\pr{(A^T)^{-1} = (A^{-1})^T}$ \pipe $\Leftarrow$
 \begin{enumerate}
   \lit $A^T * (A^{-1})^T = (A^{-1} * A)^T = I^T = I$ \pipe $(A^{-1})^T = (A^T)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Sys(A, B) \abr \pr{Matrix(A, m, n)} \land \pr{Matrix(B, m, 1)}$ \\
-$Sol(X, A, B) \abr \pr{Sys(A, B)} \land \pr{Matrix(X, n, 1)} \land (A * X = B)$ \\
-$ConsistentSys(A, B) \abr \pr{Sys(A, B)} \land \exists_{X}\pr{Sol(X, A, B)}$ \\
-$TrivSol(X, A) \abr \pr{Sol(X, A, O)} \land (X = O)$ \\
-$NonTrivSol(X, A) \abr \pr{Sol(X, A, O)} \land (X \neq O)$ \\
+$Sys[A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, m, 1])$ \\
+$Sol[X, A, B] \abr (Sys[A, B]) \land (Matrix[X, n, 1]) \land (A * X = B)$ \\
+$ConsistentSys[A, B] \abr (Sys[A, B]) \land \exists_{X}(Sol[X, A, B])$ \\
+$TrivSol[X, A] \abr (Sol[X, A, O]) \land (X = O)$ \\
+$NonTrivSol[X, A] \abr (Sol[X, A, O]) \land (X \neq O)$ \\
 
-$HomoSysProps \abr \pr{Sys(A, O)} \implies \ldots$
+$HomoSysProps \abr (Sys[A, O]) \implies \ldots$
 \begin{enumerate}
   \lit $u_0 \abr O$ ; $u_1 \abr choice(\{X \in \mathcal{M} | X \neq O\})$ ; $k \abr choice(\mathbb{R})$
-  \lit $TrivSol(u_0, A)$
-  \lit $\pr{NonTrivSol(u_1, A)} \implies \pr{Sol(u_1 + k u_0)}$
-  \lit $\pr{TrivSol(\overrightarrow{X}, A)} \implies \pr{TrivSol\pr{LC(\overrightarrow{X}), A}}$
+  \lit $TrivSol[u_0, A]$
+  \lit $(NonTrivSol[u_1, A]) \implies (Sol[u_1 + k u_0])$
+  \lit $(TrivSol[\overrightarrow{X}, A]) \implies \pr{TrivSol[LC(\overrightarrow{X}), A]}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO: Skip RowOp and go straight to ElemMatrices, Remark RowOp as ``working definition ONLY!''
-$RowOp(\phi, A) \abr \pr{\phi \equiv RowSwap(A)} \lor \pr{\phi \equiv RowScale_*(A)} \lor \pr{\phi \equiv RowCombine_*(A)}$ \\
-$RowOps(\langle \Phi \rangle_1^n, A) \abr \forall_{i < n}\pr{\pr{(i = 1) \implies RowOp(\phi_i, A)} \land \pr{(i > 1) \implies RowOps(\langle \Phi \rangle_i^{n - 1}), \phi_n(A)}}$ \\
-$RowEquiv(A, B) \abr \exists_{\langle \Phi \rangle_1^n}\pr{\pr{RowOps(\langle \Phi \rangle_1^n, A)} \land \pr{B = \langle \Phi \rangle_1^n(A)}}$ \\
-$ElemMat(E) \abr E = \exists_{\phi}\pr{\pr{RowOp(\phi, I_n)} \land \pr{E = \phi(I_n)}}$ \\
-$ElemMats(\langle F \rangle) \abr \forall_{E \in \langle F \rangle}\pr{ElemMat(E)}$ \\
+$ElemMat[E] \abr (E = Swap[I_n, i, j]) \lor \pr{Scale_*(I_n, i, c)} \lor \pr{Combine_*(I_n, i, c, j)}$ \\
+$ElemMatProd[E^*] \abr \exists_{\langle E \rangle}\pr{\forall_{E_i \in E^*}(ElemMat[E_i]) \land \pr{E^* = \Pi_{E_i \in E^*}(E_i)}}$ \\
+$RowEquiv[A, B] \abr \exists_{E^*}\pr{(ElemMatProd[E^*]) \land (B = E^* * A)}$ \\
 
-$ElemMatInv \abr \forall_{E} \exists!_{E^{-1}}\pr{\pr{ElemMat(E)} \implies (E * E^{-1} = I_n = E^{-1} * E)}$
+$ElemMatInv \abr \forall_{E \in \mathcal{M}}\pr{(ElemMat[E]) \implies (Invertible[E])}$
 \begin{enumerate}
-  \lit $E-RowSwap(E) \implies TODO$ ; $E-RowScale_*(E) \implies TODO$ ; $E-RowCombine_*(E) \implies TODO$
+  \lit $E-RowSwap[E] \implies TODO$ ; $E-RowScale_*(E) \implies TODO$ ; $E-RowCombine_*(E) \implies TODO$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RowEquivElemProd \abr \forall_{A, B \in \mathcal{M}}\pr{RowEquiv(A, B) \implies \exists_{\langle F \rangle}\pr{ElemMats(\langle F \rangle)} \land (B = \langle F \rangle * A)}$
+$ElemMatProdInv \abr \forall_{E^*}\pr{(ElemMatProd[E^*]) \implies (Invertible[E^*])}$
 \begin{enumerate}
-  \lit $B = \langle \Phi \rangle(A)$
-  \lit $\langle F \rangle = \langle E | (\phi \in \Phi) \land \pr{E = \phi(I_n)} \rangle$
-  \lit $B = \langle \Phi \rangle(A) = \langle F \rangle * A$
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RowEquivSys \abr \forall_{A, B, C, D \in \mathcal{M}} \forall_{\langle F \rangle | ElemMats(\langle F \rangle)}\pr{\pr{Sys(A, B)} \land \pr{Sys(C, D)} \land ()}$
+$RowEquivSys \abr \forall_{A, B, C, D, X \in \mathcal{M}}\pr{\pr{(Sys[A, B]) \land (Sys[C, D]) \land (RowEquiv[[A B], [C D]])} \implies (Sol[X, A, B] \iff Sol[X, C, D])}$
+\begin{enumerate}
+  \lit $\exists_{E^* : ElemMatProd[E^*]}([C D] = E^* * [A B])$
+  \lit $(E^* * A = C) \land (E^* * B = D)$
+  \lit $Sol[Y, A, B] \implies \ldots$
+  \begin{enumerate}
+    \lit $A * Y = B$
+    \lit $C * Y = (E^* * A) * Y = E^* * (A * Y) = E^* * B = D$ \pipe $Sol[Y, C, D]$
+  \end{enumerate}
+  \lit $Sol[Y, A, B] \implies Sol[Y, C, D]$
+  \lit $\pr{A = (E^*)^{-1} * C} \land \pr{B = (E^*)^{-1} * D}$
+  \lit $Sol[Z, C, D] \implies \ldots$
+  \begin{enumerate}
+    \lit $C * Z = D$
+    \lit $A * Z = \pr{(E^*)^{-1} * C} * Z = (E^*)^{-1} * (C * Z) = (E^*)^{-1} * D = B$
+  \end{enumerate}
+  \lit $Sol[Z, C, D] \implies Sol[Z, A, B]$
+  \lit $Sol[X, A, B] \iff Sol[X, C, D]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RowEquivHomoSys \abr \forall_{A, C, X \in \mathcal{M}}\pr{(RowEquiv[A, C]) \implies \pr{(Sol[X, A, O]) \iff (Sol[X, C, O])}}$
+\begin{enumerate}
+  \lit Set $B = D = O$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RREF[A] \abr (A \in \mathcal{M}) \land \left(\begin{array}{ll}
+  \text{All zero rows are at the bottom of the matrix.} \hfill \land \hfill \\
+  \text{The leading entry after the first occurs to the right of the leading entry of the previous row.} \hfill \land \hfill \\
+  \text{The leading entry in any nonzero row is 1.} \hfill \land \hfill \\
+  \text{All entries in the column above and below a leading 1 are zero.} \hfill \land \hfill \\
+\end{array}\right)$ \\
 
-$RREF(A) \abr (Definition 1.18)$ \\
-$GaussJordan \abr \forall_{A} \exists!_{B}\pr{RREF(B) \land RowEquiv(A, B)}$    \phantom{TODO}--- \\
+$GaussJordanElim \abr \forall_{A \in \mathcal{M}} \exists!_{B \in \mathcal{M}}\pr{(RREF[B]) \land (RowEquiv[A, B])}$
+\begin{enumerate}
+  \lit Hit $A$ with $ElemMat$'s until it becomes $B$
+  \lit $(B = E^* * A) \land (RREF[B])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$HasZero[A] \abr \pr{Matrix(A, m, n)} \land \pr{\exists_{i \leq m}(A_{i, :} = O)}$ \\
+
+$HasZeroNonInvertible \abr \forall_{A \in \mathcal{M}}\pr{(HasZero[A]) \implies (\lnot Invertible[A])}$
+\begin{enumerate}
+  \lit $i \abr choice(\{i \leq m | A_{i, :} = O\})$
+  \lit $(B \in \mathcal{M}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(A * B)_{i, :} = O$ \pipe $A * B \neq I_n$
+  \end{enumerate}
+  \lit $(B \in \mathcal{M}) \implies (A * B \neq I_n)$ \pipe $\forall_{B \in \mathcal{M}}(A * B \neq I_n)$ \pipe $\lnot Invertible[A]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RREFInv \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff (RowEquiv[A, I_n])}$
+\begin{enumerate}
+  \lit $(Invertible[A]) \implies \ldots$
+  \begin{enumerate}
+    \lit $(RREF[B]) \land (RowEquiv[A, B])$
+    \lit $B = E^* * A$
+    \lit $(Invertible[E^*]) \land (Invertible[A])$ \pipe $Invertible[B]$
+    \lit $Invertible[B]$ \pipe $\lnot HasZero[B]$
+    \lit $(RREF[B]) \land (\lnot HasZero[B])$ \pipe $B = I_n$
+    \lit $RowEquiv[A, I_n]$
+  \end{enumerate}
+  \lit $(Invertible[A]) \implies (RowEquiv[A, I_n])$
+  \lit $(RowEquiv[A, I_n]) \implies \ldots$
+  \begin{enumerate}
+    \lit $I_n = E^* * A$ \pipe $(E^*)^{-1} = A$
+    \lit $A^{-1} = E^*_{DescSort}$ \pipe $Invertible[A]$
+  \end{enumerate}
+  \lit $(RowEquiv[A, I_n]) \implies (Invertible[A])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$TODO RREF(S_{invertible} A) = RREF(A)$ \\
+
+CONTHERE PAGE 42
 
 %############################################################################
 TRASH CAN
