@@ -1,3 +1,5 @@
+*.DS_Store
+
 # LaTex build files
 *.aux
 *.log
