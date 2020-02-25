@@ -1055,7 +1055,7 @@ $RowEquivSys \abr \forall_{A, B, C, D, X \in \mathcal{M}}\pr{\pr{(Sys[A, B]) \la
   \lit $Sol[X, A, B] \iff Sol[X, C, D]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RowEquivHomoSys \abr \forall_{A, C, X \in \mathcal{M}}\pr{(RowEquiv[A, C]) \implies \pr{(Sol[X, A, O]) \iff (Sol[X, C, O])}}$
+$RowEquivHomoSysSol \abr \forall_{A, C, X \in \mathcal{M}}\pr{(RowEquiv[A, C]) \implies \pr{(Sol[X, A, O]) \iff (Sol[X, C, O])}}$
 \begin{enumerate}
   \lit Set $B = D = O$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -1080,12 +1080,12 @@ $HasZeroNonInvertible \abr \forall_{A \in \mathcal{M}}\pr{(HasZero[A]) \implies 
   \lit $i \abr choice(\{i \leq m | A_{i, :} = O\})$
   \lit $(B \in \mathcal{M}) \implies \ldots$
   \begin{enumerate}
-    \lit $(A * B)_{i, :} = O$ \pipe $A * B \neq I_n$
+    \lit $(A * B)_{i, :} = O \neq {I_n}_{i, :}$ \pipe $A * B \neq I_n$
   \end{enumerate}
   \lit $(B \in \mathcal{M}) \implies (A * B \neq I_n)$ \pipe $\forall_{B \in \mathcal{M}}(A * B \neq I_n)$ \pipe $\lnot Invertible[A]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RREFInv \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff (RowEquiv[A, I_n])}$
+$InvIffRowEquivI \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff (RowEquiv[A, I_n])}$
 \begin{enumerate}
   \lit $(Invertible[A]) \implies \ldots$
   \begin{enumerate}
@@ -1103,74 +1103,117 @@ $RREFInv \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff (RowEquiv[A, I
     \lit $A^{-1} = E^*_{DescSort}$ \pipe $Invertible[A]$
   \end{enumerate}
   \lit $(RowEquiv[A, I_n]) \implies (Invertible[A])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+  \lit $(Invertible[A]) \iff (RowEquiv[A, I_n])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ % $TODO RREF(S_{invertible} A) = RREF(A)$ \\
 
-$TODO RREF(S_{invertible} A) = RREF(A)$ \\
-
-CONTHERE PAGE 42
-
-%############################################################################
-TRASH CAN
-%############################################################################
-
-
-
-
-
-$SysAlgebra \abr \forall_{A, B, C, D, X}\pr{\pr{RowEquiv([A|B], [C|D])} \implies \pr{Sys(A, X, B) \iff Sys(C, X, D)}}$    \phantom{TODO}--- \\
-$SysAlgebraCorollary \abr \forall_{A, B, X}\pr{\pr{RowEquiv(A, B)} \implies \pr{Sys(A, X, O) \iff Sys(B, X, O)}}$    \phantom{TODO}--- \\
-$TrivSolLemma \abr (m < n) \implies \pr{\exists_{X}\pr{\lnot TrivSol(X, A, O)}}$ \pipe $\pr{\forall_{X}(TrivSol(X, A, O)} \implies (m \geq n)$ \pipe $\Leftarrow$
+$RowEquivIIffTrivSol \abr \forall_{A \in \mathcal{M}}\pr{(RowEquiv[A, I_n]) \iff \pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}}}$
 \begin{enumerate}
-  \lit $B = GaussJordan(A)$ \pipe $RowEquiv(A, B)$ \pipe $Sys(A, X, O) \iff Sys(B, X, O)$
-  \lit $\pr{(m < n) \land Sys(B, X, O)} \implies \text{X has at least n - m free variables}$
-  \lit Let B = GaussJordan(A) and let r be the number of non-zero rows of B \pipe $r \leq m$
-  \lit $(r \leq m) \land (m < n)$ \pipe $r < n$ \pipe $0 < n - r$
-  \lit The solution of B will have r fixed variables and n - r free variables which is also more then zero
-  \lit The solution of B will have at least one free variable that can be non-zero, i.e., non-trivial
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-%############################################################################
-TRASH CAN
-%############################################################################
-
-$Elem(A, n) \abr RowEquiv(A, I_n)$ \\
-$RowOpAsElem \abr \forall_{\phi : RowOp(\phi)}\pr{\pr{E = \phi(I)} \implies \pr{\phi(A) = E * A}}$ \\
-$RowEquiv2 \abr RowEquiv(A, B) \iff \exists_{E : |E| \in \mathbb{N}}\pr{A = \Pi_{E_i \in E}(E_i) * B}$ \\
-$\pr{Elem_i(A)} \implies \pr{Invertible(A) \land Elem_i(A^{-1})}$ \\
-$\pr{RowEquiv(A, B)} \iff \pr{B = \Pi(E_i) * A}$ \\
-$\pr{RowEquiv(I, B)} \iff \pr{B = \Pi(E_i)}$ \\
-
-
-
-$\pr{\forall_{X}(TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}$ \pipe $\Leftarrow$
-\begin{enumerate}
-  \lit Let B = GaussJordan(A) \pipe $RowEquiv(A, B)$ 
-  \lit $\forall_{X}(TrivSol(X, B, O)$ \pipe $n \geq n$ \pipe $n = n$ \pipe $B = I$
-  \lit $RowEquiv(A, B)$ \pipe $RowEquiv(A, I)$ 
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-$\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$ \pipe $\Leftarrow$
-\begin{enumerate}
-  \lit $Invertible(A) \implies \ldots$
+  \lit $(RowEquiv[A, I_n]) \implies \ldots$
   \begin{enumerate}
-    \lit $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$
-    \lit $\forall_{X}(TrivSol(X, A, O)$ \pipe $RowEquiv(A, I)$ \pipe $A = \Pi(E_i)$
+    \lit $RowEquiv[A, I_n]$ \pipe $Invertible[A]$
+    \lit $(Sol[X, A, O]) \implies \ldots$
+    \begin{enumerate}
+      \lit $A * X = O$ \pipe $X = A^{-1} * O = O$ \pipe $X = O$
+    \end{enumerate}
+    \lit $(Sol[X, A, O]) \implies (X = O)$
+    \lit $(X = O) \implies (Sol[X, A, O])$
+    \lit $(X = O) \iff (Sol[X, A, O])$ \pipe $\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}$
   \end{enumerate}
-  \lit $A = \Pi(E_i) \implies \ldots$
+  \lit $(RowEquiv[A, I_n]) \implies \pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}}$
+  \lit $\pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}} \implies \ldots$
   \begin{enumerate}
-    \lit $\Pi({E_{-i}}^{-1}) = A^{-1}$ \pipe $Invertible(A)$
+    \lit $(RREF[B]) \land (RowEquiv[A, B])$
+    \lit $Sol[X, B, O]$
+    \lit $(B \neq I_n) \implies \ldots$
+    \begin{enumerate}
+      \lit $\pr{\exists_{Y \neq X}(Sol[Y, B, O])}$
+      \lit $Sol[Y, A, O]$ \pipe $Y = X$
+      \lit $(Y \neq X) \land (Y = X)$ \pipe $\bot$
+    \end{enumerate}
+    \lit $(B \neq I_n) \implies \bot$ \pipe $B = I_n$
+    \lit $(RowEquiv[A, B]) \land (B = I_n)$ \pipe $RowEquiv[A, I_n]$
   \end{enumerate}
-  \lit $\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}$
+  \lit $\pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}} \implies (RowEquiv[A, I_n])$
+  \lit $(RowEquiv[A, I_n]) \iff \pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)})$ \pipe $\Leftarrow$ $\pr{RowEquiv(I, B) \iff B = \Pi(E_i)} \land \pr{\pr{Invertible(A)} \iff \pr{A = \Pi(E_i)}}$ \\
-
-$\pr{\forall_{X}\pr{TrivSol(X, A, O)}} \implies \pr{Invertible(A)}$ \pipe $\Leftarrow$
+$InvIffUniqSol \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff \pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])}}$
 \begin{enumerate}
-   \lit $\pr{\pr{\forall_{X}\pr{TrivSol(X, A, O)} \implies \pr{RowEquiv(A, I)}} \land \pr{\pr{Invertible(A)} \iff \pr{RowEquiv(I, A)}}}$
- \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+  \lit $(Invertible[A] \land B \in \mathcal{M}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Invertible[A]) \land (Sys[A, B])$
+    \lit $(X = A^{-1} * B) \iff (Sol[X, A, B])$ \pipe $\exists!_{X \in \mathcal{M}}(Sol[X, A, B])$
+  \end{enumerate}
+  \lit $\pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \implies \ldots$
+  \begin{enumerate}
+    \lit $X_i \abr choice(\{X_i | Sol[X_i, A, {I_n}_{:, i}]\})$
+    \lit $A * [X_1 \ldots X_n] = [(A * X_1) \ldots (A * X_n)] =  [{I_n}_{:, 1} \ldots {I_n}_{:, n}] = I_n$ \lit $A^{-1} = [X_1 \ldots X_n]$
+  \end{enumerate}
+  \lit $\pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \implies (Invertible[A])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\pr{Invertible(A)} \implies \pr{\forall_{X}\pr{TrivSol(X, A, O)}}$ \pipe $\Leftarrow$ $A X = O$ \pipe $X = A^{-1} O = O$ \pipe $\forall_{X}(TrivSol(X, A, O)$ \\
+$SquareTheorems_4 \abr \forall_{A \in \mathcal{M}}\left(\begin{array}{ll}
+  (Invertible[A]) \hfill \iff \hfill \\
+  (RowEquiv[A, I_n]) \hfill \iff \hfill \\
+  \pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}} \hfill \iff \hfill \\
+  \pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])}
+\end{array}\right)$ \\
+
+$VectorSpace[V, +, *] \abr  \forall_{\alpha ,\beta \in \mathbb{R}} \forall_{u, v, w \in V} \exists_{O \in V}\left(\begin{array}{ll}
+  (u + v \in V) \hfill \land \hfill( u + v = v + u) \hfill \land \hfill \pr{(u + v) + w = u + (v + w)} \hfill \land \hfill \\
+  (u + O = u) \hfill \land \hfill \pr{\exists_{-u \in V}\pr{u + (-u) = O}} \hfill \land \hfill \\
+  (r * u \in V) \hfill \land \hfill \pr{\alpha * (\beta * u) = (\alpha \beta) * u} \hfill \land \hfill (1 * u = u) \hfill \land \hfill \\
+  \pr{\alpha * (u + v) = (\alpha * u) + (\alpha * v)}  \hfill \land \hfill \pr{(\alpha + \beta) * u = (\alpha * u) + (\beta * u)} \\
+\end{array}\right)$
+
+$ZeroVectorUniq \abr \forall_{u, v \in V}\pr{(v + u = v) \implies (u = O)}$
+\begin{enumerate}
+  \lit $(v + u = v)$ \pipe $-v + v + u = -v + v$ \pipe $u = O$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ZeroVectorGen \abr \forall_{\alpha \in \mathbb{R}} \forall_{u \in V}\pr{(\alpha * u = O) \iff \pr{(u = O) \lor (\alpha = 0)}}$
+\begin{enumerate}
+  \lit $(u = O) \implies \ldots$
+  \begin{enumerate}
+    \lit $\alpha * u = \alpha * O = \alpha * (O + O) = (\alpha * O) + (\alpha * O)$
+    \lit $\alpha * O = (\alpha * O) + (\alpha * O)$ \pipe $\alpha * O = O$ \pipe $\alpha * u = O$
+  \end{enumerate}
+  \lit $(u = O) \implies (\alpha * u = O)$
+  \lit $(\alpha = 0) \implies \ldots$
+  \begin{enumerate}
+    \lit $\alpha * u = 0 * u = (0 + 0) * u = (0 * u )+ (0 * u)$
+    \lit $0 * u = (0 * u )+ (0 * u)$ \pipe $0 * u = O$ \pipe $\alpha * u = O$
+  \end{enumerate}
+  \lit $(\alpha = 0) \implies (\alpha * u = O)$
+  \lit $\pr{(u = O) \implies (\alpha * u = O)} \land \pr{(\alpha = 0) \implies (\alpha * u = O)}$ \pipe $\pr{(u = O) \lor (\alpha = 0)} \implies (\alpha * u = O))$
+  \lit $(\alpha * u = O) \implies \ldots$
+  \begin{enumerate}
+    \lit $(\alpha \neq 0) \implies \ldots$
+      \begin{enumerate}
+        \lit $\alpha^{-1} \in \mathbb{R}$
+        \lit $O = \alpha^{-1} * O = \alpha^{-1} * (\alpha * u) = (\alpha^{-1} * \alpha) * u = 1 * u = u$ \pipe $u = O$
+      \end{enumerate}
+      \lit $(\alpha \neq 0) \implies (u = O)$
+      \lit $(\alpha = 0) \lor (\alpha \neq 0)$ \pipe $(\alpha = 0) \lor (u = O)$
+  \end{enumerate}
+  \lit $(\alpha * u = O) \implies \pr{(\alpha = 0) \lor (u = O)}$
+  \lit $(\alpha * u = O) \iff \pr{(\alpha = 0) \lor (u = O)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$NegVectorGen \abr \forall_{u \in V}\pr{(-1) * u = -u}$
+\begin{enumerate}
+  \lit $O = 0 * u = \pr{1 + (-1)} * u = (1 * u) + \pr{(-1) * u} = u + \pr{(-1) * u}$ \pipe $O = u + \pr{(-1) * u}$ \pipe $-u = (-1) * u$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO SUBSPACE p 64
+
+%############################################################################
+. \\ . \\ TRASH CAN \\ . \\
+% \left(\begin{array}{ll}
+%   XXX \hfill \land \hfill \\
+%   YYY \hfill \land \hfill \\
+% \end{array}\right)
+%############################################################################
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
