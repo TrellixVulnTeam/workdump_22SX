@@ -1159,10 +1159,10 @@ $SquareTheorems_4 \abr \forall_{A \in \mathcal{M}}\left(\begin{array}{ll}
   (\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B]))
 \end{array}\right)$ \\
 
-$VectorSpace[V, +, *] \abr  \forall_{\alpha ,\beta \in \mathbb{R}} \forall_{u, v, w \in V} \exists_{O \in V}\left(\begin{array}{ll}
+$VectorSpace[V, +, *] \abr \forall_{\alpha ,\beta \in \mathbb{R}} \forall_{u, v, w \in V} \exists_{O \in V}\left(\begin{array}{ll}
   (u + v \in V) \hfill \land \hfill( u + v = v + u) \hfill \land \hfill ((u + v) + w = u + (v + w)) \hfill \land \hfill \\
   (u + O = u) \hfill \land \hfill (\exists_{-u \in V}(u + (-u) = O)) \hfill \land \hfill \\
-  (r * u \in V) \hfill \land \hfill (\alpha * (\beta * u) = (\alpha \beta) * u) \hfill \land \hfill (1 * u = u) \hfill \land \hfill \\
+  (\alpha * u \in V) \hfill \land \hfill (\alpha * (\beta * u) = (\alpha \beta) * u) \hfill \land \hfill (1 * u = u) \hfill \land \hfill \\
   (\alpha * (u + v) = (\alpha * u) + (\alpha * v))  \hfill \land \hfill ((\alpha + \beta) * u = (\alpha * u) + (\beta * u)) \\
 \end{array}\right)$
 
@@ -1205,7 +1205,42 @@ $NegVectorGen \abr \forall_{u \in V}((-1) * u = -u)$
   \lit $O = 0 * u = (1 + (-1)) * u = (1 * u) + ((-1) * u) = u + ((-1) * u)$ \pipe $O = u + ((-1) * u)$ \pipe $-u = (-1) * u$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO SUBSPACE p 64
+$Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[S, +, *])$ \\
+
+$SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \neq S \subseteq V}((Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))))$
+\begin{enumerate}
+  \lit $(Subspace[S, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $VectorSpace[S, +, *]$ \pipe $(\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))$
+  \end{enumerate}
+  \lit $(Subspace[S, V, +, *]) \implies ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
+  \lit $((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))) \implies \ldots$
+  \begin{enumerate}
+    \lit $((\alpha ,\beta \in \mathbb{R}) \land (u, v, w \in S)) \implies \ldots$
+    \begin{enumerate}
+      \lit $u, v \in V$ \pipe $u + v = v + u$
+      \lit $u, v, w \in V$ \pipe $(u + v) + w = u + (v + w)$
+      \lit $u \in S$ \pipe $0 * u = O \in S$
+      \lit $u \in V$ \pipe $u + O = u$
+      \lit $u \in S$ \pipe $(-1) * u = -u \in S$
+      \lit $u \in V$ \pipe $\alpha * (\beta * u) = (\alpha \beta) * u$
+      \lit $u \in V$ \pipe $1 * u = u$
+      \lit $u, v \in V$ \pipe $\alpha * (u + v) = (\alpha * u) + (\alpha * v)$
+      \lit $u \in V$ \pipe $(\alpha + \beta) * u = (\alpha * u) + (\beta * u)$
+    \end{enumerate}
+    \lit $((\alpha ,\beta \in \mathbb{R}) \land (u, v, w \in S)) \implies \ldots$
+    \lit $(VectorSpace[S, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[V, S, +, *])$ \pipe $Subspace[S, V, +, *]$
+  \end{enumerate}
+  \lit $((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))) \implies (Subspace[S, V, +, *])$
+  \lit $(Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq U \subseteq V) \land (\exists_{\Gamma \subseteq \mathbb{R}}(c = \sum_{u_i \in U}(\gamma_i * u_i)))$ \\
+$LinearSpan[] \abr $ \\
+
+$LinearSpan[\emptyset] = \{O\}$ \\
+
+page68
 
 %############################################################################
 . \\ . \\ TRASH CAN \\ . \\
