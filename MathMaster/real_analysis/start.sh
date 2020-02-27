@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -x
+git pull
 if [ -x "$(command -v evince)" ]; then
     viewer="evince"
 else

@@ -1235,12 +1235,16 @@ $SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \n
   \lit $(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq U \subseteq V) \land \pr{\exists_{\Gamma \subseteq \mathbb{R}}\pr{c = \sum_{u_i \in U}(\gamma_i * u_i)}}$ \\
-$LinearSpan[] \abr $ \\
+$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq U \subseteq V) \land (|U| \in \mathbb{N}) \land \pr{\exists_{\Gamma \in \mathbb{R}^{|U|}}\pr{c = \sum_{i = 1}^{|U|}(\gamma_i * u_i)}}$ \\
+$Linear????$
+$LinearSpan[S, U, V, +, *] \abr \left(\begin{array}{ll}
+  (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (|U| \in \mathbb{N}) \hfill \land \hfill \pr{(U = \emptyset) \implies (S = \{O\})} \hfill \land \hfill \\
+  \pr{(U \neq \emptyset) \implies (S = \{c \in V | LinearCombination[c, U, V, +, *]\})}
+\end{array}\right)$ \\
+$Spans[S, V, +, *] \abr LinearSpan[V, S, V, +, *]$ \\
+$LinearlyIndependent[S, V, +, *] \abr LinearCombination[O, S, V, +, *]$ \\
+??????????????? how to say
 
-$LinearSpan[\emptyset] = \{O\}$ \\
-
-page68
 
 %############################################################################
 . \\ . \\ TRASH CAN \\ . \\
