@@ -1235,19 +1235,33 @@ $SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \n
   \lit $(Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq U \subseteq V) \land (|U| \in \mathbb{N}) \land (\exists_{\Gamma \in \mathbb{R}^{|U|}}(c = \sum_{i = 1}^{|U|}(\gamma_i * u_i)))$ \\
-$Linear????$
+$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (n = |U| \in \mathbb{N}) \land (\exists_{\Gamma \in \mathbb{R}^{n}}(c = \sum_{i = 1}^{n}(\gamma_i * u_i)))$ \\
 $LinearSpan[S, U, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (|U| \in \mathbb{N}) \hfill \land \hfill ((U = \emptyset) \implies (S = \{O\})) \hfill \land \hfill \\
   ((U \neq \emptyset) \implies (S = \{c \in V | LinearCombination[c, U, V, +, *]\}))
 \end{array}\right)$ \\
 $Spans[S, V, +, *] \abr LinearSpan[V, S, V, +, *]$ \\
-$LinearlyIndependent[S, V, +, *] \abr LinearCombination[O, S, V, +, *]$ \\
-??????????????? how to say
+$LinearlyIndependent[U, V, +, *] \abr \left(\begin{array}{ll}
+  (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (n = |U| \in \mathbb{N}) \hfill \land \hfill \\
+  (\forall_{\Gamma \in \mathbb{R}^n}((\sum_{i = 1}^{n}(\gamma_i * u_i) = O) \implies (\Gamma = \{0\}^n)))
+\end{array}\right)$ \\
 
+TODO independent {a}, dependent {O}
+TODO check lecture notes
+
+$SubDependent \abr \forall_{V | VectorSpace[V, +, *]} \forall_{S_1, S_2 \subseteq V}()$
+
+$SuperIndependent \abr $
+
+$Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinearlyIndependent[S, V, +, *])$ \\
+
+
+
+$Dimension[d, V, +, *] \abr DO REDUCTION ALGORITHM! $
 
 %############################################################################
-. \\ . \\ TRASH CAN \\ . \\
+%. \\ . \\ TRASH CAN \\ . \\
+
 % \left(\begin{array}{ll}
 %   XXX \hfill \land \hfill \\
 %   YYY \hfill \land \hfill \\
