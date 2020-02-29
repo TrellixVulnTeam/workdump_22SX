@@ -1246,12 +1246,59 @@ $LinearlyIndependent[U, V, +, *] \abr \left(\begin{array}{ll}
   (\forall_{\Gamma \in \mathbb{R}^n}((\sum_{i = 1}^{n}(\gamma_i * u_i) = O) \implies (\Gamma = \{0\}^n)))
 \end{array}\right)$ \\
 
-TODO independent {a}, dependent {O}
-TODO check lecture notes
+$SingletonZeroDependent \abr \lnot LinearlyIndependent[\{O\}, V, +, *]$
+\begin{enumerate}
+  \lit $(1 * O = O) \land (1 \neq 0)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SubDependent \abr \forall_{V | VectorSpace[V, +, *]} \forall_{S_1, S_2 \subseteq V}()$
+$SingletonNonZeroIndependent \abr (\alpha \neq O) \implies (LinearlyIndependent[\{\alpha\}, V, +, *])$
+\begin{enumerate}
+  \lit $(r * \alpha = O) \iff ((r = 0) \lor (\alpha \neq O))$
+  \lit $\alpha \neq O$ \pipe $r = 0$
+  \lit $\forall_{r \in \mathbb{R}^1}((r * \alpha = O) \implies (r = 0))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SuperIndependent \abr $
+$SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
+  ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
+  ((LinearlyIndependent[B, V, +, *]) \implies (LinearlyIndependent[A, V, +, *]))
+\end{array}\right)$
+\begin{enumerate}
+  \lit $U \abr B \setminus A$
+  \lit $(\sum(\gamma_i * a_i = O)) \implies \ldots$
+  \begin{enumerate}
+    \lit $\sum(0 * u_i) = O$
+    \lit $\sum(\gamma'_i = b_i) = \sum(\gamma_i * a_i) + \sum(0 * u_i) = O + O = O$
+    \lit $LinearlyIndependent[B, V, +, *]$ \pipe $\Gamma' = \{0\}^{|B|}$
+    \lit $\Gamma' = \{0\}^{|B|} = \Gamma \times \{0\}^{|U|}$ \pipe $\Gamma = \{0\}^{|A|}$
+  \end{enumerate}
+  \lit $(\sum(\gamma_i * a_i = O)) \implies (\Gamma = \{0\}^{|A|})$ \pipe $LinearlyIndependent[A, V, +, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SuperDependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
+  ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
+  ((\lnot LinearlyIndependent[A, V, +, *]) \implies (\lnot LinearlyIndependent[B, V, +, *]))
+\end{array}\right)$
+\begin{enumerate}
+  \lit $U \abr B \setminus A$
+  \lit $\sum(0 * u_i) = O$
+  \lit $(\exists_{\Gamma \in \mathbb{R}^|A|}((\sum(\gamma_i * a_i) = O) \land (\Gamma \neq \{0\}^{|A|})))$
+  \lit $(\sum(\gamma_i * b_i) = \sum(\gamma_i * a_i) + O = O + O = O) \land (\Gamma' = \Gamma \times \{0\}^{|U|} \neq \{0\}^|B|)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinearlyIndependentEquiv \abr \forall_{U, V}((LinearlyIndependent[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *])))$
+\begin{enumerate}
+  \lit $(\lnot LinearlyIndependent[U, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit 123123
+   \end{enumerate}
+  \lit $(\lnot LinearlyIndependent[U, V, +, *]) \implies (\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *]))$ \pipe $(\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *])) \implies (LinearlyIndependent[U, V, +, *])$
+  \lit $(\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *])) \implies \ldots$
+  \begin{enumerate}
+    \lit 123123
+  \end{enumerate}
+  \lit $(\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *])) \implies (\lnot LinearlyIndependent[U, V, +, *])$ \pipe $(LinearlyIndependent[U, V, +, *]) \implies (\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *]))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 
 $Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinearlyIndependent[S, V, +, *])$ \\
 
