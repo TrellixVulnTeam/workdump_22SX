@@ -1235,23 +1235,23 @@ $SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \n
   \lit $(Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinearCombination[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (n = |U| \in \mathbb{N}) \land (\exists_{\Gamma \in \mathbb{R}^{n}}(c = \sum_{i = 1}^{n}(\gamma_i * u_i)))$ \\
-$LinearSpan[S, U, V, +, *] \abr \left(\begin{array}{ll}
+$LinComb[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (n = |U| \in \mathbb{N}) \land (\exists_{\Gamma \in \mathbb{R}^{n}}(c = \sum_{i = 1}^{n}(\gamma_i * u_i)))$ \\
+$LinSpan[S, U, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (|U| \in \mathbb{N}) \hfill \land \hfill ((U = \emptyset) \implies (S = \{O\})) \hfill \land \hfill \\
-  ((U \neq \emptyset) \implies (S = \{c \in V | LinearCombination[c, U, V, +, *]\}))
+  ((U \neq \emptyset) \implies (S = \{c \in V | LinComb[c, U, V, +, *]\}))
 \end{array}\right)$ \\
-$Spans[S, V, +, *] \abr LinearSpan[V, S, V, +, *]$ \\
-$LinearlyIndependent[U, V, +, *] \abr \left(\begin{array}{ll}
+$Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
+$LinInd[U, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (n = |U| \in \mathbb{N}) \hfill \land \hfill \\
   (\forall_{\Gamma \in \mathbb{R}^n}((\sum_{i = 1}^{n}(\gamma_i * u_i) = O) \implies (\Gamma = \{0\}^n)))
 \end{array}\right)$ \\
 
-$SingletonZeroDependent \abr \lnot LinearlyIndependent[\{O\}, V, +, *]$
+$SingletonZeroDependent \abr \lnot LinInd[\{O\}, V, +, *]$
 \begin{enumerate}
   \lit $(1 * O = O) \land (1 \neq 0)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SingletonNonZeroIndependent \abr (\alpha \neq O) \implies (LinearlyIndependent[\{\alpha\}, V, +, *])$
+$SingletonNonZeroIndependent \abr (\alpha \neq O) \implies (LinInd[\{\alpha\}, V, +, *])$
 \begin{enumerate}
   \lit $(r * \alpha = O) \iff ((r = 0) \lor (\alpha \neq O))$
   \lit $\alpha \neq O$ \pipe $r = 0$
@@ -1260,7 +1260,7 @@ $SingletonNonZeroIndependent \abr (\alpha \neq O) \implies (LinearlyIndependent[
 
 $SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
   ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
-  ((LinearlyIndependent[B, V, +, *]) \implies (LinearlyIndependent[A, V, +, *]))
+  ((LinInd[B, V, +, *]) \implies (LinInd[A, V, +, *]))
 \end{array}\right)$
 \begin{enumerate}
   \lit $U \abr B \setminus A$
@@ -1268,15 +1268,15 @@ $SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
   \begin{enumerate}
     \lit $\sum(0 * u_i) = O$
     \lit $\sum(\gamma'_i = b_i) = \sum(\gamma_i * a_i) + \sum(0 * u_i) = O + O = O$
-    \lit $LinearlyIndependent[B, V, +, *]$ \pipe $\Gamma' = \{0\}^{|B|}$
+    \lit $LinInd[B, V, +, *]$ \pipe $\Gamma' = \{0\}^{|B|}$
     \lit $\Gamma' = \{0\}^{|B|} = \Gamma \times \{0\}^{|U|}$ \pipe $\Gamma = \{0\}^{|A|}$
   \end{enumerate}
-  \lit $(\sum(\gamma_i * a_i = O)) \implies (\Gamma = \{0\}^{|A|})$ \pipe $LinearlyIndependent[A, V, +, *]$
+  \lit $(\sum(\gamma_i * a_i = O)) \implies (\Gamma = \{0\}^{|A|})$ \pipe $LinInd[A, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $SuperDependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
   ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
-  ((\lnot LinearlyIndependent[A, V, +, *]) \implies (\lnot LinearlyIndependent[B, V, +, *]))
+  ((\lnot LinInd[A, V, +, *]) \implies (\lnot LinInd[B, V, +, *]))
 \end{array}\right)$
 \begin{enumerate}
   \lit $U \abr B \setminus A$
@@ -1285,26 +1285,64 @@ $SuperDependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
   \lit $(\sum(\gamma_i * b_i) = \sum(\gamma_i * a_i) + O = O + O = O) \land (\Gamma' = \Gamma \times \{0\}^{|U|} \neq \{0\}^|B|)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinearlyIndependentEquiv \abr \forall_{U, V}((LinearlyIndependent[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *])))$
+$LinIndEquiv \abr \forall_{U, V}((LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])))$
 \begin{enumerate}
-  \lit $(\lnot LinearlyIndependent[U, V, +, *]) \implies \ldots$
+  \lit $\Gamma' = \Gamma \setminus \{j\}$
+  \lit $(\lnot LinInd[U, V, +, *]) \implies \ldots$
   \begin{enumerate}
-    \lit 123123
+    \lit $(\exists_{\Gamma \in \mathbb{R}^|U|}((\sum(\gamma_i * u_i) = O) \land (\Gamma \neq \{0\}^{|U|})))$
+    \lit $\exists_{\gamma_k \in \Gamma}(\gamma_k \neq 0)$
+    \lit $\sum(\gamma'_i * u_i) = \sum(\gamma_i * u_i) - \gamma_k * u_k = -\gamma_k * u_j$
+    \lit $u_k = (-1 / \gamma_k)(\sum(\gamma'_i * u_i)) = \sum( (-\gamma'_i / \gamma_k) * u_i)$ \pipe $\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])$
    \end{enumerate}
-  \lit $(\lnot LinearlyIndependent[U, V, +, *]) \implies (\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *]))$ \pipe $(\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *])) \implies (LinearlyIndependent[U, V, +, *])$
-  \lit $(\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *])) \implies \ldots$
+  \lit $(\lnot LinInd[U, V, +, *]) \implies (\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *]))$
+  \lit $(\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])) \implies (LinInd[U, V, +, *])$
+  \lit $(\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])) \implies \ldots$
   \begin{enumerate}
-    \lit 123123
+    \lit $\exists_{j \in U}(j = \sum(\gamma'_i * u_i))$
+    \lit $\Gamma \abr \Gamma' \cup \{-1\}$
+    \lit $(\sum(\gamma_i * u_i) = \sum(\gamma'_i * u_i) + (-1) * \gamma_j = O) \land (\Gamma \neq \{0\}^n)$ \pipe $\lnot LinInd[U, V, +, *]$
   \end{enumerate}
-  \lit $(\exists_{j \in U}(LinearCombination[j, U \setminus \{j\}, +, *])) \implies (\lnot LinearlyIndependent[U, V, +, *])$ \pipe $(LinearlyIndependent[U, V, +, *]) \implies (\forall_{j \in U}(\lnot LinearCombination[j, U \setminus \{j\}, +, *]))$
+  \lit $(\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])) \implies (\lnot LinInd[U, V, +, *])$
+  \lit $(LinInd[U, V, +, *]) \implies (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *]))$
+  \lit $(LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *]))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinInd[S, V, +, *])$ \\
 
-$Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinearlyIndependent[S, V, +, *])$ \\
+$UniqueLinComb \abr \forall_{S, V}((Basis[S, V]) \implies (\forall_{v, \Gamma, \Delta}(((v = \sum(\gamma_i * u_i)) \land (v = \sum(\delta_i * u_i))) \implies (\Gamma = \Delta))))$
+\begin{enumerate}
+  \lit $(v \in V) \implies \ldots$
+  \begin{enumerate}
+    \lit $Spans[V, S, +, *]$ \pipe $(\exists_{\Gamma \in \mathbb{R}^n}(v = \sum(\gamma_i * s_i))) \land (\exists_{\Gamma \in \mathbb{R}^n}(v = \sum(\gamma_i * s_i)))$
+    \lit $O = v - v = \sum(\gamma_i * s_i) - \sum(\delta_i * s_i) = \sum((\gamma_i - \delta_i) * s_i)$ \pipe $\sum((\gamma_i - \delta_i) * s_i) = O$
+    \lit $(LinInd[S, V, +, *]) \land (\sum((\gamma_i - \delta_i) * s_i) = O)$ \pipe $\{\gamma_i - \delta_i\} = \{0\}^n$ \pipe $\{\gamma_i\} = \{\delta_i\}$ \pipe $\Gamma = \Delta$
+  \end{enumerate}
+  \lit $\Gamma = \Delta$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$BasisSubSpan \abr \forall_{S, V}((Spans[S, V, +, *]) \implies (\exists_{B \subseteq S}(Basis[B, V, +, *])))$
+\begin{enumerate}
+  \lit $A = B$
+  \lit While $\lnot LinearlyIndependent(A, V, +, *)$, $\exists_{j \in A}(LinearCombination[j, A \setminus \{j\}, +, *])$, $A' = A \setminus \{j\}$
+  \lit $Spans[A', S, +, *]$, until $(LinearlyIndependent[A', V, +, *]) \land (Spans[A', V, +, *])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$BasisCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (LinearlyIndependent(T, V, +, *))) \implies (|T| \leq |S|))$
+\begin{enumerate}
+  \lit $(Basis[S, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+      \lit $(|T| > |S|) \implies \ldots$
+      \begin{enumerate}
+        \lit $(Spans[S, V, +, *]) \land (T \subseteq V)$ \pipe $t_{1 \ldots t_j} = \sum(\gamma_i * s*i)$ \cont
+        \lit \cont $t_j = \sum(\gamma'_i * t_i)$ \pipe $\lnot LinearlyIndependent(T, V, +, *)$
+      \end{enumerate}
+      \lit $(|T| > |S|) \implies (\lnot LinearlyIndependent(T, V, +, *))$ \pipe $(LinearlyIndependent(T, V, +, *)) \implies (|T| \leq |S|)$
+   \end{enumerate}
+  \lit $((Basis[S, V, +, *]) \land (LinearlyIndependent(T, V, +, *))) \implies (|T| \leq |S|)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Dimension[d, V, +, *] \abr DO REDUCTION ALGORITHM! $
+TODO: CONTINUE COROLLARY PAGE 15
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
