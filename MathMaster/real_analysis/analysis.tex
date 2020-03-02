@@ -460,7 +460,7 @@ $\df{LUBPropertyOfR} \abr \rf{LUBProperty}[\mathbb{R}, <_{\mathbb{R}}]$
 $\df{+_{\mathbb{R}}}[\alpha, \beta] \abr \alpha, \beta \in \mathbb{R} \land (\alpha +_{\mathbb{R}} \beta) = \{r + s : r \in \alpha \land s \in \beta\}$ \\
 $\df{0_{\mathbb{R}}} \abr \{x \in \mathbb{Q} : x < 0\}$ \\
 
-$\df{0InR} \abr 0_{\mathbb{R}} \in \mathbb{R}$
+$\df{ZeroInR} \abr 0_{\mathbb{R}} \in \mathbb{R}$
 \begin{enumerate}
   \lit $-1 \in 0_{\mathbb{R}} \land 1 \notin 0_{\mathbb{R}}$ \pipe $\emptyset \neq 0_{\mathbb{R}} \subseteq \mathbb{Q}$ \pipe $\rf{CutI}[0_{\mathbb{R}}]$
   \lit $(x \in 0_{\mathbb{R}} \land y \in \mathbb{Q} \land y < x) \implies y < x < 0 \implies y < 0 \implies y \in 0_{\mathbb{R}}$ \pipe $\forall_{x \in 0_{\mathbb{R}}} \forall_{y \in \mathbb{Q}} (y_0 < x \implies y \in 0_{\mathbb{R}})$ \pipe $\rf{CutII}[0_{\mathbb{R}}]$
@@ -1324,25 +1324,42 @@ $UniqueLinComb \abr \forall_{S, V}((Basis[S, V]) \implies (\forall_{v, \Gamma, \
 $BasisSubSpan \abr \forall_{S, V}((Spans[S, V, +, *]) \implies (\exists_{B \subseteq S}(Basis[B, V, +, *])))$
 \begin{enumerate}
   \lit $A = B$
-  \lit While $\lnot LinearlyIndependent(A, V, +, *)$, $\exists_{j \in A}(LinearCombination[j, A \setminus \{j\}, +, *])$, $A' = A \setminus \{j\}$
-  \lit $Spans[A', S, +, *]$, until $(LinearlyIndependent[A', V, +, *]) \land (Spans[A', V, +, *])$
+  \lit While $\lnot LinInd(A, V, +, *)$, $\exists_{j \in A}(LinearCombination[j, A \setminus \{j\}, +, *])$, $A' = A \setminus \{j\}$
+  \lit $Spans[A', S, +, *]$, until $(LinInd[A', V, +, *]) \land (Spans[A', V, +, *])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$BasisCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (LinearlyIndependent(T, V, +, *))) \implies (|T| \leq |S|))$
+$BasisLinearIndCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (LinInd[T, V, +, *])) \implies (|T| \leq |S|))$
 \begin{enumerate}
   \lit $(Basis[S, V, +, *]) \implies \ldots$
   \begin{enumerate}
       \lit $(|T| > |S|) \implies \ldots$
       \begin{enumerate}
         \lit $(Spans[S, V, +, *]) \land (T \subseteq V)$ \pipe $t_{1 \ldots t_j} = \sum(\gamma_i * s*i)$ \cont
-        \lit \cont $t_j = \sum(\gamma'_i * t_i)$ \pipe $\lnot LinearlyIndependent(T, V, +, *)$
+        \lit \cont $t_j = \sum(\gamma'_i * t_i)$ \pipe $\lnot LinInd[T, V, +, *]$
       \end{enumerate}
-      \lit $(|T| > |S|) \implies (\lnot LinearlyIndependent(T, V, +, *))$ \pipe $(LinearlyIndependent(T, V, +, *)) \implies (|T| \leq |S|)$
+      \lit $(|T| > |S|) \implies (\lnot LinInd[T, V, +, *])$ \pipe $(LinInd[T, V, +, *]) \implies (|T| \leq |S|)$
    \end{enumerate}
-  \lit $((Basis[S, V, +, *]) \land (LinearlyIndependent(T, V, +, *))) \implies (|T| \leq |S|)$
+  \lit $((Basis[S, V, +, *]) \land (LinInd[T, V, +, *])) \implies (|T| \leq |S|)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO: CONTINUE COROLLARY PAGE 15
+$BasisCardProp \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (Basis[T, V, +, *])) \implies (|T| = |S|))$
+\begin{enumerate}
+  \lit $Basis[S, V, +, *]$ \pipe $LinInd[S, V, +, *]$
+  \lit $(Basis[T, V, +, *]) \land (LinInd[S, V, +, *])$ \pipe $|S| \leq |T|$
+  \lit $Basis[T, V, +, *]$ \pipe $LinInd[T, V, +, *]$
+  \lit $(Basis[S, V, +, *]) \land (LinInd[T, V, +, *])$ \pipe $|T| \leq |S|$
+  \lit $(|S| \leq |T|) \land (|T| \leq |S|)$ \pipe $|T| = |S|$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Dim[d, V, +, *] \abr (\exists_{B}(Basis[B, V, +, *])) \land ((V = \{O\}) \implies (d = 0)) \land  ((V \neq \{O\}) \implies (d = |B|))$ \\
+
+$NullSpace[N, A] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n | A * x = O\})$ \\  % space of homogenous solutions
+$RowSpace[R, A] \abr (Matrix[A, m, n]) \land (R = \{x^T * A | x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
+$ColSpace[C, A] \abr (Matrix[A, m, n]) \land (C = \{A * x | x \in \mathbb{R}^n\})$ \\  % space of linear combination or columns
+
+$Nullity[n, A] \abr (NullSpace[N, A]) \land (Dim[n, N, +, *])$ \\
+
+??????????????????????????????
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
