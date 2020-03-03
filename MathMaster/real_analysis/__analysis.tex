@@ -1207,7 +1207,10 @@ $NegVectorGen \abr \forall_{u \in V}\pr{(-1) * u = -u}$
 
 $Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[S, +, *])$ \\
 
-$SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \neq S \subseteq V}\pr{(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}}$
+$SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
+  \pr{(VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V)} \hfill \implies \hfill \\
+  \pr{(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}}
+\end{array}\right)$
 \begin{enumerate}
   \lit $(Subspace[S, V, +, *]) \implies \ldots$
   \begin{enumerate}
@@ -1220,27 +1223,76 @@ $SubspaceEquiv \abr \forall_{V : VectorSpace[V, +, *]} \forall_{S : \emptyset \n
     \begin{enumerate}
       \lit $u, v \in V$ \pipe $u + v = v + u$
       \lit $u, v, w \in V$ \pipe $(u + v) + w = u + (v + w)$
-      \lit $u \in S$ \pipe $0 * u = O \in S$
+      \lit $(ZeroVectorGen) \land (u \in S)$ \pipe $0 * u = O \in S$
       \lit $u \in V$ \pipe $u + O = u$
-      \lit $u \in S$ \pipe $(-1) * u = -u \in S$
+      \lit $(NegVectorGen) \land (u \in S)$ \pipe $(-1) * u = -u \in S$
       \lit $u \in V$ \pipe $\alpha * (\beta * u) = (\alpha \beta) * u$
       \lit $u \in V$ \pipe $1 * u = u$
       \lit $u, v \in V$ \pipe $\alpha * (u + v) = (\alpha * u) + (\alpha * v)$
       \lit $u \in V$ \pipe $(\alpha + \beta) * u = (\alpha * u) + (\beta * u)$
     \end{enumerate}
-    \lit $\pr{(\alpha ,\beta \in \mathbb{R}) \land (u, v, w \in S)} \implies \ldots$
-    \lit $(VectorSpace[S, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[V, S, +, *])$ \pipe $Subspace[S, V, +, *]$
   \end{enumerate}
   \lit $\pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}} \implies (Subspace[S, V, +, *])$
   \lit $(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinComb[c, U, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (n = |U| \in \mathbb{N}) \land \pr{\exists_{\Gamma \in \mathbb{R}^{n}}\pr{c = \sum_{i = 1}^{n}(\gamma_i * u_i)}}$ \\
-$LinSpan[S, U, V, +, *] \abr \left(\begin{array}{ll}
-  (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (|U| \in \mathbb{N}) \hfill \land \hfill \pr{(U = \emptyset) \implies (S = \{O\})} \hfill \land \hfill \\
-  \pr{(U \neq \emptyset) \implies (S = \{c \in V | LinComb[c, U, V, +, *]\})}
+$LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (K \subseteq \mathbb{R}) \land (n = |U| = |K| \in \mathbb{N}) \land \pr{c = \sum_{i = 1}^{n}(k_i * u_i)}$ \\
+$LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
+  (VectorSpace[V, +, *]) \land (S \subseteq V) \land \pr{(S = \emptyset) \implies (S' = \{O\})} \hfill \land \hfill \\
+  \pr{(S \neq \emptyset) \implies \pr{S' = \{c \in V | \exists_{K \subseteq \mathbb{R}}(LinComb[c, S, K, V, +, *])\}}}
 \end{array}\right)$ \\
 $Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
+
+$LSSubspaceContaining \abr \forall_{S', S, V}\pr{(LinSpan[S', S, V, +, *]) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}}$
+\begin{enumerate}
+  \lit $LinSpan[S', S, V, +, *]$ \pipe $O \in S'$ \pipe $\emptyset \neq S'$
+  \lit $(\emptyset \neq S') \land (S' \subseteq V)$ \pipe $\emptyset \neq S' \subseteq V$
+  \lit $(u, v \in S') \implies \ldots$
+  \begin{enumerate}
+    \lit $u \in S'$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \subseteq \mathbb{R}}\pr{u = \sum_{i = 1}^{n}(k_i * s_i)}$
+    \lit $v \in S'$ \pipe $\exists_{L \subseteq \mathbb{R}}(LinComb[v, S, L, V, +, *])$ \pipe $\exists_{L \subseteq \mathbb{R}}\pr{v = \sum_{i = 1}^{n}(l_i * s_i)}$
+    \lit $u + v = \sum_{i = 1}^{n}(k_i * s_i) + \sum_{i = 1}^{n}(l_i * s_i) = \sum_{i = 1}^{n}\pr{(k_i + l_i) * s_i}$
+    \lit $M \abr \{k_i + l_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $M \subseteq \mathbb{R}$
+    \lit $\exists_{M \subseteq \mathbb{R}}\pr{u + v = \sum_{i = 1}^{n}(m_i * s_i)}$ \pipe $\exists_{M \subseteq \mathbb{R}}(LinComb[u + v, S, M, V, +, *])$ \pipe $u + v \in S'$
+  \end{enumerate}
+  \lit $(u, v \in S') \implies (u + v \in S')$ \pipe $\forall_{u, v \in S'}(u + v \in S')$
+  \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies \ldots$
+  \begin{enumerate}
+    \lit $u \in S'$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \subseteq \mathbb{R}}\pr{u = \sum_{i = 1}^{n}(k_i * s_i)}$
+    \lit $r * u = r * \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{n}\pr{r * (k_i * s_i)} = \sum_{i = 1}^{n}(r k_i) * s_i)$
+    \lit $M \abr \{r k_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $M \subseteq \mathbb{R}$
+    \lit $\exists_{M \subseteq \mathbb{R}}\pr{r * u = \sum_{i = 1}^{n}(m_i * s_i)}$ \pipe $\exists_{M \subseteq \mathbb{R}}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
+  \end{enumerate}
+  \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies (r * u \in S')$ \pipe $\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')$
+  \lit $SubspaceEquiv$ \pipe $Subspace[S', V, +, *]$
+  \lit $(s_j \in S) \implies \ldots$
+  \begin{enumerate}
+    \lit $K \abr \{ \left(\begin{cases} 
+      1 & i = j \\
+      0 & i \neq j 
+    \end{cases}\right) | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $K \subseteq \mathbb{R}$
+    \lit $\ldots$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
+  \end{enumerate}
+  \lit $(s_j \in S) \implies (s_j \in S')$ \pipe $\forall_{x \in S}(x \in S')$ \pipe $S \subseteq S'$
+  \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO CONTHERE
+
+$SmallestSubspaceContaining \abr \forall_{T, S', S, V}\pr{\pr{(LinSpan[S', S, V, +, *]) \land (Subspace[T, V, +, *]) \land (S \subseteq T)} \implies (S' \subseteq T)}$
+\begin{enumerate}
+  \lit $LSSubspaceContaining$ \pipe $(Subspace[S', V, +, *]) \land (S \subseteq S')$
+  \lit $VectorSpace[S', +, *]$
+
+  \lit $(W \subseteq V) \implies (LinSpan[W, W, V, +, *] \iff Subspace[W, V, +, *])$
+  \lit $\pr{(W \subseteq V) \land (Subspace[W, V, +, *]) \land (S \subseteq W) \land (LinSpan[S', S, W, +, *])} \implies (Subspace[S', W, +, *])$
+
+  \lit $\forall_{T \subset S'}\pr{(\lnot Subspace[T, V, +, *]) \lor (S \not \subseteq T)}$
+  \lit $\lnot \exists_{T \subset S'}\pr{(Subspace[T, V, +, *]) \land (S \subseteq T)}$
+
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
 $LinInd[U, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (n = |U| \in \mathbb{N}) \hfill \land \hfill \\
   \pr{\forall_{\Gamma \in \mathbb{R}^n}\pr{\pr{\sum_{i = 1}^{n}(\gamma_i * u_i) = O} \implies (\Gamma = \{0\}^n)}}
