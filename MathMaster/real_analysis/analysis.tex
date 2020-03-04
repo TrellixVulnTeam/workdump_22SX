@@ -1277,21 +1277,59 @@ $LSSubspaceContaining \abr \forall_{S', S, V}((LinSpan[S', S, V, +, *]) \implies
   \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO CONTHERE
-
-$SmallestSubspaceContaining \abr \forall_{T, S', S, V}(((LinSpan[S', S, V, +, *]) \land (Subspace[T, V, +, *]) \land (S \subseteq T)) \implies (S' \subseteq T))$
+$LSSubspaceIdentity \abr (LinSpan[W', W, V, +, *]) \implies ((W' = W) \iff (Subspace[W, V, +, *]))$
 \begin{enumerate}
-  \lit $LSSubspaceContaining$ \pipe $(Subspace[S', V, +, *]) \land (S \subseteq S')$
-  \lit $VectorSpace[S', +, *]$
-
-  \lit $(W \subseteq V) \implies (LinSpan[W, W, V, +, *] \iff Subspace[W, V, +, *])$
-  \lit $((W \subseteq V) \land (Subspace[W, V, +, *]) \land (S \subseteq W) \land (LinSpan[S', S, W, +, *])) \implies (Subspace[S', W, +, *])$
-
-  \lit $\forall_{T \subset S'}((\lnot Subspace[T, V, +, *]) \lor (S \not \subseteq T))$
-  \lit $\lnot \exists_{T \subset S'}((Subspace[T, V, +, *]) \land (S \subseteq T))$
-
+  \lit $(W' = W) \implies \ldots$
+  \begin{enumerate}
+    \lit $LSSubspaceContaining$ \pipe $Subspace[W', V, +, *]$ \pipe $Subspace[W, V, +, *]$
+  \end{enumerate}
+  \lit $(W' = W) \implies (Subspace[W, V, +, *])$
+  \lit $(Subspace[W, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $SubspaceEquiv$ \pipe $(\forall_{r, s \in W}(r + s \in W)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in W}(\alpha * s \in W))$ \pipe $\forall_{w \in W}(LinComb[w, W, K, V, +, *])$
+    \lit $(w \in W) \iff (LinComb[w, W, K, V, +, *]) \iff (w \in W')$ \pipe $W = W'$ \pipe $W' = W$
+  \end{enumerate}
+  \lit $(Subspace[W, V, +, *]) \implies (W' = W)$
+  \lit $(W' = W) \iff (Subspace[W, V, +, *])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$LSSubspaceSubset \abr ((LinSpan[S', S, V, +, *]) \land (Subspace[W, V, +, *]) \land (S \subseteq W)) \implies (Subspace[S', W, +, *])$
+\begin{enumerate}
+  \lit $(LinSpan[S', S, V, +, *]) \land (S \subseteq W)$ \pipe $(LinSpan[S', S, W, +, *])$
+  \lit $(LSSubspaceContaining) \land (LinSpan[S', S, W, +, *])$ \pipe $Subspace[S', W, +, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SmallestSubspaceContaining \abr \forall_{W, S', S, V}(((LinSpan[S', S, V, +, *]) \land (Subspace[W, V, +, *]) \land (S \subseteq W)) \implies (S' \subseteq W))$
+\begin{enumerate}
+  \lit $((Subspace[W, V, +, *]) \land (S \subseteq W)) \implies \ldots$
+  \begin{enumerate}
+    \lit $LSSubspaceSubset$ \pipe $Subspace[S', W, +, *]$\pipe $S' \subseteq W$
+  \end{enumerate}
+  \lit $((Subspace[W, V, +, *]) \land (S \subseteq W)) \implies (S' \subseteq W)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$NullSpace[N, A, m, n] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n | A * x = O\})$ \\  % space of homogenous solutions
+$RowSpace[R, A, m, n] \abr (Matrix[A, m, n]) \land (R = \{x^T * A \in \mathbb{R}^n | x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
+$ColSpace[C, A, m, n] \abr (Matrix[A, m, n]) \land (C = \{A * x \in \mathbb{R}^m | x \in \mathbb{R}^n\})$ \\  % space of linear combination or columns
+
+$NullSubspace \abr (NullSpace[N, A, m, n]) \implies (Subspace[N, \mathbb{R}^n, +, *])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RowSubspace \abr (RowSpace[R, A, m, n]) \implies (Subspace[R, \mathbb{R}^n, +, *])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ColSubspace \abr (ColSpace[C, A, m, n]) \implies (Subspace[C, \mathbb{R}^m, +, *])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinInd[S, V, +, *] \abr   (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (\forall_{K \subseteq \mathbb{R}}((LinComb[O, S, K, V, +, *]) \implies  (K = \{0\})))$
+
+TODO, SAY K is a sequence instead of a set $K \subseteq \mathbb{R}^n$ instead ??
 
 $LinInd[U, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (n = |U| \in \mathbb{N}) \hfill \land \hfill \\
@@ -1405,9 +1443,6 @@ $BasisCardProp \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (Basis[T, V, +,
 
 $Dim[d, V, +, *] \abr (\exists_{B}(Basis[B, V, +, *])) \land ((V = \{O\}) \implies (d = 0)) \land  ((V \neq \{O\}) \implies (d = |B|))$ \\
 
-$NullSpace[N, A] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n | A * x = O\})$ \\  % space of homogenous solutions
-$RowSpace[R, A] \abr (Matrix[A, m, n]) \land (R = \{x^T * A | x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
-$ColSpace[C, A] \abr (Matrix[A, m, n]) \land (C = \{A * x | x \in \mathbb{R}^n\})$ \\  % space of linear combination or columns
 
 $Nullity[n, A] \abr (NullSpace[N, A]) \land (Dim[n, N, +, *])$ \\
 
