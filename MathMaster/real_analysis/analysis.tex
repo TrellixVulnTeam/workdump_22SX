@@ -1236,10 +1236,10 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
   \lit $(Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (U \subseteq V) \land (K \subseteq \mathbb{R}) \land (n = |U| = |K| \in \mathbb{N}) \land (c = \sum_{i = 1}^{n}(k_i * u_i))$ \\
+$LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (n \in \mathbb{N}) \land (U \in V^n) \land (K \in \mathbb{R}^n) \land (c = \sum_{i = 1}^{n}(k_i * u_i))$ \\
 $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
-  (VectorSpace[V, +, *]) \land (S \subseteq V) \land ((S = \emptyset) \implies (S' = \{O\})) \hfill \land \hfill \\
-  ((S \neq \emptyset) \implies (S' = \{c \in V | \exists_{K \subseteq \mathbb{R}}(LinComb[c, S, K, V, +, *])\}))
+  (VectorSpace[V, +, *]) \land (S \in V^n) \land ((S = \emptyset) \implies (S' = \{O\})) \hfill \land \hfill \\
+  ((S \neq \emptyset) \implies (S' = \{c \in V | \exists_{K \in \mathbb{R}^n}(LinComb[c, S, K, V, +, *])\}))
 \end{array}\right)$ \\
 $Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
 
@@ -1249,29 +1249,29 @@ $LSSubspaceContaining \abr \forall_{S', S, V}((LinSpan[S', S, V, +, *]) \implies
   \lit $(\emptyset \neq S') \land (S' \subseteq V)$ \pipe $\emptyset \neq S' \subseteq V$
   \lit $(u, v \in S') \implies \ldots$
   \begin{enumerate}
-    \lit $u \in S'$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \subseteq \mathbb{R}}(u = \sum_{i = 1}^{n}(k_i * s_i))$
-    \lit $v \in S'$ \pipe $\exists_{L \subseteq \mathbb{R}}(LinComb[v, S, L, V, +, *])$ \pipe $\exists_{L \subseteq \mathbb{R}}(v = \sum_{i = 1}^{n}(l_i * s_i))$
+    \lit $u \in S'$ \pipe $\exists_{K \in \mathbb{R}^n}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \in \mathbb{R}^n}(u = \sum_{i = 1}^{n}(k_i * s_i))$
+    \lit $v \in S'$ \pipe $\exists_{L \in \mathbb{R}^n}(LinComb[v, S, L, V, +, *])$ \pipe $\exists_{L \in \mathbb{R}^n}(v = \sum_{i = 1}^{n}(l_i * s_i))$
     \lit $u + v = \sum_{i = 1}^{n}(k_i * s_i) + \sum_{i = 1}^{n}(l_i * s_i) = \sum_{i = 1}^{n}((k_i + l_i) * s_i)$
-    \lit $M \abr \{k_i + l_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $M \subseteq \mathbb{R}$
-    \lit $\exists_{M \subseteq \mathbb{R}}(u + v = \sum_{i = 1}^{n}(m_i * s_i))$ \pipe $\exists_{M \subseteq \mathbb{R}}(LinComb[u + v, S, M, V, +, *])$ \pipe $u + v \in S'$
+    \lit $M \abr \langle k_i + l_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N}) \rangle$ \pipe $M \in \mathbb{R}^n$
+    \lit $\exists_{M \in \mathbb{R}^n}(u + v = \sum_{i = 1}^{n}(m_i * s_i))$ \pipe $\exists_{M \in \mathbb{R}^n}(LinComb[u + v, S, M, V, +, *])$ \pipe $u + v \in S'$
   \end{enumerate}
   \lit $(u, v \in S') \implies (u + v \in S')$ \pipe $\forall_{u, v \in S'}(u + v \in S')$
   \lit $((r \in \mathbb{R}) \land (u \in S')) \implies \ldots$
   \begin{enumerate}
-    \lit $u \in S'$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \subseteq \mathbb{R}}(u = \sum_{i = 1}^{n}(k_i * s_i))$
+    \lit $u \in S'$ \pipe $\exists_{K \in \mathbb{R}^n}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \in \mathbb{R}^n}(u = \sum_{i = 1}^{n}(k_i * s_i))$
     \lit $r * u = r * \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{n}(r * (k_i * s_i)) = \sum_{i = 1}^{n}(r k_i) * s_i)$
-    \lit $M \abr \{r k_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $M \subseteq \mathbb{R}$
-    \lit $\exists_{M \subseteq \mathbb{R}}(r * u = \sum_{i = 1}^{n}(m_i * s_i))$ \pipe $\exists_{M \subseteq \mathbb{R}}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
+    \lit $M \abr \langle r k_i \in \mathbb{R} | (1 \leq i \leq n) \land (i \in \mathbb{N}) \rangle$ \pipe $M \in \mathbb{R}^n$
+    \lit $\exists_{M \in \mathbb{R}^n}(r * u = \sum_{i = 1}^{n}(m_i * s_i))$ \pipe $\exists_{M \in \mathbb{R}^n}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
   \end{enumerate}
   \lit $((r \in \mathbb{R}) \land (u \in S')) \implies (r * u \in S')$ \pipe $\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')$
   \lit $SubspaceEquiv$ \pipe $Subspace[S', V, +, *]$
   \lit $(s_j \in S) \implies \ldots$
   \begin{enumerate}
-    \lit $K \abr \{ \left(\begin{cases} 
+    \lit $K \abr \langle \left(\begin{cases} 
       1 & i = j \\
       0 & i \neq j 
-    \end{cases}\right) | (1 \leq i \leq n) \land (i \in \mathbb{N})\}$ \pipe $K \subseteq \mathbb{R}$
-    \lit $\ldots$ \pipe $\exists_{K \subseteq \mathbb{R}}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
+    \end{cases}\right) | (1 \leq i \leq n) \land (i \in \mathbb{N}) \rangle$ \pipe $K \in \mathbb{R}^n$
+    \lit $\ldots$ \pipe $\exists_{K \in \mathbb{R}^n}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
   \end{enumerate}
   \lit $(s_j \in S) \implies (s_j \in S')$ \pipe $\forall_{x \in S}(x \in S')$ \pipe $S \subseteq S'$
   \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
@@ -1327,52 +1327,50 @@ $ColSubspace \abr (ColSpace[C, A, m, n]) \implies (Subspace[C, \mathbb{R}^m, +, 
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinInd[S, V, +, *] \abr   (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (\forall_{K \subseteq \mathbb{R}}((LinComb[O, S, K, V, +, *]) \implies  (K = \{0\})))$
+$LinInd[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \in V^n) \land (\forall_{K \in \mathbb{R}^n}((LinComb[O, S, K, V, +, *]) \implies (K = \{0\}^n)))$ \\
 
-TODO, SAY K is a sequence instead of a set $K \subseteq \mathbb{R}^n$ instead ??
-
-$LinInd[U, V, +, *] \abr \left(\begin{array}{ll}
-  (VectorSpace[V, +, *]) \hfill \land \hfill (U \subseteq V) \hfill \land \hfill (n = |U| \in \mathbb{N}) \hfill \land \hfill \\
-  (\forall_{\Gamma \in \mathbb{R}^n}((\sum_{i = 1}^{n}(\gamma_i * u_i) = O) \implies (\Gamma = \{0\}^n)))
-\end{array}\right)$ \\
-
-$SingletonZeroDependent \abr \lnot LinInd[\{O\}, V, +, *]$
+$ZeroDependent \abr (O \in S) \implies (\lnot LinInd[S, V, +, *])$
 \begin{enumerate}
-  \lit $(1 * O = O) \land (1 \neq 0)$
+  \lit $K \abr \langle \left(\begin{cases} 
+      1 & u_i = O \\
+      0 & u_i \neq O 
+    \end{cases}\right) | (1 \leq i \leq n) \land (i \in \mathbb{N}) \rangle$ \pipe $K \in \mathbb{R}^n$
+  \lit $(LinComb[O, S, K, V, +, *]) \land (K \neq \{O\}^n)$ \pipe $\lnot LinInd[S, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SingletonNonZeroIndependent \abr (\alpha \neq O) \implies (LinInd[\{\alpha\}, V, +, *])$
+$SingletonNonZeroIndependent \abr (v \neq O) \implies (LinInd[\langle v \rangle, V, +, *])$
 \begin{enumerate}
-  \lit $(r * \alpha = O) \iff ((r = 0) \lor (\alpha \neq O))$
-  \lit $\alpha \neq O$ \pipe $r = 0$
-  \lit $\forall_{r \in \mathbb{R}^1}((r * \alpha = O) \implies (r = 0))$
+  \lit $(r * v = O) \iff ((r = 0) \lor (v \neq O))$
+  \lit $v \neq O$ \pipe $r = 0$
+  \lit $\forall_{r \in \mathbb{R}}((r * v = O) \implies (r = 0))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
-  ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
-  ((LinInd[B, V, +, *]) \implies (LinInd[A, V, +, *]))
-\end{array}\right)$
+$SubIndependent \abr \forall_{V, A, B}(((VectorSpace[V, +, *]) \land (A \subseteq B \in V^m)) \implies ((LinInd[B, V, +, *]) \implies (LinInd[A, V, +, *])))$
 \begin{enumerate}
-  \lit $U \abr B \setminus A$
-  \lit $(\sum(\gamma_i * a_i = O)) \implies \ldots$
+  \lit $(LinComb[O, A, K, V, +, *]) \implies \ldots$
   \begin{enumerate}
-    \lit $\sum(0 * u_i) = O$
-    \lit $\sum(\gamma'_i = b_i) = \sum(\gamma_i * a_i) + \sum(0 * u_i) = O + O = O$
-    \lit $LinInd[B, V, +, *]$ \pipe $\Gamma' = \{0\}^{|B|}$
-    \lit $\Gamma' = \{0\}^{|B|} = \Gamma \times \{0\}^{|U|}$ \pipe $\Gamma = \{0\}^{|A|}$
+    \lit $L \abr \langle \left(\begin{cases} 
+      1 & j \leq n \\
+      0 & j > n 
+    \end{cases}\right) | (1 \leq j \leq m \land (j \in \mathbb{N}) \rangle$ \pipe $L \in \mathbb{R}^m$
+    \lit $A \subseteq B$ \pipe $\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)$
+    \lit $\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{i = 1}^{n}(k_i * a_i)) + O = \sum_{j = 1}^{m}(l_j * b_j))$
+    \lit $LinComb[O, A, K, V, +, *]$ \pipe $O = \sum_{i = 1}^{n}(k_i * a_i)$
+    \lit $O = \sum_{i = 1}^{n}(k_i * a_i) = \sum_{j = 1}^{m}(l_j * b_j)$ \pipe $LinComb[O, B, L, V, +, *]$
+    \lit $(LinInd[B, V, +, *]) \land (LinComb[O, B, L, V, +, *])$ \pipe $L = \{0\}^m$ 
+    \lit $(\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)) \land (L = \{0\}^m)$ \pipe $\forall_{n \geq j \in \mathbb{N}}(k_j * a_j = l_j * b*j = l_j * a_j)$ \pipe $K = \{0\}^n$
   \end{enumerate}
-  \lit $(\sum(\gamma_i * a_i = O)) \implies (\Gamma = \{0\}^{|A|})$ \pipe $LinInd[A, V, +, *]$
+  \lit $(LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n)$ \pipe $\forall_{K \in \subseteq \mathbb{R}^n}((LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n))$ \pipe $LinInd[A, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SuperDependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
-  ((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V) \land (|B| \in \mathbb{N})) \hfill \implies \hfill \\
-  ((\lnot LinInd[A, V, +, *]) \implies (\lnot LinInd[B, V, +, *]))
-\end{array}\right)$
+$SuperDependent \abr \forall_{V, A, B}(((VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V)) \implies ((\lnot LinInd[A, V, +, *]) \implies (\lnot LinInd[B, V, +, *])))$
 \begin{enumerate}
-  \lit $U \abr B \setminus A$
-  \lit $\sum(0 * u_i) = O$
-  \lit $(\exists_{\Gamma \in \mathbb{R}^|A|}((\sum(\gamma_i * a_i) = O) \land (\Gamma \neq \{0\}^{|A|})))$
-  \lit $(\sum(\gamma_i * b_i) = \sum(\gamma_i * a_i) + O = O + O = O) \land (\Gamma' = \Gamma \times \{0\}^{|U|} \neq \{0\}^|B|)$
+  \lit TODO
+  \lit $L \abr \langle \left(\begin{cases} 
+      1 & j \leq n \\
+      0 & j > n 
+    \end{cases}\right) | (1 \leq j \leq m \land (j \in \mathbb{N}) \rangle$ \pipe $L \in \mathbb{R}^m$
+  \lit $\lnot LinInd[A, V, +, *]$ \pipe A has a non trivial solution \pipe use  the same non trivial solution in combination with B and L
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LinIndEquiv \abr \forall_{U, V}((LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])))$
@@ -1397,6 +1395,13 @@ $LinIndEquiv \abr \forall_{U, V}((LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\l
   \lit $(LinInd[U, V, +, *]) \implies (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *]))$
   \lit $(LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *]))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+CONT page 74, DEFER PROOFS OR JUST USE WORDS, THEN GET BACK ON TRACK
+
+
+
+
+
 
 $Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinInd[S, V, +, *])$ \\
 
@@ -1432,7 +1437,7 @@ $BasisLinearIndCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (LinInd[T,
   \lit $((Basis[S, V, +, *]) \land (LinInd[T, V, +, *])) \implies (|T| \leq |S|)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$BasisCardProp \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (Basis[T, V, +, *])) \implies (|T| = |S|))$
+$BasisCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (Basis[T, V, +, *])) \implies (|T| = |S|))$
 \begin{enumerate}
   \lit $Basis[S, V, +, *]$ \pipe $LinInd[S, V, +, *]$
   \lit $(Basis[T, V, +, *]) \land (LinInd[S, V, +, *])$ \pipe $|S| \leq |T|$
