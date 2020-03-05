@@ -1159,73 +1159,78 @@ $SquareTheorems_4 \abr \forall_{A \in \mathcal{M}}\left(\begin{array}{ll}
   \pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])}
 \end{array}\right)$ \\
 
-$VectorSpace[V, +, *] \abr \forall_{\alpha ,\beta \in \mathbb{R}} \forall_{u, v, w \in V} \exists_{O \in V}\left(\begin{array}{ll}
-  (u + v \in V) \hfill \land \hfill( u + v = v + u) \hfill \land \hfill \pr{(u + v) + w = u + (v + w)} \hfill \land \hfill \\
+$VectorSpace[V, +, *] \abr \exists_{O \in V} \forall_{\alpha ,\beta \in \mathbb{R}} \forall_{u, v, w \in V} \left(\begin{array}{ll}
+  (u + v \in V) \hfill \land \hfill (u + v = v + u) \hfill \land \hfill \pr{(u + v) + w = u + (v + w)} \hfill \land \hfill \\
   (u + O = u) \hfill \land \hfill \pr{\exists_{-u \in V}\pr{u + (-u) = O}} \hfill \land \hfill \\
   (\alpha * u \in V) \hfill \land \hfill \pr{\alpha * (\beta * u) = (\alpha \beta) * u} \hfill \land \hfill (1 * u = u) \hfill \land \hfill \\
   \pr{\alpha * (u + v) = (\alpha * u) + (\alpha * v)}  \hfill \land \hfill \pr{(\alpha + \beta) * u = (\alpha * u) + (\beta * u)} \\
 \end{array}\right)$
 
-$ZeroVectorUniq \abr \forall_{u, v \in V}\pr{(v + u = v) \implies (u = O)}$
+
+$ZeroVectorUniq \abr \forall_{O', v \in V}\pr{(v + O' = v) \implies (O' = O)}$
 \begin{enumerate}
-  \lit $(v + u = v)$ \pipe $-v + v + u = -v + v$ \pipe $u = O$
+  \lit $O' = O' + O = O + O' = O$ \pipe $O' = O$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ZeroVectorGen \abr \forall_{\alpha \in \mathbb{R}} \forall_{u \in V}\pr{(\alpha * u = O) \iff \pr{(u = O) \lor (\alpha = 0)}}$
+$AddInvUnique \abr \forall_{-v', v \in V}\pr{(v + -v' = O) \implies (-v' = -v)}$
 \begin{enumerate}
-  \lit $(u = O) \implies \ldots$
+  \lit $-v' = -v' + O = -v' + (v + -v) = (-v' + v) + -v = (v + -v') + -v = O + -v = -v$ \pipe $-v' = -v$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$AddInvGen \abr \forall_{v \in V}\pr{(-1) * v = -v}$
+\begin{enumerate}
+  \lit $v + (-1) * v = (1 - 1) * v = 0 * v = O$ \pipe $(-1) * v = -v$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ZeroVectorGenLeft \abr \forall_{v \in V}(0 * v = O)$
+\begin{enumerate}
+  \lit $0 * v = (0 + 0) * v = (0 * v) + (0 * v)$ \pipe $O = 0 * v$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ZeroVectorGenRight \abr \forall_{r \in \mathbb{R}}(r * O = O)$
+\begin{enumerate}
+  \lit $r * O = r * (O + O) = (r * O) + (r * O)$ \pipe $O = r * O$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ZeroVectorEquiv \abr \forall_{r \in \mathbb{R}} \forall_{v \in V}\pr{(r * v = O) \iff \pr{(v = O) \lor (r = 0)}}$
+\begin{enumerate}
+  \lit $(ZeroVectorGenLeft) \land (ZeroVectorGenRight)$ \pipe $\pr{(v = O) \lor (r = 0)} \implies (r * v = O))$
+  \lit $(r * v = O) \implies \ldots$
   \begin{enumerate}
-    \lit $\alpha * u = \alpha * O = \alpha * (O + O) = (\alpha * O) + (\alpha * O)$
-    \lit $\alpha * O = (\alpha * O) + (\alpha * O)$ \pipe $\alpha * O = O$ \pipe $\alpha * u = O$
-  \end{enumerate}
-  \lit $(u = O) \implies (\alpha * u = O)$
-  \lit $(\alpha = 0) \implies \ldots$
-  \begin{enumerate}
-    \lit $\alpha * u = 0 * u = (0 + 0) * u = (0 * u )+ (0 * u)$
-    \lit $0 * u = (0 * u )+ (0 * u)$ \pipe $0 * u = O$ \pipe $\alpha * u = O$
-  \end{enumerate}
-  \lit $(\alpha = 0) \implies (\alpha * u = O)$
-  \lit $\pr{(u = O) \implies (\alpha * u = O)} \land \pr{(\alpha = 0) \implies (\alpha * u = O)}$ \pipe $\pr{(u = O) \lor (\alpha = 0)} \implies (\alpha * u = O))$
-  \lit $(\alpha * u = O) \implies \ldots$
-  \begin{enumerate}
-    \lit $(\alpha \neq 0) \implies \ldots$
+    \lit $(r \neq 0) \implies \ldots$
       \begin{enumerate}
-        \lit $\alpha^{-1} \in \mathbb{R}$
-        \lit $O = \alpha^{-1} * O = \alpha^{-1} * (\alpha * u) = (\alpha^{-1} * \alpha) * u = 1 * u = u$ \pipe $u = O$
+        \lit $r \neq 0$ \pipe $r^{-1} \in \mathbb{R}$
+        \lit $ZeroVectorGenRight$ \pipe $O = r^{-1} * O = r^{-1} * (r * v) = (r^{-1} r) * v = 1 * v = v$ \pipe $O = v$
       \end{enumerate}
-      \lit $(\alpha \neq 0) \implies (u = O)$
-      \lit $(\alpha = 0) \lor (\alpha \neq 0)$ \pipe $(\alpha = 0) \lor (u = O)$
+      \lit $(r \neq 0) \implies (v = O)$ \pipe $(r = 0) \lor (r \neq 0)$ \pipe $(r = 0) \lor (v = O)$
   \end{enumerate}
-  \lit $(\alpha * u = O) \implies \pr{(\alpha = 0) \lor (u = O)}$
-  \lit $(\alpha * u = O) \iff \pr{(\alpha = 0) \lor (u = O)}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-$NegVectorGen \abr \forall_{u \in V}\pr{(-1) * u = -u}$
-\begin{enumerate}
-  \lit $O = 0 * u = \pr{1 + (-1)} * u = (1 * u) + \pr{(-1) * u} = u + \pr{(-1) * u}$ \pipe $O = u + \pr{(-1) * u}$ \pipe $-u = (-1) * u$
+  \lit $(r * v = O) \implies \pr{(r = 0) \lor (v = O)}$
+  \lit $(r * v = O) \iff \pr{(r = 0) \lor (v = O)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[S, +, *])$ \\
 
 $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
-  \pr{(VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V)} \hfill \implies \hfill \\
-  \pr{(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}}
+  (VectorSpace[V, +, *]) \hfill \implies \hfill \\
+  \pr{(Subspace[S, V, +, *]) \iff \pr{(\emptyset \neq S \subseteq V) \land \pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}}
 \end{array}\right)$
 \begin{enumerate}
   \lit $(Subspace[S, V, +, *]) \implies \ldots$
   \begin{enumerate}
+    \lit $Subspace[S, V, +, *]$ \pipe $\emptyset \neq S \subseteq V$
     \lit $VectorSpace[S, +, *]$ \pipe $\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}$
+    \lit $(\emptyset \neq S \subseteq V) \land \pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}$
   \end{enumerate}
-  \lit $(Subspace[S, V, +, *]) \implies \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
-  \lit $\pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}} \implies \ldots$
+  \lit $(Subspace[S, V, +, *]) \implies \pr{(\emptyset \neq S \subseteq V) \land \pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
+  \lit $\pr{(\emptyset \neq S \subseteq V) \land \pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}} \implies \ldots$
   \begin{enumerate}
-    \lit $\pr{(\alpha ,\beta \in \mathbb{R}) \land (u, v, w \in S)} \implies \ldots$
+    \lit $\pr{(\alpha, \beta \in \mathbb{R}) \land (\emptyset \neq S) \land (u, v, w \in S)} \implies \ldots$
     \begin{enumerate}
       \lit $u, v \in V$ \pipe $u + v = v + u$
       \lit $u, v, w \in V$ \pipe $(u + v) + w = u + (v + w)$
-      \lit $(ZeroVectorGen) \land (u \in S)$ \pipe $0 * u = O \in S$
+      \lit $(ZeroVectorGenLeft) \land (u \in S)$ \pipe $0 * u = O \in S$
       \lit $u \in V$ \pipe $u + O = u$
-      \lit $(NegVectorGen) \land (u \in S)$ \pipe $(-1) * u = -u \in S$
+      \lit $(AddInvGen) \land (u \in S)$ \pipe $(-1) * u = -u \in S$
       \lit $u \in V$ \pipe $\alpha * (\beta * u) = (\alpha \beta) * u$
       \lit $u \in V$ \pipe $1 * u = u$
       \lit $u, v \in V$ \pipe $\alpha * (u + v) = (\alpha * u) + (\alpha * v)$
@@ -1235,6 +1240,28 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
   \lit $\pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}} \implies (Subspace[S, V, +, *])$
   \lit $(Subspace[S, V, +, *]) \iff \pr{\pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SubSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land \pr{A + B = \{a + b | (a \in A) \land (b \in B)\}}$ \\
+
+$SumSubSmallest \abr \forall_{A, B, V}\left(\begin{array}{ll}
+  \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SubSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
+  \pr{\forall_{C}\pr{(Subspace[C, V, + ,*]) \land (A, B \subseteq C)} \implies (A + B \subseteq C)}
+\end{array}\right)$
+\begin{enumerate}
+  \lit 123123
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 $LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (n \in \mathbb{N}) \land (U \in V^n) \land (K \in \mathbb{R}^n) \land \pr{c = \sum_{i = 1}^{n}(k_i * u_i)}$ \\
 $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
