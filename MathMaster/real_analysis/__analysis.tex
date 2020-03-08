@@ -1173,7 +1173,6 @@ $VectorSpace[V, +, *] \abr \exists_{O \in V} \forall_{\alpha ,\beta \in \mathbb{
   \pr{\alpha * (u + v) = (\alpha * u) + (\alpha * v)}  \hfill \land \hfill \pr{(\alpha + \beta) * u = (\alpha * u) + (\beta * u)} \\
 \end{array}\right)$
 
-\begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $ZeroVectorUniq \abr \forall_{O', v \in V}\pr{(v + O' = v) \implies (O' = O)}$
 \begin{enumerate}
   \lit $O' = O' + O = O + O' = O$ \pipe $O' = O$
@@ -1214,7 +1213,6 @@ $ZeroVectorEquiv \abr \forall_{r \in \mathbb{R}} \forall_{v \in V}\pr{(r * v = O
   \lit $(r * v = O) \implies \pr{(r = 0) \lor (v = O)}$
   \lit $(r * v = O) \iff \pr{(r = 0) \lor (v = O)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-\end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Subspaces and Special Subspaces}
 $Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[S, +, *])$ \\
@@ -1595,16 +1593,16 @@ $SpanReduceBasis \abr \forall_{S, V}\pr{Spans[S, V, +, *] \implies \exists_{B}\p
   \lit TODO : Remove all dependent $s_j \in S$ \pipe $(S' = S \setminus \{s_j\}) \land (LinSpan[S'] = LinSpan[S])$ until $LinInd[S']$ \pipe $Basis[S']$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$FinDimBasis \abr \forall_{V}\pr{(FinDim[V, +, *]) \implies \pr{\exists_{B}(Basis[B, V, +, *])}}$
-\begin{enumerate}
-  \lit $FinDim[V, +, *]$ \pipe $\exists_{S \in V^n}(Spans[S, V, +, *])$
-  \lit $(SpanReduceBasis) \land (Spans[S, V, +, *])$ \pipe $\exists_{B}(Basis[B, V, +, *])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
 $LinIndExpandBasis \abr \forall_{L, V}\pr{LinInd[L, V, +, *] \implies \exists_{B}\pr{(L \subseteq B) \land (Basis[B, V, +, *])}}$
 \begin{enumerate}
   \lit TODO : $FinDimBasis$ \pipe $\exists_{A}(Basis[A, V, +, *])$, form $B = L \cup A$ \pipe $Span[B]$, \\
       use $SpanReduceBasis$ call it $B'$, $(L \subseteq B') \land (Basis[B'])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$FinDimBasis \abr \forall_{V}\pr{(FinDim[V, +, *]) \implies \pr{\exists_{B}(Basis[B, V, +, *])}}$
+\begin{enumerate}
+  \lit $FinDim[V, +, *]$ \pipe $\exists_{S \in V^n}(Spans[S, V, +, *])$
+  \lit $(SpanReduceBasis) \land (Spans[S, V, +, *])$ \pipe $\exists_{B}(Basis[B, V, +, *])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $BasisLinearIndCard \abr \forall_{S, T, V}\pr{\pr{(Basis[S, V, +, *]) \land (LinInd[T, V, +, *])} \implies (|T| \leq |S|)}$
@@ -1631,12 +1629,6 @@ $BasisCard \abr \forall_{S, T, V}\pr{\pr{(Basis[S, V, +, *]) \land (Basis[T, V, 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Dim[d, V, +, *] \abr \pr{\exists_{B}(Basis[B, V, +, *])} \land \pr{(V = \{O\}) \implies (d = 0)} \land  \pr{(V \neq \{O\}) \implies (d = |B|)}$ \\
-$Nullity[n, A] \abr (NullSpace[N, A]) \land (Dim[n, N, +, *])$ \\
-
-$DimSub \abr \forall_{U, V}\pr{\pr{(FinDim[V, +, *]) \land (Subspace[U, V, +, *])} \implies (Dim[U] \leq Dim[V])}$
-\begin{enumerate}
-  \lit TODO ???
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LinIndLengthDim \abr \forall_{U, V}\pr{\pr{(LinInd[U, V, +, *]) \land (Dim[|U|, V, +, *])} \implies (Basis[U, V, +, *])}$
 \begin{enumerate}
@@ -1644,13 +1636,29 @@ $LinIndLengthDim \abr \forall_{U, V}\pr{\pr{(LinInd[U, V, +, *]) \land (Dim[|U|,
   \lit $(BasisCard) \land (Dim[|U|, V, +, *]) \land (Basis[B, V, +, *])$ \pipe $|B| = |U|$ \pipe $B = U$ \pipe $Basis[U, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SpanLengthDim \abr \forall_{U, V}\pr{\pr{(LinSpan[U, V, +, *]) \land (Dim[|U|, V, +, *])} \implies (Basis[U, V, +, *])}$
+$SpanLengthDim \abr \forall_{U, V}\pr{\pr{(Spans[U, V, +, *]) \land (Dim[|U|, V, +, *])} \implies (Basis[U, V, +, *])}$
 \begin{enumerate}
   \lit $(SpanReduceBasis) \land (Spans[U, V, +, *])$ \pipe $\exists_{B}\pr{(B \subseteq U) \land (Basis[B, V, +, *])}$
   \lit $(BasisCard) \land (Dim[|U|, V, +, *]) \land (Basis[B, V, +, *])$ \pipe $|B| = |U|$ \pipe $B = U$ \pipe $Basis[U, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$LinDepLengthDim \abr \forall_{U, V}\pr{\pr{(U \subseteq V) \land (|U| > Dim[V])} \implies (\lnot LinInd[U, V, +, *])}$
+\begin{enumerate}
+  \lit Contrapositive of $BasisLinearIndCard$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinDepLengthDim \abr \forall_{U, V}\pr{\pr{(U \subseteq V) \land (|U| < Dim[V])} \implies (\lnot Spans[U, V, +, *])}$
+\begin{enumerate}
+  \lit Suppose $Spans[U, V, +, *]$, $B = SpanReduceBasis[U]$ to form a basis, $(|B| \leq |U| < Dim[V]) \land |B| = Dim[V]$ \pipe $\bot$
+  \lit $\lnot Spans[U, V, +, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 \begin{comment}
+  $DimSub \abr \forall_{U, V}\pr{\pr{(FinDim[V, +, *]) \land (Subspace[U, V, +, *])} \implies (Dim[U] \leq Dim[V])}$
+  \begin{enumerate}
+    \lit TODO ???
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
   $DimSum \abr \forall_{U_1, U_2, V}\pr{((FinDim[V, +, *]) \land (Subspace[U_1, V, +, *]) \land (Subspace[U_2, V, +, *])} \\
       \implies (Dim[U_1 + U_2] = Dim[U_1] + Dim[U_2] - Dim[U_1 \cap U_2]))$
   \begin{enumerate}
@@ -1678,19 +1686,53 @@ $SpanLengthDim \abr \forall_{U, V}\pr{\pr{(LinSpan[U, V, +, *]) \land (Dim[|U|, 
   \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 \end{comment}
 
-TODO ADD COROLLARY 2.7.4 ONWARDS
-
 \section{Rank}
+$Nullity[n, A] \abr (NullSpace[N, A]) \land (Dim[n, N, +, *])$ \\
+$Rank[r, A, m, n] \abr (Matrix[A, m, n]) \land (RowSpace[R, A, m, n]) \land (Dim[r, R, A, +, *])$ \\
 
-\section{Linear Maps}
-$123123$
+$RowRankEqColRank \abr \forall_{A}(TODO)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RankNullity \abr \forall_{A}\pr{(Matrix[A, m, n]) \implies (Rank[A] + Nullity[A] = n)}$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RankInv \abr \forall_{A}\pr{(Matrix[A, m, n]) \implies \pr{(Rank[A] = n) \iff (Inv[A])}}$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RankNonTrivialSol \abr \pr{\exists_{X}\pr{(A * X = O) \land (X \neq O)}} \iff (Rank[A] < n)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RankUniqueSol \abr \pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \iff (Rank[A] = n)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$SquareTheorems_() \abr \forall_{A \in \mathcal{M}}\left(\begin{array}{ll}
+  (Invertible[A]) \hfill \iff \hfill \\
+  (RowEquiv[A, I_n]) \hfill \iff \hfill \\
+  \pr{\forall_{X}\pr{(X = O) \iff (Sol[X, A, O])}} \hfill \iff \hfill \\
+  \pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \hfill \iff \hfill \\
+  (Rank[A] = n) \hfill \iff \hfill \\
+  (Nullity[A] = 0) \hfill \iff \hfill \\
+  \pr{\text{The rows form a linearly independent set of vectors (to get full rank)}} \hfill \iff \hfill \\
+  \pr{\text{The columns form a linearly independent set of vectors (to get full rank)}} \hfill \iff \hfill \\
+\end{array}\right)$ \\
 
-??????????????????????????????
+\section{Linear Transformations}
+$LinTrans[L, V, +_v, *_v, W, +_w, *_w] \abr \left(\begin{array}{ll}
+  (Function[f, V, W]) \hfill \land \hfill (VectorSpace[V, +_v, *_v]) \hfill \land \hfill (VectorSpace[W, +_w, *_w]) \hfill \land \hfill \\
+  \pr{\forall_{\alpha, \beta \in V}\pr{L(\alpha +_v \beta) = L(\alpha) +_w L(\beta)}} \hfill \land \hfill \pr{\forall_{r \in \mathbb{R}} \forall_{\alpha \in V}\pr{L(r *_v \alpha) = r *_w L(\alpha)}}
+\end{array}\right)$
+
+CONTHERE P 18
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
