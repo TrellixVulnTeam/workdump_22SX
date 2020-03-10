@@ -1763,16 +1763,16 @@ $BasisDomainInduceLinTrans \abr \forall_{V, W}\left(\begin{array}{ll}
   \lit $(BasisEquiv) \land (Basis[A, V, +_v, *_v])$ \pipe $\forall_{v \in V} \exists!_{K \in \mathbb{R}^n}(LinComb[v, A, K, V, +, *])$ \pipe $T: Span[A] \rightarrow Span[B]$ \pipe $Function[T, V, W]$
   \lit $(\alpha, \beta \in V) \implies \ldots$
   \begin{enumerate}
-    \lit $(LinComb[\alpha, A, K_\alpha, V, +_v, *_v]) \land (LinComb[\beta, A, K_\beta, V, +_v, *_v])$
+    \lit $(LinComb[\alpha, A, K_\alpha, V, +_v, *_v]) \land (LinComb[\beta, A, K_\beta, V, +_v, *_v])$ \pipe $(\alpha = \sum_{i = 1}^{n}({k_\alpha}_i * a_i)) \land (\beta = \sum_{i = 1}^{n}({k_\beta}_i * a_i))$
     \lit $T(\alpha + \beta) = T(\sum_{i = 1}^{n}({k_\alpha}_i * a_i) + \sum_{i = 1}^{n}({k_\beta}_i * a_i)) = T(\sum_{i = 1}^{n}(({k_\alpha}_i + {k_\beta}_i) * a_i))) = \sum_{i = 1}^{n}(({k_\alpha}_i + {k_\beta}_i) * b_i) = $ \cont
     \lit \cont $\sum_{i = 1}^{n}({k_\alpha}_i * b_i) + \sum_{i = 1}^{n}({k_\beta}_i * b_i) = T(\sum_{i = 1}^{n}({k_\alpha}_i * a_i)) + T(\sum_{i = 1}^{n}({k_\beta}_i * a_i)) = T(\alpha) + T(\beta)$
   \end{enumerate}
   \lit $(\alpha, \beta \in V) \implies (L(\alpha +_v \beta) = L(\alpha) +_w L(\beta))$ \pipe $\forall_{\alpha, \beta \in V}(L(\alpha +_v \beta) = L(\alpha) +_w L(\beta))$
   \lit $((r \in \mathbb{R}) \land (\alpha \in V)) \implies \ldots$
   \begin{enumerate}
-    \lit $LinComb[\alpha, A, K, V, +_v, *_v]$
-    \lit $L(r *_v \alpha) = L(r *_v \sum_{i = 1}^{n}(k_i *_v a_i)) = L(\sum_{i = 1}^{n}((r k_i) *_v a_i)) = \sum_{i = 1}^{n}((r k_i) *_w b_i) = r *_w $
-    \lit  TODO CONTHERE p54
+    \lit $LinComb[\alpha, A, K, V, +_v, *_v]$ \pipe $\alpha = \sum_{i = 1}^{n}(k_i * a_i)$
+    \lit $L(r *_v \alpha) = L(r *_v \sum_{i = 1}^{n}(k_i *_v a_i)) = L(\sum_{i = 1}^{n}((r k_i) *_v a_i)) = $ \cont
+    \lit \cont $\sum_{i = 1}^{n}((r k_i) *_w b_i) = r *_w \sum_{i = 1}^{n}(k_i *_w b_i) = r *_w L(\sum_{i = 1}^{n}(k_i *_v a_i)) = r *_w L(\alpha)$
   \end{enumerate}
   \lit $((r \in \mathbb{R}) \land (\alpha \in V)) \implies (L(r *_v \alpha) = r *_w L(\alpha))$ \pipe $\forall_{r \in \mathbb{R}} \forall_{\alpha \in V}(L(r *_v \alpha) = r *_w L(\alpha))$
   \lit $(\forall_{i \in \mathbb{N}_{1, n}}(T(a_i) = b_i)) \land (Function[T, V, W]) \land (\forall_{\alpha, \beta \in V}(L(\alpha +_v \beta) = L(\alpha) +_w L(\beta))) \land (\forall_{r \in \mathbb{R}} \forall_{\alpha \in V}(L(r *_v \alpha) = r *_w L(\alpha))) \land$ \cont
