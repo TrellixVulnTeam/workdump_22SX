@@ -1446,6 +1446,8 @@ $LinSpanSubMinContains \abr \forall_{S', S, V, +, *}((LinSpan[S', S, V, +, *]) \
   \lit $(s' \in S') \implies (s' \in W)$ \pipe $S' \subseteq W$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$LinInd[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (S \in V^n) \land ((S \neq \emptyset) \implies (\forall_{K \in \mathbb{R}^n}((LinComb[O, S, K, V, +, *]) \implies (K = \{0\}^n))))$ \\
+
 $ZeroDependent \abr (O \in S) \implies (\lnot LinInd[S, V, +, *])$
 \begin{enumerate}
   \lit $K \abr \langle \left(\begin{cases} 
@@ -1508,9 +1510,18 @@ $LinIndEquiv \abr \forall_{U, V}((LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\l
   \lit $(LinInd[U, V, +, *]) \iff (\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *]))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$LinIndSuperspace \abr \forall_{U, V}((Subspace[U, V]) \implies (\forall_{W}((LinInd[W, U, +, *]) \implies (LinInd[W, V, +, *]))))$
+\begin{enumerate}
+  \lit $(\lnot LinInd[W, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{j \in W}(LinComb[j, W \setminus \{j\}, +, *])$ \pipe $\lnot LinInd[W, U, +, *]$
+    \lit $(LinInd[W, U, +, *]) \land (\lnot LinInd[W, U, +, *])$ \pipe $\bot$
+  \end{enumerate}
+  \lit $(\lnot LinInd[W, V, +, *]) \implies \bot$ \pipe $LinInd[W, V, +, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 $Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
 $FinDim[V, +, *] \abr \exists_{S \in V^n}(Spans[S, V, +, *])$ \\
-$LinInd[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (S \in V^n) \land ((S \neq \emptyset) \implies (\forall_{K \in \mathbb{R}^n}((LinComb[O, S, K, V, +, *]) \implies (K = \{0\}^n))))$ \\
 
 $LinDepLemma \abr \forall_{S, V}\left(\begin{array}{ll}
   (\lnot LinInd[S, V, +, *]) \hfill \implies \hfill \\
@@ -1593,16 +1604,16 @@ $SpanReduceBasis \abr \forall_{S, V}(Spans[S, V, +, *] \implies \exists_{B}((B \
   \lit TODO : Remove all dependent $s_j \in S$ \pipe $(S' = S \setminus \{s_j\}) \land (LinSpan[S'] = LinSpan[S])$ until $LinInd[S']$ \pipe $Basis[S']$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinIndExpandBasis \abr \forall_{L, V}(LinInd[L, V, +, *] \implies \exists_{B}((L \subseteq B) \land (Basis[B, V, +, *])))$
-\begin{enumerate}
-  \lit TODO : $FinDimBasis$ \pipe $\exists_{A}(Basis[A, V, +, *])$, form $B = L \cup A$ \pipe $Span[B]$, \\
-      use $SpanReduceBasis$ call it $B'$, $(L \subseteq B') \land (Basis[B'])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
 $FinDimBasis \abr \forall_{V}((FinDim[V, +, *]) \implies (\exists_{B}(Basis[B, V, +, *])))$
 \begin{enumerate}
   \lit $FinDim[V, +, *]$ \pipe $\exists_{S \in V^n}(Spans[S, V, +, *])$
   \lit $(SpanReduceBasis) \land (Spans[S, V, +, *])$ \pipe $\exists_{B}(Basis[B, V, +, *])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinIndExpandBasis \abr \forall_{L, V}(LinInd[L, V, +, *] \implies \exists_{B}((L \subseteq B) \land (Basis[B, V, +, *])))$
+\begin{enumerate}
+  \lit TODO : $FinDimBasis$ \pipe $\exists_{A}(Basis[A, V, +, *])$, form $B = L \cup A$ \pipe $Span[B]$, \\
+      use $SpanReduceBasis$ call it $B'$, $(L \subseteq B') \land (Basis[B'])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $BasisLinearIndCard \abr \forall_{S, T, V}(((Basis[S, V, +, *]) \land (LinInd[T, V, +, *])) \implies (|T| \leq |S|))$
@@ -1668,7 +1679,7 @@ $LinDepLengthDim \abr \forall_{U, V}(((U \subseteq V) \land (|U| < Dim[V])) \imp
   $SubDirSum \abr \forall_{U, V}(((FinDim[V, +, *]) \land (Subspace[U, V, +, *])) \implies (\exists_{W}((Subspace[W, V, +, *]) \land (DirSum[V, U, W, V, +, *]))))$
   \begin{enumerate}
     \lit $FinSubSpace$ \pipe $FinDim[U, +, *]$
-    \lit $(FinDimBasis) \land (FinDim[U, +, *])$ \pipe $\exists_{B}(Basis[B, U, +, *])$ \pipe $LinInd[B, U, +, *]$ \pipe $LinInd[B, V, +, *]$ TODO
+    \lit $(FinDimBasis) \land (FinDim[U, +, *])$ \pipe $\exists_{B}(Basis[B, U, +, *])$ \pipe $LinInd[B, U, +, *]$ \pipe $LinInd[B, V, +, *]$ NEWTHM
     \lit $(LinIndExpandBasis) \land (LinInd[B, V, +, *])$ \pipe $\exists_{C}((B \subseteq C) \land (Basis[C, V, +, *]))$
     \lit $(LinSpanSubContains) \land (W \abr LinSpan[C \setminus B])$ \pipe $Subspace[W, V, +, *]$
     \lit $(v \in V) \implies \ldots$
@@ -1825,33 +1836,56 @@ $KerInjective \abr \forall_{L, V, W}((Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \
   \lit $(Injective[L, V, W]) \iff (ker_L = \{O_v\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Ran[ran_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (ran_L = \{\beta \in W | \exists_{\alpha \in V}(\beta = L(\alpha))\})$ \\
+$Rng[rng_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (rng_L = \{\beta \in W | \exists_{\alpha \in V}(\beta = L(\alpha))\})$ \\
 
-$RangeSub \abr \forall_{L, V, W}((Ran[ran_L, L, V, +_v, *_v, W, +_w, *_w]) \implies (Subspace[ran_L, W, +_w, *_w]))$
+$RangeSub \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies (Subspace[rng_L, W, +_w, *_w]))$
 \begin{enumerate}
-  \lit $ZeroMapsToZero$ \pipe $O_w = L(O_v)$ \pipe $\exists_{\alpha \in V}(O_w = L(\alpha))$ \pipe $O_w \in ran_L$ \pipe $\emptyset \neq ran_L$ \pipe $\emptyset \neq ran_L \subseteq W$
-  \lit $(\alpha, \beta \in ran_L) \implies \ldots$
+  \lit $ZeroMapsToZero$ \pipe $O_w = L(O_v)$ \pipe $\exists_{\alpha \in V}(O_w = L(\alpha))$ \pipe $O_w \in rng_L$ \pipe $\emptyset \neq rng_L$ \pipe $\emptyset \neq rng_L \subseteq W$
+  \lit $(\alpha, \beta \in rng_L) \implies \ldots$
   \begin{enumerate}
     \lit $(\exists_{u \in V}(\alpha = L(u))) \land (\exists_{v \in V}(\beta = L(v)))$
-    \lit $\alpha + \beta = L(u) + L(v) = L(u + v)$ \pipe $\exists_{w \in V}(\alpha + \beta = L(w))$ \pipe $\alpha + \beta \in ran_L$
+    \lit $\alpha + \beta = L(u) + L(v) = L(u + v)$ \pipe $\exists_{w \in V}(\alpha + \beta = L(w))$ \pipe $\alpha + \beta \in rng_L$
   \end{enumerate}
-  \lit $(\alpha, \beta \in ran_L) \implies (\alpha + \beta \in ran_L)$ \pipe $\forall_{\alpha, \beta \in ran_L}(\alpha + \beta \in ran_L)$
-  \lit $((r \in \mathbb{R}) \land (\alpha \in ran_L)) \implies \ldots$
+  \lit $(\alpha, \beta \in rng_L) \implies (\alpha + \beta \in rng_L)$ \pipe $\forall_{\alpha, \beta \in rng_L}(\alpha + \beta \in rng_L)$
+  \lit $((r \in \mathbb{R}) \land (\alpha \in rng_L)) \implies \ldots$
   \begin{enumerate}
-    \lit $\exists_{v \in V}(\alpha = L(v))$ \pipe $L(r * v) = r * L(v) = r * \alpha$ \pipe $\exists_{w \in V}(r * \alpha = L(w))$ \pipe $r * \alpha \in ran_L$
+    \lit $\exists_{v \in V}(\alpha = L(v))$ \pipe $L(r * v) = r * L(v) = r * \alpha$ \pipe $\exists_{w \in V}(r * \alpha = L(w))$ \pipe $r * \alpha \in rng_L$
   \end{enumerate}
-  \lit $((r \in \mathbb{R}) \land (\alpha \in ran_L)) \implies (r * \alpha \in ran_L)$ \pipe $\forall_{r \in \mathbb{R}} \forall_{\alpha \in ran_L}(r * \alpha \in ran_L)$
-  \lit $(SubspaceEquiv) \land (\emptyset \neq ran_L \subseteq W) \land (\forall_{\alpha, \beta \in ran_L}(\alpha + \beta \in ran_L)) \land (\forall_{r \in \mathbb{R}} \forall_{\alpha \in ran_L}(r * \alpha \in ran_L))$ \pipe $Subspace[ran_L, W, +_w, *_w]$
+  \lit $((r \in \mathbb{R}) \land (\alpha \in rng_L)) \implies (r * \alpha \in rng_L)$ \pipe $\forall_{r \in \mathbb{R}} \forall_{\alpha \in rng_L}(r * \alpha \in rng_L)$
+  \lit $(SubspaceEquiv) \land (\emptyset \neq rng_L \subseteq W) \land (\forall_{\alpha, \beta \in rng_L}(\alpha + \beta \in rng_L)) \land (\forall_{r \in \mathbb{R}} \forall_{\alpha \in rng_L}(r * \alpha \in rng_L))$ \pipe $Subspace[rng_L, W, +_w, *_w]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RankKer \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[ran_L]))$
+$RankKer \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L]))$ TODO
 \begin{enumerate}
-  \lit $(\exists_{U}(Basis[U, ker_L, +_v, *_v])) \land (m \abr |U|)$
-  \lit $p63$ 
+  \lit $\exists_{U}(Basis[U, ker_L, +_v, *_v])$ \pipe $Dim[ker_L] = |U|$
+  \lit $(LinIndSuperspace) \land (LinInd[U, ker_L, +_v, *_v])$ \pipe $LinInd[U, V, +_v, *_v]$
+  \lit $LinIndExpandBasis$ \pipe $\exists_{B}((U \subseteq B)\land (Basis[B, V, +_v, *_v]))$ \pipe $Dim[V] = |B|$
+  \lit $T \abr B \setminus U$ \pipe $B = U \cup T$ 
+  \lit $m \abr |U|$ ; $n \abr |T|$ ; $p \abr |B|$
+  \lit $L(T) \abr \langle L(t_i) | i \in \mathbb{N}_{1, n} \rangle \subseteq W^n$
+  \lit $(w \in W) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{v \in V}(w = L(v))$
+    \lit $Basis[B, V, +_v, *_v]$ \pipe $\exists_{K \in \mathbb{R}^p}(v = \sum_{i = 1}^{p}(k_i * b_i))$
+    \lit $v = \sum_{i = 1}^{p}(k_i * b_i) = \sum_{i = 1}^{m}(k_i * u_i) + \sum_{i = 1}^{n}(\kappa_i * t_i)$
+    \lit $w = L(v) = L(\sum_{i = 1}^{m}(k_i * u_i) + \sum_{i = 1}^{n}(k_i * t_i)) = \sum_{i = 1}^{m}(k_i * L(u_i)) + \sum_{i = 1}^{n}(k_i * L(t_i)) = O_w + \sum_{i = 1}^{n}(k_i * L(t_i)) = \sum_{i = 1}^{n}(k_i * L(t_i))$
+    \lit $\exists_{K}(LinComb[w, L(T), K, W, +_w, *_w])$
+  \end{enumerate}
+  \lit $(w \in W) \implies (\exists_{K}(LinComb[w, L(T), K, W, +_w, *_w]))$ \pipe $\forall_{w \in W}(\exists_{K}(LinComb[w, L(T), K, W, +_w, *_w]))$
+  \lit $Spans[L(T), W, +_w, *_w]$
+  \lit $((K \in \mathbb{R}^n) \land (LinComb[O_w, L(T), K, W, +_w, *_w])) \implies \ldots$
+  \begin{enumerate}
+    \lit $O_w = \sum_{i = 1}^{n}(k_i * L(t_i)) = L(\sum_{i = 1}^{n}(k_i * t_i))$ \pipe $\sum_{i = 1}^{n}(k_i * t_i) \in ker_L$ 
+    \lit $Basis[U, ker_L, +_v, *_v]$ \pipe $\exists_{D \in \mathbb{R}^m}(\sum_{i = 1}^{n}(k_i * t_i) = \sum_{i = 1}^{m}(d_i * u_i))$
+    \lit $(LinInd[T \cup U]) \land (\sum_{i = 1}^{n}(k_i * t_i) = \sum_{i = 1}^{m}(d_i * u_i))$ \pipe $K = D = \{O\}$ \pipe $K = \{O\}$
+  \end{enumerate}
+  \lit $((K \in \mathbb{R}^n) \land (LinComb[O_w, L(T), K, W, +_w, *_w])) \implies (K = \{O\})$
+  \lit $\forall_{K \in \mathbb{R}^n}((LinComb[O_w, L(T), K, W, +_w, *_w]) \implies (K = \{O\}))$
+  \lit $\forall_{K \in \mathbb{R}^n}((LinComb[O_w, L(T), K, W, +_w, *_w]) \iff (K = \{O\}))$ \pipe $LinInd[L(T), W, +_w, *_w]$
+  \lit $Basis[L(T), W, +_w, *_w]$ \pipe $Dim[V] = |B| = |U| + |L(T)| = Dim[ker_L] + Dim[rng_L]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-https://math.stackexchange.com/questions/3576488/is-a-linearly-independent-set-in-a-subspace-also-a-linearly-independent-set-in
-
+TODO INJ -> SUR, SUR -> INJ
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
