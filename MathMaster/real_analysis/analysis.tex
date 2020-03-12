@@ -1855,7 +1855,7 @@ $RangeSub \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \impl
   \lit $(SubspaceEquiv) \land (\emptyset \neq rng_L \subseteq W) \land (\forall_{\alpha, \beta \in rng_L}(\alpha + \beta \in rng_L)) \land (\forall_{r \in \mathbb{R}} \forall_{\alpha \in rng_L}(r * \alpha \in rng_L))$ \pipe $Subspace[rng_L, W, +_w, *_w]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RankKer \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L]))$ TODO
+$RankKer \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L]))$
 \begin{enumerate}
   \lit $\exists_{U}(Basis[U, ker_L, +_v, *_v])$ \pipe $Dim[ker_L] = |U|$
   \lit $(LinIndSuperspace) \land (LinInd[U, ker_L, +_v, *_v])$ \pipe $LinInd[U, V, +_v, *_v]$
@@ -1885,7 +1885,22 @@ $RankKer \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies
   \lit $Basis[L(T), W, +_w, *_w]$ \pipe $Dim[V] = |B| = |U| + |L(T)| = Dim[ker_L] + Dim[rng_L]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO INJ -> SUR, SUR -> INJ
+$LTSurInj \abr \forall_{L, V, W}(((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (Surjective[L, V, W])) \implies (Injective[L, V, W]))$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LTInjSur \abr \forall_{L, V, W}(((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (Injective[L, V, W])) \implies (Surjective[L, V, W]))$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LTInjLinInd \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies ((Injective[L, V, W]) \iff (\text{LI In W are LI IN V})))$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO coordinatesb
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
