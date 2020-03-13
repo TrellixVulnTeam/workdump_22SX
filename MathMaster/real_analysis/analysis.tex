@@ -1178,7 +1178,7 @@ $ZeroVectorUniq \abr \forall_{O', v \in V}((v + O' = v) \implies (O' = O))$
   \lit $O' = O' + O = O + O' = O$ \pipe $O' = O$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$AddInvUnique \abr \forall_{-v', v \in V}((v + -v' = O) \implies (-v' = -v))$
+$AddInvUniq \abr \forall_{-v', v \in V}((v + -v' = O) \implies (-v' = -v))$
 \begin{enumerate}
   \lit $-v' = -v' + O = -v' + (v + -v) = (-v' + v) + -v = (v + -v') + -v = O + -v = -v$ \pipe $-v' = -v$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -1208,14 +1208,14 @@ $ZeroVectorEquiv \abr \forall_{r \in \mathbb{R}} \forall_{v \in V}((r * v = O) \
         \lit $r \neq 0$ \pipe $r^{-1} \in \mathbb{R}$
         \lit $ZeroVectorGenRight$ \pipe $O = r^{-1} * O = r^{-1} * (r * v) = (r^{-1} r) * v = 1 * v = v$ \pipe $O = v$
       \end{enumerate}
-      \lit $(r \neq 0) \implies (v = O)$ \pipe $(r = 0) \lor (r \neq 0)$ \pipe $(r = 0) \lor (v = O)$
+      \lit $(r \neq 0) \implies (v = O)$ \pipe $(r = 0) \lor (v = O)$
   \end{enumerate}
   \lit $(r * v = O) \implies ((r = 0) \lor (v = O))$
   \lit $(r * v = O) \iff ((r = 0) \lor (v = O))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 \section{Subspaces and Special Subspaces}
-$Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (\emptyset \neq S \subseteq V) \land (VectorSpace[S, +, *])$ \\
+$Subspace[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (S \subseteq V) \land (VectorSpace[S, +, *])$ \\
 
 $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \hfill \implies \hfill \\
@@ -1224,18 +1224,21 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
 \begin{enumerate}
   \lit $(Subspace[S, V, +, *]) \implies \ldots$
   \begin{enumerate}
-    \lit $Subspace[S, V, +, *]$ \pipe $\emptyset \neq S \subseteq V$
-    \lit $VectorSpace[S, +, *]$ \pipe $(\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))$
+    \lit $Subspace[S, V, +, *]$ \pipe $S \subseteq V$
+    \lit $VectorSpace[S, V, +, *]$ \pipe $\exists_{O \in V} \forall_{v \in V}(v + O = v)$ \pipe $O \in S$ \pipe $\emptyset \neq S$
+    \lit $(\emptyset \neq S) \land (S \subseteq V)$ \pipe $\emptyset \neq S \subseteq V$
+    \lit $VectorSpace[S, V, +, *]$ \pipe $(\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))$
     \lit $(\emptyset \neq S \subseteq V) \land (\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))$
   \end{enumerate}
   \lit $(Subspace[S, V, +, *]) \implies ((\emptyset \neq S \subseteq V) \land (\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
   \lit $((\emptyset \neq S \subseteq V) \land (\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))) \implies \ldots$
   \begin{enumerate}
-    \lit $((\alpha, \beta \in \mathbb{R}) \land (\emptyset \neq S) \land (u, v, w \in S)) \implies \ldots$
+    \lit $((\emptyset \neq S) \land (\alpha, \beta \in \mathbb{R}) \land (u, v, w \in S)) \implies \ldots$
     \begin{enumerate}
+      \lit $\emptyset \neq S$ \pipe $\exists_{x}(x \in V)$
+      \lit $(ZeroVectorGenLeft) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)) \land (x \in V)$ \pipe $O = 0 * x \in S$ \pipe $O \in S$
       \lit $u, v \in V$ \pipe $u + v = v + u$
       \lit $u, v, w \in V$ \pipe $(u + v) + w = u + (v + w)$
-      \lit $(ZeroVectorGenLeft) \land (u \in S)$ \pipe $0 * u = O \in S$
       \lit $u \in V$ \pipe $u + O = u$
       \lit $(AddInvGen) \land (u \in S)$ \pipe $(-1) * u = -u \in S$
       \lit $u \in V$ \pipe $\alpha * (\beta * u) = (\alpha \beta) * u$
@@ -1244,9 +1247,12 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
       \lit $u \in V$ \pipe $(\alpha + \beta) * u = (\alpha * u) + (\beta * u)$
     \end{enumerate}
   \end{enumerate}
-  \lit $((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))) \implies (Subspace[S, V, +, *])$
-  \lit $(Subspace[S, V, +, *]) \iff ((\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
+  \lit $((\emptyset \neq S) \land (\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S))) \implies (Subspace[S, V, +, *])$
+  \lit $(Subspace[S, V, +, *]) \iff ((\emptyset \neq S) \land (\forall_{r, s \in S}(r + s \in S)) \land (\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+\begin{shaded}
+$SetSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land (A + B = \{a + b | (a \in A) \land (b \in B)\})$ \\
 
 $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
   ((Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])) \hfill \implies \hfill \\
@@ -1254,8 +1260,15 @@ $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
 \end{array}\right)$
 \begin{enumerate}
   \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $(O \in A) \land (O \in B)$
-  \lit $(SetSum[A + B, A, B, V, +, *]) \land (O \in A) \land (O \in B)$ \pipe $O \in A + B$ \pipe $\emptyset \neq A + B$
-  \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $A + B \subseteq V$ \pipe $\emptyset \neq A + B \subseteq V$
+  \lit $(SetSum[A + B, A, B, V, +, *]) \land (O \in A) \land (O \in B)$ \pipe $O = O + O \in A + B$ \pipe $\emptyset \neq A + B$
+  \lit $(v \in A + B) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{a \in A} \exists_{b \in B}(v = a + b)$
+    \lit $(A \subseteq V) \land (B \subseteq V)$ \pipe $a, b \in V$
+    \lit $VectorSpace[V, +, *]$ \pipe $v = a + b \in V$
+  \end{enumerate}
+  \lit $(v \in A + B) \implies (v \in V)$ \pipe $A + B \subseteq V$
+  \lit $(\emptyset \neq A + B) \land (A + B \subseteq V)$ \pipe $\emptyset \neq A + B \subseteq V$
   \lit $(u, v \in A + B) \implies \ldots$
   \begin{enumerate}
     \lit $(\exists_{a_1 \in A} \exists_{b_1 \in B}(u = a_1 + b_1)) \land (\exists_{a_2 \in A} \exists_{b_2 \in B}(v = a_2 + b_2))$
@@ -1270,11 +1283,13 @@ $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
     \lit $(r * a \in A) \land (r * b) \in B$ \pipe $r * v \in A + B$
   \end{enumerate}
   \lit $((r \in \mathbb{R}) \land (v \in A + B)) \implies (r * v \in A + B)$ \pipe $\forall_{r \in \mathbb{R}} \forall_{v \in A + B}(r * v \in A + B)$
-  \lit $(\emptyset \neq A + B \subseteq V) \land (\forall_{u, v \in A + B}(u + v \in A + B)) \land (\forall_{r \in \mathbb{R}} \forall_{v \in A + B}(r * v \in A + B))$ \pipe $Subspace[A + B, V, + ,*]$
-  \lit $(\forall_{a \in A}(a + O) = a) \land (O \in B)$ \pipe $A \subseteq A + B$
-  \lit $(\forall_{b \in B}(b + O) = b) \land (O \in A)$ \pipe $B \subseteq A + B$
-  \lit $(A, B \subseteq A + B) \land (Subspace[A + B, V, + ,*])$
+  \lit $(SubspaceEquiv) \land (\emptyset \neq A + B \subseteq V) \land (\forall_{u, v \in A + B}(u + v \in A + B)) \land (\forall_{r \in \mathbb{R}} \forall_{v \in A + B}(r * v \in A + B))$ \pipe $Subspace[A + B, V, + ,*]$
+  \lit $(O \in B) \land (\forall_{a \in A}(a + O) = a)$ \pipe $A \subseteq A + B$
+  \lit $(O \in A) \land (\forall_{b \in B}(b + O) = b)$ \pipe $B \subseteq A + B$
+  \lit $(A \subseteq A + B) \land (B \subseteq A + B)$ \pipe $A, B \subseteq A + B$
+  \lit $(Subspace[A + B, V, + ,*]) \land (A, B \subseteq A + B)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+\end{shaded}
 
 $SumSubMinContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
   ((Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])) \hfill \implies \hfill \\
@@ -1315,7 +1330,7 @@ $ColSubspace \abr (ColSpace[C, A, m, n]) \implies (Subspace[C, \mathbb{R}^m, +, 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 \begin{comment}
-  $SetSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land (A + B = \{a + b | (a \in A) \land (b \in B)\})$ \\
+  
 
   $DirSum[A \oplus B, A, B, V, +, *] \abr \left(\begin{array}{ll}
     (Subspace[A, V, +, *]) \hfill \land \hfill (Subspace[B, V, +, *]) \hfill \land \hfill \\
@@ -1900,7 +1915,8 @@ $LTInjLinInd \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \imp
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO coordinatesb
+\section{Matrix of a Linear Transform}
+
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
