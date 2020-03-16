@@ -1516,46 +1516,62 @@ $SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
   \lit $\pr{(K \in \mathbb{R}^n) \land (LinComb[O, A, K, V, +, *])} \implies \ldots$
   \begin{enumerate}
     \lit $n \leq m$ \pipe $L \abr \langle \left(\begin{cases} 
-      1 & j \leq n \\
+      k_j & j \leq n \\
       0 & j > n 
     \end{cases}\right) | j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
-    \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$
-    \lit CONTHERE
-    \lit $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{i = 1}^{n}(k_i * a_i)) + O = \sum_{j = 1}^{m}(l_j * b_j))$
-    \lit $LinComb[O, A, K, V, +, *]$ \pipe $O = \sum_{i = 1}^{n}(k_i * a_i)$
-    \lit $O = \sum_{i = 1}^{n}(k_i * a_i) = \sum_{j = 1}^{m}(l_j * b_j)$ \pipe $LinComb[O, B, L, V, +, *]$
-    \lit $(LinInd[B, V, +, *]) \land (LinComb[O, B, L, V, +, *])$ \pipe $L = \{0\}^m$ 
-    \lit $\pr{\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)} \land (L = \{0\}^m)$ \pipe $\forall_{n \geq j \in \mathbb{N}}(k_j * a_j = l_j * b*j = l_j * a_j)$ \pipe $K = \{0\}^n$
+    \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{j = 1}^{m}(l_j * b_j))$
+    \lit $LinComb[O, A, K, V, +, *]$ \pipe $O = \sum_{i = 1}^{n}(k_i * a_i) = \sum_{j = 1}^{m}(l_j * b_j))$ \pipe $LinComb[O, B, L, V, +, *]$
+    \lit $(LinInd[B, V, +, *]) \land (LinComb[O, B, L, V, +, *])$ \pipe $L = \{0\}^m$ \pipe $K = \{0\}^n$ 
   \end{enumerate}
-  \lit $\pr{(K \in \mathbb{R}^n) \land (LinComb[O, A, K, V, +, *])} \implies (K = \{0\}^n)$ \pipe $\forall_{K \in \subseteq \mathbb{R}^n}\pr{(LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n)}$ \pipe $LinInd[A, V, +, *]$
+  \lit $\pr{(K \in \mathbb{R}^n) \land (LinComb[O, A, K, V, +, *])} \implies (K = \{0\}^n)$ \pipe $LinInd[A, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $SuperDependent \abr \forall_{V, A, B}\pr{\pr{(VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V)} \implies \pr{(\lnot LinInd[A, V, +, *]) \implies (\lnot LinInd[B, V, +, *])}}$
 \begin{enumerate}
-  \lit TODO :  A has a non trivial solution \pipe use  the same non trivial solution in combination with B and L
+  \lit $\lnot LinInd[A, V, +, *]$ \pipe $\exists_{K}\pr{(LinComb[O, A, K, V, +, *]) \land (K \neq \{0\}^n)}$
+  \lit $n \leq m$ \pipe $L \abr \langle \left(\begin{cases} 
+      k_j & j \leq n \\
+      0 & j > n 
+    \end{cases}\right) | j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
+  \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{j = 1}^{m}(l_j * b_j))$
+  \lit $LinComb[O, A, K, V, +, *]$ \pipe $LinComb[O, B, L, V, +, *]$
+  \lit $K \neq \{0\}^n$ \pipe $L \neq \{0\}^m$
+  \lit $\exists_{L}\pr{(LinComb[O, B, L, V, +, *]) \land (L \neq \{0\}^m)}$ \pipe $\lnot LinInd[B, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LinIndEquiv \abr \forall_{U, V}\pr{(LinInd[U, V, +, *]) \iff \pr{\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])}}$
+$LinDepProp \abr \forall_{S, V}\pr{(\lnot LinInd[S, V, +, *]) \implies \pr{\exists_{s_j \in S} \exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])}}$
 \begin{enumerate}
-  \lit $\Gamma' = \Gamma \setminus \{j\}$
-  \lit $(\lnot LinInd[U, V, +, *]) \implies \ldots$
+  \lit $\lnot LinInd[S, V, +, *]$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{(LinComb[O, S, K, V, +, *]) \land (K \neq \{0\}^n)}$
+  \lit $K \neq \{0\}^n$ \pipe $\exists_{j \in \mathbb{N}_{1, n}}\pr{(k_j \neq 0) \land \pr{\forall_{i \in \mathbb{N}_{j + 1, n}}(k_i = 0)}}$ \cont
+  \lit \cont $\sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{j}(k_i * s_i) = \sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j$ \pipe $\sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j$
+  \lit $(LinComb[O, S, K, V, +, *]) \land \pr{\sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j}$ \pipe $O = \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j$
+  \lit $s_j = (-1/k_j) \sum_{i = 1}^{j - 1}(k_i * s_i) = \sum_{i = 1}^{j - 1}\pr{(-k_i / k_j) * s_i}$ \pipe $s_j = \sum_{i = 1}^{j - 1}\pr{(-k_i / k_j) * s_i}$
+  \lit $\exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinDepPropCorollary \abr \forall_{P, S, V}\pr{\pr{(\lnot LinInd[S, V, +, *]) \land (LinSpan[P, S, V, +, *])} \implies \pr{\exists_{s_j \in S}(LinSpan[P, S \setminus \{s_j\}, V, +, *])}}$
+\begin{enumerate}
+  \lit $LinDepProp$ \pipe $\exists_{s_j \in S} \exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])$
+  \lit $\forall_{u \in P}\pr{\pr{\exists_{K_1}(LinComb[u, S, K_1, V, +, *])} \implies \pr{\exists_{K_2}(LinComb[u, S \setminus \{s_j\}, K_2, V, +, *])}}$ \pipe $LinSpan[P, S \setminus \{s_j\}, V, +, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LinIndEquiv \abr \forall_{S, V}\pr{(LinInd[S, V, +, *]) \iff \pr{\forall_{s_j \in S} \forall_{K \in \mathbb{R}^{n - 1}}(\lnot LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])}}$
+\begin{enumerate}
+  \lit $LinDepProp$ \pipe $(\lnot LinInd[S, V, +, *]) \implies \pr{\exists_{s_j \in S} \exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])}$ \cont
+  \lit \cont $\pr{\forall_{s_j \in S} \forall_{K \in \mathbb{R}^{n - 1}}(\lnot LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])} \implies (LinInd[S, V, +, *])$
+  \lit $\pr{\exists_{s_j \in S} \exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])} \implies \ldots$
   \begin{enumerate}
-    \lit $\pr{\exists_{\Gamma \in \mathbb{R}^|U|}\pr{\pr{\sum(\gamma_i * u_i) = O} \land (\Gamma \neq \{0\}^{|U|})}}$
-    \lit $\exists_{\gamma_k \in \Gamma}(\gamma_k \neq 0)$
-    \lit $\sum(\gamma'_i * u_i) = \sum(\gamma_i * u_i) - \gamma_k * u_k = -\gamma_k * u_j$
-    \lit $u_k = (-1 / \gamma_k)\pr{\sum(\gamma'_i * u_i)} = \sum\pr{ (-\gamma'_i / \gamma_k) * u_i}$ \pipe $\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])$
-   \end{enumerate}
-  \lit $(\lnot LinInd[U, V, +, *]) \implies \pr{\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])}$
-  \lit $\pr{\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])} \implies (LinInd[U, V, +, *])$
-  \lit $\pr{\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])} \implies \ldots$
-  \begin{enumerate}
-    \lit $\exists_{j \in U}\pr{j = \sum(\gamma'_i * u_i)}$
-    \lit $\Gamma \abr \Gamma' \cup \{-1\}$
-    \lit $\pr{\sum(\gamma_i * u_i) = \sum(\gamma'_i * u_i) + (-1) * \gamma_j = O} \land (\Gamma \neq \{0\}^n)$ \pipe $\lnot LinInd[U, V, +, *]$
+    \lit $L \abr \langle \left(\begin{cases} 
+      k_i & i \neq j \\
+      -1 & i = j 
+    \end{cases}\right) | i \in \mathbb{N}_{1, n}) \rangle$ \pipe $(L \in \mathbb{R}^n) \land (L \neq \{0\}^n)$
+    \lit $LinComb[s_j, S \setminus \{s_j\}, K, V, +, *]$ \pipe \cont  \pipe $\sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j = \sum_{i = 1}^{j - 1}(k_i * s_i) + -\sum_{i = 1}^{j - 1}(k_i * s_i) = O$ \cont
+    \lit \cont $LinComb[O, S, L, V, +, *]$
+    \lit $(LinComb[O, S, L, V, +, *]) \land (L \neq \{0\}^n)$ \pipe $\exists_{L \in \mathbb{R}^n}\pr{(LinComb[O, S, L, V, +, *]) \land (L \neq \{0\}^n)}$ \pipe $(\lnot LinInd[S, V, +, *])$
   \end{enumerate}
-  \lit $\pr{\exists_{j \in U}(LinComb[j, U \setminus \{j\}, +, *])} \implies (\lnot LinInd[U, V, +, *])$
-  \lit $(LinInd[U, V, +, *]) \implies \pr{\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])}$
-  \lit $(LinInd[U, V, +, *]) \iff \pr{\forall_{j \in U}(\lnot LinComb[j, U \setminus \{j\}, +, *])}$
+  \lit $\pr{\exists_{s_j \in S} \exists_{K \in \mathbb{R}^{n - 1}}(LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])} \implies (\lnot LinInd[S, V, +, *])$
+  \lit $(LinInd[S, V, +, *]) \implies \pr{\forall_{s_j \in S} \forall_{K \in \mathbb{R}^{n - 1}}(\lnot LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])}$
+  \lit $(LinInd[S, V, +, *]) \iff \pr{\forall_{s_j \in S} \forall_{K \in \mathbb{R}^{n - 1}}(\lnot LinComb[s_j, S \setminus \{s_j\}, K, V, +, *])}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LinIndSuperspace \abr \forall_{U, V}\pr{(Subspace[U, V]) \implies \pr{\forall_{W}\pr{(LinInd[W, U, +, *]) \implies (LinInd[W, V, +, *])}}}$
@@ -1568,22 +1584,7 @@ $LinIndSuperspace \abr \forall_{U, V}\pr{(Subspace[U, V]) \implies \pr{\forall_{
   \lit $(\lnot LinInd[W, V, +, *]) \implies \bot$ \pipe $LinInd[W, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-
-$LinDepLemma \abr \forall_{S, V}\left(\begin{array}{ll}
-  (\lnot LinInd[S, V, +, *]) \hfill \implies \hfill \\
-  \exists_{j \in \mathbb{N}_{1, n}}\pr{(s_j \in LinSpan[P_1, S_{1, j - 1}, V, +, *]) \land (LinSpan[P_2, S, V, +, *] = LinSpan[P_3, S \setminus \{s_j\}, V, +, *])}
-\end{array}\right)$
-\begin{enumerate}
-  \lit $\lnot LinInd[S, V, +, *]$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{(LinComb[O, S, K, V, +, *]) \land (K \neq \{0\}^n)}$
-  \lit $\exists_{j \in \mathbb{N}_{1, n}}\pr{(k_j \neq 0) \land \pr{\forall_{i \in \mathbb{N}_{1, n}}\pr{(i > j) \implies (k_i = 0)}}}$
-  \lit $s_j = (-1/k_j) \sum_{i = 1}^{j - 1}(k_i * s_i) = \sum_{i = 1}^{j - 1}\pr{(-k_i / k_j) * s_i}$
-  \lit $\langle -k_i / k_j | i \in \mathbb{N}_{1, j - 1} \rangle \in \mathbb{R}^{j - 1}$
-  \lit $\exists_{M \in \mathbb{R}^{j-1}}(LinComb[s_j, S_{1, j - 1}, M, V, +, *])$ \pipe $s_j \in LinSpan[P_1, S_{1, j - 1}, V, +, *]$
-  \lit $(v \in P_2) \iff (v \in LinSpan[P_2, S, V, +, *]) \iff$ \cont
-  \lit \cont $\pr{v = \sum_{i = 1}^{n}(k_i * s_i)} = \sum_{i = 1}^{j - 1}(k_i * s_i)) + \sum_{i = j + 1}^{n}(k_i * s_i)) + k_j * s_j = \sum_{i = 1}^{j - 1}(k_i * s_i)) + \sum_{i = j + 1}^{n}(k_i * s_i)) + k_j * \sum_{i = 1}^{j - 1}\pr{(-k_i / k_j) * s_i} \iff$ \cont
-  \lit $(v \in LinSpan[P_3, S \setminus \{s_j\}, V, +, *]) \iff (v \in P_3)$ \pipe $(v \in P_2) \iff (v \in P_3)$ \pipe $P_2 = P_3$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
+\begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $LinIndLengthLeqSpan \abr \forall_{L, S}\pr{\pr{(LinInd[L, V, +, *]) \land (Spans[S, V, +, *])} \implies (|L| \leq |S|)}$
 \begin{enumerate}
   \lit TODO : form $B = L \cup S$, remove dependent elements in $S$ such that \\
@@ -1609,6 +1610,7 @@ $FinSubSpace \abr \forall_{U, V}\pr{\pr{(Subspace[U, V, +, *])\land (FinDim[V, +
   \end{enumerate}
   \lit $LinSpan[U, B, V, +, *]$ \pipe $\exists_{B \in V^M}(Spans[B, U, +, *])$ \pipe $FinDim[U, +, *$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Bases and Dimensions}
 $Basis[S, V, +, *] \abr (Spans[S, V, +, *]) \land (LinInd[S, V, +, *])$ \\
