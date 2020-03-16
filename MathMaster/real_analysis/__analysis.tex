@@ -51,6 +51,8 @@
 \usepackage{framed}
 \colorlet{shadecolor}{black!100} % \begin{shaded}\end{shaded}
 
+%\usepackage{ocgx}
+
 \newcommand{\df}[1]{\hypertarget{#1}{\textcolor{red}{#1}}}
 \newcommand{\rf}[1]{\hyperlink{#1}{\textcolor{cyan}{#1}}}
 %\newcommand{\df}[1]{#1}
@@ -1251,7 +1253,7 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
   \lit $(Subspace[S, V, +, *]) \iff \pr{(\emptyset \neq S) \land \pr{\forall_{r, s \in S}(r + s \in S)} \land \pr{\forall_{\alpha \in \mathbb{R}} \forall_{s \in S}(\alpha * s \in S)}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-\begin{shaded}
+\begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 $SetSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land \pr{A + B = \{a + b | (a \in A) \land (b \in B)\}}$ \\
 
 $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
@@ -1289,7 +1291,6 @@ $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
   \lit $(A \subseteq A + B) \land (B \subseteq A + B)$ \pipe $A, B \subseteq A + B$
   \lit $(Subspace[A + B, V, + ,*]) \land (A, B \subseteq A + B)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-\end{shaded}
 
 $SumSubMinContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
   \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
@@ -1303,12 +1304,95 @@ $SumSubMinContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
     \begin{enumerate}
       \lit $\exists_{a \in A} \exists_{b \in B}(s = a + b)$
       \lit $(A, B \subseteq C)$ \pipe $a, b \in C$
-      \lit $Subspace[C, V, + ,*]$ \pipe $s = a + b \in C$
+      \lit $(VectorSpace[C, V, + ,*]) \land (a, b \in C)$ \pipe $s = a + b \in C$
     \end{enumerate}
     \lit $(s \in A + B) \implies (s \in C)$ \pipe $A + B \subseteq C$
   \end{enumerate}
   \lit $\pr{(Subspace[C, V, + ,*]) \land (A, B \subseteq C)} \implies (A + B \subseteq C)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$DirSum[A \oplus B, A, B, V, +, *] \abr \left(\begin{array}{ll}
+  (Subspace[A, V, +, *]) \hfill \land \hfill (Subspace[B, V, +, *]) \hfill \land \hfill \\
+  (SetSum[A + B, A, B, V, +, *]) \hfill \land \hfill \pr{\forall_{s \in A + B} \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)}
+\end{array}\right)$ \\
+
+$DirSumEquiv \abr \forall_{A, B, V}\left(\begin{array}{ll}
+  \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
+  \pr{(DirSum[A \oplus B, A, B, V, +, *]) \iff \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $(O \in A) \land (O \in B)$
+    \lit $(SubSum[A \oplus B, A, B, V, +, *]) \land (O \in A) \land (O \in B)$ \pipe $O = O + O \in A \oplus B$
+    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \land (O \in A \oplus B)$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)$
+  \end{enumerate}
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}$
+  \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies \ldots$
+  \begin{enumerate}
+    \lit $(s \in A \oplus B) \implies \ldots$
+    \begin{enumerate}
+      \lit $\pr{\exists_{\langle a, b \rangle \in A \times B}(s = a + b)}$
+      \lit $\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies \ldots$
+      \begin{enumerate}
+        \lit $O = s - s = (a_1 + b_1) - (a_2 + b_2) = (a_1 - a_2) + (b_1 - b_2)$
+        \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $(a_1 - a_2 \in A) \land (b_1 - b_2 \in B)$
+        \lit $\pr{(a_1 - a_2 \neq O) \lor (b_1 - b_2 \neq O)} \implies \pr{\lnot \exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies \bot$
+        \lit $(a_1 - a_2 = O) \land (b_1 - b_2 = O)$ \pipe $\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle$
+      \end{enumerate}
+      \lit $\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies \langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle$
+      \lit $\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$
+      \lit $\exists_{\langle a, b \rangle \in A \times B}(s = a + b) \land \forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$
+    \end{enumerate}
+    \lit $(s \in A + B) \implies \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$ \pipe $\forall_{s \in A + B} \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$ \pipe $DirSum[A \oplus B, A, B, V, +, *]$
+  \end{enumerate}
+  \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies (DirSum[A \oplus B, A, B, V, +, *])$
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \iff \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$DirSumSubspace \abr \forall_{A, B, V}\left(\begin{array}{ll}
+  \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
+  \pr{(DirSum[A \oplus B, A, B, V, +, *]) \iff (A \cap B = \{O\})}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $(v \in A \cap B) \implies \ldots$
+    \begin{enumerate}
+      \lit $(v \in A \cap B) \land (VectorSpace[B, +, *])$ \pipe $(v \in A) \land (v \in B)$ \pipe $(v \in A) \land (-v \in B)$
+      \lit $(v \in A) \land (-v \in B)$ \pipe $v + (-v) = O \in A + B$
+      \lit $DirSum[A \oplus B, A, B, V, +, *]$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)$
+      \lit $(v \neq O) \implies \pr{\lnot \exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies \bot$ \pipe $v = O$
+    \end{enumerate}
+    \lit $(v \in A \cap B) \implies (v = O)$ \pipe $A + B \subseteq \{O\}$
+    \lit $(v = O) \implies \ldots$
+    \begin{enumerate}
+      \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $(O \in A) \land (O \in B)$ \pipe $v = O \in A \cup B$
+    \end{enumerate}
+    \lit $(v = O) \implies (v \in A \cap B)$ \pipe $\{O\} \subseteq A \cap B$
+    \lit $(A + B \subseteq \{O\}) \land (\{O\} \subseteq A \cap B)$ \pipe $A \cap B = \{O\}$
+  \end{enumerate}
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies (A \cap B = \{O\})$
+  \lit $(A \cap B = \{O\}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(O \in A) \land (O \in B) \land (O = O + O \in A + B)$ \pipe $\exists_{\langle a, b \rangle \in A \times B}(O = a + b)$
+    \lit $\pr{(\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B) \land (O = a_1 + b_1) \land (O = a_2 + b_2)} \implies \ldots$
+    \begin{enumerate}
+      \lit $(O = a_1 + b_1) \land (O = a_2 + b_2)$ \pipe $(a_1 = -b_1) \land (a_2 = -b_2)$
+      \lit $VectorSpace[B, +, *]$ \pipe $-b_1, -b_2 \in B$
+      \lit $(a_1 \in A) \land (a_1 = -b_1 \in B)$ \pipe $a_1 \in A \cap B$ \pipe $a_1 = O$ \pipe $a_1 = b_1 = O$
+      \lit $(a_2 \in A) \land (a_2 = -b_2 \in B)$ \pipe $a_2 \in A \cap B$ \pipe $a_2 = O$ \pipe $a_2 = b_2 = O$
+      \lit $\langle a_1, b_1 \rangle = \langle O, O \rangle = \langle a_2, b_2 \rangle$
+    \end{enumerate}
+    \lit $\pr{(\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B) \land (O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)$
+    \lit $\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$
+    \lit $\pr{\exists_{\langle a, b \rangle \in A \times B}(O = a + b)} \land \pr{\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}}$
+    \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \land (DirSumEquiv)$ \pipe $DirSum[A \oplus B, A, B, V, +, *]$
+  \end{enumerate}
+  \lit $(A \cap B = \{O\}) \implies (DirSum[A \oplus B, A, B, V, +, *])$
+  \lit $(DirSum[A \oplus B, A, B, V, +, *]) \iff (A \cap B = \{O\})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+\end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 $NullSpace[N, A, m, n] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n | A * x = O\})$ \\  % space of homogenous solutions
 $RowSpace[R, A, m, n] \abr (Matrix[A, m, n]) \land (R = \{x^T * A \in \mathbb{R}^n | x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
@@ -1329,126 +1413,62 @@ $ColSubspace \abr (ColSpace[C, A, m, n]) \implies (Subspace[C, \mathbb{R}^m, +, 
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-\begin{comment}
-  
-
-  $DirSum[A \oplus B, A, B, V, +, *] \abr \left(\begin{array}{ll}
-    (Subspace[A, V, +, *]) \hfill \land \hfill (Subspace[B, V, +, *]) \hfill \land \hfill \\
-    (SetSum[A + B, A, B, V, +, *]) \hfill \land \hfill \pr{\forall_{s \in A + B} \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)}
-  \end{array}\right)$ \\
-
-  $DirSumEquiv \abr \forall_{A, B, V}\left(\begin{array}{ll}
-    \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
-    \pr{(DirSum[A \oplus B, A, B, V, +, *]) \iff \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}}
-  \end{array}\right)$
-  \begin{enumerate}
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \ldots$
-    \begin{enumerate}
-      \lit $(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *])$ \pipe $(O \in A) \land (O \in B)$ \pipe $O \in A \oplus B$
-      \lit $(DirSum[A \oplus B, A, B, V, +, *]) \land (O \in A \oplus B)$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)$
-    \end{enumerate}
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}$
-    \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies \ldots$
-    \begin{enumerate}
-      \lit $(s \in A + B) \implies \ldots$
-      \begin{enumerate}
-        \lit $s \in A + B$ \pipe $\pr{\exists_{\langle a, b \rangle \in A \times B}(s = a + b)}$
-        \lit $\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies \ldots$
-        \begin{enumerate}
-          \lit $O = s - s = (a_1 + b_1) - (a_2 + b_2) = (a_1 - a_2) + (b_1 - b_2)$
-          \lit $(a_1 - a_2 \in A) \land (b_1 - b_2 \in B)$
-          \lit $\pr{(a_1 - a_2 \neq O) \lor (b_1 - b_2 \neq O)} \implies \pr{\lnot \exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies \bot$
-          \lit $(a_1 - a_2 = O) \land (b_1 - b_2 = O)$ \pipe $\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle$
-        \end{enumerate}
-        \lit $\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies \langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle$
-        \lit $\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$
-        \lit $\exists_{\langle a, b \rangle \in A \times B}(s = a + b) \land \forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(s = a_1 + b_1) \land (s = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$
-      \end{enumerate}
-      \lit $(s \in A + B) \implies \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$ \pipe $\forall_{s \in A + B} \exists!_{\langle a, b \rangle \in A \times B}(s = a + b)$ \pipe $DirSum[A \oplus B, A, B, V, +, *]$
-    \end{enumerate}
-    \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \implies (DirSum[A \oplus B, A, B, V, +, *])$
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \iff \pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)}$
-  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-  $DirSumProp \abr \forall_{A, B, V}\left(\begin{array}{ll}
-    \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
-    \pr{(DirSum[A \oplus B, A, B, V, +, *]) \iff (A \cap B = \{O\})}
-  \end{array}\right)$
-  \begin{enumerate}
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies \ldots$
-    \begin{enumerate}
-      \lit $(v \in A \cap B) \implies \ldots$
-      \begin{enumerate}
-        \lit $v \in A \cap B$ \pipe $(v \in A) \land (v \in B)$ \pipe $(v \in A) \land (-v \in B)$
-        \lit $(v \in A) \land (-v \in B)$ \pipe $O = v + (-v) \in A + B$
-        \lit $(DirSum[A \oplus B, A, B, V, +, *]) \land (O \in A + B)$ \pipe $\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)$ \pipe $v = O$
-      \end{enumerate}
-      \lit $(v \in A \cap B) \implies (v = O)$ \pipe $A + B \subseteq \{O\}$
-      \lit $(v = O) \implies (v \in A \cap B)$ \pipe $\{O\} \subseteq A \cap B$
-      \lit $A \cap B = \{O\}$
-    \end{enumerate}
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \implies (A \cap B = \{O\})$
-    \lit $(A \cap B = \{O\}) \implies \ldots$
-    \begin{enumerate}
-      \lit $(O \in A) \land (O \in B) \land (O = O + O \in A + B)$ \pipe $\exists_{\langle a, b \rangle \in A \times B}(O = a + b)$
-      \lit $\pr{(\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B) \land (O = a_1 + b_1) \land (O = a_2 + b_2)} \implies \ldots$
-      \begin{enumerate}
-        \lit $(a_1 \in A) \land (a_1 = -b_1 \in B)$ \pipe $a_1 \in A \cap B$ \pipe $a_1 = O = b_1$
-        \lit $(a_2 \in A) \land (a_2 = -b_2 \in B)$ \pipe $a_2 \in A \cap B$ \pipe $a_2 = O = b_2$
-        \lit $\langle a_1, b_1 \rangle = \langle O, O \rangle = \langle a_2, b_2 \rangle$
-      \end{enumerate}
-      \lit $\pr{(\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B) \land (O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)$
-      \lit $\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}$
-      \lit $\pr{\exists_{\langle a, b \rangle \in A \times B}(O = a + b)} \land \pr{\forall_{\langle a_1, b_1 \rangle, \langle a_2, b_2 \rangle \in A \times B}\pr{\pr{(O = a_1 + b_1) \land (O = a_2 + b_2)} \implies (\langle a_1, b_1 \rangle = \langle a_2, b_2 \rangle)}}$
-      \lit $\pr{\exists!_{\langle a, b \rangle \in A \times B}(O = a + b)} \land (DirSumEquiv)$ \pipe $DirSum[A \oplus B, A, B, V, +, *]$
-    \end{enumerate}
-    \lit $(A \cap B = \{O\}) \implies (DirSum[A \oplus B, A, B, V, +, *])$
-    \lit $(DirSum[A \oplus B, A, B, V, +, *]) \iff (A \cap B = \{O\})$
-  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-\end{comment}
-
 \section{Linear Combination, Linear Span, Linear Independence}
 $LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (n \in \mathbb{N}) \land (U \in V^n) \land (K \in \mathbb{R}^n) \land \pr{c = \sum_{i = 1}^{n}(k_i * u_i)}$ \\
 $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \land (S \in V^n) \land \pr{(S = \emptyset) \implies (S' = \{O\})} \hfill \land \hfill \\
-  \pr{(S \neq \emptyset) \implies \pr{S' = \{c \in V | \exists_{K \in \mathbb{R}^n}(LinComb[c, S, K, V, +, *])\}}}
+  \pr{(S \neq \emptyset) \implies \pr{S' = \{c \in V | (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}}}
 \end{array}\right)$ \\
 
-$LinSpanSubContains \abr \forall_{S', S, V, +, *}\pr{(LinSpan[S', S, V, +, *]) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}}$
+\begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$LinSpanSubContains \abr \forall_{S', S, V}\pr{(LinSpan[S', S, V, +, *]) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}}$
 \begin{enumerate}
-  \lit $(S = \emptyset) \implies (S' = \{O\}) \implies (\emptyset \neq S')$
-  \lit $(S \neq \emptyset) \implies (LinComb[O, S, \{0\}^n, V, +, *]) \implies (O \in S') \implies (\emptyset \neq S')$
-  \lit $\pr{(S = \emptyset) \lor (S \neq \emptyset)} \implies (\emptyset \neq S')$ \pipe $\emptyset \neq S'$
-  \lit $LinSpan[S', S, V, +, *]$ \pipe $S' \subseteq V$ \pipe $\emptyset \neq S' \subseteq V$
-  \lit $(a, b \in S') \implies \ldots$
+  \lit $(S = \emptyset) \implies \ldots$
   \begin{enumerate}
-    \lit $\pr{\exists_{K \in \mathbb{R}^n}(LinComb[a, S, K, V, +, *])} \land \pr{\exists_{L \in \mathbb{R}^n}(LinComb[b, S, L, V, +, *])}$
-    \lit $a + b = \sum_{i = 1}^{n}(k_i * s_i) + \sum_{i = 1}^{n}(l_i * s_i) = \sum_{i = 1}^{n}\pr{(k_i + l_i) * s_i}$ \pipe $a + b = \sum_{i = 1}^{n}\pr{(k_i + l_i) * s_i}$
-    \lit $\langle k_i + l_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{N}^n$
-    \lit $\pr{a + b = \sum_{i = 1}^{n}\pr{(k_i + l_i) * s_i}} \land (\langle k_i + l_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{N}^n)$ \pipe $\exists_{M \in \mathbb{N}^n}\pr{a + b = \sum_{i = 1}^{n}(m_i * s_i)}$
-    \lit $\exists_{M \in \mathbb{N}^n}(LinComb[a + b, S, M, V, +, *])$ \pipe $a + b \in S'$
+    \lit $LinSpan[S', S, V, +, *]$ \pipe $S' = \{O\}$
+    \lit $Subspace[\{O\}, V, +, *]$ \pipe $Subspace[S', V, +, *]$
+    \lit $S = \emptyset \subseteq \{O\} = S'$ \pipe $S \subseteq S'$
+    \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
   \end{enumerate}
-  \lit $(a, b \in S') \implies (a + b \in S')$ \pipe $\forall_{a, b \in S'}(a + b \in S')$
-  \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies \ldots$
+  \lit $(S = \emptyset) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}$
+  \lit $(S \neq \emptyset) \implies \ldots$
   \begin{enumerate}
-    \lit $\exists_{K \in \mathbb{R}^n}(LinComb[u, S, K, V, +, *])$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{u = \sum_{i = 1}^{n}(k_i * s_i)}$
-    \lit $r * u = r * \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{n}\pr{r * (k_i * s_i)} = \sum_{i = 1}^{n}(r k_i) * s_i)$ \pipe $r * u = \sum_{i = 1}^{n}(r k_i) * s_i)$
-    \lit $\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
-    \lit $\pr{\sum_{i = 1}^{n}(r k_i) * s_i}) \land (\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$
-    \lit $\exists_{M \in \mathbb{R}^n}\pr{r * u = \sum_{i = 1}^{n}(m_i * s_i)}$ \pipe $\exists_{M \in \mathbb{R}^n}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
+    \lit $LinSpan[S', S, V, +, *]$ \pipe $S' = \{c \in V | (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}$ \pipe $S' \subseteq V$
+    \lit $(\{0\}^n \subseteq \mathbb{R}^n) \land (LinComb[O, S, \{0\}^n, V, +, *])$ \pipe $O \in S'$ \pipe $\emptyset \neq S'$
+    \lit $(S' \subseteq V) \land (\emptyset \neq S')$ \pipe $\emptyset \neq S' \subseteq V$
+    \lit $(a, b \in S') \implies \ldots$
+    \begin{enumerate}
+      \lit $\pr{\exists_{K_a \in \mathbb{R}^n}(LinComb[a, S, K_a, V, +, *])} \land \pr{\exists_{K_b \in \mathbb{R}^n}(LinComb[b, S, K_b, V, +, *])}$ \pipe $\pr{a = \sum_{i = 1}^{n}({k_a}_i * s_i)} \land \pr{b = \sum_{i = 1}^{n}({k_b}_i * s_i)}$
+      \lit $a + b = \sum_{i = 1}^{n}({k_a}_i * s_i) + \sum_{i = 1}^{n}({k_b}_i * s_i) = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}$ \pipe $a + b = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}$
+      \lit $\langle {k_a}_i + {k_b}_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
+      \lit $\pr{a + b = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}} \land (\langle {k_a}_i + {k_b}_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \cont
+      \lit \cont $\exists_{M \in \mathbb{N}^n}\pr{a + b = \sum_{i = 1}^{n}(m_i * s_i)}$ \pipe $\exists_{M \in \mathbb{N}^n}(LinComb[a + b, S, M, V, +, *])$ \pipe $a + b \in S'$
+    \end{enumerate}
+    \lit $(a, b \in S') \implies (a + b \in S')$ \pipe $\forall_{a, b \in S'}(a + b \in S')$
+    \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{K \in \mathbb{R}^n}(LinComb[u, S, K, V, +, *])$ \pipe $u = \sum_{i = 1}^{n}(k_i * s_i)$
+      \lit $r * u = r * \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{n}\pr{r * (k_i * s_i)} = \sum_{i = 1}^{n}(r k_i) * s_i$ \pipe $r * u = \sum_{i = 1}^{n}(r k_i) * s_i$
+      \lit $\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
+      \lit $\pr{r * u = \sum_{i = 1}^{n}(r k_i) * s_i}) \land (\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \pipe $\exists_{M \in \mathbb{R}^n}\pr{r * u = \sum_{i = 1}^{n}(m_i * s_i)}$ 
+      \lit $\exists_{M \in \mathbb{R}^n}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
+    \end{enumerate}
+    \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies (r * u \in S')$ \pipe $\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')$
+    \lit $(SubspaceEquiv) \land (\emptyset \neq S' \subseteq V) \land \pr{\forall_{a, b \in S'}(a + b \in S')} \land \pr{\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')}$ \pipe $Subspace[S', V, +, *]$
+    \lit $(s_i \in S) \implies \ldots$
+    \begin{enumerate}
+      \lit $K_s \abr \langle \left(\begin{cases} 
+        1 & j = i \\
+        0 & j \neq i 
+      \end{cases}\right) | j \in \mathbb{N}_{1, n} \rangle$ \pipe $(K_s \in \mathbb{R}^n) \land \pr{\sum_{j = 1}^{n}({k_s}_j * s_j) = s_i}$
+      \lit $\exists_{K \in \mathbb{R}^n}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
+    \end{enumerate}
+    \lit $(s_i \in S) \implies (s_i \in S')$ \pipe $S \subseteq S'$
+    \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
   \end{enumerate}
-  \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies (r * u \in S')$ \pipe $\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')$
-  \lit $(SubspaceEquiv) \land (\emptyset \neq S' \subseteq V) \land \pr{\forall_{a, b \in S'}(a + b \in S')} \land \pr{\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')}$ \pipe $Subspace[S', V, +, *]$
-  \lit $(s_j \in S) \implies \ldots$
-  \begin{enumerate}
-    \lit $K \abr \langle \left(\begin{cases} 
-      1 & i = j \\
-      0 & i \neq j 
-    \end{cases}\right) | \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$ \pipe $\sum_{i = 1}^{n}(k_i * s_i) = s_j$
-    \lit $\ldots$ \pipe $\exists_{K \in \mathbb{R}^n}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
-  \end{enumerate}
-  \lit $(s_j \in S) \implies (s_j \in S')$ \pipe $\forall_{x \in S}(x \in S')$ \pipe $S \subseteq S'$
-  \lit $(Subspace[S', V, +, *]) \land (S \subseteq S')$
+  \lit $(S \neq \emptyset) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}$
+  \lit $\pr{(S = \emptyset) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}} \land \pr{(S \neq \emptyset) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}}$ \cont
+  \lit \cont $(Subspace[S', V, +, *]) \land (S \subseteq S')$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LinSpanSubMinContains \abr \forall_{S', S, V, +, *}\pr{(LinSpan[S', S, V, +, *]) \implies \pr{\forall_{W}\pr{((Subspace[W, V, + ,*]) \land (S \subseteq W)} \implies (S' \subseteq W)}}$
@@ -1456,45 +1476,58 @@ $LinSpanSubMinContains \abr \forall_{S', S, V, +, *}\pr{(LinSpan[S', S, V, +, *]
   \lit $(s' \in S') \implies \ldots$
   \begin{enumerate}
     \lit $\exists_{K \in \mathbb{R}^n}(LinComb[s', S, K, V, +, *])$ \pipe $s' = \sum_{i = 1}^{n}(k_i * s_i)$
-    \lit $(S \subseteq W) \land (Subspace[W, V, + ,*])$ \pipe $s' = \sum_{i = 1}^{n}(k_i * s_i) \in W$
+    \lit $(S \subseteq W) \land (VectorSpace[W, V, + ,*])$ \pipe $s' = \sum_{i = 1}^{n}(k_i * s_i) \in W$ \pipe $s' \in W$
   \end{enumerate}
   \lit $(s' \in S') \implies (s' \in W)$ \pipe $S' \subseteq W$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
+$FinDim[V, +, *] \abr \exists_{S \in V^n}(Spans[S, V, +, *])$ \\
 
 $LinInd[S, V, +, *] \abr (VectorSpace[V, +, *]) \land (S \in V^n) \land \pr{(S \neq \emptyset) \implies \pr{\forall_{K \in \mathbb{R}^n}\pr{(LinComb[O, S, K, V, +, *]) \implies (K = \{0\}^n)}}}$ \\
 
 $ZeroDependent \abr (O \in S) \implies (\lnot LinInd[S, V, +, *])$
 \begin{enumerate}
-  \lit $K \abr \langle \left(\begin{cases} 
+  \lit $O \in S$ \pipe $\exists_{u_i \in S}(u_i = O)$ \pipe $K \abr \langle \left(\begin{cases} 
       1 & u_i = O \\
       0 & u_i \neq O 
-    \end{cases}\right) | (1 \leq i \leq n) \land (i \in \mathbb{N}) \rangle$ \pipe $K \in \mathbb{R}^n$
-  \lit $(LinComb[O, S, K, V, +, *]) \land (K \neq \{O\}^n)$ \pipe $\lnot LinInd[S, V, +, *]$
+    \end{cases}\right) | i \in \mathbb{N}_{1, n} \rangle$ \pipe $\{O\}^n \neq K \in \mathbb{R}^n$
+  \lit $O = \sum_{i = 1}^{n}(k_i * s_i)$ \pipe $LinComb[O, S, K, V, +, *]$
+  \lit $(LinComb[O, S, K, V, +, *]) \land (\{O\}^n \neq K \in \mathbb{R}^n)$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{(LinComb[O, S, K, V, +, *]) \land (K \neq \{0\}^n)}$ \pipe $\lnot LinInd[S, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $SingletonNonZeroIndependent \abr (v \neq O) \implies (LinInd[\langle v \rangle, V, +, *])$
 \begin{enumerate}
-  \lit $(r * v = O) \iff \pr{(r = 0) \lor (v \neq O)}$
-  \lit $v \neq O$ \pipe $r = 0$
-  \lit $\forall_{r \in \mathbb{R}}\pr{(r * v = O) \implies (r = 0)}$
+  \lit $\pr{(\langle r \rangle \in \mathbb{R}^1) \land (LinComb[O, \langle v \rangle , \langle r \rangle, V, +, *])} \implies \ldots$
+  \begin{enumerate}
+    \lit $(ZeroVectorEquiv) \land (r * v = O)$ \pipe $(r * v = O) \iff \pr{(r = 0) \lor (v \neq O)}$
+    \lit $v \neq O$ \pipe $r = 0$
+  \end{enumerate}
+  \lit $\pr{(\langle r \rangle \in \mathbb{R}^1) \land (LinComb[O, \langle v \rangle , \langle r \rangle, V, +, *])} \implies (r = 0)$ \pipe $\forall_{r \in \mathbb{R}}\pr{(LinComb[O, \langle v \rangle, \langle r \rangle, V, +, *]) \implies (r = 0)}$
+  \lit $LinInd[\langle v \rangle, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SubIndependent \abr \forall_{V, A, B}\pr{\pr{(VectorSpace[V, +, *]) \land (A \subseteq B \in V^m)} \implies \pr{(LinInd[B, V, +, *]) \implies (LinInd[A, V, +, *])}}$
+$SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
+  \pr{(VectorSpace[V, +, *]) \land (A \subseteq B) \land (A \in V^n) \land (B \in V^m)} \hfill \implies \hfill \\
+  \pr{(LinInd[B, V, +, *]) \implies (LinInd[A, V, +, *])}
+\end{array}\right)$
 \begin{enumerate}
-  \lit $(LinComb[O, A, K, V, +, *]) \implies \ldots$
+  \lit $\pr{(K \in \mathbb{R}^n) \land (LinComb[O, A, K, V, +, *])} \implies \ldots$
   \begin{enumerate}
-    \lit $L \abr \langle \left(\begin{cases} 
+    \lit $n \leq m$ \pipe $L \abr \langle \left(\begin{cases} 
       1 & j \leq n \\
       0 & j > n 
-    \end{cases}\right) | (1 \leq j \leq m \land (j \in \mathbb{N}) \rangle$ \pipe $L \in \mathbb{R}^m$
-    \lit $A \subseteq B$ \pipe $\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)$
-    \lit $\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{i = 1}^{n}(k_i * a_i)) + O = \sum_{j = 1}^{m}(l_j * b_j))$
+    \end{cases}\right) | j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
+    \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$
+    \lit CONTHERE
+    \lit $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{i = 1}^{n}(k_i * a_i)) + O = \sum_{j = 1}^{m}(l_j * b_j))$
     \lit $LinComb[O, A, K, V, +, *]$ \pipe $O = \sum_{i = 1}^{n}(k_i * a_i)$
     \lit $O = \sum_{i = 1}^{n}(k_i * a_i) = \sum_{j = 1}^{m}(l_j * b_j)$ \pipe $LinComb[O, B, L, V, +, *]$
     \lit $(LinInd[B, V, +, *]) \land (LinComb[O, B, L, V, +, *])$ \pipe $L = \{0\}^m$ 
     \lit $\pr{\forall_{n \geq j \in \mathbb{N}}(a_j = b_j)} \land (L = \{0\}^m)$ \pipe $\forall_{n \geq j \in \mathbb{N}}(k_j * a_j = l_j * b*j = l_j * a_j)$ \pipe $K = \{0\}^n$
   \end{enumerate}
-  \lit $(LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n)$ \pipe $\forall_{K \in \subseteq \mathbb{R}^n}\pr{(LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n)}$ \pipe $LinInd[A, V, +, *]$
+  \lit $\pr{(K \in \mathbb{R}^n) \land (LinComb[O, A, K, V, +, *])} \implies (K = \{0\}^n)$ \pipe $\forall_{K \in \subseteq \mathbb{R}^n}\pr{(LinComb[O, A, K, V, +, *]) \implies (K = \{0\}^n)}$ \pipe $LinInd[A, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $SuperDependent \abr \forall_{V, A, B}\pr{\pr{(VectorSpace[V, +, *]) \land (A \subseteq B \subseteq V)} \implies \pr{(\lnot LinInd[A, V, +, *]) \implies (\lnot LinInd[B, V, +, *])}}$
@@ -1535,8 +1568,6 @@ $LinIndSuperspace \abr \forall_{U, V}\pr{(Subspace[U, V]) \implies \pr{\forall_{
   \lit $(\lnot LinInd[W, V, +, *]) \implies \bot$ \pipe $LinInd[W, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Spans[S, V, +, *] \abr LinSpan[V, S, V, +, *]$ \\
-$FinDim[V, +, *] \abr \exists_{S \in V^n}(Spans[S, V, +, *])$ \\
 
 $LinDepLemma \abr \forall_{S, V}\left(\begin{array}{ll}
   (\lnot LinInd[S, V, +, *]) \hfill \implies \hfill \\
