@@ -1991,6 +1991,30 @@ $RankNullity \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \imp
   \lit $B = U \cup T$ \pipe $|B| = |U| + |T|$ \pipe $Dim[V] = Dim[ker_L] + Dim[rng_L]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$InjectiveSurjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
+  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Injective[T, V, W])) \hfill \implies \hfill \\
+  (Surjective[T, V, W])
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(KerInjective) \land (Injective[T, V, W])$ \pipe $ker_T = \{O\}$ \pipe $Dim[ker_T] = 0$
+  \lit $(RankNullity) \land (Dim[ker_T] = 0)$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[V] = Dim[rng_T]$
+  \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[rng_T])$ \pipe $Dim[W] = Dim[rng_T]$
+  \lit $RangeSubspace$ \pipe $Subspace[rng_T, W, +_w, *_w]$
+  \lit $(Subspace[rng_T, W, +_w, *_w]) \land (Dim[W] = Dim[rng_T])$ \pipe $\exists_{B}((Basis[B, W, +_w, *_w]) \land (Basis[B, rng_T, +_w, *_w]))$
+  \lit $(Spans[W] = Spans[rng_T])$ \pipe $W = rng_T$ \pipe $Surjective[T, V, W]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SurjectiveInjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
+  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Surjective[T, V, W])) \hfill \implies \hfill \\
+  (Injective[T, V, W])
+\end{array}\right)$
+\begin{enumerate}
+  \lit $RankNullity$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T]$
+  \lit $Surjective[T, V, W]$ \pipe $rng_T = W$ \pipe $Dim[rng_T] = Dim[W]$
+  \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[ker_T] + Dim[rng_T]) \land (Dim[rng_T] = Dim[W])$ \pipe $Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[ker_T] = 0$ \pipe $ker_T = \{O\}$
+  \lit $(KerInjective) \land (er_T = \{O\})$ \pipe $Injective[T, V, W]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 $SmallerMapNotInjective \abr \forall_{T, V, W}(((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] > Dim[W])) \implies (\lnot Injective[T, V, W]))$
 \begin{enumerate}
   \lit $(RankNullity) \land (Dim[W] \geq Dim[rng_T])$ \pipe $Dim[ker_T] = Dim[V] - Dim[rng_T] \geq Dim[V] - Dim[W] > 0$ \pipe $Dim[ker_T] \neq 0$
@@ -2020,8 +2044,6 @@ An inhomogeneous system of linear equations with more equations than variables h
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 \end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\section{Invertibility of Linear Transformations}
 $LTInv[L^{-1}, L, V, +_v, *_v, W, +_w, *_w] \abr \left(\begin{array}{ll}
   (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \hfill \land \hfill (LinTrans[L^{-1}, W, +_w, *_w, V, +_v, *_v]) \hfill \land \hfill \\
   (L^{-1} \circ L = 1_v) \hfill \land \hfill (L \circ L^{-1} = 1_w)
@@ -2038,29 +2060,64 @@ $InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w,
 \begin{enumerate}
   \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \implies \ldots$
   \begin{enumerate}
-    \lit TODO
+    \lit $\exists_{L^{-1}}(LTInv[L^{-1}, L, V, +_v, *_v, W, +_w, *_w])$
+    \lit $(L(u) = L(w)) \implies \ldots$
+    \begin{enumerate}
+      \lit $u = L^{-1}(L(u)) = L^{-1}(L(v)) = v$ \pipe $u = v$
+    \end{enumerate}
+    \lit $(L(u) = L(w)) \implies (u = w)$ \pipe $\forall_{u, w}((L(u) = L(w)) \implies (u = w))$ \pipe $Injective[L, V, W]$
+    \lit $(w \in W) \implies \ldots$
+    \begin{enumerate}
+      \lit $L^{-1}(w) \in V$
+      \lit $L \circ L^{-1} = 1_w$ \pipe $L(L^{-1}(w) = w)$
+      \lit $(L^{-1}(w) \in V) \land (L(L^{-1}(w) = w))$ \pipe $\exists_{v \in V}(w = (L(v)))$
+    \end{enumerate}
+    \lit $(w \in W) \implies (\exists_{v \in V}(w = (L(v))))$ \pipe $\forall_{w \in W} \exists_{v \in V}(w = L(v))$ \pipe $Surjective[L, V, W]$
+    \lit $(Injective[L, V, W]) \land (Surjective[L, V, W])$
   \end{enumerate}
   \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \implies ((Injective[L, V, W]) \land (Surjective[L, V, W]))$
   \lit $((Injective[L, V, W]) \land (Surjective[L, V, W])) \implies \ldots$
   \begin{enumerate}
-    \lit TODO
+    \lit $(Injective[L, V, W]) \land (Surjective[L, V, W])$ \pipe $\forall_{w \in W} \exists!_{v \in V}(w = L(v))$
+    \lit $S \abr \{(w, v) \in W \times V | w = L(v)\}$
+    \lit $(\forall_{w \in W} \exists!_{v \in V}(w = L(v))) \land (S = \{(w, v) \in W \times V | w = L(v)\})$ \pipe $Function[S, W, V]$
+    \lit $(\forall_{v \in V}(S(L(v)) = v)) \land (\forall_{w \in W}(L(S(w)) = w))$
+    \lit $(w_1, w_2 \implies W) \implies \ldots$
+    \begin{enumerate}
+      \lit $(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (\forall_{w \in W}(L(S(w)) = w))$ \pipe $L(S(w_1) + S(w_2)) = L(S(w_1)) + L(S(w_2)) = w_1 + w_2$
+      \lit $(\forall_{w \in W}(L(S(w)) = w)) \land (w_1 + w_2 \in W)$ \pipe $L(S(w_1 + w_2)) = w_1 + w_2$
+      \lit $L(S(w_1) + S(w_2)) = w_1 + w_2 = L(S(w_1 + w_2))$ \pipe $L(S(w_1) + S(w_2)) = L(S(w_1 + w_2))$
+      \lit $(Injective[L, V, W]) \land (L(S(w_1) + S(w_2)) = L(S(w_1 + w_2)))$ \pipe $S(w_1) + S(w_2) = S(w_1 + w_2)$
+    \end{enumerate}
+    \lit $(w_1, w_2 \implies W) \implies (S(w_1 + w_2) = S(w_1) + S(w_2))$ \pipe $\forall_{w_1, w_2 \in W}(S(w_1 + w_2) = S(w_1) + S(w_2))$
+    \lit $((r \in \mathbb{R}) \land (w \in W)) \implies \ldots$
+    \begin{enumerate}
+      \lit $(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (\forall_{w \in W}(L(S(w)) = w))$ \pipe $L(r * S(w)) = r * L(S(w)) = r * w$
+      \lit $(\forall_{w \in W}(L(S(w)) = w)) \land (r * w \in W)$ \pipe $L(S(r * w)) = r * w$
+      \lit $L(r * S(w)) = r * w = L(S(r * w))$ \pipe $L(r * S(w)) = L(S(r * w))$
+      \lit $(Injective[L, V, W]) \land (L(r * S(w)) = L(S(r * w)))$ \pipe $r * S(w) = S(r * w)$
+    \end{enumerate}
+    \lit $((r \in \mathbb{R}) \land (w \in W)) \implies (r * S(w) = S(r * w))$ \pipe $\forall_{r \in \mathbb{R}} \forall_{w \in W}(S(r * w) = r * S(w)$
+    \lit $(Function[S, W, V]) \land (\forall_{w_1, w_2 \in W}(S(w_1 + w_2) = S(w_1) + S(w_2))) \land (\forall_{r \in \mathbb{R}} \forall_{w \in W}(S(r * w) = r * S(w)))$
+    \lit $LinTrans[S, W, +_w, *_w, V, +_v, *_v]$
+    \lit $\forall_{v \in V}((S(L(v)) = v))$ \pipe $S \circ L = 1_v$
+    \lit $\forall_{w \in W}(L(S(w)) = w)$ \pipe $L \circ S = 1_w$
+    \lit $(LinTrans[S, W, +_w, *_w, V, +_v, *_v]) \land (S \circ L = 1_v) \land (L \circ S = 1_w)$ \pipe $LTInv[S, L, V, +_v, *_v, W, +_w, *_w]$
+    \lit $\exists_{L^{-1}}(LTInv[L^{-1}, L, V, +_v, *_v, W, +_w, *_w])$ \pipe $LTInvertible[L, V, +_v, *_v, W, +_w, *_w]$
   \end{enumerate}
   \lit $((Injective[L, V, W]) \land (Surjective[L, V, W])) \implies (LTInvertible[L, V, +_v, *_v, W, +_w, *_w])$
   \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \iff ((Injective[L, V, W]) \land (Surjective[L, V, W]))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-3.69
-87
-Injectivity is equivalent to surjectivity in finite dimensions
-Suppose V is finite-dimensional and T 2 L.V /. Then the following are
-equivalent:
-(a) T is invertible;
-(b) T is injective;
-(c) T is surjective.
+TODO: some corollary of InjectiveSurjectiveEqualDim + SurjectiveInjectiveEqualDim + InvertibleBijectiveEquiv \\
+
+$Isomorphism[L, V, +_v, *_v, W, +_w, *_w] \abr LTInvertible[L, V, +_v, *_v, W, +_w, *_w]$ \\
+$Isomorphic[V, +_v, *_v, W, +_w, *_w] \abr \exists_{L}(Isomorphism[L, V, +_v, *_v, W, +_w, *_w])$ \\
 
 
 \section{Matrix of a Linear Transform}
-123123
+LETS FUCKING GOOOOOOOOOOOOO
+
 
 %############################################################################
 %. \\ . \\ TRASH CAN \\ . \\
