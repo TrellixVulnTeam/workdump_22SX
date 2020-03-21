@@ -1844,8 +1844,8 @@ $SplitAddInv \abr \forall_{L, V, W}\pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \
   \lit $L(\alpha - \beta) = L\pr{\alpha + (-\beta)} = L(\alpha) + L(-\beta) = L(\alpha) + (-1) * L(\beta) = L(\alpha) - L(\beta)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$BasisDomainInduceLinTrans \abr \forall_{V, W}\left(\begin{array}{ll}
-  \pr{(Basis[A, V, +_v, *_v]) \land (B \subseteq W) \land (n = |B| = |A|) \land (VectorSpace[W, +_w, *_w])} \hfill \implies \hfill \\
+$UniqBasisLT \abr \forall_{V, W}\left(\begin{array}{ll}
+  \pr{(VectorSpace[V, +_v, *_v]) \land (VectorSpace[W, +_w, *_w]) \land (Basis[A, V, +_v, *_v]) \land (Basis[B, W, +_w, *_w])} \hfill \implies \hfill \\
   \pr{\exists!_{T}\pr{(LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land \pr{\forall_{i \in \mathbb{N}_{1, n}}\pr{T(a_i) = b_i}}}}
 \end{array}\right)$
 \begin{enumerate}
@@ -1964,7 +1964,7 @@ $KerInjective \abr \forall_{L, V, W}\pr{(Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]
   \lit $(Injective[L, V, W]) \iff (ker_L = \{O_v\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RankNullity \abr \forall_{L, V, W}\pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L])}$
+$RankNullityLT \abr \forall_{L, V, W}\pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L])}$
 \begin{enumerate}
   \lit $KerSubspace$ \pipe $\pr{\exists_{U}(Basis[U, ker_L, +_v, *_v])} \land (Dim[ker_L] = |U|)$
   \lit $(LinIndSuperspace) \land (LinInd[U, ker_L, +_v, *_v])$ \pipe $LinInd[U, V, +_v, *_v]$
@@ -1997,7 +1997,7 @@ $InjectiveSurjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
 \end{array}\right)$
 \begin{enumerate}
   \lit $(KerInjective) \land (Injective[T, V, W])$ \pipe $ker_T = \{O\}$ \pipe $Dim[ker_T] = 0$
-  \lit $(RankNullity) \land (Dim[ker_T] = 0)$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[V] = Dim[rng_T]$
+  \lit $(RankNullityLT) \land (Dim[ker_T] = 0)$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[V] = Dim[rng_T]$
   \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[rng_T])$ \pipe $Dim[W] = Dim[rng_T]$
   \lit $RangeSubspace$ \pipe $Subspace[rng_T, W, +_w, *_w]$
   \lit $(Subspace[rng_T, W, +_w, *_w]) \land (Dim[W] = Dim[rng_T])$ \pipe $\exists_{B}\pr{(Basis[B, W, +_w, *_w]) \land (Basis[B, rng_T, +_w, *_w])}$
@@ -2009,7 +2009,7 @@ $SurjectiveInjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
   (Injective[T, V, W])
 \end{array}\right)$
 \begin{enumerate}
-  \lit $RankNullity$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T]$
+  \lit $RankNullityLT$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T]$
   \lit $Surjective[T, V, W]$ \pipe $rng_T = W$ \pipe $Dim[rng_T] = Dim[W]$
   \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[ker_T] + Dim[rng_T]) \land (Dim[rng_T] = Dim[W])$ \pipe $Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[ker_T] = 0$ \pipe $ker_T = \{O\}$
   \lit $(KerInjective) \land (er_T = \{O\})$ \pipe $Injective[T, V, W]$
@@ -2017,13 +2017,13 @@ $SurjectiveInjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
 
 $SmallerMapNotInjective \abr \forall_{T, V, W}\pr{\pr{(LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] > Dim[W])} \implies (\lnot Injective[T, V, W])}$
 \begin{enumerate}
-  \lit $(RankNullity) \land (Dim[W] \geq Dim[rng_T])$ \pipe $Dim[ker_T] = Dim[V] - Dim[rng_T] \geq Dim[V] - Dim[W] > 0$ \pipe $Dim[ker_T] \neq 0$
+  \lit $(RankNullityLT) \land (Dim[W] \geq Dim[rng_T])$ \pipe $Dim[ker_T] = Dim[V] - Dim[rng_T] \geq Dim[V] - Dim[W] > 0$ \pipe $Dim[ker_T] \neq 0$
   \lit $(KerInjective) \land (Dim[ker_T] \neq 0)$ \pipe $\lnot Injective[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LargerMapNotSurjective \abr \forall_{T, V, W}\pr{\pr{(LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] < Dim[W])} \implies (\lnot Surjective[T, V, W])}$
 \begin{enumerate}
-  \lit $RankNullity$ \pipe $Dim[rng_T] = Dim[V] - Dim[ker_T] \leq Dim[V] < Dim[W]$
+  \lit $RankNullityLT$ \pipe $Dim[rng_T] = Dim[V] - Dim[ker_T] \leq Dim[V] < Dim[W]$
   \lit $Dim[rng_T] < Dim[W]$ \pipe $Dim[rng_T] \neq Dim[W]$ \pipe $\lnot Surjective[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
@@ -2116,12 +2116,53 @@ $Isomorphic[V, +_v, *_v, W, +_w, *_w] \abr \exists_{L}(Isomorphism[L, V, +_v, *_
 
 
 \section{Matrix of a Linear Transform}
-LETS FUCKING GOOOOOOOOOOOOO
+$CoordVec[[\alpha]_S, \alpha, S, V, +, *] \abr (Basis[S, V, +, *]) \land (S * [\alpha]_S = \alpha \in V)$ \\
+
+$LTMatrix \abr \forall_{L, V, W}\left(\begin{array}{ll}
+  \pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (Basis[A, V, +_v, *_v]) \land (Basis[B, W, +_w, *_w])} \hfill \implies \hfill \\
+  \pr{\forall_{v \in V}\pr{CoordVec[[L(v)]_B, L(v), B, W, +_w, *_w] = \langle [L(a_i)]_B | a_i \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v]}}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $Basis[A, V, +_v, *_v]$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{v = \sum_{i = 1}^{n}(k_i * a_i)}$ \pipe $K^T = CoordVec[[v]_A,, v, A, V, +, *]$
+  \lit $[L(v)]_B = [L\pr{\sum_{i = 1}^{n}(k_i * a_i)}]_B = [\sum_{i = 1}^{n}\pr{L(k_i * a_i)}]_B = \sum_{i = 1}^{n}\pr{[L(k_i * a_i)]_B} = \sum_{i = 1}^{n}\pr{[k_i * L(a_i)]_B} = \sum_{i = 1}^{n}\pr{k_i * [L(a_i)]_B} =$ \cont
+  \lit \cont $\langle [L(a)]_B | a \in A \rangle * K^T = \langle [L(a)]_B | a \in A \rangle * [v]_A$ \pipe $[L(v)]_B = \langle [L(a)]_B | a \in A \rangle * [v]_A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+Note: Shorthand is to RREF the augmented matrix [Columns of B | Columns of A] into [I | M], thus M is the transition matrix \\
+$TransitionMatrix \abr \forall_{L, V}\left(\begin{array}{ll}
+  \pr{(Basis[A, V, +, *]) \land (Basis[B, V, +, *])} \hfill \implies \hfill \\
+  \pr{\forall_{v \in V}(CoordVec[[v]_B, v, B, W, +_w, *_w] = \langle [a]_B | a \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v])}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(LTMatrix) \land (LinTrans[I, V, +, *, V, +, *])$ \pipe $[I(v)]_B = \langle [I(a)]_B | a \in A \rangle * [v]_A$ \pipe $[v]_B = \langle [a]_B | a \in A \rangle * [v]_A$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LTOverTransition \abr \pr{\pr{[L(a)]_T = A * [a]_S} \land (P * [a]_{S'} = [a]_S) \land \pr{Q * [L(a)]_{T'} = [L(a)]_T}} \implies \pr{[L(a)]_{T'} = (Q^{-1} * A * P) * [a]_{S'}}$
+\begin{enumerate}
+  \lit $[L(a)]_{T'} = Q^{-1} * [L(a)]_T = Q^{-1} * A * [a]_S = Q^{-1} * A * P * [a]_{S'}$ \pipe $[L(a)]_{T'} = (Q^{-1} * A * P) * [a]_{S'}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LOOverTransition \abr \pr{\pr{[L(a)]_S = A * [a]_S} \land (P * [a]_{S'} = [a]_S)} \implies \pr{[L(a)]_{S'} = (P^{-1} * A * P) * [a]_{S'}}$
+\begin{enumerate}
+  \lit $P * [a]_{S'} = [a]_S$ \pipe $P * [L(a)]_{S'} = [L(a)]_S$
+  \lit $LTOverTransition$ \pipe $[L(a)]_{S'} = P^{-1} * [L(a)]_S = P^{-1} * A * [a]_S = P^{-1} * A * P * [a]_{S'}$ \pipe $[L(a)]_{S'} = (P^{-1} * A * P) * [a]_{S'}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RankNullityRelation \abr (Rank[A] \equiv Dim[rng_L]) \land (Nullity[A] \equiv Dim[ker_L]) \land (RankNullity \equiv RankNullityLT)$ \\
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SimMatrix[A, B] \abr \exists_{P}(B = P * A * P^{-1})$ \\
+
+$SimMatrixEquiv \abr (SimMatrix[A, B]) \iff \pr{\pr{[L(a)]_T = A * [a]_S} \land \pr{[L(a)]_{T'} = B * [a]_{S'}}}$ ??? \\
+
+
+
+
 
 
 %############################################################################
-%. \\ . \\ TRASH CAN \\ . \\
-
 % \left(\begin{array}{ll}
 %   XXX \hfill \land \hfill \\
 %   YYY \hfill \land \hfill \\
