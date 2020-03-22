@@ -818,50 +818,182 @@ TODO:
 
 % https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/Book%3A_Mathematical_Reasoning_-_Writing_and_Proof_(Sundstrom)
 \chapter{Abstract Algebra}
-% https://math.libretexts.org/Bookshelves/Mathematical_Logic_and_Proof/Book%3A_Mathematical_Reasoning_-_Writing_and_Proof_(Sundstrom)/6%3A_Functions/6.3%3A_Injections%2C_Surjections%2C_and_Bijections
-$Relation(f, X) \abr f \subseteq X$ \\
-$Function(f, X, Y) \abr X \neq \emptyset \neq Y \land Relation(f, X \times Y) \land \forall_{x \in X} \exists!_{y \in Y}\pr{(x, y) \in f}$ \\
+\section{Functions}
+$Rel[r, X] \abr (X \neq \emptyset) \land (r \subseteq X)$ \\
+$Func[f, X, Y] \abr (Rel[f, X \times Y]) \land \pr{\forall_{x \in X} \exists!_{y \in Y}(\langle x, y \rangle \in f)}$ \\
+$Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land (Func[g \circ f, X, Z]) \land \pr{g \circ f = \{\langle x, g\pr{f(x)} \rangle \in X \times Z | x \in X\}}$ \\
 
-$\pr{Function(f, X, Y) \land A \subseteq X \land B \subseteq Y} \implies \ldots$
+$CompAssoc \abr h \circ (g \circ f) = (h \circ g) \circ f$
 \begin{enumerate}
-  \lit $Domain(f) \abr X; Codomain(f) \abr Y$ % behaves like types
-  \lit $Image(f, A) \abr \{f(a) : a \in A\}; Preimage(f, B) \abr \{a : f(a) \in B\}$
-  \lit $Range(f) \abr Image\pr{Domain(f)}$
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Injective(f, X, Y) \abr Function(f, X, Y) \land \forall_{x_1, x_2 \in X}\pr{x_1 \neq x_2 \implies f(x_1) \neq f(x_2)}$ \\ % or One-to-One
-$Surjective(f, X, Y) \abr Function(f, X, Y) \land \forall_{y \in Y} \exists_{x \in X}\pr{y_0 = f(x)}$ \\ % or Onto
-$Bijective(f, X, Y) \abr Injective(f, X, Y) \land Surjective(f, X, Y)$ \\ % or One-to-One Correspondence
-$\df{Surjective Equivalent} \abr \pr{Range(f) = Codomain(f)} \implies Surjective(f)$ \\
+$Domain[dom(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{dom(f) = X}$ \\
+$Codomain[cod(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{cod(f) = Y}$ \\
+$Image[im(A), A, f, X, Y] \abr (Func[f, X, Y]) \land (A \subseteq X) \land \pr{im(A) = \{f(a) \in Y | a \in A\}}$ \\
+$Preimage[pim(B), B, f, X, Y] \abr (Func[f, X, Y]) \land (B \subseteq Y) \land \pr{pim(B) = \{a \in X | f(a) \in B\}}$ \\
+$Range[rng(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{Image[rng(f), dom(f), f, X, Y]}$ \\
 
-$\pr{Function(f, X, Y) \land Function(g, Y, Z)} \implies (f \circ g)(x) \abr f\pr{g(x)}; Function(f \circ g, X, Z)$ \\
+$Inj[f, X, Y] \abr (Func[f, X, Y]) \land \pr{\forall_{x_1, x_2 \in X}\pr{\pr{f(x_1) = f(x_2)} \implies (x_1 = x_2)}}$ \\ % or One-to-One
+$Surj[f, X, Y] \abr (Func[f, X, Y]) \land \pr{\forall_{y \in Y} \exists_{x \in X}\pr{y = f(x)}}$ \\ % or Onto
+$Bij[f, X, Y] \abr (Inj[f, X, Y]) \land (Surj[f, X, Y])$ \\ % or One-to-One Correspondence
+$Inv[f^{-1}, f, X, Y] \abr (Func[f, X, Y]) \land (Func[f^{-1}, Y, X]) \land (f \circ f^{-1} = I_Y) \land (f^{-1} \circ f = I_X)$ \\
 
-$\df{Properties of Functions} \abr \pr{Function(f, A, B) \land Function(g, B, C) \land Function(h, C, D)} \implies \ldots$
+$SurjEquiv \abr (Surj[f, X, Y]) \iff \pr{rng(f) = cod(f)}$ \\
 \begin{enumerate}
-  \lit $h \circ (g \circ f) = (h \circ g) \circ f$
-  \lit $\pr{Injective(f) \land Injective(g)} \implies Injective(g \circ f)$
-  \lit $\pr{Surjective(f) \land Surjective(g)} \implies Surjective(g \circ f)$
-  \lit $\pr{Bijective(f, A, B)} \implies \exists_{f^{-1}}\pr{Function(f^-1, B, A) \land \forall_{a \in A}\pr{f^{-1}\pr{f(a)} = a} \land \forall_{b \in B}\pr{f\pr{f^{-1}(b)} = b}}$
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\df{|}(a, b) \abr a, b \in \mathbb{Z} \land a \neq 0 \land \exists_{c \in \mathbb{Z}}(b = a c)$ \\
-
-$\df{Divisibility Theorems} \abr (a, b, c, m, x, y \in \mathbb{Z}) \implies \ldots$
+$BijEquiv \abr (Bij[f, X, Y]) \iff \pr{\exists_{f_{-1}}(Inv[f^{-1}, f, X, Y])}$ \\
 \begin{enumerate}
-  \lit $(a | b) \implies a | b c$
-  \lit $(a | b \land b | c) \implies a | c$
-  \lit $(a | b \land b | c) \implies a | (b x + c y)$
-  \lit $(a | b \land b | a) \implies a = \pm b$
-  \lit $(a | b \land a > 0 \land b > 0) \implies (a \leq b)$
-  \lit $(a | b) \iff (m \neq 0 \land m a | m b)$
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\df{Division Algorithm} \abr (a, b \in \mathbb{Z} \land a > 0) \implies \exists!_{q, r \in \mathbb{Z}}(b = a q + r)$ \\
+$InjComp \abr \pr{(Inj[f]) \land (Inj[g])} \implies (Inj[g \circ f])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\df{CD}(a, b, c) \abr a, b, c \in \mathbb{Z} \land a : b \land a : c$ \\
-$\df{GCD}(a, b, c) \abr CD(a, b, c) \land \forall_{d}\pr{(d : b \land d : c) \implies d : a}$
+$SurjComp \abr \pr{(Surj[f]) \land (Surj[g])} \implies (Surj[g \circ f])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$\df{GCD Equivalent} \abr 123123$
+
+\section{Divisibility, Equivalence Relations, Paritions}
+$DivisionAlgorithm \abr \forall_{b \in \mathbb{Z}} \forall_{a \in \mathbb{Z}^+} \exists!_{q, r \in \mathbb{Z}}\pr{(b = a q + r) \land (0 \leq r < q)}$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Divides[a, b] \abr (a, b \in \mathbb{Z}) \land \pr{\exists_{c \in \mathbb{Z}}(b = a c)}$ \\
+$ComDiv[a, b, c] \abr (Divides[a, b]) \land (Divides[a, c])$ \\
+$GCD[a, b, c] \abr (ComDiv[a, b, c]) \land \pr{\forall_{d \in \mathbb{Z}}\pr{\pr{(Divides[d, b]) \land (Divides[d, c])} \implies (Divides[d, a])}}$ \\
+$RelPrime[a, b] \abr GCD[1, a, b]$ \\
+$CongRel[a, b, n] \abr Divides[n, a - b]$ \\
+
+$Partition[\mathcal{P}, S] \abr \pr{\forall_{P \in \mathcal{P}}(P \neq \emptyset)} \land \pr{S = \cup_{P \in \mathcal{P}}(P)} \land \pr{\forall_{P_1, P_2 \in \mathcal{P}}\pr{(P_1 \neq P_2) \implies (P_1 \cap P_2 = \emptyset)}}$ \\
+$EqRel[\sim, S] \abr (Rel[\sim, S]) \land \pr{\forall_{a \in S}(a \sim a)} \land \pr{\forall_{a, b \in S}\pr{(a \sim b) \implies (b \sim a)}} \land \pr{\forall_{a, b, c \in S}\pr{\pr{(a \sim b) \land (b \sim c)} \implies (a \sim c)}}$ \\
+$EqClass[[s], s, \sim, S] \abr (Rel[\sim, S]) \land (s \in S) \land ([s] = \{x \in S | x \sim s\})$ \\
+
+$PartitionInducesEqRel \abr (Partition[\mathcal{P}, S]) \implies \pr{\exists_{\sim}(EqRel[\sim, S])}$
+\begin{enumerate}
+  \lit TODO : $\sim = \{\langle a, b \rangle \in S \times S | (P \in \mathcal{P}) \land (a, b \in P)\}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$EqRelInducesPartition \abr (EqRel[\sim, S]) \implies \pr{\exists_{\mathcal{P}}(Partition[\mathcal{P}, S])}$
+\begin{enumerate}
+  \lit TODO : $Partition[EqClass_1, EqClass_2, \ldots]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$EqRelCong \abr \forall_{n \in \mathbb{Z}^+}(EqRel[CongRel, \mathbb{Z}])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Groups}
+$Group[G, *] \abr \left(\begin{array}{ll}
+  (Function[*, G, G]) \hfill \land \hfill \\  % binary operation / magma
+  \pr{\forall_{a, b, c \in G}\pr{(a * b) * c = a * (b * c)}} \hfill \land \hfill \\  % semigroup
+  \pr{\exists_{e \in G} \forall_{a \in G}(a * e = a = e * a)} \hfill \land \hfill \\  % monoid
+  \pr{\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a)}
+\end{array}\right)$ \\
+$AbelianGroup[G, *] \abr (Group[G, *]) \land \pr{\forall_{a, b \in G}(a * b = b * a)}$ \\
+
+$CancelLaws \abr \forall_{G}\pr{(Group[G, *]) \implies \pr{\forall_{a, b, c \in G}\pr{\pr{(a * b = a * c) \implies (b = c)} \land \pr{(a * c = b * c) \implies (a = b)}}}}$
+\begin{enumerate}
+  \lit $(a * b = a * c) \implies \ldots$
+  \begin{enumerate}
+    \lit $a \in G$ \pipe $\exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a)$
+    \lit $Function[*, G, G]$ \pipe $a^{-1} * a * b = a^{-1} * a * c$
+    \lit $\pr{\forall_{a, b, c \in G}\pr{(a * b) * c = a * (b * c)}} \land \pr{\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a)}$ \pipe $b = c$
+  \end{enumerate}
+  \lit $(a * b = a * c) \implies (b = c)$
+  \lit $(a * c = b * c) \implies \ldots$
+  \begin{enumerate}
+    \lit TODO
+  \end{enumerate}
+  \lit $(a * c = b * c) \implies (a = b)$
+  \lit $\pr{(a * b = a * c) \implies (b = c)} \land \pr{(a * c = b * c) \implies (a = b)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IdUniq \abr \forall_{G}\pr{(Group[G, *]) \implies \pr{\forall_{e_1, e_2 \in G} \forall_{a \in G}\pr{\pr{(a * e_1 = a = e_1 * a) \land (a * e_2 = a = e_2 * a)} \implies (e_1 = e_2)}}}$
+\begin{enumerate}
+  \lit $(CancelLaws) \land \pr{\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a)}$ \pipe $a * e_1 = a = a * e_2$ \pipe $e_1 = e_2$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvUniq \abr \forall_{G}\pr{(Group[G, *]) \implies \pr{\forall_{a \in G} \forall_{a_1^{-1}, a_2^{-1} \in G}\pr{\pr{(a * a_1^{-1} = e = a_1^{-1} * a) \land (a * a_2^{-1} = e = a_2^{-1} * a)} \implies (a_1^{-1} = a_2^{-1})}}}$
+\begin{enumerate}
+  \lit $(CancelLaws) \land \pr{\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a)}$ \pipe $a * a_1^{-1} = e = a * a_2^{-1}$ \pipe $a_1^{-1} = a_2^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvProd \abr \forall_{G} \forall_{a, b \in G}\pr{(a * b)^{-1} = b^{-1} * a^{-1}}$
+\begin{enumerate}
+  \lit $(a * b) * (a * b)^{-1} = e$
+  \lit $(a * b) * (b^{-1} * a^{-1}) = \pr{a * (b * b^{-1}) * a^{-1}} = e$
+  \lit $InvUniq$ \pipe $(a * b)^{-1} = b^{-1} * a^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$OrderG[o(G), G, *] \abr (Group[G, *]) \land \pr{o(G) = |G|}$ \\
+$gWitness[n, g, G, *] \abr (Group[G, *]) \land (n \in \mathbb{Z}^+) \land (g^n = e) \land \pr{\forall_{m \in \mathbb{Z}^+} (m < n) \implies (g^m \neq e)}$ \\
+$Orderg[o(g), g, G, *] \abr (Group[G, *]) \land \pr{\pr{\exists_{n}(gWitness[n, g, G, *])} \implies \pr{o(g) = n}} \land \pr{\pr{\lnot \exists_{n}(gWitness[n, g, G, *])} \implies \pr{o(g) = \infty}}$ \\
+
+
+\section{Subgroups}
+$Subgroup[H, G, *] \abr (Group[G, *]) \land (H \subseteq G) \land (Group[H, *])$ \\
+$TrivSubgroup[H, G, *] \abr (H = \{e\}) \lor (H = G)$ \\
+$PropSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land (\lnot TrivSubgroup[H, G, *])$ \\
+
+$SubgroupEquiv \abr \forall_{H, G}\left(\begin{array}{ll}
+  (Subgroup[H, G, *]) \hfill \iff \hfill \\
+  \pr{(Group[G, *]) \land (\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land \pr{\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(Subgroup[H, G, *]) \implies \pr{(\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land \pr{\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}}$
+  \lit $\pr{(\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land \pr{\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}} \implies \ldots$
+  \begin{enumerate}
+    \lit $Group[G, *]$ \pipe $(a, b, c \in H) \implies (a, b, c \in G) \implies \pr{(a * b) * c = a * (b * c)}$ \pipe $\forall_{a, b, c \in H}\pr{(a * b) * c = a * (b * c)}$
+    \lit $\emptyset \neq H$ \pipe $\exists_{h}(h \in H)$
+    \lit $h \in H$ \pipe $\exists_{h^{-1} \in H}(h * h^{-1} = e = h^{-1} * h)$
+    \lit $Function[*, H, H]$ \pipe $e = h * h^{-1} \in H$ \pipe $e \in H$ \pipe $\exists_{e \in H} \forall_{a \in H}(a * e = a = e * a)$
+    \lit $(Function[*, H, H]) \land \pr{\forall_{a, b, c \in H}\pr{(a * b) * c = a * (b * c)}} \land \pr{\exists_{e \in H} \forall_{a \in H}(a * e = a = e * a) \land (\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}$
+    \lit $Group[H, *]$
+    \lit $(Group[G, *]) \land (H \subseteq G) \land (Group[H, *])$ \pipe $Subgroup[H, G, *]$
+  \end{enumerate}
+  \lit $\pr{(\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land \pr{\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}} \implies (Subgroup[H, G, *])$
+  \lit $(Subgroup[H, G, *]) \iff \pr{(Group[G, *]) \land (\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land \pr{\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SubgroupEquivOST \abr \forall_{H, G}\pr{(Subgroup[H, G, *]) \iff \pr{(Group[G, *]) \land (\emptyset \neq H \subseteq G) \land \pr{\forall_{a, b \in H}(a * b^{-1} \in H)}}}$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SubgroupIntersection \abr \forall_{H_1, H_2, G}\pr{\pr{(Subgroup[H_1, G, *]) \land (Subgroup[H_2, G, *])} \implies (Subgroup[H_1 \cap H_2, G, *])}$
+\begin{enumerate}
+  \lit $Group[G, *]$
+  \lit $(e \in H_1) \land (e \in H_2)$ \pipe $e \in H_1 \cap H_2$ \pipe $\emptyset \neq H_1 \cap H_2$
+  \lit $(H_1 \subseteq G) \land (H_2 \subseteq G)$ \pipe $H_1 \cap H_2 \subseteq G$
+  \lit $\emptyset \neq H_1 \cap H_2 \subseteq G$
+  \lit $(a, b \in H_1 \cap H_2) \implies \ldots$
+  \begin{enumerate}
+    \lit $a, b \in H_1$ \pipe $a * b \in H_1$
+    \lit $a, b \in H_2$ \pipe $a * b \in H_2$
+    \lit $a * b \in H_1 \cap H_2$
+  \end{enumerate}
+  \lit $(a, b \in H_1 \cap H_2) \implies (a * b \in H_1 \cap H_2)$ \pipe $Function[*, H_1 \cap H_2, H_1 \cap H_2]$
+  \lit $(a \in H_1 \cap H_2) \implies \ldots$
+  \begin{enumerate}
+    \lit $(a^{-1} \in H_1) \land (a^{-1} \in H_2)$ \pipe $a^{-1} \in H_1 \cap H_2$
+  \end{enumerate}
+  \lit $(a \in H_1 \cap H_2) \implies (a^{-1} \in H_1 \cap H_2)$ \pipe $\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a)$
+  \lit $(SubgroupEquiv) \land (Group[G, *]) \land (\emptyset \neq H_1 \cap H_2 \subseteq G) \land (Function[*, H_1 \cap H_2, H_1 \cap H_2]) \land$ \cont
+  \lit \cont $\pr{\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a)}$ \pipe $Subgroup[H_1 \cap H_2, G, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+centers centralizers you're fucking retarded
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\\pr{(.+?)\}    $1[$2]
