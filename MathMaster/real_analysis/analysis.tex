@@ -861,7 +861,7 @@ $SurjComp \abr ((Surj[f]) \land (Surj[g])) \implies (Surj[g \circ f])$
 
 
 \section{Divisibility, Equivalence Relations, Paritions}
-$DivisionAlgorithm \abr \forall_{b \in \mathbb{Z}} \forall_{a \in \mathbb{Z}^+} \exists!_{q, r \in \mathbb{Z}}((b = a q + r) \land (0 \leq r < q))$
+$DivisionAlgorithm \abr \forall_{b \in \mathbb{Z}} \forall_{a \in \mathbb{Z}^+} \exists!_{q, r \in \mathbb{Z}}((b = a q + r) \land (0 \leq r < a))$
 \begin{enumerate}
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -935,9 +935,9 @@ $InvProd \abr \forall_{G} \forall_{a, b \in G}((a * b)^{-1} = b^{-1} * a^{-1})$
   \lit $InvUniq$ \pipe $(a * b)^{-1} = b^{-1} * a^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$OrderG[o(G), G, *] \abr (Group[G, *]) \land (o(G) = |G|)$ \\
+$OrderEl[o(G), G, *] \abr (Group[G, *]) \land (o(G) = |G|)$ \\
 $gWitness[n, g, G, *] \abr (Group[G, *]) \land (n \in \mathbb{Z}^+) \land (g^n = e) \land (\forall_{m \in \mathbb{Z}^+} (m < n) \implies (g^m \neq e))$ \\
-$Orderg[o(g), g, G, *] \abr (Group[G, *]) \land ((\exists_{n}(gWitness[n, g, G, *])) \implies (o(g) = n)) \land ((\lnot \exists_{n}(gWitness[n, g, G, *])) \implies (o(g) = \infty))$ \\
+$OrderEl[o(g), g, G, *] \abr (Group[G, *]) \land ((\exists_{n}(gWitness[n, g, G, *])) \implies (o(g) = n)) \land ((\lnot \exists_{n}(gWitness[n, g, G, *])) \implies (o(g) = \infty))$ \\
 
 
 \section{Subgroups}
@@ -992,8 +992,281 @@ $SubgroupIntersection \abr \forall_{H_1, H_2, G}(((Subgroup[H_1, G, *]) \land (S
   \lit \cont $(\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a))$ \pipe $Subgroup[H_1 \cap H_2, G, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-centers centralizers you're fucking retarded
+$Centralizer[C(g), g, G, *] \abr (Group[G, *]) \land (g \in G) \land (C(g) = \{h \in G | g * h = h * g\})$ \\
 
+$SubgroupCentralizer \abr \forall_{g, G}((Centralizer[C(g), g, G, *]) \implies (Subgroup[C(g), G, *]))$
+\begin{enumerate}
+  \lit $e * g = g * e$ \pipe $e \in C(g)$ \pipe $C(g) \neq \emptyset$
+  \lit $C(g) \subseteq G$ \pipe $\emptyset \neq C(g) \subseteq G$
+  \lit $(a, b \in C(g)) \implies \ldots$
+  \begin{enumerate}
+    \lit $(a * g = g * a) \land (b * g = g * b)$
+    \lit $(a * b) * g = a * (b * g) = a * (g * b) = (a * g) * b = (g * a) * b = g * (a * b)$ \pipe $a * b \in C(g)$
+  \end{enumerate}
+  \lit $(a, b \in C(g)) \implies (a * b \in C(g))$ \pipe $\forall_{a, b \in C(g)}(a * b \in C(g))$
+  \lit $(a \in C(g)) \implies \ldots$
+  \begin{enumerate}
+    \lit $a * g = g * a$
+    \lit $a^{-1} * (a * g) * a^{-1} = a^{-1} * (g * a) * a^{-1}$ \pipe $g * a^{-1} = a^{-1} * g$ \pipe $a^{-1} \in C(g)$
+  \end{enumerate}
+  \lit $(a \in C(g)) \implies (a^{-1} \in C(g))$ \pipe $\forall_{a \in C(g)}(a^{-1} \in C(g))$
+  \lit $(SubgroupEquiv) \land (\emptyset \neq C(g) \subseteq G) \land (\forall_{a, b \in C(g)}(a * b \in C(g))) \land (\forall_{a \in C(g)}(a^{-1} \in C(g)))$ \pipe $Subgroup[C(g), G, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Center[Z(G), G, *] \abr (Group[G, *]) \land (Z(G) = \cap_{g \in G}(C(g)))$ \\
+
+$SubgroupCenter \abr \forall_{G}((Center[Z(G), G, *]) \implies (Subgroup[Z(G), G, *]))$
+\begin{enumerate}
+  \lit $(SubgroupCentralizer) \land (SubgroupIntersection)$ \pipe $Subgroup[Z(G), G, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Special Groups}
+\subsection{Cyclic Group}
+$CyclicSubgroup[<g>, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (<g> = \{g^n | n \in \mathbb{Z}\})$ \\
+$Generator[g, G, *] \abr CyclicSubgroup[G, g, G, *]$ \\
+$CyclicGroup[G, *] \abr \exists_{g \in G}(Generator[g, G, *])$ \\
+
+$SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}(((CyclicGroup[G, *]) \land (Subgroup[H, G, *])) \implies (CyclicGroup[H, *]))$
+\begin{enumerate}
+  \lit $\exists_{g \in G}(Generator[g, G, *])$
+  \lit $H \subseteq G$ \pipe $\exists_{m \in \mathbb{Z}^+}((g^m \in H) \land (\forall_{k \in \mathbb{Z}^+}((k < m) \implies (g^k \notin H))))$
+  \lit $(b \in H) \implies \ldots$
+  \begin{enumerate}
+    \lit $H \subseteq G$ \pipe $\exists_{n \in \mathbb{Z}^+}(b = g^n)$
+    \lit $(DivisionAlgorithm) \land (n \in \mathbb{Z}) \land (m \in \mathbb{Z}^+)$ \pipe $\exists!_{q, r \in \mathbb{Z}}((n = m q + r) \land (0 \leq r < m))$
+    \lit $g^n = g^{m q + r} = g^{m q} * g^r$ \pipe $g^r = (g^{m q})^{-1} * g^n$
+    \lit $g^n, g^m \in H$ \pipe $g^n, (g^{m q})^{-1} \in H$ \pipe $g^r = g^{m q})^{-1} * g^n \in H$ \pipe $g^r \in H$
+    \lit $(g^r \in H) \land (0 \leq r < m) \land (\forall_{k \in \mathbb{Z}^+}((k < m) \implies (g^k \notin H)))$ \pipe $r = 0$
+    \lit $(r = 0) \land (g^n = g^{m q + r}) \land (b = g^n)$ \pipe $b = g^n = g^{m q}$ \pipe $b \in <g^m>$
+  \end{enumerate}
+  \lit $(b \in H) \implies (b \in <g^m>)$ \pipe $H \subseteq <g^m>$
+  \lit $(b \in <g^m>) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{k \in \mathbb{Z}}(b = g^{m k})$
+    \lit  $g^m \in H$ \pipe $b = g^{m k} \in H$ \pipe $b \in H$
+  \end{enumerate}
+  \lit $(b \in <g^m>) \implies (b \in H)$ \pipe $<g^m> \subseteq H$
+  \lit $(H \subseteq <g^m>) \land (<g^m> \subseteq H)$ \pipe $H = <g^m>$ \pipe $Generator[g^m, H, *]$ \pipe $\exists_{h \in G}(Generator[h, G, *])$ \pipe $CyclicGroup[H, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ExpModOrder \abr \forall_{G, g, n, s, t}((Group[G, *]) \land (g \in G) \land (OrderEl[n, g, G, *]) \implies ((g^s = g^t) \iff (s \equiv t (mod \phantom{.} n))))$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+\subsection{Symmetric and Alternating Groups}
+$SymmetricGroup[S_n, n] \abr S_n = \{\text{permutation of a set with n elements}\}$ \\
+$SymmetricGroupOrder \abr o(S_n) = n!$ \\
+$SymmetricGroupAsDisjoinsCycles \abr \forall_{\sigma \in S_n} \exists_{\Sigma \subseteq S_n}((DisjointCycles[\Sigma]) \land (\sigma = \prod(\sigma_i)))$ \\
+$SymmetricGroupAsTranspositions \abr \forall_{\sigma \in S_n} \exists_{\Sigma \subseteq S_n}((Transpositions[\Sigma]) \land (\sigma = \prod(\sigma_i)))$ \\
+
+$vFunction[v(\sigma), \sigma, S_n] \abr v(\sigma) = n - |DisjointFullCycles[\Sigma]|$ \\
+$signFunction[sign(\sigma), \sigma, S_n] \abr sign(\sigma) = (-1)^{v(\sigma)}$ \\
+$EvenPermutation[\sigma, S_n] \abr sign(\sigma) = 1$ \\
+$OddPermutation[\sigma, S_n] \abr sign(\sigma) = -1$ \\
+
+$TranspositionSigns \abr sign(\tau \sigma) = -sign(\sigma)$ \\
+$TranspositionSignsCorollary \abr sign(\prod_{i = 1}^{r}(\tau_i)) = (-1)^r$ \\
+$SignProp \abr sign(\sigma \pi) = sign(\sigma) sign(\pi)$ \\
+
+$AlternatingGroup[A_n, n] \abr A_n = \{\sigma \in S_n | EvenPermutation[\sigma, S_n]\}$ \\
+$AlternatingGroupOrder \abr o(A_n) = n!/2$ \\
+
+\subsection{Dihedral Group}
+$DihedralGroup[D_n, *] \abr (D_n = \{a^r * b^s | (r \in \mathbb{N}_{0, n - 1}) \land (s \in \mathbb{N}_{0, 1})\}) \land \left(\begin{array}{ll}
+  (a^p a^q = a^{(p + q) \% n}) \hfill \land \hfill \\
+  (a^p b a^q = a^{(p - q) \% n} b) \hfill \land \hfill \\
+  (a^p b a^q b = a^{(p - q) \% n})
+\end{array}\right)$ \\
+$DihedralGroupOrder \abr o(D_n) = 2 n$ \\
+
+
+\section{Lagrange's Theorem}
+$LeftCoset[g H, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (g H = \{g * h | h \in H\})$ \\
+$RightCoset[H g, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (H g = \{h * g | h \in H\})$ \\
+
+$CosetInduceEqRel \abr \forall_{G, H}(((Subgroup[H, G, *]) \land (\sim = \{\langle a, b \rangle | a * b^{-1} \in H\})) \implies ((EqRel[\sim, G]) \land (EqClass[H a, a, \sim, G])))$
+\begin{enumerate}
+  \lit $(a, b, c \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Subgroup[H, G, *]) \implies (e \in H) \implies (a * a^{-1} \in H) \implies (a \sim a)$
+    \lit $(a \sim b) \implies (a * b^{-1} \in H) \implies (b * a^{-1} = (a * b^{-1})^{-1} \in H) \implies (b \sim a)$
+    \lit $((a \sim b) \land (b \sim c)) \implies (a * b^{-1}, b * c^{-1} \in H) \implies (a * c^{-1} = (a * b^{-1}) * (b * c^{-1}) \in H)$ \pipe $a \sim c$
+  \end{enumerate}
+  \lit $EqRel[\sim, G]$
+  \lit $(a, x \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $(x \sim a) \iff (x * a^{-1} \in H) \iff (\exists_{h \in H}(x * a^{-1} = h)) \iff (\exists_{h \in H}(x = h * a)) \iff (x \in H a)$
+  \end{enumerate}
+  \lit $[a] = \{x \in G | x \sim a\} = H a$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LagrangeTheorem \abr \forall_{G, H}(((Order[n, G, *]) \land (Order[m, H, *]) \land (n, m \in \mathbb{N}) \land (Subgroup[H, G, *])) \implies (Divides[m, n]))$
+\begin{enumerate}
+  \lit $(CosetInduceEqRel) \land (EqRelInducesPartition)$ \pipe $\exists_{k \in \mathbb{N}}(n = m k)$ \pipe $Divides[m, n]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IndexSubgroup[|G : H|, H, G, *] \abr (Subgroup[H, G, *]) \land (|G : H| = \text{Number of distinct right cosets of H, i.e., k in LagrangeTheorem)})$ \\
+
+$OrderOrderElProp \abr \forall_{g, G}(((Order[n, G, *]) \land (OrderEl[m, g, G, *])) \implies ((Divides[m, n]) \land (g^n = e)))$
+\begin{enumerate}
+  \lit $CyclicSubgroup[<g>, g, G, *]$ \pipe $Order[<g>] = m$
+  \lit $(LagrangeTheorem) \land (CyclicSubgroup)$ \pipe $Divides[Order[<g>], Order[G]]$ \pipe $Divides[m, n]$
+  \lit $g^n = g^{m k} = e ^k = e$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$\text{Any prime ordered cyclic group has no proper non-trivial subgroups and any non-identity element is a generator.}$
+\begin{enumerate}
+  \lit $LagrangeTheorem$ \pipe $\text{Subgroups must have the order 1 or p}$ \pipe $\text{Subgroups are trivial}$
+  \lit $\text{CyclicSubgroup of a non-identity element is G}$ \pipe $\text{Non-identity elements generates G}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$((Subgroup[H, G, *]) \land (Subgroup[K, G, *] \land (RelPrime(o(H), o(K)))) \implies (H \cap K = \{e\})$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Homomorphisms}
+$Homomorphism[\phi, G, *, H, \diamond] \abr (Function[\phi, G, H]) \land (\forall_{a, b \in G}(\phi(a * b) = \phi(a) \diamond \phi(b)))$ \\
+$Monomorphism[\phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (Inj[\phi, G, H])$ \\
+$Epimorphism[\phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (Surj[\phi, G, H])$ \\
+$Isomorphism[\phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (Bij[\phi, G, H])$ \\
+$Isomorphic[G, *, H, \diamond] \abr \exists_{\phi}(Isomorphism[\phi, G, *, H, \diamond])$ ** Notation: $G \cong H$ ** \\
+$Automorphism[\phi, G, *] \abr Isomorphism[\phi, G, *, G, *]$ \\
+
+$IdMapsId \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\phi(e_G) = e_H)$
+\begin{enumerate}
+  \lit $\phi(e_G) = \phi(e_G * e_G) = \phi(e_G) \diamond \phi(e_G)$
+  \lit $e_H = \phi(e_G)^{-1} \diamond \phi(e_G) = \phi(e_G)^{-1} \diamond \phi(e_G) \diamond \phi(e_G) = \phi(e_G)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$InvMapsInv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\phi(g^{-1}) = \phi(g)^{-1})$
+\begin{enumerate}
+  \lit $IdMapsId$ \pipe $e_H = \phi(e_G) = \phi(g * g^{-1}) = \phi(g) \diamond \phi(g^{-1})$ \pipe $e_H = \phi(g) \diamond \phi(g^{-1})$ \pipe $\phi(g^{-1}) = \phi(g)^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ExpMapsExp \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\phi(g^n) = \phi(g)^n)$
+\begin{enumerate}
+  \lit $\phi(g^n) = \phi(g * \ldots * g) = \phi(g) \diamond \ldots \phi(g) = \phi(g)^n$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$MapDivProp \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (Order[n, G, *])) \implies (\forall_{g \in G}((OrderEl[m, \phi(g), H, \diamond]) \implies (Divides[m, n])))$
+\begin{enumerate}
+  \lit $OrderOrderElProp$ \pipe $g^n = e_G$
+  \lit $(IdMapsId) \land (ExpMapsExp)$ \pipe $e_G = \phi(g^n) = \phi(g)^n = e_H$
+  \lit $OrderEl[m, \phi(g), H, \diamond]$ \pipe $\phi(g)^m = e_H$ \pipe $\phi(g)^m = e_H = {e_H}^k = \phi(g)^n$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$HomoCompInduceHomo \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \square])) \implies (Homomorphism[\theta \circ \phi, G, *, K, \square])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IsoInvInduceIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\phi^{-1}, H, \diamond, G, *])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
+  ((CyclicGroup[G, *]) \hfill \land \hfill (CyclicGroup[H, \diamond]) \hfill \land \hfill (Order[n, G, *]) \hfill \land \hfill (Order[n, H, \diamond])) \hfill \implies \hfill \\
+  (Isomorphic[G, *, H, \diamond])
+\end{array}\right)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Kernel and Image Homomorphisms}
+$Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (ker_\phi = \{g \in G | \phi(g) = e_H\})$ \\
+$Image[im_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (im_\phi = \{\phi(g) \in H | g \in G\})$ \\
+
+$KernelSubgroupDomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Subgroup[ker_\phi, G, *])$
+\begin{enumerate}
+  \lit $IdMapsId$ \pipe $\phi(e_G) = e_H$ \pipe $e_G \in ker_\phi$ \pipe $ker_\phi \neq \emptyset$
+  \lit $ker_\phi \subseteq G$ \pipe $\emptyset \neq ker_\phi \subseteq G$
+  \lit $(a, b \in ker_\phi) \implies \ldots$
+  \begin{enumerate}
+    \lit $(\phi(a) = e_H) \land (\phi(b) = e_H)$ \pipe $e_H = e_H \diamond e_H = \phi(a) \diamond \phi(b) = \phi(a * b)$ \pipe $a * b \in ker_\phi$
+  \end{enumerate}
+  \lit $(a, b \in ker_\phi) \implies (a * b \in ker_\phi)$ \pipe $\forall_{a, b \in ker_\phi}(a * b \in ker_\phi)$
+  \lit $(a \in ker_\phi) \implies \ldots$
+  \begin{enumerate}
+    \lit $\phi(a) = e_H$
+    \lit $InvMapsInv$ \pipe $\phi(a^{-1}) = {e_H}^{-1} = e_H$ \pipe $a^{-1} \in ker_\phi$
+  \end{enumerate}
+  \lit $(a \in ker_\phi) \implies (a^{-1} \in ker_\phi)$ \pipe $\forall_{a \in ker_\phi}(a^{-1} \in ker_\phi)$
+  \lit $(SubgroupEquiv) \land (\emptyset \neq ker_\phi \subseteq G) \land (\forall_{a, b \in ker_\phi}(a * b \in ker_\phi)) \land (\forall_{a \in ker_\phi}(a^{-1} \in ker_\phi))$ \pipe $Subgroup[ker_\phi, G, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Subgroup[im_\phi, H, \diamond])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ImageCyclicIsCyclic \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (CyclicGroup[G, *])) \implies (CyclicGroup[im_\phi, \diamond])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$MonomorphismEquiv \abr (Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
+\begin{enumerate}
+  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \implies \ldots$
+  \begin{enumerate}
+    \lit $IdMapsId$ \pipe $\phi(e_G) = e_H$ \pipe $e_G \in ker_\phi$ \pipe $\{e_G\} \subseteq ker_\phi$
+    \lit $(g \in ker_\phi) \implies \ldots$
+    \begin{enumerate}
+      \lit $(g \in ker_\phi) \land (IdMapsId)$ \pipe $\phi(g) = e_H = \phi(e_G)$
+      \lit $(Injective[\phi, G, H]) \land (\phi(g) = \phi(e_G))$ \pipe $g = e_G$ \pipe $g \in \{e_G\}$
+    \end{enumerate}
+    \lit $(g \in ker_\phi) \implies (g \in \{e_G\})$ \pipe $ker_\phi \subseteq \{e_G\}$
+    \lit $(\{e_G\} \subseteq ker_\phi) \land (ker_\phi \subseteq \{e_G\})$ \pipe $ker_\phi = \{e_G\}$
+  \end{enumerate}
+  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \implies (ker_\phi = \{e_G\})$
+  \lit $(ker_\phi = \{e_G\}) \implies \ldots$
+  \begin{enumerate}
+    \lit $((g_1, g_2 \in G) \land (\phi(g_1) = \phi(g_2))) \implies \ldots$
+    \begin{enumerate}
+      \lit $InvMapsInv$ \pipe $e_H = \phi(g_1) \diamond \phi(g_2)^{-1} = \phi(g_1) \diamond \phi({g_2}^{-1}) = \phi(g_1 * {g_2}^{-1})$ \pipe $e_H = \phi(g_1 * {g_2}^{-1})$ \pipe $g_1 * {g_2}^{-1} \in ker_\phi$
+      \lit $(ker_\phi = \{e_G\}) \land (g_1 * {g_2}^{-1} \in ker_\phi)$ \pipe $g_1 * {g_2}^{-1} = e_G$ \pipe ${g_1}^{-1} = {g_2}^{-1}$
+      \lit $InvUniq$ \pipe $g_1 = g_2$
+    \end{enumerate}
+    \lit $((g_1, g_2 \in G) \land (\phi(g_1) = \phi(g_2))) \implies (g_1 = g_2)$ \pipe $Injective[\phi, G, H]$ \pipe $Monomorphism[\phi, G, *, H, \diamond]$
+  \end{enumerate}
+  \lit $(ker_\phi = \{e_G\}) \implies (Monomorphism[\phi, G, *, H, \diamond])$
+  \lit $((Monomorphism[\phi, G, *, H, \diamond]) \implies (ker_\phi = \{e_G\})) \land ((ker_\phi = \{e_G\}) \implies (Monomorphism[\phi, G, *, H, \diamond]))$
+  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$MapsToSameEl \abr (ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
+\begin{enumerate}
+  \lit $(x \in (ker_\phi) g) \implies \ldots$
+  \begin{enumerate}
+    \lit $x = K_x * g$ \pipe $\phi(x) = \phi(K_x * g) = \phi(K_x) \diamond \phi(g) = e_H \diamond \phi(g) = \phi(g)$ \pipe $\phi(x) = \phi(g)$
+  \end{enumerate}
+  \lit $(x \in (ker_\phi) g) \implies (\phi(x) = \phi(g))$
+  \lit $(\phi(x) = \phi(g)) \implies \ldots$
+  \begin{enumerate}
+    \lit TODO: other direction
+  \end{enumerate}
+  \lit $(\phi(x) = \phi(g)) \implies (x \in (ker_\phi) g)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$MapsToSameElMultiplicity \abr ((|G| = n) \land (|ker_\phi| = m) \land (|im_\phi| = r)) \implies (n = m r)$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ImageDividesGH \abr (|im_\phi| = r) \implies ((Divides[r, o(G)]) \land (Divides[r, o(H)]))$
+\begin{enumerate}
+  \lit $MapsToSameElMultiplicity$ \pipe $Divides[r, o(G)]$
+  \lit $LagrangeTheorem$ \pipe $Divides[r, o(H)]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Conjugacy}
+123123
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\((.+?)\)    $1[$2]
