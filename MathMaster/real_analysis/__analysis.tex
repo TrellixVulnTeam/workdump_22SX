@@ -1086,6 +1086,11 @@ $DihedralGroupOrder \abr o(D_n) = 2 n$ \\
 $LeftCoset[g H, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (g H = \{g * h | h \in H\})$ \\
 $RightCoset[H g, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (H g = \{h * g | h \in H\})$ \\
 
+$CosetCardinality \abr (RightCoset[H g, g, H, G, *]) \implies (|H| = |H g|)$
+\begin{enumerate}
+  \lit $CancellationLaws$ \pipe $(h_1 g = h_2 g) \implies (h_1 = h_2)$ \pipe $|H| = |H g|$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 $CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \{\langle a, b \rangle | a * b^{-1} \in H\})} \implies \pr{(EqRel[\sim, G]) \land (EqClass[H a, a, \sim, G])}}$
 \begin{enumerate}
   \lit $(a, b, c \in G) \implies \ldots$
@@ -1104,7 +1109,7 @@ $CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \
 
 $LagrangeTheorem \abr \forall_{G, H}\pr{\pr{(Order[n, G, *]) \land (Order[m, H, *]) \land (n, m \in \mathbb{N}) \land (Subgroup[H, G, *])} \implies (Divides[m, n])}$
 \begin{enumerate}
-  \lit $(CosetInduceEqRel) \land (EqRelInducesPartition)$ \pipe $\exists_{k \in \mathbb{N}}(n = m k)$ \pipe $Divides[m, n]$
+  \lit $(CosetInduceEqRel) \land (EqRelInducesPartition) \land (CosetCardinality)$ \pipe $\exists_{k \in \mathbb{N}}(n = m k)$ \pipe $Divides[m, n]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $IndexSubgroup[|G : H|, H, G, *] \abr (Subgroup[H, G, *]) \land (|G : H| = \text{Number of distinct right cosets of H, i.e., k in LagrangeTheorem)})$ \\
@@ -1243,12 +1248,12 @@ $MapsToSameEl \abr (ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
 \begin{enumerate}
   \lit $\pr{x \in (ker_\phi) g} \implies \ldots$
   \begin{enumerate}
-    \lit $x = K_x * g$ \pipe $\phi(x) = \phi(K_x * g) = \phi(K_x) \diamond \phi(g) = e_H \diamond \phi(g) = \phi(g)$ \pipe $\phi(x) = \phi(g)$
+    \lit $\exists_{K_x \in ker_\phi}(x = K_x * g)$ \pipe $\phi(x) = \phi(K_x * g) = \phi(K_x) \diamond \phi(g) = e_H \diamond \phi(g) = \phi(g)$ \pipe $\phi(x) = \phi(g)$
   \end{enumerate}
-  \lit $\pr{x \in (ker_\phi) g} \implies \pr{\phi(x) = \phi(g)}$
+  \lit $\pr{x \in (ker_\phi) g} \implies \pr{\phi(x) = \phi(g)}$ \pipe $(ker_\phi) g \subseteq \{x \in G | \phi(x) = \phi(g)\}$
   \lit $\pr{\phi(x) = \phi(g)} \implies \ldots$
   \begin{enumerate}
-    \lit TODO: other direction
+    \lit $e_H = \phi(x) \diamond \phi(g)^{-1} = \phi(x) \diamond \phi(g^{-1)} = \phi(x * g^{-1)}$ \pipe $x * g^{-1} \in ker_\phi$ \pipe $x \in (ker_\phi) g$
   \end{enumerate}
   \lit $\pr{\phi(x) = \phi(g)} \implies \pr{x \in (ker_\phi) g}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -1266,7 +1271,39 @@ $ImageDividesGH \abr (|im_\phi| = r) \implies \pr{\pr{Divides[r, o(G)]} \land \p
 
 
 \section{Conjugacy}
-123123
+$Conjugate[\sim^*, a, b, G, *] \abr (Group[G, *]) \land (a, b \in G) \land \pr{\exists_{c \in G}(b = c^{-1} * a * c)}$ \\
+
+$ConjugateEqRel \abr EqRel[\sim^*, G]$
+\begin{enumerate}
+  \lit $(a, b, c \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $a = e^{-1} * a * e$ \pipe $a \sim^* a$
+    \lit $(a \sim^* b) \implies (b = x_{b}^{-1} * a * x_{b}) \implies (x_{b} * b * x_{b}^{-1} = a) \implies (b \sim^* a)$
+    \lit $\pr{(a \sim^* b) \land (b \sim^* c)} \implies \pr{(b = x_{b}^{-1} * a * x_{b}) \land (c = x_{c}^{-1} * b * x_{c})} \implies$ \cont
+    \lit \cont $\pr{c = x_{c}^{-1} * x_{b}^{-1} * a * x_{b} * x_{c} = (x_{b} * x_{c})^{-1} * a * (x_{b} * x_{c})}$ \pipe $a \sim^* c$
+  \end{enumerate}
+  \lit $EqRel[\sim^*, G]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConjugacyClass[C_g, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (EqClass[C_g, g, \sim^*, G])$ \\
+
+$ConjugacyCenter \abr (g \in G) \implies \pr{(C_g = \{g\}) \iff \pr{g \in Z(G)}}$
+\begin{enumerate}
+  \lit $\pr{g \in Z(g)} \iff \pr{\forall_{x \in G}(x * g = g * x)} \iff \pr{\forall_{x \in G}(x * g * x^{-1} = g)} \iff \pr{\forall_{f \in G}\pr{(f \sim^* g) \iff (f = g)}} \iff (C_g = \{g\})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+**Note: why is this both sound and awkward at the same time \\
+
+$ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G])$
+\begin{enumerate}
+  \lit $ConjugacyCenter$ \pipe $\pr{\forall_{g \in G}(C_g = \{g\})} \iff \pr{\forall_{g \in G}\pr{g \in Z(g)}} \iff (AbelianGroup[G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConjugateOrder \abr (h \sim^* g) \implies \pr{o(h) = o(g)}$
+\begin{enumerate}
+  \lit $\exists_{c \in G}(g = c^{-1} h c)$ \pipe $e = g^{o(g)} = (c^{-1} h c)^{o(g)} = c^{-1} h^{o(g)} c$ \pipe $e = c^{-1} h^{o(g)} c$ \pipe $h^{o(g)} = e$ \pipe $o(h) = o(g)$
+  \lit TODO: contradiction if $h^m = e$ for some $m < o(g)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\\pr{(.+?)\}    $1[$2]
