@@ -1026,6 +1026,7 @@ $SubgroupCenter \abr \forall_{G}\pr{\pr{Center[Z(G), G, *]} \implies \pr{Subgrou
 $CyclicSubgroup[<g>, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (<g> = \{g^n | n \in \mathbb{Z}\})$ \\
 $Generator[g, G, *] \abr CyclicSubgroup[G, g, G, *]$ \\
 $CyclicGroup[G, *] \abr \exists_{g \in G}(Generator[g, G, *])$ \\
+%$CyclicGroup[G, *] \abr \exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \\
 
 $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}\pr{\pr{(CyclicGroup[G, *]) \land (Subgroup[H, G, *])} \implies (CyclicGroup[H, *])}$
 \begin{enumerate}
@@ -1044,7 +1045,7 @@ $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}\pr{\pr{(CyclicGroup[G, *]) \l
   \lit $(b \in <g^m>) \implies \ldots$
   \begin{enumerate}
     \lit $\exists_{k \in \mathbb{Z}}(b = g^{m k})$
-    \lit  $g^m \in H$ \pipe $b = g^{m k} \in H$ \pipe $b \in H$
+    \lit $g^m \in H$ \pipe $b = g^{m k} \in H$ \pipe $b \in H$
   \end{enumerate}
   \lit $(b \in <g^m>) \implies (b \in H)$ \pipe $<g^m> \subseteq H$
   \lit $(H \subseteq <g^m>) \land (<g^m> \subseteq H)$ \pipe $H = <g^m>$ \pipe $Generator[g^m, H, *]$ \pipe $\exists_{h \in G}(Generator[h, G, *])$ \pipe $CyclicGroup[H, *]$
@@ -1193,7 +1194,7 @@ $KernelSubgroupDomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Sub
   \lit $ker_\phi \subseteq G$ \pipe $\emptyset \neq ker_\phi \subseteq G$
   \lit $(a, b \in ker_\phi) \implies \ldots$
   \begin{enumerate}
-    \lit $\pr{\phi(a) = e_H} \land \pr{\phi(b) = e_H}$ \pipe $e_H = e_H \diamond e_H = \phi(a) \diamond \phi(b) = \phi(a * b)$ \pipe $a * b \in ker_\phi$
+    \lit $\pr{\phi(a) = e_H} \land \pr{\phi(b) = e_H}$ \pipe $\phi(a * b) = \phi(a) \diamond \phi(b) = e_H \diamond e_H = e_H$ \pipe $a * b \in ker_\phi$
   \end{enumerate}
   \lit $(a, b \in ker_\phi) \implies (a * b \in ker_\phi)$ \pipe $\forall_{a, b \in ker_\phi}(a * b \in ker_\phi)$
   \lit $(a \in ker_\phi) \implies \ldots$
@@ -1207,12 +1208,30 @@ $KernelSubgroupDomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Sub
 
 $ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Subgroup[im_\phi, H, \diamond])$
 \begin{enumerate}
-  \lit TODO
+  \lit $(IdMapsId) \land (e_G \in G)$ \pipe $\phi(e_G) = e_H \in H$ \pipe $e_H \in im_\phi$ \pipe $\emptyset \neq im_\phi$
+  \lit $im_\phi \subseteq H$ \pipe $\emptyset \neq im_\phi \subseteq H$
+  \lit $(a, b \in im_\phi) \implies \ldots$
+  \begin{enumerate}
+    \lit $\pr{\exists_{g_a \in G}\pr{a = \phi(g_a)}} \land \pr{\exists_{g_b \in G}\pr{b = \phi(g_b)}}$
+    \lit $(g_a * g_b \in G) \land \pr{\phi(g_a * g_b) = \phi(g_a) * \phi(g_b) = a * b}$
+    \lit $\exists_{g \in G}\pr{a * b = \phi(g)}$ \pipe $a * b \in im_\phi$
+  \end{enumerate}
+  \lit $(a, b \in im_\phi) \implies (a * b \in im_\phi)$ \pipe $\forall_{a, b \in im_\phi}(a * b \in im_\phi)$
+  \lit $(a \in im_\phi) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{g_a \in G}\pr{a = \phi(g_a)}$
+    \lit $({g_a}^{-1} \in G) \land (InvMapsInv)$ \pipe $\phi({g_a}^{-1}) = \phi(g_a)^{-1} = a^{-1}$
+    \lit $\exists_{g \in G}\pr{a^{-1} = \phi(g)}$ \pipe $a^{-1} \in im_\phi$
+  \end{enumerate}
+  \lit $(a \in im_\phi) \implies (a^{-1} \in im_\phi)$ \pipe $\forall_{a \in im_\phi}(a^{-1} \in im_\phi)$
+  \lit $(SubgroupEquiv) \land (\emptyset \neq im_\phi \subseteq H) \land \pr{\forall_{a, b \in im_\phi}(a * b \in im_\phi)} \land \pr{\forall_{a \in im_\phi}(a^{-1} \in im_\phi)}$ \pipe $Subgroup[im_\phi, H, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $ImageCyclicIsCyclic \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (CyclicGroup[G, *])} \implies (CyclicGroup[im_\phi, \diamond])$
 \begin{enumerate}
-  \lit TODO
+  \lit $CyclicGroup[G, *]$ \pipe $\exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \pipe $\exists_{g_0 \in G}(G = <g_0> = \{{g_0}^n | n \in \mathbb{Z}\})$
+  \lit $ExpMapsExp$ \pipe $h \in im_\phi \iff \exists_{g \in G}\pr{h = \phi(g)} \iff \exists_{n \in \mathbb{Z}}\pr{h = \phi({g_0}^n)} \iff \exists_{n \in \mathbb{Z}}\pr{h = \phi(g_0)^n}$ \pipe $Generator[\phi(g_0), im_\phi, \diamond]$
+  \lit $\exists_{h \in im_\phi}(Generator[h, im_\phi, \diamond])$ \pipe $CyclicGroup[im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $MonomorphismEquiv \abr (Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
@@ -1244,7 +1263,7 @@ $MonomorphismEquiv \abr (Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi =
   \lit $(Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$MapsToSameEl \abr (ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
+$KerCountsMapSameEl \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G)} \implies \pr{(ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}}$
 \begin{enumerate}
   \lit $\pr{x \in (ker_\phi) g} \implies \ldots$
   \begin{enumerate}
@@ -1255,18 +1274,22 @@ $MapsToSameEl \abr (ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
   \begin{enumerate}
     \lit $e_H = \phi(x) \diamond \phi(g)^{-1} = \phi(x) \diamond \phi(g^{-1)} = \phi(x * g^{-1)}$ \pipe $x * g^{-1} \in ker_\phi$ \pipe $x \in (ker_\phi) g$
   \end{enumerate}
-  \lit $\pr{\phi(x) = \phi(g)} \implies \pr{x \in (ker_\phi) g}$
+  \lit $\pr{\phi(x) = \phi(g)} \implies \pr{x \in (ker_\phi) g}$ \pipe $\{x \in G | \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
+  \lit $\pr{(ker_\phi) g \subseteq \{x \in G | \phi(x) = \phi(g)\}} \land \pr{\{x \in G | \phi(x) = \phi(g)\} \subseteq (ker_\phi) g}$ \pipe $(ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$MapsToSameElMultiplicity \abr \pr{(|G| = n) \land (|ker_\phi| = m) \land (|im_\phi| = r)} \implies (n = m r)$
+$KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{o(G) = o(ker_\phi) o(im_\phi)}$
 \begin{enumerate}
-  \lit TODO
+  \lit $\text{$im_\phi$ forms equivalence classes of G that maps to the same elements under $\phi$}$
+  \lit $\text{$(KerCountsMapSameEl) \land (CosetCardinality)$ counts the number of same element mappings / multiplicity for each pre-image class}$
+  \lit $o(G) = o(ker_\phi) o(im_\phi)$
+  \lit TODO: formalize
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ImageDividesGH \abr (|im_\phi| = r) \implies \pr{\pr{Divides[r, o(G)]} \land \pr{Divides[r, o(H)]}}$
+$ImageDividesGH \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\pr{Divides[o(im_\phi), o(G)]} \land \pr{Divides[o(im_\phi), o(H)]}}$
 \begin{enumerate}
-  \lit $MapsToSameElMultiplicity$ \pipe $Divides[r, o(G)]$
-  \lit $LagrangeTheorem$ \pipe $Divides[r, o(H)]$
+  \lit $KerImPartitionsG$ \pipe $Divides[r, o(G)]$
+  \lit $(LagrangeTheorem) \land (ImageSubgroupCodomain)$ \pipe $Divides[r, o(H)]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
@@ -1291,17 +1314,57 @@ $ConjugacyCenter \abr (g \in G) \implies \pr{(C_g = \{g\}) \iff \pr{g \in Z(G)}}
 \begin{enumerate}
   \lit $\pr{g \in Z(g)} \iff \pr{\forall_{x \in G}(x * g = g * x)} \iff \pr{\forall_{x \in G}(x * g * x^{-1} = g)} \iff \pr{\forall_{f \in G}\pr{(f \sim^* g) \iff (f = g)}} \iff (C_g = \{g\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-**Note: why is this both sound and awkward at the same time \\
+**Note: why is this both sound and awkward at the same time, because you defined sets using set-builder instead of using biconditional relations \\
 
 $ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G])$
 \begin{enumerate}
   \lit $ConjugacyCenter$ \pipe $\pr{\forall_{g \in G}(C_g = \{g\})} \iff \pr{\forall_{g \in G}\pr{g \in Z(g)}} \iff (AbelianGroup[G])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ConjugateOrder \abr (h \sim^* g) \implies \pr{o(h) = o(g)}$
+$ConjugateOrder \abr \pr{(g_1, g_2 \in G) \land (g_1 \sim^* g_2)} \implies \pr{o(g_1) = o(g_2)}$
 \begin{enumerate}
-  \lit $\exists_{c \in G}(g = c^{-1} h c)$ \pipe $e = g^{o(g)} = (c^{-1} h c)^{o(g)} = c^{-1} h^{o(g)} c$ \pipe $e = c^{-1} h^{o(g)} c$ \pipe $h^{o(g)} = e$ \pipe $o(h) = o(g)$
-  \lit TODO: contradiction if $h^m = e$ for some $m < o(g)$
+  \lit $\exists_{c \in G}(g_2 = c^{-1} g_1 c)$ \pipe $e = {g_2}^{o(g_2)} = (c^{-1} g_1 c)^{o(g_2)} = c^{-1} {g_1}^{o(g_2)} c$ \pipe $e = c^{-1} {g_1}^{o(g_2)} c$ \pipe ${g_1}^{o(g_2)} = e$
+  \lit $(m \in \mathbb{Z}^+) \land \pr{m < o(g_2)} \implies \ldots$
+  \begin{enumerate}
+    \lit $e \neq {g_2}^m = (c^{-1} g_1 c)^m = c^{-1} {g_1}^m c$ \pipe $e \neq c^{-1} {g_1}^m c$ \pipe $e = c * e * c^{-1} \neq {g_1}^m$ \pipe ${g_1}^m \neq e$
+  \end{enumerate}
+  \lit $\pr{m < o(g_2)} \implies (e \neq {g_1}^m)$ \pipe $\forall_{m \in \mathbb{Z}^+}\pr{\pr{m < o(g_2)} \implies ({g_1}^m \neq e)}$
+  \lit $\pr{{g_1}^{o(g_2)} = e} \land \pr{\forall_{m \in \mathbb{Z}^+}\pr{\pr{m < o(g_2)} \implies ({g_1}^m \neq e)}}$ \pipe $o(g_1) = o(g_2)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$ConjugateCentralizersCardinality \abr \forall_{c, g, h \in G}\pr{(h = c^{-1} g c) \implies \pr{C(h) = c^{-1} C(g) c}}$
+\begin{enumerate}
+  \lit $\pr{x \in C(h)} \iff (h * x = x * h) \iff \pr{(c^{-1} g c) * x = x * (c^{-1} g c)} \iff \pr{x \in c^{-1} C(g) c}$ \pipe $C(h) = c^{-1} C(g) c$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConjugateCentersPartitionsG \abr (g \in G) \implies \pr{o(G) = o(C_g) o\pr{C(g)}}$
+\begin{enumerate}
+  \lit $(ConjugateEqRel) \land (EqRelInducesPartition) \land (ConjugateCentralizersCardinality)$ \pipe $o(G) = o(C_g) o\pr{C(g)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Normal Subgroups}
+$NormalSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{g \in G}(g H = H g)}$ \\
+
+$CenterNormalSubgroup \abr NormalSubgroup[Z(G), G, *]$
+\begin{enumerate}
+  \lit $SubgroupCenter$ \pipe $Subgroup[Z(G), G, *]$
+  \lit $(g \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $g Z(G) = \{g * a | \forall_{b \in G}(a * b = b * a)\} = \{a * g | \forall_{b \in G}(a * b = b * a)\} = Z(G) g$ \pipe $g Z(G) = Z(G) g$
+  \end{enumerate}
+  \lit $(g \in G) \implies \pr{g Z(G) = Z(G) g}$ \pipe $\forall_{g \in G}\pr{g Z(G) = Z(G) g}$
+  \lit $\pr{Subgroup[Z(G), G, *]} \land \pr{\forall_{g \in G}\pr{g Z(G) = Z(G) g}}$ \pipe $NormalSubgroup[Z(G), G, *]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$UnionConjugacyClassesNormalSubgroup \abr 12313$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IndexImpliesSubgroup \abr 123123$
+\begin{enumerate}
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
