@@ -2469,6 +2469,11 @@ $KerInjective \abr \forall_{L, V, W}((Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \
   \lit $(Injective[L, V, W]) \iff (ker_L = \{O_v\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$RngSurjective \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies ((Surjective[L, V, W]) \iff (rng_L = W)))$
+\begin{enumerate}
+  \lit $(SurjEquiv) \land (rng(L) = rng_L)$ \pipe $(Surjective[L, V, W]) \iff (rng_L = W)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 $RankNullityLT \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L]))$
 \begin{enumerate}
   \lit $KerSubspace$ \pipe $(\exists_{U}(Basis[U, ker_L, +_v, *_v])) \land (Dim[ker_L] = |U|)$
