@@ -872,7 +872,7 @@ $GCD[a, b, c] \abr (ComDiv[a, b, c]) \land \pr{\forall_{d \in \mathbb{Z}}\pr{\pr
 $RelPrime[a, b] \abr GCD[1, a, b]$ \\
 $CongRel[a, b, n] \abr Divides[n, a - b]$ \\
 
-$Partition[\mathcal{P}, S] \abr \pr{\forall_{P \in \mathcal{P}}(P \neq \emptyset)} \land \pr{S = \cup_{P \in \mathcal{P}}(P)} \land \pr{\forall_{P_1, P_2 \in \mathcal{P}}\pr{(P_1 \neq P_2) \implies (P_1 \cap P_2 = \emptyset)}}$ \\
+$Partition[\mathcal{P}, S] \abr \pr{\forall_{P \in \mathcal{P}}(P \neq \emptyset)} \land \pr{S = \bigcup\limits_{P \in \mathcal{P}}(P)} \land \pr{\forall_{P_1, P_2 \in \mathcal{P}}\pr{(P_1 \neq P_2) \implies (P_1 \cap P_2 = \emptyset)}}$ \\
 $EqRel[\sim, S] \abr (Rel[\sim, S]) \land \pr{\forall_{a \in S}(a \sim a)} \land \pr{\forall_{a, b \in S}\pr{(a \sim b) \implies (b \sim a)}} \land \pr{\forall_{a, b, c \in S}\pr{\pr{(a \sim b) \land (b \sim c)} \implies (a \sim c)}}$ \\
 $EqClass[[s], s, \sim, S] \abr (Rel[\sim, S]) \land (s \in S) \land ([s] = \{x \in S | x \sim s\})$ \\
 
@@ -1013,7 +1013,7 @@ $SubgroupCentralizer \abr \forall_{g, G}\pr{\pr{Centralizer[C(g), g, G, *]} \imp
   \lit $(SubgroupEquiv) \land \pr{\emptyset \neq C(g) \subseteq G} \land \pr{\forall_{a, b \in C(g)}\pr{a * b \in C(g)}} \land \pr{\forall_{a \in C(g)}\pr{a^{-1} \in C(g)}}$ \pipe $Subgroup[C(g), G, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Center[Z(G), G, *] \abr (Group[G, *]) \land \pr{Z(G) = \cap_{g \in G}\pr{C(g)}}$ \\
+$Center[Z(G), G, *] \abr (Group[G, *]) \land \pr{Z(G) = \bigcap\limits_{g \in G}\pr{C(g)}}$ \\
 
 $SubgroupCenter \abr \forall_{G}\pr{\pr{Center[Z(G), G, *]} \implies \pr{Subgroup[Z(G), G, *]}}$
 \begin{enumerate}
@@ -1344,28 +1344,82 @@ $ConjugateCentersPartitionsG \abr (g \in G) \implies \pr{o(G) = o(C_g) o\pr{C(g)
 
 
 \section{Normal Subgroups}
-$NormalSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{g \in G}(g H = H g)}$ \\
+$NormalSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)}$ \\
 
 $CenterNormalSubgroup \abr NormalSubgroup[Z(G), G, *]$
 \begin{enumerate}
   \lit $SubgroupCenter$ \pipe $Subgroup[Z(G), G, *]$
-  \lit $(g \in G) \implies \ldots$
+  \lit $\pr{\pr{h \in Z(G)} \land (g \in G)} \implies \ldots$
   \begin{enumerate}
-    \lit $g Z(G) = \{g * a | \forall_{b \in G}(a * b = b * a)\} = \{a * g | \forall_{b \in G}(a * b = b * a)\} = Z(G) g$ \pipe $g Z(G) = Z(G) g$
+    \lit $h g = g h$ \pipe $g^{-1} h g = h \in Z(G)$ \pipe $g^{-1} h g \in Z(G)$
   \end{enumerate}
-  \lit $(g \in G) \implies \pr{g Z(G) = Z(G) g}$ \pipe $\forall_{g \in G}\pr{g Z(G) = Z(G) g}$
-  \lit $\pr{Subgroup[Z(G), G, *]} \land \pr{\forall_{g \in G}\pr{g Z(G) = Z(G) g}}$ \pipe $NormalSubgroup[Z(G), G, *]$
+  \lit $\pr{\pr{h \in Z(G)} \land (g \in G)} \implies \pr{g^{-1} h g \in Z(G)}$ \pipe $\forall_{h \in Z(G)} \forall_{g \in G}\pr{g^{-1} h g \in Z(G)}$
+  \lit $\pr{Subgroup[Z(G), G, *]} \land \pr{\forall_{h \in Z(G)} \forall_{g \in G}\pr{g^{-1} h g \in Z(G)}}$ \pipe $NormalSubgroup[Z(G), G, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$UnionConjugacyClassesNormalSubgroup \abr 12313$
+$UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies \pr{H = \bigcup\limits_{z \in H}(C_z)}$
 \begin{enumerate}
-  \lit TODO
+  \lit TODO: formalize "collections"/ equivalences within quantified definitions
+  \lit $(NormalSubgroup[H, G, *]) \implies \ldots$
+  \begin{enumerate}
+    \lit $NormalSubgroup[H, G, *]$ \pipe $\forall_{x \in H} \forall_{g \in G}(g^{-1} x g \in H)$ \pipe $\forall_{x \in H}(C_x \subseteq H)$
+    \lit $\forall_{x \in H}(C_x \subseteq H)$ \pipe $\forall_{x \in H} \forall_{y}(y \in C_x \implies y \in H)$ \pipe $\forall_{y} \forall_{x \in H}(y \notin H \implies y \notin C_x)$
+    \lit $(b \in H) \implies \pr{b \in C_b \subseteq \bigcup\limits_{z \in H}(C_z)}$ \pipe $(b \in H) \implies \pr{b \in \bigcup\limits_{z \in H}(C_z)}$
+    \lit $(b \notin H) \implies \pr{\forall_{a \in H}(b \notin C_a)} \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}$ \pipe $(b \notin H) \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}$
+    \lit $\pr{(b \in H) \implies \pr{b \in \bigcup\limits_{z \in H}(C_z)}} \land \pr{(b \notin H) \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}}$ \pipe $(b \in H) \iff \pr{b \in \bigcup\limits_{z \in H}(C_z)}$
+    \lit $\forall_{b}\pr{(b \in H) \iff \pr{b \in \bigcup\limits_{z \in H}(C_z)}}$ \pipe $H = \bigcup\limits_{z \in H}(C_z)$
+  \end{enumerate}
+  \lit $(NormalSubgroup[H, G, *]) \implies \pr{H = \bigcup\limits_{z \in H}(C_z)}$
+  %\lit TODO: show $Subgroup[H, G, *]$ and add $H \neq \emptyset$ as a hypothesis $\pr{H = \bigcup\limits_{z \in H}(C_z)} \implies (NormalSubgroup[H, G, *])
+  %\lit $\pr{H = \bigcup\limits_{z \in H}(C_z)} \implies \ldots$
+  %\begin{enumerate}
+  %  \lit TODO: show $Subgroup[H, G, *]$ and add $H \neq \emptyset$ as a hypothesis $\pr{H = \bigcup\limits_{z \in H}(C_z)} \implies (NormalSubgroup[H, G, *])$
+  %  \lit $\pr{(h \in H) \land (g \in G)} \implies \ldots$
+  %  \begin{enumerate}
+  %    \lit $\exists_{x \in H}(h \in C_x)$ \pipe $g^{-1} h g \in C_x \subseteq \bigcup\limits_{z \in H}(C_z) = H$ \pipe $g^{-1} h g \in H$
+  %  \end{enumerate}
+  %  \lit $\pr{(h \in H) \land (g \in G)} \implies (g^{-1} h g \in H)$ \pipe $\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)$
+  %  \lit $(Subgroup[H, G, *]) \land \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)}$ \pipe $NormalSubgroup[H, G, *]$
+  %\end{enumerate}
+  %\lit 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$IndexImpliesSubgroup \abr 123123$
+$NormalSubgroupCosetEquiv \abr (NormalSubgroup[H, G, *]) \iff \pr{\forall_{g \in G}(g H = H g)}$
 \begin{enumerate}
-  \lit TODO
+  \lit $CosetCardinality$ \pipe $(NormalSubgroup[H, G, *]) \iff \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)} \iff \pr{\forall_{h \in H} \forall_{g \in G}(h g \in g H)} \iff$ \cont
+  \lit \cont $\pr{\forall_{g \in G}(H g \subseteq g H)} \iff \pr{\forall_{g \in G}(H g = g H)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$NormalSubgroupIndexEquiv \abr (NormalSubgroup[H, G, *]) \iff (IndexSubgroup[2, H, G, *])$
+\begin{enumerate}
+  \lit $NormalSubgroupCosetEquiv$ \pipe $(IndexSubgroup[2, H, G, *]) \iff \pr{\forall_{g \in G}(g H = H g)} \iff (NormalSubgroup[H, G, *])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Quotient Groups}
+$QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g | g \in G\})$ \\
+$FactorMul[\bar{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{x, y \in G}(H x \bar{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\})}$ \\
+
+$ConstructionQuotientGroup \abr \left(\begin{array}{ll}
+  \pr{(NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (FactorMul[\bar{*}, x, y, H, G, *])} \hfill \implies \hfill \\
+  (Group[G / H, \bar{*}])
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(H x, H y \in G / H) \implies \ldots$
+  \begin{enumerate}
+    \lit TODO: show set manipulations as lemmas e.g., $(H * H = H) \abr (H * H \subseteq H) \land (H \subseteq H * H)$
+    \lit $NormalSubgroup[H, G, *]$ \pipe $H x \bar{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\} = \{h_1 h_2 x y | h_1, h_2 \in H\} = \{h x y | h \in H\} = H x y$
+    \lit $x, y \in G$ \pipe $x y \in G$ \pipe $H x \bar{*} H y = H x y \in G / H$
+  \end{enumerate}
+  \lit $(H x, H y \in G / H) \implies (H x \bar{*} H y \in G / H)$
+  \lit $(H x, H y, H z \in G / H) \implies \ldots$
+  \begin{enumerate}
+    \lit 123123 CONTHERE https://youtu.be/hgbnua35tE4?t=599
+  \end{enumerate}
+  \lit 123123
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$NormalSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)}$ \\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2467,6 +2521,11 @@ $KerInjective \abr \forall_{L, V, W}\pr{(Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]
   \end{enumerate}
   \lit $(ker_L = \{O_v\}) \implies (Injective[L, V, W])$
   \lit $(Injective[L, V, W]) \iff (ker_L = \{O_v\})$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$RngSurjective \abr \forall_{L, V, W}\pr{(Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies \pr{(Surjective[L, V, W]) \iff (rng_L = W)}}$
+\begin{enumerate}
+  \lit $(SurjEquiv) \land \pr{rng(L) = rng_L}$ \pipe $(Surjective[L, V, W]) \iff (rng_L = W)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $RankNullityLT \abr \forall_{L, V, W}\pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L])}$
