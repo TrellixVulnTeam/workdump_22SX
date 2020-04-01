@@ -1130,7 +1130,7 @@ $\text{Any prime ordered cyclic group has no proper non-trivial subgroups and an
 
 $\pr{(Subgroup[H, G, *]) \land \pr{Subgroup[K, G, *] \land \pr{RelPrime(o(H), o(K)}}} \implies (H \cap K = \{e\})$
 \begin{enumerate}
-  \lit TODO
+  \lit $(LagrangeTheorem) \land (SubgroupIntersection) \land \pr{RelPrime\pr{o(H), o(K)}}$ \pipe $H \cap K = \{e\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
@@ -1180,6 +1180,8 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   (Isomorphic[G, *, H, \diamond])
 \end{array}\right)$
 \begin{enumerate}
+  \lit $\exists_{g, h}\pr{(Generator[g, G, *]) \land (Generator[h, H, \diamond])}$
+  \lit $\phi(g^n) = h^n$
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
@@ -1310,11 +1312,17 @@ $ConjugateEqRel \abr EqRel[\sim^*, G]$
 
 $ConjugacyClass[C_g, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (EqClass[C_g, g, \sim^*, G])$ \\
 
+$ConjugacyClassEquiv \abr (ConjugacyClass[C_g, g, G, *]) \iff \pr{\forall_{x \in G}\pr{(x \in C_g) \iff \pr{\exists_{c \in G}(x = c^{-1} g c)}}}$
+\begin{enumerate}
+  \lit TODO: by definition
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 $ConjugacyCenter \abr (g \in G) \implies \pr{(C_g = \{g\}) \iff \pr{g \in Z(G)}}$
 \begin{enumerate}
-  \lit $\pr{g \in Z(g)} \iff \pr{\forall_{x \in G}(x * g = g * x)} \iff \pr{\forall_{x \in G}(x * g * x^{-1} = g)} \iff \pr{\forall_{f \in G}\pr{(f \sim^* g) \iff (f = g)}} \iff (C_g = \{g\})$
+  \lit $ConjugacyClassEquiv$ \pipe $\pr{g \in Z(g)} \iff \pr{\forall_{c \in G}(c * g = g * c)} \iff \pr{\forall_{c \in G}(g = c^{-1} * g * c)} \iff$ \cont
+  \lit \cont $\pr{\forall_{x \in G}\pr{(x \neq g) \iff \pr{\forall_{c \in G}(x \neq c^{-1} * g * c)}}} \iff$ \cont
+  \lit \cont $\pr{\forall_{x \in G}\pr{(x \in \{g\}) \iff \pr{\exists_{c \in G}(x = c^{-1} * g * c)}}} \iff (C_g = \{g\})$ \pipe $(C_g = \{g\}) \iff \pr{g \in Z(G)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-**Note: why is this both sound and awkward at the same time, because you defined sets using set-builder instead of using biconditional relations \\
 
 $ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G])$
 \begin{enumerate}
@@ -1359,11 +1367,16 @@ $CenterNormalSubgroup \abr NormalSubgroup[Z(G), G, *]$
 
 $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies \pr{H = \bigcup\limits_{z \in H}(C_z)}$
 \begin{enumerate}
-  \lit TODO: formalize "collections"/ equivalences within quantified definitions
   \lit $(NormalSubgroup[H, G, *]) \implies \ldots$
   \begin{enumerate}
-    \lit $NormalSubgroup[H, G, *]$ \pipe $\forall_{x \in H} \forall_{g \in G}(g^{-1} x g \in H)$ \pipe $\forall_{x \in H}(C_x \subseteq H)$
-    \lit $\forall_{x \in H}(C_x \subseteq H)$ \pipe $\forall_{x \in H} \forall_{y}(y \in C_x \implies y \in H)$ \pipe $\forall_{y} \forall_{x \in H}(y \notin H \implies y \notin C_x)$
+    \lit $NormalSubgroup[H, G, *]$ \pipe $\forall_{x \in H} \forall_{g \in G}(g^{-1} x g \in H)$
+    \lit $\pr{(x \in H) \land (y \in C_x)} \implies \ldots$
+    \begin{enumerate}
+      \lit $ConjugacyClassEquiv$ \pipe $\exists_{c \in G}(y = c^{-1} x c)$
+      \lit $\pr{\forall_{x \in H} \forall_{g \in G}(g^{-1} x g \in H)} \land (x \in H) \land (c \in G)$ \pipe $y \in H$
+    \end{enumerate}
+    \lit $\pr{(x \in H) \land (y \in C_x)} \implies (y \in H)$ \pipe $\forall_{x \in H}(C_x \subseteq H)$
+    \lit $\forall_{x \in H}(C_x \subseteq H)$ \pipe $\forall_{x \in H} \forall_{y}(y \in C_x \implies y \in H)$ \pipe $\forall_{x \in H} \forall_{y}(y \notin H \implies y \notin C_x)$
     \lit $(b \in H) \implies \pr{b \in C_b \subseteq \bigcup\limits_{z \in H}(C_z)}$ \pipe $(b \in H) \implies \pr{b \in \bigcup\limits_{z \in H}(C_z)}$
     \lit $(b \notin H) \implies \pr{\forall_{a \in H}(b \notin C_a)} \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}$ \pipe $(b \notin H) \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}$
     \lit $\pr{(b \in H) \implies \pr{b \in \bigcup\limits_{z \in H}(C_z)}} \land \pr{(b \notin H) \implies \pr{b \notin \bigcup\limits_{z \in H}(C_z)}}$ \pipe $(b \in H) \iff \pr{b \in \bigcup\limits_{z \in H}(C_z)}$
@@ -1386,8 +1399,9 @@ $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies \pr
 
 $NormalSubgroupCosetEquiv \abr (NormalSubgroup[H, G, *]) \iff \pr{\forall_{g \in G}(g H = H g)}$
 \begin{enumerate}
-  \lit $CosetCardinality$ \pipe $(NormalSubgroup[H, G, *]) \iff \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)} \iff \pr{\forall_{h \in H} \forall_{g \in G}(h g \in g H)} \iff$ \cont
-  \lit \cont $\pr{\forall_{g \in G}(H g \subseteq g H)} \iff \pr{\forall_{g \in G}(H g = g H)}$
+  \lit $CosetCardinality$ \pipe $\forall_{g \in G}(|H g| = |g H|)$ \pipe $\pr{\forall_{g \in G}\pr{(H g \subseteq g H) \iff (H g = g H)}}$
+  \lit $\pr{\forall_{g \in G}\pr{(H g \subseteq g H) \iff (H g = g H)}}$ \pipe $(NormalSubgroup[H, G, *]) \iff \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)} \iff$ \cont
+  \lit \cont $\pr{\forall_{h \in H} \forall_{g \in G}(h g \in g H)} \iff \pr{\forall_{g \in G}(H g \subseteq g H)} \iff \pr{\forall_{g \in G}(H g = g H)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $NormalSubgroupIndexEquiv \abr (NormalSubgroup[H, G, *]) \iff (IndexSubgroup[2, H, G, *])$
@@ -2719,13 +2733,48 @@ $RankNullityRelation \abr (Rank[A] \equiv Dim[rng_L]) \land (Nullity[A] \equiv D
 
 $SimMatrix[A, B] \abr \exists_{P}(B = P * A * P^{-1})$ \\
 
-$SimMatrixEquiv \abr (SimMatrix[A, B]) \iff \pr{\pr{[L(a)]_T = A * [a]_S} \land \pr{[L(a)]_{T'} = B * [a]_{S'}}}$ ??? \\
+$SimMatrixEquiv \abr (SimMatrix[A, B]) \iff \pr{\exists_{S, T, S', T}\pr{\pr{[L(a)]_T = A * [a]_S} \land \pr{[L(a)]_{T'} = B * [a]_{S'}}}}$ \\
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SimRank \abr (SimMatrix[A, B]) \implies (Rank[A] = Rank[B])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+\section{Determinants}
+$Perm[\sigma, S] \abr Bij[\sigma, S, S]$ \\
+$IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma | Perm[\sigma, \mathbb{N}_{1, n}]\}$ \\
+
+$IntPermSetCard \abr (IntPermSet[\mathcal{S}_n, n]) \implies (|\mathcal{S}_n| = n!)$
+\begin{enumerate}
+  \lit TODO: Combinatorics / induction on N
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
+\begin{enumerate}
+  \lit $Perm[I_n, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $I_n \in \mathcal{S}_n$
+  \lit $(\sigma, \tau, \upsilon \in \mathcal{S}_n) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $Bij[\sigma \circ \tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \tau \in \mathcal{S}_n$
+    \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\upsilon, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $(\sigma \circ \tau) \circ \upsilon = \sigma \circ (\tau \circ \upsilon)$
+    \lit $\sigma \circ I_n = \sigma = I_n \circ \sigma$
+    \lit $Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \sigma^{-1} = I_n = \sigma^{-1} \circ \sigma$
+  \end{enumerate}
+  \lit $Group[\mathcal{S}_n, \circ]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
 
+$IntPermSetDecomp \abr (IntPermSet[\mathcal{S}_n, n]) \land (Perm[\tau, \mathbb{N}_{1, n}]) \implies (\mathcal{S}_n = \{\tau \circ \sigma | \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau | \sigma \in \mathcal{S}_n\})$
+\begin{enumerate}
+  \lit $(\sigma \in \mathcal{S}_n) \iff ()$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
-
+% TODO: script that updates completions based on completions snippet in a file!!!
 %############################################################################
 % \left(\begin{array}{ll}
 %   XXX \hfill \land \hfill \\
