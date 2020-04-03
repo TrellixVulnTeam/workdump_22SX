@@ -821,7 +821,12 @@ TODO:
 \section{Functions}
 $Rel[r, X] \abr (X \neq \emptyset) \land (r \subseteq X)$ \\
 $Func[f, X, Y] \abr (Rel[f, X \times Y]) \land \pr{\forall_{x \in X} \exists!_{y \in Y}(\langle x, y \rangle \in f)}$ \\
-$Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land (Func[g \circ f, X, Z]) \land \pr{g \circ f = \{\langle x, g\pr{f(x)} \rangle \in X \times Z | x \in X\}}$ \\
+$Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land \pr{g \circ f = \{\langle x, g\pr{f(x)} \rangle \in X \times Z | x \in X\}}$ \\
+
+$FuncComp \abr (Comp[g \circ f, f, g, X, Y, Z]) \implies (Func[g \circ f, X, Z])$
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $CompAssoc \abr h \circ (g \circ f) = (h \circ g) \circ f$
 \begin{enumerate}
@@ -1051,10 +1056,17 @@ $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}\pr{\pr{(CyclicGroup[G, *]) \l
   \lit $(H \subseteq <g^m>) \land (<g^m> \subseteq H)$ \pipe $H = <g^m>$ \pipe $Generator[g^m, H, *]$ \pipe $\exists_{h \in G}(Generator[h, G, *])$ \pipe $CyclicGroup[H, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ExpModOrder \abr \forall_{G, g, n, s, t}\pr{(Group[G, *]) \land (g \in G) \land (OrderEl[n, g, G, *]) \implies \pr{(g^s = g^t) \iff \pr{s \equiv t (mod \phantom{.} n)}}}$
+$ExpModOrder \abr \forall_{G, g, n, s, t}\pr{\pr{(Group[G, *]) \land (OrderEl[n, g, G, *])} \implies \pr{(g^s = g^t) \iff \pr{s \equiv t (mod \phantom{.} n)}}}$
 \begin{enumerate}
-  \lit TODO
+  \lit $\pr{s \equiv t (mod \phantom{.} n)} \iff (Divides[n, s - t]) \iff \pr{\exists_{k \in \mathbb{N}}(s - t = k n)} \iff$ \cont
+  \lit \cont $\pr{\exists_{k \in \mathbb{N}}(s = k n + t)} \iff (g^{s} = g^{k n + t} = g^{k n} * g^t = e^k * g^t = g^t) \iff (g^s = g^t)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ExpModOrderCorollary \abr \forall_{G, g, n, s, t}\pr{\pr{(Group[G, *]) \land (OrderEl[n, g, G, *])} \implies \pr{(g^s = e) \iff (Divides[n, s])}}$
+\begin{enumerate}
+  \lit $ExpModOrder$ \pipe $(g^s = e) \iff (g^s = g^0) \iff \pr{s \equiv 0 (mod \phantom{.} n)} \iff (Divides[n, s - 0]) \iff (Divides[n, s])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
 
 \subsection{Symmetric and Alternating Groups}
 $SymmetricGroup[S_n, n] \abr S_n = \{\text{permutation of a set with n elements}\}$ \\
@@ -1144,8 +1156,8 @@ $Automorphism[\phi, G, *] \abr Isomorphism[\phi, G, *, G, *]$ \\
 
 $IdMapsId \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\phi(e_G) = e_H}$
 \begin{enumerate}
-  \lit $\phi(e_G) = \phi(e_G * e_G) = \phi(e_G) \diamond \phi(e_G)$
-  \lit $e_H = \phi(e_G)^{-1} \diamond \phi(e_G) = \phi(e_G)^{-1} \diamond \phi(e_G) \diamond \phi(e_G) = \phi(e_G)$
+  \lit $\phi(e_G) = \phi(e_G * e_G) = \phi(e_G) \diamond \phi(e_G)$ \pipe $\phi(e_G) = \phi(e_G) \diamond \phi(e_G)$
+  \lit $e_H = \phi(e_G)^{-1} \diamond \phi(e_G) = \phi(e_G)^{-1} \diamond \pr{\phi(e_G) \diamond \phi(e_G)} = \phi(e_G)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $InvMapsInv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\phi(g^{-1}) = \phi(g)^{-1}}$
@@ -1153,9 +1165,15 @@ $InvMapsInv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\phi(g^{-1
   \lit $IdMapsId$ \pipe $e_H = \phi(e_G) = \phi(g * g^{-1}) = \phi(g) \diamond \phi(g^{-1})$ \pipe $e_H = \phi(g) \diamond \phi(g^{-1})$ \pipe $\phi(g^{-1}) = \phi(g)^{-1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ExpMapsExp \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\phi(g^n) = \phi(g)^n}$
+$ExpMapsExp \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{\forall_{n \in \mathbb{N}^+}\pr{\phi(g^n) = \phi(g)^n}}$
 \begin{enumerate}
-  \lit $\phi(g^n) = \phi(g * \ldots * g) = \phi(g) \diamond \ldots \phi(g) = \phi(g)^n$
+  \lit $\phi(g^1) = \phi(g) = \phi(g)^1$ \pipe $\phi(g^1) = \phi(g)^1$
+  \lit $\pr{\forall_{k \in \mathbb{N}^+}\pr{\phi(g^k) = \phi(g)^k}} \implies \ldots$
+  \begin{enumerate}
+    \lit $\phi(g^{k + 1}) = \phi(g^k * g) = \phi(g)^k \diamond \phi(g) = \phi(g)^{k + 1}$ \pipe $\phi(g^{k + 1}) = \phi(g)^{k + 1}$
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+  \lit $\pr{\forall_{k \in \mathbb{N}^+}\pr{\phi(g^k) = \phi(g)^k}} \implies \pr{\phi(g^{k + 1}) = \phi(g)^{k + 1}}$
+  \lit $\pr{\phi(g^1) = \phi(g)^1} \land \pr{\pr{\forall_{k \in \mathbb{N}^+}\pr{\phi(g^k) = \phi(g)^k}} \implies \pr{\phi(g^{k + 1}) = \phi(g)^{k + 1}}}$ \pipe $\forall_{n \in \mathbb{N}^+}\pr{\phi(g^n) = \phi(g)^n})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $MapDivProp \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Order[n, G, *])} \implies \pr{\forall_{g \in G}\pr{\pr{OrderEl[m, \phi(g), H, \diamond]} \implies (Divides[m, n])}}$
@@ -1167,12 +1185,21 @@ $MapDivProp \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Order[n, G, 
 
 $HomoCompInduceHomo \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \square])} \implies (Homomorphism[\theta \circ \phi, G, *, K, \square])$
 \begin{enumerate}
-  \lit TODO
+  \lit $FuncComp$ \pipe $Func[\theta \circ \phi, G, K]$
+  \lit $(g_1, g_2 \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \square])$ \pipe $\theta \circ \phi(g_1 * g_2) = \theta\pr{\phi(g_1 * g_2)} =$ \cont
+  \lit \cont $\theta\pr{\phi(g_1) \diamond \phi(g_2)} = \theta\pr{\phi(g_1)} \square \theta\pr{\phi(g_2)} = \theta \circ \phi(g_1) \square \theta \circ \phi(g_2)$ \pipe $\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \square \theta \circ \phi(g_2)$
+  \end{enumerate}
+  \lit $(g_1, g_2 \in G) \implies \pr{\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \square \theta \circ \phi(g_2)}$ \pipe $\forall_{g_1, g_2 \in G}\pr{\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \square \theta \circ \phi(g_2)}$
+  \lit $(Func[\theta \circ \phi, G, K]) \land \pr{\forall_{g_1, g_2 \in G}\pr{\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \square \theta \circ \phi(g_2)}}$ \pipe $Homomorphism[\theta \circ \phi, G, *, K, \square]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $IsoInvInduceIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\phi^{-1}, H, \diamond, G, *])$
 \begin{enumerate}
-  \lit TODO
+  \lit $Isomorphism[\phi, G, *, H, \diamond]$ \pipe $(Homomorphism[\phi, G, *, H, \diamond]) \land (Bij[\phi, G, H])$
+  \lit $BijEquiv$ \pipe $\exists_{\phi^{-1}}(Inv[\phi^{-1}, \phi, G, H])$
+  \lit TODO continue
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
@@ -1181,8 +1208,7 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
 \end{array}\right)$
 \begin{enumerate}
   \lit $\exists_{g, h}\pr{(Generator[g, G, *]) \land (Generator[h, H, \diamond])}$
-  \lit $\phi(g^n) = h^n$
-  \lit TODO
+  \lit TODO $\phi(g^n) = h^n$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
@@ -1319,12 +1345,34 @@ $ConjugacyClassEquiv \abr (ConjugacyClass[C_g, g, G, *]) \iff \pr{\forall_{x \in
 
 $ConjugacyCenter \abr (g \in G) \implies \pr{(C_g = \{g\}) \iff \pr{g \in Z(G)}}$
 \begin{enumerate}
-  \lit $ConjugacyClassEquiv$ \pipe $\pr{g \in Z(g)} \iff \pr{\forall_{c \in G}(c * g = g * c)} \iff \pr{\forall_{c \in G}(g = c^{-1} * g * c)} \iff$ \cont
-  \lit \cont $\pr{\forall_{x \in G}\pr{(x \neq g) \iff \pr{\forall_{c \in G}(x \neq c^{-1} * g * c)}}} \iff$ \cont
-  \lit \cont $\pr{\forall_{x \in G}\pr{(x \in \{g\}) \iff \pr{\exists_{c \in G}(x = c^{-1} * g * c)}}} \iff (C_g = \{g\})$ \pipe $(C_g = \{g\}) \iff \pr{g \in Z(G)}$
+  \lit $(C_g = \{g\}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(x \in G) \implies \ldots$
+    \begin{enumerate}
+      \lit $(ConjugacyClass[C_g, g, G, *]) \land (ConjugacyClassEquiv) \land (x \in G)$ \pipe $x^{-1} g x \in C_g$
+      \lit $(C_g = \{g\}) \land (x^{-1} g x \in C_g)$ \pipe $x^{-1} g x = g$ \pipe $g x = x g$
+    \end{enumerate}
+    \lit $(x \in G) \implies (g x = x g)$ \pipe $\forall_{x \in G}(g x = x g)$ \pipe $g \in Z(G)$
+  \end{enumerate}
+  \lit $(C_g = \{g\}) \implies \pr{g \in Z(G)}$
+  \lit $\pr{g \in Z(G)} \implies \ldots$
+  \begin{enumerate}
+    \lit $\pr{g \in Z(G)} \land (Group[G, *])$ \pipe $\pr{\forall_{c \in G}(g c = c g)} \land \pr{\exists_{e}(e \in G)}$
+    \lit $(x \in G) \implies \ldots$
+    \begin{enumerate}
+      \lit $\pr{\forall_{c \in G}(g c = c g)} \land \pr{\exists_{e}(e \in G)}$ \pipe $\pr{\exists_{c \in G}(x = c^{-1} g c)} \iff \pr{\exists_{c \in G}(x = c^{-1} g c = c^{-1} c g = g)} \iff (x = g) \iff (x \in \{g\})$
+    \end{enumerate}
+    \lit $(x \in G) \implies \pr{\pr{\exists_{c \in G}(x = c^{-1} g c)} \iff (x \in \{g\})}$ \pipe $\forall_{x \in G}\pr{(x \in \{g\}) \iff \pr{\exists_{c \in G}(x = c^{-1} g c)}}$
+    \lit $(ConjugacyClassEquiv) \land \pr{\forall_{x \in G}\pr{(x \in \{g\}) \iff \pr{\exists_{c \in G}(x = c^{-1} g c)}}}$ \pipe $C_g = \{g\}$
+  \end{enumerate}
+  \lit $\pr{g \in Z(G)} \implies (C_g = \{g\})$
+  \lit $(C_g = \{g\}) \iff \pr{g \in Z(G)}$
+  %\lit $ConjugacyClassEquiv$ \pipe $\pr{g \in Z(g)} \iff \pr{\forall_{c \in G}(c * g = g * c)} \iff \pr{\forall_{c \in G}(g = c^{-1} * g * c)} \iff$ \cont
+  %\lit \cont $\pr{\forall_{x \in G}\pr{(x \neq g) \iff \pr{\forall_{c \in G}(x \neq c^{-1} * g * c)}}} \iff$ \cont
+  %\lit \cont $\pr{\forall_{x \in G}\pr{(x \in \{g\}) \iff \pr{\exists_{c \in G}(x = c^{-1} * g * c)}}} \iff (C_g = \{g\})$ \pipe $(C_g = \{g\}) \iff \pr{g \in Z(G)}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G])$
+$ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G, *])$
 \begin{enumerate}
   \lit $ConjugacyCenter$ \pipe $\pr{\forall_{g \in G}(C_g = \{g\})} \iff \pr{\forall_{g \in G}\pr{g \in Z(g)}} \iff (AbelianGroup[G])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
