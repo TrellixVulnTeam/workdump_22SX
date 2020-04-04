@@ -1120,12 +1120,13 @@ $CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \
   \lit $[a] = \{x \in G | x \sim a\} = H a$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LagrangeTheorem \abr \forall_{G, H}\pr{\pr{(Order[n, G, *]) \land (Order[m, H, *]) \land (n, m \in \mathbb{N}) \land (Subgroup[H, G, *])} \implies (Divides[m, n])}$
-\begin{enumerate}
-  \lit $(CosetInduceEqRel) \land (EqRelInducesPartition) \land (CosetCardinality)$ \pipe $\exists_{k \in \mathbb{N}}(n = m k)$ \pipe $Divides[m, n]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+$CosetSet[G : H, H, G, *] \abr (Subgroup[H, G, *]) \land (G : H = \{g H | g \in G\})$ \\ % similar to QuotientSet
+$IndexSubgroup[|G : H|, H, G, *] \abr (CosetSet[G : H, H, G, *]) \land (|G : H| = |G : H|) \land \pr{|G| = (|H|) (|G : H|)}$ \\
 
-$IndexSubgroup[|G : H|, H, G, *] \abr (Subgroup[H, G, *]) \land (|G : H| = \text{Number of distinct right cosets of H, i.e., k in LagrangeTheorem)})$ \\
+$LagrangeTheorem \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (o(G), o(H) \in \mathbb{N}}} \implies \pr{o(G) = o(H) |G: H|} \land \pr{Divides[o(H), o(G)]}$
+\begin{enumerate}
+  \lit $(CosetInduceEqRel) \land (EqRelInducesPartition) \land (CosetCardinality)$ \pipe $\pr{o(G) = o(H) |G: H|} \land \pr{Divides[o(H), o(G)]}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $OrderOrderElProp \abr \forall_{g, G}\pr{\pr{(Order[n, G, *]) \land (OrderEl[m, g, G, *])} \implies \pr{(Divides[m, n]) \land (g^n = e)}}$
 \begin{enumerate}
@@ -1374,11 +1375,33 @@ $ConjugacyCenter \abr (g \in G) \implies \pr{(C_g = \{g\}) \iff \pr{g \in Z(G)}}
 
 $ConjugacyAbelian \abr \pr{\forall_{g \in G}(C_g = \{g\})} \iff (AbelianGroup[G, *])$
 \begin{enumerate}
-  \lit $ConjugacyCenter$ \pipe $\pr{\forall_{g \in G}(C_g = \{g\})} \iff \pr{\forall_{g \in G}\pr{g \in Z(g)}} \iff (AbelianGroup[G])$
+  \lit $ConjugacyCenter$ \pipe $\pr{\forall_{g \in G}(C_g = \{g\})} \iff \pr{\forall_{g \in G}\pr{g \in Z(g)}} \iff (AbelianGroup[G, *])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConjugateExp \abr \forall_{n \in \mathbb{N}^+}\pr{(x^{-1} g x)^n = x^{-1} g^n x}$
+\begin{enumerate}
+  \lit $(n = 1) \implies \ldots$
+  \begin{enumerate}
+    \lit $(x^{-1} g x)^n = (x^{-1} g x)^1 = x^{-1} g^1 x = x^{-1} g^n x$ \pipe $(x^{-1} g x)^n = x^{-1} g^n x$
+  \end{enumerate}
+  \lit $(n = 1) \implies \pr{(x^{-1} g x)^n = x^{-1} g^n x}$
+  \lit $\pr{(n > 1) \land \pr{\forall_{m \in \mathbb{N}^+}\pr{(m \leq n) \implies \pr{(x^{-1} g x)^m = x^{-1} g^m x}}}} \implies \ldots$
+  \begin{enumerate}
+    \lit $(x^{-1} g x)^{n + 1} = (x^{-1} g x)^n * (x^{-1} g x) = (x^{-1} g^n x) * (x^{-1} g x) = x^{-1} g^{n + 1} x$ \pipe $(x^{-1} g x)^{n + 1} = x^{-1} g^{n + 1} x$
+  \end{enumerate}
+  \lit $\pr{(n > 1) \land \pr{\forall_{m \in \mathbb{N}^+}\pr{(m \leq n) \implies \pr{(x^{-1} g x)^m = x^{-1} g^m x}}}} \implies \pr{(x^{-1} g x)^{n + 1} = x^{-1} g^{n + 1} x}$
+  \lit $\forall_{n \in \mathbb{N}^+}\pr{(x^{-1} g x)^n = x^{-1} g^n x}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $ConjugateOrder \abr \pr{(g_1, g_2 \in G) \land (g_1 \sim^* g_2)} \implies \pr{o(g_1) = o(g_2)}$
 \begin{enumerate}
+  \lit $\exists_{c \in G}(g_2 = c^{-1} g_1 c)$
+  \lit $ConjugateExp$ \pipe $e = {g_2}^{o(g_2)} = (c^{-1} g_1 c)^{o(g_2)} = c^{-1} {g_1}^{o(g_2)} c$ \pipe $e = c^{-1} {g_1}^{o(g_2)} c$ \pipe ${g_1}^{o(g_2)} = e$
+  \lit $ExpModOrderCorollary$ \pipe $Divides[o(g_2), o(g_1)]$
+  \lit $ConjugateExp$ \pipe $e = {g_1}^{o(g_1)} = (c g_2 c^{-1})^{o(g_1)} = c {g_2}^{o(g_1)} c^{-1}$ \pipe $e = c {g_2}^{o(g_1)} c^{-1}$ \pipe ${g_2}^{o(g_1)} = e$
+  \lit $ExpModOrderCorollary$ \pipe $Divides[o(g_1), o(g_2)]$
+  \lit $\pr{Divides[o(g_2), o(g_1)]} \land \pr{Divides[o(g_1), o(g_2)]} \land (g_1, g_2 \in \mathbb{N}^+)$ \pipe $o(g_1) = o(g_2)$
+  \lit =================================================================================
   \lit $\exists_{c \in G}(g_2 = c^{-1} g_1 c)$ \pipe $e = {g_2}^{o(g_2)} = (c^{-1} g_1 c)^{o(g_2)} = c^{-1} {g_1}^{o(g_2)} c$ \pipe $e = c^{-1} {g_1}^{o(g_2)} c$ \pipe ${g_1}^{o(g_2)} = e$
   \lit $(m \in \mathbb{Z}^+) \land \pr{m < o(g_2)} \implies \ldots$
   \begin{enumerate}
@@ -1388,14 +1411,35 @@ $ConjugateOrder \abr \pr{(g_1, g_2 \in G) \land (g_1 \sim^* g_2)} \implies \pr{o
   \lit $\pr{{g_1}^{o(g_2)} = e} \land \pr{\forall_{m \in \mathbb{Z}^+}\pr{\pr{m < o(g_2)} \implies ({g_1}^m \neq e)}}$ \pipe $o(g_1) = o(g_2)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$ConjugateCentralizersCardinality \abr \forall_{c, g, h \in G}\pr{(h = c^{-1} g c) \implies \pr{C(h) = c^{-1} C(g) c}}$
+$CentralizerConjugateCosets \abr \forall_{c, g, h \in G}\pr{(h = c^{-1} g c) \implies \pr{C(h) = c^{-1} C(g) c}}$
 \begin{enumerate}
-  \lit $\pr{x \in C(h)} \iff (h * x = x * h) \iff \pr{(c^{-1} g c) * x = x * (c^{-1} g c)} \iff \pr{x \in c^{-1} C(g) c}$ \pipe $C(h) = c^{-1} C(g) c$
+  \lit $\pr{c^{-1} a c \in c^{-1} C(g) c} \implies \ldots$
+  \begin{enumerate}
+    \lit $a \in C(g)$ \pipe $a g = g a$
+    \lit $(c^{-1} a c) h = (c^{-1} a c) (c^{-1} g c) = c^{-1} a g c = c^{-1} g a c = c^{-1} g (c c^{-1}) a c = h (c^{-1} a c)$ \pipe $(c^{-1} a c) h = h (c^{-1} a c)$ \pipe $c^{-1} a c \in C(h)$
+  \end{enumerate}
+  \lit $\pr{c^{-1} a c \in c^{-1} C(g) c} \implies \pr{c^{-1} a c \in C(h)}$ \pipe $c^{-1} C(g) c \subseteq C(h)$
+  \lit $\pr{a \in C(h)} \implies \ldots$
+  \begin{enumerate}
+    \lit $a \in C(h)$ \pipe $a h = h a$ \pipe $a (c^{-1} g c) = (c^{-1} g c) a$
+    \lit $(c a c^{-1}) g = g (c a c^{-1})$ \pipe $c a c^{-1} \in C(g)$ \pipe $a \in c^{-1} C(g) c$
+  \end{enumerate}
+  \lit $\pr{a \in C(h)} \implies \pr{a \in c^{-1} C(g) c}$ \pipe $C(h) \subseteq c^{-1} C(g) c$
+  \lit $\pr{c^{-1} C(g) c \subseteq C(h)} \land \pr{C(h) \subseteq c^{-1} C(g) c}$ \pipe $C(h) = c^{-1} C(g) c$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ConjugateCentersPartitionsG \abr (g \in G) \implies \pr{o(G) = o(C_g) o\pr{C(g)}}$
+$ConjugatesMultiplicity \abr (g \in G) \implies \pr{o(G) = o\pr{C(g)} |C_g|}$
 \begin{enumerate}
-  \lit $(ConjugateEqRel) \land (EqRelInducesPartition) \land (ConjugateCentralizersCardinality)$ \pipe $o(G) = o(C_g) o\pr{C(g)}$
+  \lit $\phi \abr \{\langle a^{-1} g a, C(g) a \rangle \in \pr{C_g \times G : C(g)} | a \in G\}$
+  \lit $(x, y \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $(x^{-1} g x = y^{-1} g y) \iff (g x = x y^{-1} g y) \iff \pr{g (x y^{-1}) = (x y^{-1}) g} \iff$ \cont
+    \lit \cont $\pr{x y^{-1} \in C(g)} \iff \pr{C(g) (x y^{-1}) = C(g)} \iff \pr{C(g) x = C(g) y}$
+  \end{enumerate}
+  \lit $(x, y \in G) \implies \pr{(x^{-1} g x = y^{-1} g y) \iff \pr{C(g) x = C(g) y}}$
+  \lit $\pr{Func[\phi, C_g, G : C(g)]} \land \pr{Inj[\phi, C_g, G : C(g)]} \land \pr{Surj[\phi, C_g, G : C(g)]}$ \pipe $Bij[\phi, C_g, G : C(g)]$
+  \lit $\exists_{\phi}\pr{Bij[\phi, C_g, G : C(g)]}$ \pipe $|C_g| = |G : C(g)|$
+  \lit $(LagrangeTheorem) \land (SubgroupCenter) \land \pr{|C_g| = |G : C(g)|}$ \pipe $o(G) = o\pr{C(g)} |G : C(g)|$ \pipe $o(G) = o\pr{C(g)} |C_g|$ 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
@@ -1462,28 +1506,67 @@ $NormalSubgroupIndexEquiv \abr (NormalSubgroup[H, G, *]) \iff (IndexSubgroup[2, 
 $QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g | g \in G\})$ \\
 $FactorMul[\bar{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{x, y \in G}(H x \bar{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\})}$ \\
 
-$ConstructionQuotientGroup \abr \left(\begin{array}{ll}
+$QuotientGroupLemma \abr \pr{(NormalSubgroup[H, G, *]) \land (x, y, z \in G)} \implies \pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}}$
+\begin{enumerate}
+  \lit $\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \implies \ldots$
+  \begin{enumerate}
+    \lit $(Group[G, *]) \land (x \in G)$ \pipe $x^{-1} \in G$
+    \lit $(NormalSubgroup[H, G, *]) \land (x^{-1} \in G) \land (h_2 \in H)$ \pipe $(x^{-1})^{-1} h_2 x^{-1} = x h_2 x^{-1} \in H$
+    \lit $(Group[H, *]) \land (h_1, x h_2 x^{-1} \in H)$ \pipe $h_1 x h_2 x^{-1} \in H$
+    \lit $(h_1 x h_2 x^{-1}) (x y) = h_1 x h_2 y = z$ \pipe $(h_1 x h_2 x^{-1}) (x y) = z$
+    \lit $(h_1 x h_2 x^{-1} \in H) \land \pr{(h_1 x h_2 x^{-1}) (x y) = z}$ \pipe $\exists_{h_3 \in H}(z = h_3 x y)$
+  \end{enumerate}
+  \lit $\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \implies \pr{\exists_{h_3 \in H}(z = h_3 x y)}$
+  \lit $\pr{\exists_{h_3 \in H}(z = h_3 x y)} \implies \ldots$
+  \begin{enumerate}
+    \lit $(NormalSubgroup[H, G, *]) \land (x \in G) \land (h_3 \in H)$ \pipe $x^{-1} h_3 x \in H$
+    \lit $Group[H, *]$ \pipe $e \in H$
+    \lit $(e) x (x^{-1} h_3 x) y = h_3 x y = z$ \pipe $(e) x (x^{-1} h_3 x) y = z$
+    \lit $(x^{-1} h_3 x, e \in H) \land \pr{(e) x (x^{-1} h_3 x) y = h_3 x y = z}$ \pipe $\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)$
+  \end{enumerate}
+  \lit $\pr{\exists_{h_3 \in H}(z = h_3 x y)} \implies \pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)}$
+  \lit $\pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \implies \pr{\exists_{h_3 \in H}(z = h_3 x y)}} \land \pr{\pr{\exists_{h_3 \in H}(z = h_3 x y)} \implies \pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)}}$
+  \lit $\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$QuotientGroup \abr \left(\begin{array}{ll}
   \pr{(NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (FactorMul[\bar{*}, x, y, H, G, *])} \hfill \implies \hfill \\
   (Group[G / H, \bar{*}])
 \end{array}\right)$
 \begin{enumerate}
   \lit $(H x, H y \in G / H) \implies \ldots$
   \begin{enumerate}
-    \lit TODO: show set manipulations as lemmas e.g., $(H * H = H) \abr (H * H \subseteq H) \land (H \subseteq H * H)$
-    \lit $NormalSubgroup[H, G, *]$ \pipe $H x \bar{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\} = \{h_1 h_2 x y | h_1, h_2 \in H\} = \{h x y | h \in H\} = H x y$
-    \lit $x, y \in G$ \pipe $x y \in G$ \pipe $H x \bar{*} H y = H x y \in G / H$
+    \lit $(NormalSubgroup[H, G, *]) \land (QuotientGroupLemma)$ \pipe $\forall_{x, y, z \in G}\pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}}$
+    \lit $(z \in H x \bar{*} H y) \iff \pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)} \iff (z \in H x y)$ \pipe $H x \bar{*} H y = H x y$
+    \lit $(Group[G, *]) \land (x, y \in G)$ \pipe $x y \in G$ \pipe $H x y \in G / H$
+    \lit $(H x \bar{*} H y = H x y) \land (H x y \in G / H)$ \pipe $\exists!_{H x y \in G / H}(H x \bar{*} H y = H x y)$
   \end{enumerate}
-  \lit $(H x, H y \in G / H) \implies (H x \bar{*} H y \in G / H)$
+  \lit $(H x, H y \in G / H) \implies \pr{\exists!_{H x y \in G / H}(H x \bar{*} H y = H x y)}$ \pipe $Func[\bar{*}, G / H, G / H]$
   \lit $(H x, H y, H z \in G / H) \implies \ldots$
   \begin{enumerate}
-    \lit 123123 CONTHERE https://youtu.be/hgbnua35tE4?t=599
+    \lit $(H x \bar{*} H y) \bar{*} H z = H x y \bar{*} H z = H x y z = H x \bar{*} H y z = H x \bar{*} (H y \bar{*} H z)$ \pipe $(H x \bar{*} H y) \bar{*} H z = H x \bar{*} (H y \bar{*} H z)$
   \end{enumerate}
-  \lit 123123
+  \lit $(H x, H y, H z \in G / H) \implies \pr{(H x \bar{*} H y) \bar{*} H z = H x \bar{*} (H y \bar{*} H z)}$ \pipe $\forall_{a, b, c \in G / H}\pr{(a \bar{*} b) \bar{*} c = a \bar{*} (b \bar{*} c)}$
+  \lit $(H e \in G / H) \land \pr{\forall_{H x \in G / H}(H x \bar{*} H e = H x e = H x = H e x = H e \bar{*} H x)}$ \pipe $\exists_{e \in G / H} \forall_{a \in G / H}(a \bar{*} e = a = e \bar{*} a)$
+  \lit $(H x \in G / H) \implies \ldots$
+  \begin{enumerate}
+    \lit $x \in G$ \pipe $x^{-1} \in G$ \pipe $H x^{-1} \in G / H$
+    \lit $H x \bar{*} H x^{-1} = H x x^{-1} = H e = H x^{-1} x = H x^{-1} \bar{*} H x$ \pipe $H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x$
+    \lit $(H x^{-1} \in G / H) \land (H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)$ \pipe $\exists_{H x^{-1} \in G / H}(H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)$
+  \end{enumerate}
+  \lit $(H x \in G / H) \implies \pr{\exists_{H x^{-1} \in G / H}(H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)}$ \pipe $\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bar{*} a^{-1} = e = a^{-1} \bar{*} a)$
+  \lit $(Func[\bar{*}, G / H, G / H]) \land \pr{\forall_{a, b, c \in G / H}\pr{(a \bar{*} b) \bar{*} c = a \bar{*} (b \bar{*} c)}} \land \pr{\exists_{e \in G / H} \forall_{a \in G / H}(a \bar{*} e = a = e \bar{*} a)} \land$ \cont
+  \lit \cont $\pr{\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bar{*} a^{-1} = e = a^{-1} \bar{*} a)}$ \pipe $Group[G / H, \bar{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $NormalSubgroup[H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)}$ \\
 
+TODO THEOREMS 5.7-5.11
+TODO INCLUDE COMMON NOTATIONS!!
 
+%
+%
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\\pr{(.+?)\}    $1[$2]
 
