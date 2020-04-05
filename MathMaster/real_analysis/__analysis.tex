@@ -79,6 +79,8 @@
 \newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
 \newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
+\newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
+%{\mathbin{\ooalign{$\hidewidth\ \bar{#1}\hidewidth$\cr$\phantom{$1}$}}}
 
 %\usepackage[author={Max Schlepzig}]{pdfcomment}
 %Here we\pdfcomment[icon=Insert]{insert: miss} a word!
@@ -1436,8 +1438,8 @@ $ConjugatesMultiplicity \abr (g \in G) \implies \pr{o(G) = o\pr{C(g)} |C_g|}$
     \lit $(x^{-1} g x = y^{-1} g y) \iff (g x = x y^{-1} g y) \iff \pr{g (x y^{-1}) = (x y^{-1}) g} \iff$ \cont
     \lit \cont $\pr{x y^{-1} \in C(g)} \iff \pr{C(g) (x y^{-1}) = C(g)} \iff \pr{C(g) x = C(g) y}$
   \end{enumerate}
-  \lit $(x, y \in G) \implies \pr{(x^{-1} g x = y^{-1} g y) \iff \pr{C(g) x = C(g) y}}$
-  \lit $\pr{Func[\phi, C_g, G : C(g)]} \land \pr{Inj[\phi, C_g, G : C(g)]} \land \pr{Surj[\phi, C_g, G : C(g)]}$ \pipe $Bij[\phi, C_g, G : C(g)]$
+  \lit $(x, y \in G) \implies \pr{(x^{-1} g x = y^{-1} g y) \iff \pr{C(g) x = C(g) y}}$ \cont
+  \lit \cont $\pr{Func[\phi, C_g, G : C(g)]} \land \pr{Inj[\phi, C_g, G : C(g)]} \land \pr{Surj[\phi, C_g, G : C(g)]}$ \pipe $Bij[\phi, C_g, G : C(g)]$ % TODO ANALYZE
   \lit $\exists_{\phi}\pr{Bij[\phi, C_g, G : C(g)]}$ \pipe $|C_g| = |G : C(g)|$
   \lit $(LagrangeTheorem) \land (SubgroupCenter) \land \pr{|C_g| = |G : C(g)|}$ \pipe $o(G) = o\pr{C(g)} |G : C(g)|$ \pipe $o(G) = o\pr{C(g)} |C_g|$ 
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -1517,7 +1519,7 @@ $KerInduceNormalSubgroup \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (
 
 \section{Quotient Groups}
 $QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g | g \in G\})$ \\
-$FactorMul[\bar{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{x, y \in G}(H x \bar{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\})}$ \\
+$CosetMul[\bbin{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{x, y \in G}(H x \bbin{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\})}$ \\
 
 $QuotientGroupLemma \abr \pr{(NormalSubgroup[H, G, *]) \land (x, y, z \in G)} \implies \pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}}$
 \begin{enumerate}
@@ -1543,64 +1545,79 @@ $QuotientGroupLemma \abr \pr{(NormalSubgroup[H, G, *]) \land (x, y, z \in G)} \i
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $QuotientGroup \abr \left(\begin{array}{ll}
-  \pr{(NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (FactorMul[\bar{*}, x, y, H, G, *])} \hfill \implies \hfill \\
-  (Group[G / H, \bar{*}])
+  \pr{(NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (CosetMul[\bbin{*}, x, y, H, G, *])} \hfill \implies \hfill \\
+  (Group[G / H, \bbin{*}])
 \end{array}\right)$
 \begin{enumerate}
   \lit $(H x, H y \in G / H) \implies \ldots$
   \begin{enumerate}
     \lit $(NormalSubgroup[H, G, *]) \land (QuotientGroupLemma)$ \pipe $\forall_{x, y, z \in G}\pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}}$
-    \lit $(z \in H x \bar{*} H y) \iff \pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)} \iff (z \in H x y)$ \pipe $H x \bar{*} H y = H x y$
+    \lit $(z \in H x \bbin{*} H y) \iff \pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)} \iff (z \in H x y)$ \pipe $H x \bbin{*} H y = H x y$
     \lit $(Group[G, *]) \land (x, y \in G)$ \pipe $x y \in G$ \pipe $H x y \in G / H$
-    \lit $(H x \bar{*} H y = H x y) \land (H x y \in G / H)$ \pipe $\exists!_{H x y \in G / H}(H x \bar{*} H y = H x y)$
+    \lit $(H x \bbin{*} H y = H x y) \land (H x y \in G / H)$ \pipe $\exists!_{H x y \in G / H}(H x \bbin{*} H y = H x y)$
   \end{enumerate}
-  \lit $(H x, H y \in G / H) \implies \pr{\exists!_{H x y \in G / H}(H x \bar{*} H y = H x y)}$ \pipe $Func[\bar{*}, G / H, G / H]$
+  \lit $(H x, H y \in G / H) \implies \pr{\exists!_{H x y \in G / H}(H x \bbin{*} H y = H x y)}$ \pipe $Func[\bbin{*}, G / H, G / H]$
   \lit $(H x, H y, H z \in G / H) \implies \ldots$
   \begin{enumerate}
-    \lit $(H x \bar{*} H y) \bar{*} H z = H x y \bar{*} H z = H x y z = H x \bar{*} H y z = H x \bar{*} (H y \bar{*} H z)$ \pipe $(H x \bar{*} H y) \bar{*} H z = H x \bar{*} (H y \bar{*} H z)$
+    \lit $(H x \bbin{*} H y) \bbin{*} H z = H x y \bbin{*} H z = H x y z = H x \bbin{*} H y z = H x \bbin{*} (H y \bbin{*} H z)$ \pipe $(H x \bbin{*} H y) \bbin{*} H z = H x \bbin{*} (H y \bbin{*} H z)$
   \end{enumerate}
-  \lit $(H x, H y, H z \in G / H) \implies \pr{(H x \bar{*} H y) \bar{*} H z = H x \bar{*} (H y \bar{*} H z)}$ \pipe $\forall_{a, b, c \in G / H}\pr{(a \bar{*} b) \bar{*} c = a \bar{*} (b \bar{*} c)}$
-  \lit $(H e \in G / H) \land \pr{\forall_{H x \in G / H}(H x \bar{*} H e = H x e = H x = H e x = H e \bar{*} H x)}$ \pipe $\exists_{e \in G / H} \forall_{a \in G / H}(a \bar{*} e = a = e \bar{*} a)$
+  \lit $(H x, H y, H z \in G / H) \implies \pr{(H x \bbin{*} H y) \bbin{*} H z = H x \bbin{*} (H y \bbin{*} H z)}$ \pipe $\forall_{a, b, c \in G / H}\pr{(a \bbin{*} b) \bbin{*} c = a \bbin{*} (b \bbin{*} c)}$
+  \lit $(H e \in G / H) \land \pr{\forall_{H x \in G / H}(H x \bbin{*} H e = H x e = H x = H e x = H e \bbin{*} H x)}$ \pipe $\exists_{e \in G / H} \forall_{a \in G / H}(a \bbin{*} e = a = e \bbin{*} a)$
   \lit $(H x \in G / H) \implies \ldots$
   \begin{enumerate}
     \lit $x \in G$ \pipe $x^{-1} \in G$ \pipe $H x^{-1} \in G / H$
-    \lit $H x \bar{*} H x^{-1} = H x x^{-1} = H e = H x^{-1} x = H x^{-1} \bar{*} H x$ \pipe $H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x$
-    \lit $(H x^{-1} \in G / H) \land (H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)$ \pipe $\exists_{H x^{-1} \in G / H}(H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)$
+    \lit $H x \bbin{*} H x^{-1} = H x x^{-1} = H e = H x^{-1} x = H x^{-1} \bbin{*} H x$ \pipe $H x \bbin{*} H x^{-1} = H e = H x^{-1} \bbin{*} H x$
+    \lit $(H x^{-1} \in G / H) \land (H x \bbin{*} H x^{-1} = H e = H x^{-1} \bbin{*} H x)$ \pipe $\exists_{H x^{-1} \in G / H}(H x \bbin{*} H x^{-1} = H e = H x^{-1} \bbin{*} H x)$
   \end{enumerate}
-  \lit $(H x \in G / H) \implies \pr{\exists_{H x^{-1} \in G / H}(H x \bar{*} H x^{-1} = H e = H x^{-1} \bar{*} H x)}$ \pipe $\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bar{*} a^{-1} = e = a^{-1} \bar{*} a)$
-  \lit $(Func[\bar{*}, G / H, G / H]) \land \pr{\forall_{a, b, c \in G / H}\pr{(a \bar{*} b) \bar{*} c = a \bar{*} (b \bar{*} c)}} \land \pr{\exists_{e \in G / H} \forall_{a \in G / H}(a \bar{*} e = a = e \bar{*} a)} \land$ \cont
-  \lit \cont $\pr{\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bar{*} a^{-1} = e = a^{-1} \bar{*} a)}$ \pipe $Group[G / H, \bar{*}]$
+  \lit $(H x \in G / H) \implies \pr{\exists_{H x^{-1} \in G / H}(H x \bbin{*} H x^{-1} = H e = H x^{-1} \bbin{*} H x)}$ \pipe $\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bbin{*} a^{-1} = e = a^{-1} \bbin{*} a)$
+  \lit $(Func[\bbin{*}, G / H, G / H]) \land \pr{\forall_{a, b, c \in G / H}\pr{(a \bbin{*} b) \bbin{*} c = a \bbin{*} (b \bbin{*} c)}} \land \pr{\exists_{e \in G / H} \forall_{a \in G / H}(a \bbin{*} e = a = e \bbin{*} a)} \land$ \cont
+  \lit \cont $\pr{\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bbin{*} a^{-1} = e = a^{-1} \bbin{*} a)}$ \pipe $Group[G / H, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$QuotientMap[\bar{\phi}, H, G, *] \abr (NormalSubgroup[H, G, *]) \land (Func[\bar{\phi}, G, *, G / H, \bar{*}]) \land \pr{\forall_{g \in G}\pr{\bar{\phi}(g) = H g}}$ \\
+$QuotientMap[\bar{\phi}, H, G, *] \abr (NormalSubgroup[H, G, *]) \land (Func[\bar{\phi}, G, *, G / H, \bbin{*}]) \land \pr{\forall_{g \in G}\pr{\bar{\phi}(g) = H g}}$ \\
 
-$QuotientMapHomo \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[\bar{\phi}, G, *, G / H, \bar{*}])$
+$QuotientMapHomo \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[\bar{\phi}, G, *, G / H, \bbin{*}])$
 \begin{enumerate}
-  \lit $QuotientMap[\bar{\phi}, H, G, *]$ \pipe $Func[\bar{\phi}, G, *, G / H, \bar{*}]$
+  \lit $QuotientMap[\bar{\phi}, H, G, *]$ \pipe $Func[\bar{\phi}, G, *, G / H, \bbin{*}]$
   \lit $(x, y \in G) \implies \ldots$
   \begin{enumerate}
-    \lit $\bar{\phi}(x * y) = H x y = H x \bar{*} H y = \bar{\phi}(x) \bar{*} \bar{\phi}(y)$ \pipe $\bar{\phi}(x * y) = \bar{\phi}(x) \bar{*} \bar{\phi}(y)$
+    \lit $\bar{\phi}(x * y) = H x y = H x \bbin{*} H y = \bar{\phi}(x) \bbin{*} \bar{\phi}(y)$ \pipe $\bar{\phi}(x * y) = \bar{\phi}(x) \bbin{*} \bar{\phi}(y)$
   \end{enumerate}
-  \lit $(x, y \in G) \implies \pr{\bar{\phi}(x * y) = \bar{\phi}(x) \bar{*} \bar{\phi}(y)}$ \pipe $\forall_{x, y \in G}\pr{\bar{\phi}(x) \bar{*} \bar{\phi}(y)})$
-  \lit $(Func[\bar{\phi}, G, *, G / H, \bar{*}]) \land \pr{\forall_{x, y \in G}\pr{\bar{\phi}(x) \bar{*} \bar{\phi}(y)}})$ \pipe $Homomorphism[\bar{\phi}, G, *, G / H, \bar{*}]$
+  \lit $(x, y \in G) \implies \pr{\bar{\phi}(x * y) = \bar{\phi}(x) \bbin{*} \bar{\phi}(y)}$ \pipe $\forall_{x, y \in G}\pr{\bar{\phi}(x) \bbin{*} \bar{\phi}(y)})$
+  \lit $(Func[\bar{\phi}, G, *, G / H, \bbin{*}]) \land \pr{\forall_{x, y \in G}\pr{\bar{\phi}(x) \bbin{*} \bar{\phi}(y)}})$ \pipe $Homomorphism[\bar{\phi}, G, *, G / H, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $QuotientMapKer \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi}} = H)$
 \begin{enumerate}
-  \lit $ker_{\bar{\phi}} = \{x \in G | \bar{\phi}(x) = H e\} = \{x \in G | H x = H\} = H$
+  \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G | \bar{\phi}(x) = H e\} = \{x \in G | H x = H\} = H$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-CONTHERE The proofs are omitted in these notes but you may refer to Fraleigh, pp. 229-230
-$FirstIsoTheorem \abr $
+
+$FirstIsoTheorem \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond])$
+\begin{enumerate}
+  \lit $\psi \abr \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) | g \in G\}$
+  \lit $(g, h \in G) \implies \ldots$
+  \begin{enumerate}
+     \lit $(ker_\phi g = ker_\phi h) \iff (ker_\phi g h^{-1} = ker_\phi) \iff (g h^{-1} \in ker_\phi) \iff \pr{\phi(g h^{-1}) = e_H} \iff$ \cont
+     \lit \cont $\pr{e_H = \phi(g) \diamond \phi(h^{-1}) = \phi(g) \diamond \phi(h)^{-1}} \iff \pr{\phi(g) = \phi(h)}$ \pipe $(ker_\phi g = ker_\phi h) \iff \pr{\phi(g) = \phi(h)}$
+   \end{enumerate}
+  \lit $(g, h \in G) \implies \pr{(ker_\phi g = ker_\phi h) \iff \pr{\phi(g) = \phi(h)}}$ \cont
+  \lit \cont $(Func[\psi, G / ker_\phi, im_\phi]) \land (Inj[\psi, G / ker_\phi, im_\phi]) \land (Surj[\psi, G / ker_\phi, im_\phi])$ \pipe $Bij[\psi, G / ker_\phi, im_\phi]$ % TODO ANALYZE
+  \lit $(ker_\phi g, ker_\phi h \in G / ker_\phi) \implies \ldots$
+  \begin{enumerate}
+    \lit $\psi(ker_\phi g \bbin{*} ker_\phi h) = \psi(ker_\phi g h) = \phi(g * h) = \phi(g) \diamond \phi(h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)$ \pipe $\psi(ker_\phi g \bbin{*} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)$
+  \end{enumerate}
+  \lit $(ker_\phi g, ker_\phi h \in G / ker_\phi) \implies \pr{\psi(ker_\phi g \bbin{*} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)}$ \cont
+  \lit \cont $\forall_{ker_\phi g, ker_\phi h \in G / ker_\phi}\pr{\psi(ker_\phi g \bbin{*} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)}$
+  \lit $(Bij[\psi, G / ker_\phi, im_\phi]) \land \pr{\forall_{ker_\phi g, ker_\phi h \in G / ker_\phi}\pr{\psi(ker_\phi g {\bbin{*}} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)}}$ \pipe $Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
+  \lit $\exists_{\psi}(Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond])$ \pipe $Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SecondIsoTheorem \abr \pr{(Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])} \implies \pr{Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}]}$
 \begin{enumerate}
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SecondIsoTheorem \abr $
-\begin{enumerate}
-  \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-$ThirdIsoTheorem \abr $
+$ThirdIsoTheorem \abr \pr{(NormalSubgroup[K, G, *]) \land (NormalSubgroup[H, G, *]) \land (Subgroup[K, H, *])} \implies \pr{Isomorphic[G / H, \bbin{*}, (G / K) / (H / K), \bbin{*}]}$
 \begin{enumerate}
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
