@@ -1519,7 +1519,8 @@ $KerInduceNormalSubgroup \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (
 
 \section{Quotient Groups}
 $QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g | g \in G\})$ \\
-$CosetMul[\bbin{*}, H, G, *] \abr (Subgroup[H, G, *]) \land (\forall_{x, y \in G}(H x \bbin{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\}))$ \\
+$CosetMul[\bbin{*}, H, G, *] \abr (Subgroup[H, G, *]) \land (\forall_{H x, H y \in G / H}(H x \bbin{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\}))$ \\
+$SubsetMul[\bbin{\times}, G, *] \abr (Group[G, *]) \land (\forall_{A, B \subseteq G}(A \bbin{\times} B = \{a * b | (a \in A) \land (b \in B)\}))$ \\
 
 $QuotientGroupLemma \abr ((NormalSubgroup[H, G, *]) \land (x, y, z \in G)) \implies ((\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)) \iff (\exists_{h_3 \in H}(z = h_3 x y)))$
 \begin{enumerate}
@@ -1544,7 +1545,7 @@ $QuotientGroupLemma \abr ((NormalSubgroup[H, G, *]) \land (x, y, z \in G)) \impl
   \lit $(\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)) \iff (\exists_{h_3 \in H}(z = h_3 x y))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$QuotientGroup \abr \left(\begin{array}{ll}
+$QuotientGroupThm \abr \left(\begin{array}{ll}
   ((NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (CosetMul[\bbin{*}, x, y, H, G, *])) \hfill \implies \hfill \\
   (Group[G / H, \bbin{*}])
 \end{array}\right)$
@@ -1592,7 +1593,7 @@ $QuotientMapKer \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi
   \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G | \bar{\phi}(x) = H e\} = \{x \in G | H x = H\} = H$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$FirstIsoTheorem \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond])$
+$FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond])$
 \begin{enumerate}
   \lit $\psi \abr \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) | g \in G\}$
   \lit $(g, h \in G) \implies \ldots$
@@ -1611,13 +1612,57 @@ $FirstIsoTheorem \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorph
   \lit $(Bij[\psi, G / ker_\phi, im_\phi]) \land (\forall_{ker_\phi g, ker_\phi h \in G / ker_\phi}(\psi(ker_\phi g {\bbin{*}} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)))$ \pipe $Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
   \lit $\exists_{\psi}(Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond])$ \pipe $Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
-$SecondIsoTheorem \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implies (Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}])$
+TODO USE BIJECTION FOR CYCLIC GROUPS!!!
+$SecondIsoThm \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implies (Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}])$
 \begin{enumerate}
-  \lit TODO
+  \lit $(Group[H, *]) \land (Group[N, *])$ \pipe $(e \in H) \land (e \in N)$
+  \lit $e = e * e \in H N$ \pipe $\emptyset \neq H N \subseteq G$
+  \lit $(h_1 n_1, h_2 n_2 \in H N) \implies \ldots$
+  \begin{enumerate}
+    \lit $h_2 \in G$ \pipe $(h_2)^{-1} n_1 h_2 \in N$
+    \lit $(h_1 n_1) (h_2 n_2) = h_1 (h_2 (h_2)^{-1}) n_1 h_2 n_2 = (h_1 h_2) ((h_2)^{-1} n_1 h_2 n_2)$ \pipe $(h_1 n_1) (h_2 n_2) = (h_1 h_2) ((h_2)^{-1} n_1 h_2 n_2)$
+    \lit $(Group[H, *]) \land (Group[N, *])$ \pipe $(h_1 h_2 \in H) \land ((h_2)^{-1} n_1 h_2 n_2 \in N)$
+    \lit $(h_1 n_1) (h_2 n_2) = (h_1 h_2) ((h_2)^{-1} n_1 h_2 n_2 \in N$ \pipe $(h_1 n_1) (h_2 n_2) \in N$
+  \end{enumerate}
+  \lit $(h_1 n_1, h_2 n_2 \in H N) \implies ((h_1 n_1) (h_2 n_2) \in N)$ \pipe $\forall_{h_1 n_1, h_2 n_2 \in H N}((h_1 n_1) (h_2 n_2) \in N)$
+  \lit $(h n \in H N) \implies \ldots$
+  \begin{enumerate}
+    \lit $(Subgroup[H, G, *]) \land (Group[N, *])$ \pipe $(h^{-1} \in G) \land (n^{-1} \in N)$ 
+    \lit $(NormalSubgroup[N, G, *]) \land (h^{-1} \in G) \land (n^{-1} \in N)$ \pipe  $h n^{-1} h^{-1} \in N$
+    \lit $(h n)^{-1} = n^{-1} h^{-1} = (h^{-1} h) n^{-1} h^{-1} = h^{-1} (h n^{-1} h^{-1}) \in H N$ \pipe $(h n)^{-1} \in H N$
+  \end{enumerate}
+  \lit $(h n \in H N) \implies ((h n)^{-1} \in H N)$ \pipe $\forall_{h n \in H N}((h n)^{-1} \in H N)$
+  \lit $(\emptyset \neq H N \subseteq G) \land (\forall_{h_1 n_1, h_2 n_2 \in H N}((h_1 n_1) (h_2 n_2) \in N)) \land (\forall_{h n \in H N}((h n)^{-1} \in H N))$ \pipe $Subgroup[H N, G, *]$ \pipe $Group[H N, *]$
+  \lit $(N \subseteq H N) \land (Group[N, *])$ \pipe $Subgroup[N, H N, *]$
+  \lit $((n \in N) \land (h_1 n_1 \in H N)) \implies \ldots$
+  \begin{enumerate}
+    \lit $(NormalSubgroup[N, G, *]) \land (h_1 n_1 \in G)$ \pipe $(h_1 n_1)^{-1} n (h_1 n_1) \in N$
+  \end{enumerate}
+  \lit $((n \in N) \land (h_1 n_1 \in H N)) \implies ((h_1 n_1)^{-1} n (h_1 n_1) \in N)$ \pipe $\forall_{n \in N} \forall_{h_1 n_1 \in H N}((h_1 n_1)^{-1} n (h_1 n_1) \in N)$
+  \lit $(Subgroup[N, H N, *]) \land (\forall_{n \in N} \forall_{h_1 n_1 \in H N}((h_1 n_1)^{-1} n (h_1 n_1) \in N))$ \pipe $NormalSubgroup[N, H N, *]$
+  \lit $(SubgroupIntersection) \land (Subgroup[H, G, *]) \land (Subgroup[N, G, *])$ \pipe $Subgroup[H \cap N, G, *]$ \pipe $Group[H \cap N, *]$
+  \lit $(H \cap N \subseteq H) \land (Group[H \cap N, *])$ \pipe $Subgroup[H \cap N, H, *]$
+  \lit $((x \in H \cap N) \land (h \in H)) \implies \ldots$
+  \begin{enumerate}
+    \lit $x \in H \cap N$ \pipe $(x \in H) \land (x \in N)$
+    \lit $(Group[H, *]) \land (h \in H)$ \pipe $h^{-1} \in H$
+    \lit $(Group[H, *]) \land (x, h, h^{-1} \in H)$ \pipe $h^{-1} x h \in H$
+    \lit $(NormalSubgroup[N, G, *]) \land (h \in G) \land (x \in N)$ \pipe $h^{-1} x h \in N$
+    \lit $(h^{-1} x h \in H) \land (h^{-1} x h \in N)$ \pipe $h^{-1} x h \in H \cap N$
+  \end{enumerate}
+  \lit $((x \in H \cap N) \land (h \in H)) \implies (h^{-1} x h \in H \cap N)$ \pipe $\forall_{x \in H \cap N} \forall_{h \in H}(h^{-1} x h \in H \cap N)$
+  \lit $(Subgroup[H \cap N, H, *]) \land (\forall_{x \in H \cap N} \forall_{h \in H}(h^{-1} x h \in H \cap N))$ \pipe $NormalSubgroup[H \cap N, H, *]$
+  \lit $(Group[H N, *]) \land (NormalSubgroup[N, H N, *]) \land (Group[H, *]) \land (NormalSubgroup[H \cap N, H, *])$
+  \lit $QuotientGroupThm$ \pipe $(Group[(H N) / N, \bbin{*}]) \land (Group[H / (H \cap N), \bbin{*}])$
+  \lit $\phi \abr \{\langle 1, 2 \rangle \in (3 \times 4) | 5 \in 6\}$
+  \lit 123123
+  %\lit $\exists_{\phi}(Isomorphism[\phi, (H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}])$ \pipe $Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ThirdIsoTheorem \abr ((NormalSubgroup[K, G, *]) \land (NormalSubgroup[H, G, *]) \land (Subgroup[K, H, *])) \implies (Isomorphic[G / H, \bbin{*}, (G / K) / (H / K), \bbin{*}])$
+$ThirdIsoThm \abr \left(\begin{array}{ll}
+  ((NormalSubgroup[K, G, *]) \hfill \land \hfill (NormalSubgroup[H, G, *]) \hfill \land \hfill (Subgroup[K, H, *])) \hfill \implies \hfill \\
+  (Isomorphic[G / H, \bbin{*}, (G / K) / (H / K), \bbin{*}])
+\end{array}\right)$
 \begin{enumerate}
   \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
