@@ -80,7 +80,7 @@
 \newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 \newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
-%{\mathbin{\ooalign{$\hidewidth\ \bar{#1}\hidewidth$\cr$\phantom{$1}$}}}
+\newcommand{\st}{\mathbin{|}}
 
 %\usepackage[author={Max Schlepzig}]{pdfcomment}
 %Here we\pdfcomment[icon=Insert]{insert: miss} a word!
@@ -823,7 +823,7 @@ TODO:
 \section{Functions}
 $Rel[r, X] \abr (X \neq \emptyset) \land (r \subseteq X)$ \\
 $Func[f, X, Y] \abr (Rel[f, X \times Y]) \land \pr{\forall_{x \in X} \exists!_{y \in Y}(\langle x, y \rangle \in f)}$ \\
-$Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land \pr{g \circ f = \{\langle x, g\pr{f(x)} \rangle \in X \times Z | x \in X\}}$ \\
+$Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land \pr{g \circ f = \{\langle x, g\pr{f(x)} \rangle \in X \times Z \st x \in X\}}$ \\
 
 $FuncComp \abr (Comp[g \circ f, f, g, X, Y, Z]) \implies (Func[g \circ f, X, Z])$
 \begin{enumerate}
@@ -837,8 +837,8 @@ $CompAssoc \abr h \circ (g \circ f) = (h \circ g) \circ f$
 
 $Domain[dom(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{dom(f) = X}$ \\
 $Codomain[cod(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{cod(f) = Y}$ \\
-$Image[im(A), A, f, X, Y] \abr (Func[f, X, Y]) \land (A \subseteq X) \land \pr{im(A) = \{f(a) \in Y | a \in A\}}$ \\
-$Preimage[pim(B), B, f, X, Y] \abr (Func[f, X, Y]) \land (B \subseteq Y) \land \pr{pim(B) = \{a \in X | f(a) \in B\}}$ \\
+$Image[im(A), A, f, X, Y] \abr (Func[f, X, Y]) \land (A \subseteq X) \land \pr{im(A) = \{f(a) \in Y \st a \in A\}}$ \\
+$Preimage[pim(B), B, f, X, Y] \abr (Func[f, X, Y]) \land (B \subseteq Y) \land \pr{pim(B) = \{a \in X \st f(a) \in B\}}$ \\
 $Range[rng(f), f, X, Y] \abr (Func[f, X, Y]) \land \pr{Image[rng(f), dom(f), f, X, Y]}$ \\
 
 $Inj[f, X, Y] \abr (Func[f, X, Y]) \land \pr{\forall_{x_1, x_2 \in X}\pr{\pr{f(x_1) = f(x_2)} \implies (x_1 = x_2)}}$ \\ % or One-to-One
@@ -881,11 +881,11 @@ $CongRel[a, b, n] \abr Divides[n, a - b]$ \\
 
 $Partition[\mathcal{P}, S] \abr \pr{\forall_{P \in \mathcal{P}}(P \neq \emptyset)} \land \pr{S = \bigcup\limits_{P \in \mathcal{P}}(P)} \land \pr{\forall_{P_1, P_2 \in \mathcal{P}}\pr{(P_1 \neq P_2) \implies (P_1 \cap P_2 = \emptyset)}}$ \\
 $EqRel[\sim, S] \abr (Rel[\sim, S]) \land \pr{\forall_{a \in S}(a \sim a)} \land \pr{\forall_{a, b \in S}\pr{(a \sim b) \implies (b \sim a)}} \land \pr{\forall_{a, b, c \in S}\pr{\pr{(a \sim b) \land (b \sim c)} \implies (a \sim c)}}$ \\
-$EqClass[[s], s, \sim, S] \abr (Rel[\sim, S]) \land (s \in S) \land ([s] = \{x \in S | x \sim s\})$ \\
+$EqClass[[s], s, \sim, S] \abr (Rel[\sim, S]) \land (s \in S) \land ([s] = \{x \in S \st x \sim s\})$ \\
 
 $PartitionInducesEqRel \abr (Partition[\mathcal{P}, S]) \implies \pr{\exists_{\sim}(EqRel[\sim, S])}$
 \begin{enumerate}
-  \lit TODO : $\sim = \{\langle a, b \rangle \in S \times S | (P \in \mathcal{P}) \land (a, b \in P)\}$
+  \lit TODO : $\sim = \{\langle a, b \rangle \in S \times S \st (P \in \mathcal{P}) \land (a, b \in P)\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $EqRelInducesPartition \abr (EqRel[\sim, S]) \implies \pr{\exists_{\mathcal{P}}(Partition[\mathcal{P}, S])}$
@@ -999,7 +999,7 @@ $SubgroupIntersection \abr \forall_{H_1, H_2, G}\pr{\pr{(Subgroup[H_1, G, *]) \l
   \lit \cont $\pr{\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a)}$ \pipe $Subgroup[H_1 \cap H_2, G, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Centralizer[C(g), g, G, *] \abr (Group[G, *]) \land (g \in G) \land \pr{C(g) = \{h \in G | g * h = h * g\}}$ \\
+$Centralizer[C(g), g, G, *] \abr (Group[G, *]) \land (g \in G) \land \pr{C(g) = \{h \in G \st g * h = h * g\}}$ \\
 
 $SubgroupCentralizer \abr \forall_{g, G}\pr{\pr{Centralizer[C(g), g, G, *]} \implies \pr{Subgroup[C(g), G, *]}}$
 \begin{enumerate}
@@ -1030,7 +1030,7 @@ $SubgroupCenter \abr \forall_{G}\pr{\pr{Center[Z(G), G, *]} \implies \pr{Subgrou
 
 \section{Special Groups}
 \subsection{Cyclic Group}
-$CyclicSubgroup[<g>, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (<g> = \{g^n | n \in \mathbb{Z}\})$ \\
+$CyclicSubgroup[<g>, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (<g> = \{g^n \st n \in \mathbb{Z}\})$ \\
 $Generator[g, G, *] \abr CyclicSubgroup[G, g, G, *]$ \\
 $CyclicGroup[G, *] \abr \exists_{g \in G}(Generator[g, G, *])$ \\
 %$CyclicGroup[G, *] \abr \exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \\
@@ -1085,11 +1085,11 @@ $TranspositionSigns \abr sign(\tau \sigma) = -sign(\sigma)$ \\
 $TranspositionSignsCorollary \abr sign\pr{\prod_{i = 1}^{r}(\tau_i)} = (-1)^r$ \\
 $SignProp \abr sign(\sigma \pi) = sign(\sigma) sign(\pi)$ \\
 
-$AlternatingGroup[A_n, n] \abr A_n = \{\sigma \in S_n | EvenPermutation[\sigma, S_n]\}$ \\
+$AlternatingGroup[A_n, n] \abr A_n = \{\sigma \in S_n \st EvenPermutation[\sigma, S_n]\}$ \\
 $AlternatingGroupOrder \abr o(A_n) = n!/2$ \\
 
 \subsection{Dihedral Group}
-$DihedralGroup[D_n, *] \abr \pr{D_n = \{a^r * b^s | (r \in \mathbb{N}_{0, n - 1}) \land (s \in \mathbb{N}_{0, 1})\}} \land \left(\begin{array}{ll}
+$DihedralGroup[D_n, *] \abr \pr{D_n = \{a^r * b^s \st (r \in \mathbb{N}_{0, n - 1}) \land (s \in \mathbb{N}_{0, 1})\}} \land \left(\begin{array}{ll}
   \pr{a^p a^q = a^{(p + q) \% n}} \hfill \land \hfill \\
   \pr{a^p b a^q = a^{(p - q) \% n} b} \hfill \land \hfill \\
   \pr{a^p b a^q b = a^{(p - q) \% n}}
@@ -1098,15 +1098,15 @@ $DihedralGroupOrder \abr o(D_n) = 2 n$ \\
 
 
 \section{Lagrange's Theorem}
-$LeftCoset[g H, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (g H = \{g * h | h \in H\})$ \\
-$RightCoset[H g, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (H g = \{h * g | h \in H\})$ \\
+$LeftCoset[g H, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (g H = \{g * h \st h \in H\})$ \\
+$RightCoset[H g, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (H g = \{h * g \st h \in H\})$ \\
 
 $CosetCardinality \abr (RightCoset[H g, g, H, G, *]) \implies (|H| = |H g|)$
 \begin{enumerate}
   \lit $CancellationLaws$ \pipe $(h_1 g = h_2 g) \implies (h_1 = h_2)$ \pipe $|H| = |H g|$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \{\langle a, b \rangle | a * b^{-1} \in H\})} \implies \pr{(EqRel[\sim, G]) \land (EqClass[H a, a, \sim, G])}}$
+$CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \{\langle a, b \rangle \st a * b^{-1} \in H\})} \implies \pr{(EqRel[\sim, G]) \land (EqClass[H a, a, \sim, G])}}$
 \begin{enumerate}
   \lit $(a, b, c \in G) \implies \ldots$
   \begin{enumerate}
@@ -1119,10 +1119,10 @@ $CosetInduceEqRel \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (\sim = \
   \begin{enumerate}
     \lit $(x \sim a) \iff (x * a^{-1} \in H) \iff \pr{\exists_{h \in H}(x * a^{-1} = h)} \iff \pr{\exists_{h \in H}(x = h * a)} \iff (x \in H a)$
   \end{enumerate}
-  \lit $[a] = \{x \in G | x \sim a\} = H a$
+  \lit $[a] = \{x \in G \st x \sim a\} = H a$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$CosetSet[G : H, H, G, *] \abr (Subgroup[H, G, *]) \land (G : H = \{g H | g \in G\})$ \\ % similar to QuotientSet
+$CosetSet[G : H, H, G, *] \abr (Subgroup[H, G, *]) \land (G : H = \{g H \st g \in G\})$ \\ % similar to QuotientSet
 $IndexSubgroup[|G : H|, H, G, *] \abr (CosetSet[G : H, H, G, *]) \land (|G : H| = |G : H|) \land \pr{|G| = (|H|) (|G : H|)}$ \\
 
 $LagrangeTheorem \abr \forall_{G, H}\pr{\pr{(Subgroup[H, G, *]) \land (o(G), o(H) \in \mathbb{N}}} \implies \pr{o(G) = o(H) |G: H|} \land \pr{Divides[o(H), o(G)]}$
@@ -1210,14 +1210,23 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   (Isomorphic[G, *, H, \diamond])
 \end{array}\right)$
 \begin{enumerate}
-  \lit $\exists_{g, h}\pr{(Generator[g, G, *]) \land (Generator[h, H, \diamond])}$
-  \lit TODO $\phi(g^n) = h^n$
+  \lit $\pr{\exists_{g \in G}(Generator[g, G, *])} \land \pr{\exists_{h \in H}(Generator[h, H, \diamond])}$
+  \lit $\phi \abr \{\langle g^n, h^n \rangle \in (G \times H) \st n \in \mathbb{Z}\}$
+  \lit $(n_1, n_2 \in \mathbb{Z}) \implies \ldots$
+  \begin{enumerate}
+    \lit $(ExpModOrder) \land (Order[n, G, *]) \land (Order[n, H, \diamond])$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{n_1 \equiv n_2 (mod \phantom{.} n)} \iff (h^{n_1} = h^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}$
+  \end{enumerate}
+  \lit $(n_1, n_2 \in \mathbb{Z}) \implies \pr{(g^{n_1} = g^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}}$ \cont
+  \lit \cont $(Func[\phi, G, H]) \land (Inj[\phi, G, H]) \land (Surj[\phi, G, H]])$ \pipe $Bij[\phi, G, H]$ % TODO ANALYZE
+  \lit TODO: $Homomorphism[\phi, G, *, H, \diamond]$
+  \lit $(Homomorphism[\phi, G, *, H, \diamond]) \land (Bij[\phi, G, H])$ \pipe $Isomorphism[\phi, G, *, H, \diamond]$
+  \lit $\exists_{\phi}(Isomorphism[\phi, G, *, H, \diamond])$ \pipe $Isomorphic[G, *, H, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
 \section{Kernel and Image Homomorphisms}
-$Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{ker_\phi = \{g \in G | \phi(g) = e_H\}}$ \\
-$Image[im_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{im_\phi = \{\phi(g) \in H | g \in G\}}$ \\
+$Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{ker_\phi = \{g \in G \st \phi(g) = e_H\}}$ \\
+$Image[im_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{im_\phi = \{\phi(g) \in H \st g \in G\}}$ \\
 
 $KernelSubgroupDomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Subgroup[ker_\phi, G, *])$
 \begin{enumerate}
@@ -1260,7 +1269,7 @@ $ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Su
 
 $ImageCyclicIsCyclic \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (CyclicGroup[G, *])} \implies (CyclicGroup[im_\phi, \diamond])$
 \begin{enumerate}
-  \lit $CyclicGroup[G, *]$ \pipe $\exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \pipe $\exists_{g_0 \in G}(G = <g_0> = \{{g_0}^n | n \in \mathbb{Z}\})$
+  \lit $CyclicGroup[G, *]$ \pipe $\exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \pipe $\exists_{g_0 \in G}(G = <g_0> = \{{g_0}^n \st n \in \mathbb{Z}\})$
   \lit $ExpMapsExp$ \pipe $h \in im_\phi \iff \exists_{g \in G}\pr{h = \phi(g)} \iff \exists_{n \in \mathbb{Z}}\pr{h = \phi({g_0}^n)} \iff \exists_{n \in \mathbb{Z}}\pr{h = \phi(g_0)^n}$ \pipe $Generator[\phi(g_0), im_\phi, \diamond]$
   \lit $\exists_{h \in im_\phi}(Generator[h, im_\phi, \diamond])$ \pipe $CyclicGroup[im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -1294,19 +1303,19 @@ $MonomorphismEquiv \abr (Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi =
   \lit $(Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$KerCountsMapSameEl \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G)} \implies \pr{(ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}}$
+$KerCountsMapSameEl \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G)} \implies \pr{(ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\}}$
 \begin{enumerate}
   \lit $\pr{x \in (ker_\phi) g} \implies \ldots$
   \begin{enumerate}
     \lit $\exists_{K_x \in ker_\phi}(x = K_x * g)$ \pipe $\phi(x) = \phi(K_x * g) = \phi(K_x) \diamond \phi(g) = e_H \diamond \phi(g) = \phi(g)$ \pipe $\phi(x) = \phi(g)$
   \end{enumerate}
-  \lit $\pr{x \in (ker_\phi) g} \implies \pr{\phi(x) = \phi(g)}$ \pipe $(ker_\phi) g \subseteq \{x \in G | \phi(x) = \phi(g)\}$
+  \lit $\pr{x \in (ker_\phi) g} \implies \pr{\phi(x) = \phi(g)}$ \pipe $(ker_\phi) g \subseteq \{x \in G \st \phi(x) = \phi(g)\}$
   \lit $\pr{\phi(x) = \phi(g)} \implies \ldots$
   \begin{enumerate}
     \lit $e_H = \phi(x) \diamond \phi(g)^{-1} = \phi(x) \diamond \phi(g^{-1)} = \phi(x * g^{-1)}$ \pipe $x * g^{-1} \in ker_\phi$ \pipe $x \in (ker_\phi) g$
   \end{enumerate}
-  \lit $\pr{\phi(x) = \phi(g)} \implies \pr{x \in (ker_\phi) g}$ \pipe $\{x \in G | \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
-  \lit $\pr{(ker_\phi) g \subseteq \{x \in G | \phi(x) = \phi(g)\}} \land \pr{\{x \in G | \phi(x) = \phi(g)\} \subseteq (ker_\phi) g}$ \pipe $(ker_\phi) g = \{x \in G | \phi(x) = \phi(g)\}$
+  \lit $\pr{\phi(x) = \phi(g)} \implies \pr{x \in (ker_\phi) g}$ \pipe $\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
+  \lit $\pr{(ker_\phi) g \subseteq \{x \in G \st \phi(x) = \phi(g)\}} \land \pr{\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g}$ \pipe $(ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies \pr{o(G) = o(ker_\phi) o(im_\phi)}$
@@ -1432,7 +1441,7 @@ $CentralizerConjugateCosets \abr \forall_{c, g, h \in G}\pr{(h = c^{-1} g c) \im
 
 $ConjugatesMultiplicity \abr (g \in G) \implies \pr{o(G) = o\pr{C(g)} |C_g|}$
 \begin{enumerate}
-  \lit $\phi \abr \{\langle a^{-1} g a, C(g) a \rangle \in \pr{C_g \times G : C(g)} | a \in G\}$
+  \lit $\phi \abr \{\langle a^{-1} g a, C(g) a \rangle \in \pr{C_g \times G : C(g)} \st a \in G\}$
   \lit $(x, y \in G) \implies \ldots$
   \begin{enumerate}
     \lit $(x^{-1} g x = y^{-1} g y) \iff (g x = x y^{-1} g y) \iff \pr{g (x y^{-1}) = (x y^{-1}) g} \iff$ \cont
@@ -1518,9 +1527,9 @@ $KerInduceNormalSubgroup \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (
 
 
 \section{Quotient Groups}
-$QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g | g \in G\})$ \\
-$CosetMul[\bbin{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{H x, H y \in G / H}(H x \bbin{*} H y = \{h_1 x h_2 y | h_1, h_2 \in H\})}$ \\
-$SubsetMul[\bbin{\times}, G, *] \abr (Group[G, *]) \land \pr{\forall_{A, B \subseteq G}\pr{A \bbin{\times} B = \{a * b | (a \in A) \land (b \in B)\}}}$ \\
+$QuotientSet[G / H, H, G, *] \abr (Subgroup[H, G, *]) \land (G / H = \{H g \st g \in G\})$ \\
+$CosetMul[\bbin{*}, H, G, *] \abr (Subgroup[H, G, *]) \land \pr{\forall_{H x, H y \in G / H}(H x \bbin{*} H y = \{h_1 x h_2 y \st h_1, h_2 \in H\})}$ \\
+$SubsetMul[\bbin{\times}, G, *] \abr (Group[G, *]) \land \pr{\forall_{A, B \subseteq G}\pr{A \bbin{\times} B = \{a * b \st (a \in A) \land (b \in B)\}}}$ \\
 
 $QuotientGroupLemma \abr \pr{(NormalSubgroup[H, G, *]) \land (x, y, z \in G)} \implies \pr{\pr{\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)} \iff \pr{\exists_{h_3 \in H}(z = h_3 x y)}}$
 \begin{enumerate}
@@ -1590,12 +1599,12 @@ $QuotientMapHomo \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[
 
 $QuotientMapKer \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi}} = H)$
 \begin{enumerate}
-  \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G | \bar{\phi}(x) = H e\} = \{x \in G | H x = H\} = H$
+  \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G \st \bar{\phi}(x) = H e\} = \{x \in G \st H x = H\} = H$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond])$
 \begin{enumerate}
-  \lit $\psi \abr \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) | g \in G\}$
+  \lit $\psi \abr \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) \st g \in G\}$
   \lit $(g, h \in G) \implies \ldots$
   \begin{enumerate}
      \lit $(ker_\phi g = ker_\phi h) \iff (ker_\phi g h^{-1} = ker_\phi) \iff (g h^{-1} \in ker_\phi) \iff \pr{\phi(g h^{-1}) = e_H} \iff$ \cont
@@ -1612,8 +1621,8 @@ $FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G
   \lit $(Bij[\psi, G / ker_\phi, im_\phi]) \land \pr{\forall_{ker_\phi g, ker_\phi h \in G / ker_\phi}\pr{\psi(ker_\phi g {\bbin{*}} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)}}$ \pipe $Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
   \lit $\exists_{\psi}(Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond])$ \pipe $Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-TODO USE BIJECTION FOR CYCLIC GROUPS!!!
-$SecondIsoThm \abr \pr{(Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])} \implies \pr{Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}]}$
+
+$SecondIsoThm \abr \pr{(Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])} \implies \pr{Isomorphic[H / (H \cap N), \bbin{*}, (H N) / N, \bbin{*}]}$
 \begin{enumerate}
   \lit $(Group[H, *]) \land (Group[N, *])$ \pipe $(e \in H) \land (e \in N)$
   \lit $e = e * e \in H N$ \pipe $\emptyset \neq H N \subseteq G$
@@ -1654,9 +1663,17 @@ $SecondIsoThm \abr \pr{(Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])} \imp
   \lit $(Subgroup[H \cap N, H, *]) \land \pr{\forall_{x \in H \cap N} \forall_{h \in H}(h^{-1} x h \in H \cap N)}$ \pipe $NormalSubgroup[H \cap N, H, *]$
   \lit $(Group[H N, *]) \land (NormalSubgroup[N, H N, *]) \land (Group[H, *]) \land (NormalSubgroup[H \cap N, H, *])$
   \lit $QuotientGroupThm$ \pipe $\pr{Group[(H N) / N, \bbin{*}]} \land \pr{Group[H / (H \cap N), \bbin{*}]}$
-  \lit $\phi \abr \{\langle 1, 2 \rangle \in (3 \times 4) | 5 \in 6\}$
-  \lit 123123
-  %\lit $\exists_{\phi}\pr{Isomorphism[\phi, (H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}]}$ \pipe $Isomorphic[(H N) / N, \bbin{*}, H / (H \cap N), \bbin{*}]$
+  \lit $\phi \abr \{\langle h, h N \rangle \in \pr{H \times (H N) / N} \st h \in H\}$ \pipe $Func[\phi, H, (H N) / N]$
+  \lit $(h_1, h_2 \in H) \implies \ldots$
+  \begin{enumerate}
+    \lit $\phi(h_1 * h_2) = (h_1 * h_2) N = (h_1 N) \bbin{*} (h_1 N) = \phi(h_1) \bbin{*} \phi(h_2)$ \pipe $\phi(h_1 * h_2) = \phi(h_1) \bbin{*} \phi(h_2)$  % some left coset is equivalent to some right coset
+  \end{enumerate}
+  \lit $(h_1, h_2 \in H) \implies \pr{\phi(h_1 * h_2) = \phi(h_1) \bbin{*} \phi(h_2)}$ \pipe $\forall_{h_1, h_2 \in H}\pr{\phi(h_1 * h_2) = \phi(h_1) \bbin{*} \phi(h_2)}$
+  \lit $\pr{Func[\phi, H, (H N) / N]} \land \pr{\forall_{h_1, h_2 \in H}\pr{\phi(h_1 * h_2) = \phi(h_1) \bbin{*} \phi(h_2)}}$ \pipe $Homomorphism[\phi, H, *, (H N) / N, \bbin{*}]$
+  \lit $im_\phi = \{\phi(h) \st h \in H\} = \{h N \st h \in H\} = (H N) / N$ \pipe $im_\phi = (H N) / N$
+  \lit $ker_\phi = \{h \in H \st \phi(h) = e_{(H N) / N}\} = \{h \in H \st h N = N\} = \{h \in H \st h \in N\} = \{h \st (h \in H) \land (h \in N)\} = H \cap N$ \pipe $ker_\phi = H \cap N$
+  \lit $(FirstIsoThm) \land \pr{Homomorphism[\phi, H, *, (H N) / N, \bbin{*}]}$ \pipe $Isomorphic[H / ker_\phi, \bbin{*}, im_\phi, \bbin{*}]$
+  \lit $(ker_\phi = H \cap N) \land \pr{im_\phi = (H N) / N} \land (Isomorphic[H / ker_\phi, \bbin{*}, im_\phi, \bbin{*}])$ \pipe $Isomorphic[H / (H \cap N), \bbin{*}, (H N) / N, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $ThirdIsoThm \abr \left(\begin{array}{ll}
@@ -1831,7 +1848,7 @@ $NonTrivSol[X, A] \abr (Sol[X, A, O]) \land (X \neq O)$ \\
 
 $HomoSysProps \abr (Sys[A, O]) \implies \ldots$
 \begin{enumerate}
-  \lit $u_0 \abr O$ ; $u_1 \abr choice(\{X \in \mathcal{M} | X \neq O\})$ ; $k \abr choice(\mathbb{R})$
+  \lit $u_0 \abr O$ ; $u_1 \abr choice(\{X \in \mathcal{M} \st X \neq O\})$ ; $k \abr choice(\mathbb{R})$
   \lit $TrivSol[u_0, A]$
   \lit $(NonTrivSol[u_1, A]) \implies (Sol[u_1 + k u_0])$
   \lit $(TrivSol[\overrightarrow{X}, A]) \implies \pr{TrivSol[LC(\overrightarrow{X}), A]}$
@@ -1893,7 +1910,7 @@ $HasZero[A] \abr \pr{Matrix(A, m, n)} \land \pr{\exists_{i \leq m}(A_{i, :} = O)
 
 $HasZeroNonInvertible \abr \forall_{A \in \mathcal{M}}\pr{(HasZero[A]) \implies (\lnot Invertible[A])}$
 \begin{enumerate}
-  \lit $i \abr choice(\{i \leq m | A_{i, :} = O\})$
+  \lit $i \abr choice(\{i \leq m \st A_{i, :} = O\})$
   \lit $(B \in \mathcal{M}) \implies \ldots$
   \begin{enumerate}
     \lit $(A * B)_{i, :} = O \neq {I_n}_{i, :}$ \pipe $A * B \neq I_n$
@@ -1962,7 +1979,7 @@ $InvIffUniqSol \abr \forall_{A \in \mathcal{M}}\pr{(Invertible[A]) \iff \pr{\for
   \end{enumerate}
   \lit $\pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \implies \ldots$
   \begin{enumerate}
-    \lit $X_i \abr choice(\{X_i | Sol[X_i, A, {I_n}_{:, i}]\})$
+    \lit $X_i \abr choice(\{X_i \st Sol[X_i, A, {I_n}_{:, i}]\})$
     \lit $A * [X_1 \ldots X_n] = [(A * X_1) \ldots (A * X_n)] =  [{I_n}_{:, 1} \ldots {I_n}_{:, n}] = I_n$ \lit $A^{-1} = [X_1 \ldots X_n]$
   \end{enumerate}
   \lit $\pr{\forall_{B \in \mathcal{M}} \exists!_{X \in \mathcal{M}}(Sol[X, A, B])} \implies (Invertible[A])$
@@ -2064,7 +2081,7 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 \begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  $SetSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land \pr{A + B = \{a + b | (a \in A) \land (b \in B)\}}$ \\
+  $SetSum[A + B, A, B, V, +, *] \abr (VectorSpace[V, +, *]) \land (A, B \subseteq V) \land \pr{A + B = \{a + b \st (a \in A) \land (b \in B)\}}$ \\
 
   $SumSubContains \abr \forall_{A, B, V}\left(\begin{array}{ll}
     \pr{(Subspace[A, V, +, *]) \land (Subspace[B, V, +, *]) \land (SetSum[A + B, A, B, V, +, *])} \hfill \implies \hfill \\
@@ -2204,9 +2221,9 @@ $SubspaceEquiv \abr \forall_{V, S}\left(\begin{array}{ll}
   \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 \end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-$NullSpace[N, A, m, n] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n | A * x = O\})$ \\  % space of homogenous solutions
-$RowSpace[R, A, m, n] \abr (Matrix[A, m, n]) \land (R = \{x^T * A \in \mathbb{R}^n | x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
-$ColSpace[C, A, m, n] \abr (Matrix[A, m, n]) \land (C = \{A * x \in \mathbb{R}^m | x \in \mathbb{R}^n\})$ \\  % space of linear combination or columns
+$NullSpace[N, A, m, n] \abr (Matrix[A, m, n]) \land (N = \{x \in \mathbb{R}^n \st A * x = O\})$ \\  % space of homogenous solutions
+$RowSpace[R, A, m, n] \abr (Matrix[A, m, n]) \land (R = \{x^T * A \in \mathbb{R}^n \st x \in \mathbb{R}^m\})$ \\  % space of linear combination of rows
+$ColSpace[C, A, m, n] \abr (Matrix[A, m, n]) \land (C = \{A * x \in \mathbb{R}^m \st x \in \mathbb{R}^n\})$ \\  % space of linear combination or columns
 
 $NullSubspace \abr (NullSpace[N, A, m, n]) \implies (Subspace[N, \mathbb{R}^n, +, *])$
 \begin{enumerate}
@@ -2228,7 +2245,7 @@ $ColSubspace \abr (ColSpace[C, A, m, n]) \implies (Subspace[C, \mathbb{R}^m, +, 
 $LinComb[c, U, K, V, +, *] \abr (VectorSpace[V, +, *]) \land (n \in \mathbb{N}) \land (U \in V^n) \land (K \in \mathbb{R}^n) \land \pr{c = \sum_{i = 1}^{n}(k_i * u_i)}$ \\
 $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
   (VectorSpace[V, +, *]) \land (S \in V^n) \land \pr{(S = \emptyset) \implies (S' = \{O\})} \hfill \land \hfill \\
-  \pr{(S \neq \emptyset) \implies \pr{S' = \{c \in V | (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}}}
+  \pr{(S \neq \emptyset) \implies \pr{S' = \{c \in V \st (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}}}
 \end{array}\right)$ \\
 
 \begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2244,15 +2261,15 @@ $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
     \lit $(S = \emptyset) \implies \pr{(Subspace[S', V, +, *]) \land (S \subseteq S')}$
     \lit $(S \neq \emptyset) \implies \ldots$
     \begin{enumerate}
-      \lit $LinSpan[S', S, V, +, *]$ \pipe $S' = \{c \in V | (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}$ \pipe $S' \subseteq V$
+      \lit $LinSpan[S', S, V, +, *]$ \pipe $S' = \{c \in V \st (K \in \mathbb{R}^n) \land (LinComb[c, S, K, V, +, *])\}$ \pipe $S' \subseteq V$
       \lit $(\{0\}^n \subseteq \mathbb{R}^n) \land (LinComb[O, S, \{0\}^n, V, +, *])$ \pipe $O \in S'$ \pipe $\emptyset \neq S'$
       \lit $(S' \subseteq V) \land (\emptyset \neq S')$ \pipe $\emptyset \neq S' \subseteq V$
       \lit $(a, b \in S') \implies \ldots$
       \begin{enumerate}
         \lit $\pr{\exists_{K_a \in \mathbb{R}^n}(LinComb[a, S, K_a, V, +, *])} \land \pr{\exists_{K_b \in \mathbb{R}^n}(LinComb[b, S, K_b, V, +, *])}$ \pipe $\pr{a = \sum_{i = 1}^{n}({k_a}_i * s_i)} \land \pr{b = \sum_{i = 1}^{n}({k_b}_i * s_i)}$
         \lit $a + b = \sum_{i = 1}^{n}({k_a}_i * s_i) + \sum_{i = 1}^{n}({k_b}_i * s_i) = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}$ \pipe $a + b = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}$
-        \lit $\langle {k_a}_i + {k_b}_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
-        \lit $\pr{a + b = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}} \land (\langle {k_a}_i + {k_b}_i | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \cont
+        \lit $\langle {k_a}_i + {k_b}_i \st i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
+        \lit $\pr{a + b = \sum_{i = 1}^{n}\pr{({k_a}_i + {k_b}_i) * s_i}} \land (\langle {k_a}_i + {k_b}_i \st i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \cont
         \lit \cont $\exists_{M \in \mathbb{N}^n}\pr{a + b = \sum_{i = 1}^{n}(m_i * s_i)}$ \pipe $\exists_{M \in \mathbb{N}^n}(LinComb[a + b, S, M, V, +, *])$ \pipe $a + b \in S'$
       \end{enumerate}
       \lit $(a, b \in S') \implies (a + b \in S')$ \pipe $\forall_{a, b \in S'}(a + b \in S')$
@@ -2260,8 +2277,8 @@ $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
       \begin{enumerate}
         \lit $\exists_{K \in \mathbb{R}^n}(LinComb[u, S, K, V, +, *])$ \pipe $u = \sum_{i = 1}^{n}(k_i * s_i)$
         \lit $r * u = r * \sum_{i = 1}^{n}(k_i * s_i) = \sum_{i = 1}^{n}\pr{r * (k_i * s_i)} = \sum_{i = 1}^{n}(r k_i) * s_i$ \pipe $r * u = \sum_{i = 1}^{n}(r k_i) * s_i$
-        \lit $\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
-        \lit $\pr{r * u = \sum_{i = 1}^{n}(r k_i) * s_i}) \land (\langle r k_i \in \mathbb{R} | i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \pipe $\exists_{M \in \mathbb{R}^n}\pr{r * u = \sum_{i = 1}^{n}(m_i * s_i)}$ 
+        \lit $\langle r k_i \in \mathbb{R} \st i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n$
+        \lit $\pr{r * u = \sum_{i = 1}^{n}(r k_i) * s_i}) \land (\langle r k_i \in \mathbb{R} \st i \in \mathbb{N}_{1, n} \rangle \in \mathbb{R}^n)$ \pipe $\exists_{M \in \mathbb{R}^n}\pr{r * u = \sum_{i = 1}^{n}(m_i * s_i)}$ 
         \lit $\exists_{M \in \mathbb{R}^n}(LinComb[r * u, S, M, V, +, *])$ \pipe $r * u \in S'$
       \end{enumerate}
       \lit $\pr{(r \in \mathbb{R}) \land (u \in S')} \implies (r * u \in S')$ \pipe $\forall_{r \in \mathbb{R}} \forall_{u \in S'}(r * u \in S')$
@@ -2271,7 +2288,7 @@ $LinSpan[S', S, V, +, *] \abr \left(\begin{array}{ll}
         \lit $K_s \abr \langle \left(\begin{cases} 
           1 & j = i \\
           0 & j \neq i 
-        \end{cases}\right) | j \in \mathbb{N}_{1, n} \rangle$ \pipe $(K_s \in \mathbb{R}^n) \land \pr{\sum_{j = 1}^{n}({k_s}_j * s_j) = s_i}$
+        \end{cases}\right) \st j \in \mathbb{N}_{1, n} \rangle$ \pipe $(K_s \in \mathbb{R}^n) \land \pr{\sum_{j = 1}^{n}({k_s}_j * s_j) = s_i}$
         \lit $\exists_{K \in \mathbb{R}^n}(LinComb[s_j, S, K, V, +, *])$ \pipe $s_j \in S'$
       \end{enumerate}
       \lit $(s_i \in S) \implies (s_i \in S')$ \pipe $S \subseteq S'$
@@ -2303,7 +2320,7 @@ $ZeroDependent \abr (O \in S) \implies (\lnot LinInd[S, V, +, *])$
   \lit $O \in S$ \pipe $\exists_{u_i \in S}(u_i = O)$ \pipe $K \abr \langle \left(\begin{cases} 
       1 & u_i = O \\
       0 & u_i \neq O 
-    \end{cases}\right) | i \in \mathbb{N}_{1, n} \rangle$ \pipe $\{O\}^n \neq K \in \mathbb{R}^n$
+    \end{cases}\right) \st i \in \mathbb{N}_{1, n} \rangle$ \pipe $\{O\}^n \neq K \in \mathbb{R}^n$
   \lit $O = \sum_{i = 1}^{n}(k_i * s_i)$ \pipe $LinComb[O, S, K, V, +, *]$
   \lit $(LinComb[O, S, K, V, +, *]) \land (\{O\}^n \neq K \in \mathbb{R}^n)$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{(LinComb[O, S, K, V, +, *]) \land (K \neq \{0\}^n)}$ \pipe $\lnot LinInd[S, V, +, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
@@ -2329,7 +2346,7 @@ $SubIndependent \abr \forall_{V, A, B}\left(\begin{array}{ll}
     \lit $n \leq m$ \pipe $L \abr \langle \left(\begin{cases} 
       k_j & j \leq n \\
       0 & j > n 
-    \end{cases}\right) | j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
+    \end{cases}\right) \st j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
     \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{j = 1}^{m}(l_j * b_j))$
     \lit $LinComb[O, A, K, V, +, *]$ \pipe $O = \sum_{i = 1}^{n}(k_i * a_i) = \sum_{j = 1}^{m}(l_j * b_j))$ \pipe $LinComb[O, B, L, V, +, *]$
     \lit $(LinInd[B, V, +, *]) \land (LinComb[O, B, L, V, +, *])$ \pipe $L = \{0\}^m$ \pipe $K = \{0\}^n$ 
@@ -2343,7 +2360,7 @@ $SuperDependent \abr \forall_{V, A, B}\pr{\pr{(VectorSpace[V, +, *]) \land (A \s
   \lit $n \leq m$ \pipe $L \abr \langle \left(\begin{cases} 
       k_j & j \leq n \\
       0 & j > n 
-    \end{cases}\right) | j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
+    \end{cases}\right) \st j \in \mathbb{N}_{1, m}) \rangle$ \pipe $L \in \mathbb{R}^m$
   \lit $A \subseteq B$ \pipe $\forall_{j \in \mathbb{N}_{1, n}}(a_j = b_j)$ \pipe $\sum_{i = 1}^{n}(k_i * a_i)) = \sum_{j = 1}^{m}(l_j * b_j))$
   \lit $LinComb[O, A, K, V, +, *]$ \pipe $LinComb[O, B, L, V, +, *]$
   \lit $K \neq \{0\}^n$ \pipe $L \neq \{0\}^m$
@@ -2375,7 +2392,7 @@ $LinIndEquiv \abr \forall_{S, V}\pr{(LinInd[S, V, +, *]) \iff \pr{\forall_{s_j \
     \lit $L \abr \langle \left(\begin{cases} 
       k_i & i \neq j \\
       -1 & i = j 
-    \end{cases}\right) | i \in \mathbb{N}_{1, n}) \rangle$ \pipe $(L \in \mathbb{R}^n) \land (L \neq \{0\}^n)$
+    \end{cases}\right) \st i \in \mathbb{N}_{1, n}) \rangle$ \pipe $(L \in \mathbb{R}^n) \land (L \neq \{0\}^n)$
     \lit $LinComb[s_j, S \setminus \{s_j\}, K, V, +, *]$ \pipe \cont  \pipe $\sum_{i = 1}^{j - 1}(k_i * s_i) + k_j * s_j = \sum_{i = 1}^{j - 1}(k_i * s_i) + -\sum_{i = 1}^{j - 1}(k_i * s_i) = O$ \cont
     \lit \cont $LinComb[O, S, L, V, +, *]$
     \lit $(LinComb[O, S, L, V, +, *]) \land (L \neq \{0\}^n)$ \pipe $\exists_{L \in \mathbb{R}^n}\pr{(LinComb[O, S, L, V, +, *]) \land (L \neq \{0\}^n)}$ \pipe $(\lnot LinInd[S, V, +, *])$
@@ -2446,7 +2463,7 @@ $BasisEquiv \abr \forall_{S, V}\pr{(Basis[S, V, +, *]) \iff (\forall_{v \in V} \
       \begin{enumerate}
         \lit $\pr{v = \sum({k_1}_i * s_i)} \land \pr{v = \sum({k_2}_i * s_i)}$
         \lit $O = v - v = \sum({k_1}_i * s_i) - \sum({k_2}_i * s_i) = \sum\pr{({k_1}_i - {k_2}_i) * s_i}$
-        \lit $L \abr \langle {k_1}_i - {k_2}_i | i \in \mathbb{N}_{i = 1}^n \rangle \in \mathbb{R}^n$
+        \lit $L \abr \langle {k_1}_i - {k_2}_i \st i \in \mathbb{N}_{i = 1}^n \rangle \in \mathbb{R}^n$
         \lit $(LinInd[S, V, +, *]) \land (LinComb[O, S, L, V, +, *])$ \pipe $L = \{0\}^n$ \pipe $K_2 = K_1$
       \end{enumerate}
       \lit $\pr{(K_1, K_2 \in \mathbb{R}^n) \land (LinComb[v, S, K_1, V, +, *]) \land (LinComb[v, S, K_2, V, +, *])} \implies (K_1 = K_2)$
@@ -2638,7 +2655,7 @@ $LinTrans[L, V, +_v, *_v, W, +_w, *_w] \abr \left(\begin{array}{ll}
   \pr{\forall_{\alpha, \beta \in V}\pr{L(\alpha +_v \beta) = L(\alpha) +_w L(\beta)}} \hfill \land \hfill \pr{\forall_{r \in \mathbb{R}} \forall_{\alpha \in V}\pr{L(r *_v \alpha) = r *_w L(\alpha)}}
 \end{array}\right)$ \\
 $LinOp[L, V, +_v, *_v] \abr LinTrans[L, V, +_v, *_v, V, +_v, *_v]$ \\
-$\mathcal{L}[V, W] \abr \{L | LinTrans[L, V, +_v, *_v, W, +_w, *_w]\}$ \\
+$\mathcal{L}[V, W] \abr \{L \st LinTrans[L, V, +_v, *_v, W, +_w, *_w]\}$ \\
 
 $ZeroMapsToZero \abr \forall_{L, V, W}\pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies \pr{L(O_v) = O_w}}$
 \begin{enumerate}
@@ -2662,7 +2679,7 @@ $UniqBasisLT \abr \forall_{V, W}\left(\begin{array}{ll}
     \lit $L \abr \langle \left(\begin{cases} 
       1 & j = i \\
       0 & j \neq i 
-    \end{cases}\right) | j \in \mathbb{N}_{1, n} \rangle$ \pipe $L \in \mathbb{R}^n$
+    \end{cases}\right) \st j \in \mathbb{N}_{1, n} \rangle$ \pipe $L \in \mathbb{R}^n$
     \lit $T(a_i) = T\pr{\sum_{i = 1}^{n}(l_i * a_i)} = \sum_{i = 1}^{n}(l_i * b_i) = b_i$ \pipe $T(a_i) = b_i$
   \end{enumerate}
   \lit $(i \in \mathbb{N}_{1, n}) \implies \pr{T(a_i) = b_i}$ \pipe $\forall_{i \in \mathbb{N}_{1, n}}\pr{T(a_i) = b_i}$
@@ -2706,7 +2723,7 @@ $UniqBasisLT \abr \forall_{V, W}\left(\begin{array}{ll}
   \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 \end{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-$Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land \pr{ker_L = \{\alpha \in V | L(\alpha) = O_w\}}$ \\
+$Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land \pr{ker_L = \{\alpha \in V \st L(\alpha) = O_w\}}$ \\
 
 $KerSubspace \abr \forall_{L, V, W}\pr{(Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \implies (Subspace[ker_L, V, +_v, *_v])}$
 \begin{enumerate}
@@ -2724,7 +2741,7 @@ $KerSubspace \abr \forall_{L, V, W}\pr{(Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w])
   \lit $(SubspaceEquiv) \land (\emptyset \neq ker_L \subseteq V) \land \pr{\forall_{\alpha, \beta \in ker_L}(\alpha + \beta \in ker_L)} \land \pr{\forall_{r \in \mathbb{R}} \forall_{\alpha \in ker_L}(r * \alpha \in ker_L)}$ \pipe $Subspace[ker_L, V, +_v, *_v]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$Rng[rng_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land \pr{rng_L = \{\beta \in W | \exists_{\alpha \in V}\pr{\beta = L(\alpha)}\}}$ \\
+$Rng[rng_L, L, V, +_v, *_v, W, +_w, *_w] \abr (LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land \pr{rng_L = \{\beta \in W \st \exists_{\alpha \in V}\pr{\beta = L(\alpha)}\}}$ \\
 
 $RangeSubspace \abr \forall_{L, V, W}\pr{(Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies (Subspace[rng_L, W, +_w, *_w])}$
 \begin{enumerate}
@@ -2891,8 +2908,8 @@ $InvertibleBijectiveEquiv \abr \forall_{L}\pr{(LTInvertible[L, V, +_v, *_v, W, +
   \lit $\pr{(Injective[L, V, W]) \land (Surjective[L, V, W])} \implies \ldots$
   \begin{enumerate}
     \lit $(Injective[L, V, W]) \land (Surjective[L, V, W])$ \pipe $\forall_{w \in W} \exists!_{v \in V}\pr{w = L(v)}$
-    \lit $S \abr \{(w, v) \in W \times V | w = L(v)\}$
-    \lit $\pr{\forall_{w \in W} \exists!_{v \in V}\pr{w = L(v)}} \land \pr{S = \{(w, v) \in W \times V | w = L(v)\}}$ \pipe $Function[S, W, V]$
+    \lit $S \abr \{(w, v) \in W \times V \st w = L(v)\}$
+    \lit $\pr{\forall_{w \in W} \exists!_{v \in V}\pr{w = L(v)}} \land \pr{S = \{(w, v) \in W \times V \st w = L(v)\}}$ \pipe $Function[S, W, V]$
     \lit $\pr{\forall_{v \in V}\pr{S\pr{L(v)} = v}} \land \pr{\forall_{w \in W}\pr{L\pr{S(w)} = w}}$
     \lit $(w_1, w_2 \implies W) \implies \ldots$
     \begin{enumerate}
@@ -2932,21 +2949,21 @@ $CoordVec[[\alpha]_S, \alpha, S, V, +, *] \abr (Basis[S, V, +, *]) \land (S * [\
 
 $LTMatrix \abr \forall_{L, V, W}\left(\begin{array}{ll}
   \pr{(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (Basis[A, V, +_v, *_v]) \land (Basis[B, W, +_w, *_w])} \hfill \implies \hfill \\
-  \pr{\forall_{v \in V}\pr{CoordVec[[L(v)]_B, L(v), B, W, +_w, *_w] = \langle [L(a_i)]_B | a_i \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v]}}
+  \pr{\forall_{v \in V}\pr{CoordVec[[L(v)]_B, L(v), B, W, +_w, *_w] = \langle [L(a_i)]_B \st a_i \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v]}}
 \end{array}\right)$
 \begin{enumerate}
   \lit $Basis[A, V, +_v, *_v]$ \pipe $\exists_{K \in \mathbb{R}^n}\pr{v = \sum_{i = 1}^{n}(k_i * a_i)}$ \pipe $K^T = CoordVec[[v]_A,, v, A, V, +, *]$
   \lit $[L(v)]_B = [L\pr{\sum_{i = 1}^{n}(k_i * a_i)}]_B = [\sum_{i = 1}^{n}\pr{L(k_i * a_i)}]_B = \sum_{i = 1}^{n}\pr{[L(k_i * a_i)]_B} = \sum_{i = 1}^{n}\pr{[k_i * L(a_i)]_B} = \sum_{i = 1}^{n}\pr{k_i * [L(a_i)]_B} =$ \cont
-  \lit \cont $\langle [L(a)]_B | a \in A \rangle * K^T = \langle [L(a)]_B | a \in A \rangle * [v]_A$ \pipe $[L(v)]_B = \langle [L(a)]_B | a \in A \rangle * [v]_A$
+  \lit \cont $\langle [L(a)]_B \st a \in A \rangle * K^T = \langle [L(a)]_B \st a \in A \rangle * [v]_A$ \pipe $[L(v)]_B = \langle [L(a)]_B \st a \in A \rangle * [v]_A$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 Note: Shorthand is to RREF the augmented matrix [Columns of B | Columns of A] into [I | M], thus M is the transition matrix \\
 $TransitionMatrix \abr \forall_{L, V}\left(\begin{array}{ll}
   \pr{(Basis[A, V, +, *]) \land (Basis[B, V, +, *])} \hfill \implies \hfill \\
-  \pr{\forall_{v \in V}(CoordVec[[v]_B, v, B, W, +_w, *_w] = \langle [a]_B | a \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v])}
+  \pr{\forall_{v \in V}(CoordVec[[v]_B, v, B, W, +_w, *_w] = \langle [a]_B \st a \in A \rangle * CoordVec[[v]_A, v, A, V, +_v, *_v])}
 \end{array}\right)$
 \begin{enumerate}
-  \lit $(LTMatrix) \land (LinTrans[I, V, +, *, V, +, *])$ \pipe $[I(v)]_B = \langle [I(a)]_B | a \in A \rangle * [v]_A$ \pipe $[v]_B = \langle [a]_B | a \in A \rangle * [v]_A$
+  \lit $(LTMatrix) \land (LinTrans[I, V, +, *, V, +, *])$ \pipe $[I(v)]_B = \langle [I(a)]_B \st a \in A \rangle * [v]_A$ \pipe $[v]_B = \langle [a]_B \st a \in A \rangle * [v]_A$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $LTOverTransition \abr \pr{\pr{[L(a)]_T = A * [a]_S} \land (P * [a]_{S'} = [a]_S) \land \pr{Q * [L(a)]_{T'} = [L(a)]_T}} \implies \pr{[L(a)]_{T'} = (Q^{-1} * A * P) * [a]_{S'}}$
@@ -2980,7 +2997,7 @@ $SimRank \abr (SimMatrix[A, B]) \implies (Rank[A] = Rank[B])$
 
 \section{Determinants}
 $Perm[\sigma, S] \abr Bij[\sigma, S, S]$ \\
-$IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma | Perm[\sigma, \mathbb{N}_{1, n}]\}$ \\
+$IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$ \\
 
 $IntPermSetCard \abr (IntPermSet[\mathcal{S}_n, n]) \implies (|\mathcal{S}_n| = n!)$
 \begin{enumerate}
@@ -3002,7 +3019,7 @@ $IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
 
 
 
-$IntPermSetDecomp \abr (IntPermSet[\mathcal{S}_n, n]) \land (Perm[\tau, \mathbb{N}_{1, n}]) \implies (\mathcal{S}_n = \{\tau \circ \sigma | \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau | \sigma \in \mathcal{S}_n\})$
+$IntPermSetDecomp \abr (IntPermSet[\mathcal{S}_n, n]) \land (Perm[\tau, \mathbb{N}_{1, n}]) \implies (\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\})$
 \begin{enumerate}
   \lit $(\sigma \in \mathcal{S}_n) \iff ()$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
