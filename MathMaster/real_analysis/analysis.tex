@@ -1033,7 +1033,6 @@ $SubgroupCenter \abr \forall_{G}((Center[Z(G), G, *]) \implies (Subgroup[Z(G), G
 $CyclicSubgroup[<g>, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (<g> = \{g^n \st n \in \mathbb{Z}\})$ \\
 $Generator[g, G, *] \abr CyclicSubgroup[G, g, G, *]$ \\
 $CyclicGroup[G, *] \abr \exists_{g \in G}(Generator[g, G, *])$ \\
-%$CyclicGroup[G, *] \abr \exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \\
 
 $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}(((CyclicGroup[G, *]) \land (Subgroup[H, G, *])) \implies (CyclicGroup[H, *]))$
 \begin{enumerate}
@@ -1051,8 +1050,9 @@ $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}(((CyclicGroup[G, *]) \land (S
   \lit $(b \in H) \implies (b \in <g^m>)$ \pipe $H \subseteq <g^m>$
   \lit $(b \in <g^m>) \implies \ldots$
   \begin{enumerate}
-    \lit $\exists_{k \in \mathbb{Z}}(b = g^{m k})$
-    \lit $g^m \in H$ \pipe $b = g^{m k} \in H$ \pipe $b \in H$
+    \lit $\exists_{k \in \mathbb{Z}}(b = (g^m)^k)$
+    \lit $(Group[H, G, *]) \land (g^m \in H)$ \pipe $(g^m * g^m \in H) \land ((g^m)^{-1} \in H)$
+    \lit $Induction$ \pipe $b = (g^m)^k \in H$ \pipe $b \in H$
   \end{enumerate}
   \lit $(b \in <g^m>) \implies (b \in H)$ \pipe $<g^m> \subseteq H$
   \lit $(H \subseteq <g^m>) \land (<g^m> \subseteq H)$ \pipe $H = <g^m>$ \pipe $Generator[g^m, H, *]$ \pipe $\exists_{h \in G}(Generator[h, G, *])$ \pipe $CyclicGroup[H, *]$
@@ -1248,7 +1248,6 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   \lit $\exists_{\phi}(Isomorphism[\phi, G, *, H, \diamond])$ \pipe $Isomorphic[G, *, H, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-CONTHERE
 \section{Kernel and Image Homomorphisms}
 $Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (ker_\phi = \{g \in G \st \phi(g) = e_H\})$ \\
 $Image[im_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (im_\phi = \{\phi(g) \in H \st g \in G\})$ \\
@@ -1294,67 +1293,66 @@ $ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Su
 
 $ImageCyclicIsCyclic \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (CyclicGroup[G, *])) \implies (CyclicGroup[im_\phi, \diamond])$
 \begin{enumerate}
-  \lit $CyclicGroup[G, *]$ \pipe $\exists_{g \in G}(CyclicSubgroup[G, g, G, *])$ \pipe $\exists_{g_0 \in G}(G = <g_0> = \{{g_0}^n \st n \in \mathbb{Z}\})$
-  \lit $ExpMapsExp$ \pipe $h \in im_\phi \iff \exists_{g \in G}(h = \phi(g)) \iff \exists_{n \in \mathbb{Z}}(h = \phi({g_0}^n)) \iff \exists_{n \in \mathbb{Z}}(h = \phi(g_0)^n)$ \pipe $Generator[\phi(g_0), im_\phi, \diamond]$
-  \lit $\exists_{h \in im_\phi}(Generator[h, im_\phi, \diamond])$ \pipe $CyclicGroup[im_\phi, \diamond]$
+  \lit $CyclicGroup[G, *]$ \pipe $\exists_{r \in G}(Generator[r, G, *])$ \pipe $G = <r> = \{{r}^n \st n \in \mathbb{Z}\}$
+  \lit $ExpMapsExp$ \pipe $im_\phi = \{\phi(g) | g \in G\} = \{\phi(r^n) | n \in \mathbb{Z}\} = \{\phi(r)^n | n \in \mathbb{Z}\} = <\phi(r)>$
+  \lit $Generator[\phi(r), im_\phi, \diamond]$ \pipe $\exists_{s \in im_\phi}(Generator[s, im_\phi, \diamond])$ \pipe $CyclicGroup[im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$MonomorphismEquiv \abr (Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
+$HomoInjEquiv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies ((Inj[\phi, G, H]) \iff (ker_\phi = \{e_G\}))$
 \begin{enumerate}
-  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \implies \ldots$
+  \lit $(Inj[\phi, G, H]) \implies \ldots$
   \begin{enumerate}
     \lit $IdMapsId$ \pipe $\phi(e_G) = e_H$ \pipe $e_G \in ker_\phi$ \pipe $\{e_G\} \subseteq ker_\phi$
     \lit $(g \in ker_\phi) \implies \ldots$
     \begin{enumerate}
       \lit $(g \in ker_\phi) \land (IdMapsId)$ \pipe $\phi(g) = e_H = \phi(e_G)$
-      \lit $(Injective[\phi, G, H]) \land (\phi(g) = \phi(e_G))$ \pipe $g = e_G$ \pipe $g \in \{e_G\}$
+      \lit $(Inj[\phi, G, H]) \land (\phi(g) = \phi(e_G))$ \pipe $g = e_G$ \pipe $g \in \{e_G\}$
     \end{enumerate}
     \lit $(g \in ker_\phi) \implies (g \in \{e_G\})$ \pipe $ker_\phi \subseteq \{e_G\}$
     \lit $(\{e_G\} \subseteq ker_\phi) \land (ker_\phi \subseteq \{e_G\})$ \pipe $ker_\phi = \{e_G\}$
   \end{enumerate}
-  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \implies (ker_\phi = \{e_G\})$
+  \lit $(Inj[\phi, G, H]) \implies (ker_\phi = \{e_G\})$
   \lit $(ker_\phi = \{e_G\}) \implies \ldots$
   \begin{enumerate}
     \lit $((g_1, g_2 \in G) \land (\phi(g_1) = \phi(g_2))) \implies \ldots$
     \begin{enumerate}
       \lit $InvMapsInv$ \pipe $e_H = \phi(g_1) \diamond \phi(g_2)^{-1} = \phi(g_1) \diamond \phi({g_2}^{-1}) = \phi(g_1 * {g_2}^{-1})$ \pipe $e_H = \phi(g_1 * {g_2}^{-1})$ \pipe $g_1 * {g_2}^{-1} \in ker_\phi$
-      \lit $(ker_\phi = \{e_G\}) \land (g_1 * {g_2}^{-1} \in ker_\phi)$ \pipe $g_1 * {g_2}^{-1} = e_G$ \pipe ${g_1}^{-1} = {g_2}^{-1}$
-      \lit $InvUniq$ \pipe $g_1 = g_2$
+      \lit $(ker_\phi = \{e_G\}) \land (g_1 * {g_2}^{-1} \in ker_\phi)$ \pipe $g_1 * {g_2}^{-1} = e_G$ \pipe $g_1 = g_2$
     \end{enumerate}
-    \lit $((g_1, g_2 \in G) \land (\phi(g_1) = \phi(g_2))) \implies (g_1 = g_2)$ \pipe $Injective[\phi, G, H]$ \pipe $Monomorphism[\phi, G, *, H, \diamond]$
+    \lit $((g_1, g_2 \in G) \land (\phi(g_1) = \phi(g_2))) \implies (g_1 = g_2)$ \pipe $\forall_{g_1, g_2 \in G}((\phi(g_1) = \phi(g_2)) \implies (g_1 = g_2))$ \pipe $Inj[\phi, G, H]$
   \end{enumerate}
-  \lit $(ker_\phi = \{e_G\}) \implies (Monomorphism[\phi, G, *, H, \diamond])$
-  \lit $((Monomorphism[\phi, G, *, H, \diamond]) \implies (ker_\phi = \{e_G\})) \land ((ker_\phi = \{e_G\}) \implies (Monomorphism[\phi, G, *, H, \diamond]))$
-  \lit $(Monomorphism[\phi, G, *, H, \diamond]) \iff (ker_\phi = \{e_G\})$
+  \lit $(ker_\phi = \{e_G\}) \implies (Inj[\phi, G, H])$
+  \lit $((Inj[\phi, G, H]) \implies (ker_\phi = \{e_G\})) \land ((ker_\phi = \{e_G\}) \implies (Inj[\phi, G, H]))$
+  \lit $(Inj[\phi, G, H]) \iff (ker_\phi = \{e_G\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$KerCountsMapSameEl \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G)) \implies ((ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\})$
+$KerMultiplicityMap \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G)) \implies ((ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\})$
 \begin{enumerate}
   \lit $(x \in (ker_\phi) g) \implies \ldots$
   \begin{enumerate}
     \lit $\exists_{K_x \in ker_\phi}(x = K_x * g)$ \pipe $\phi(x) = \phi(K_x * g) = \phi(K_x) \diamond \phi(g) = e_H \diamond \phi(g) = \phi(g)$ \pipe $\phi(x) = \phi(g)$
   \end{enumerate}
   \lit $(x \in (ker_\phi) g) \implies (\phi(x) = \phi(g))$ \pipe $(ker_\phi) g \subseteq \{x \in G \st \phi(x) = \phi(g)\}$
-  \lit $(\phi(x) = \phi(g)) \implies \ldots$
+  \lit $((x \in G) \land (\phi(x) = \phi(g))) \implies \ldots$
   \begin{enumerate}
-    \lit $e_H = \phi(x) \diamond \phi(g)^{-1} = \phi(x) \diamond \phi(g^{-1)} = \phi(x * g^{-1)}$ \pipe $x * g^{-1} \in ker_\phi$ \pipe $x \in (ker_\phi) g$
+    \lit $e_H = \phi(x) \diamond \phi(g)^{-1} = \phi(x) \diamond \phi(g^{-1}) = \phi(x * g^{-1})$ \pipe $x * g^{-1} \in ker_\phi$ \pipe $x \in (ker_\phi) g$
   \end{enumerate}
-  \lit $(\phi(x) = \phi(g)) \implies (x \in (ker_\phi) g)$ \pipe $\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
+  \lit $((x \in G) \land (\phi(x) = \phi(g))) \implies (x \in (ker_\phi) g)$ \pipe $\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
   \lit $((ker_\phi) g \subseteq \{x \in G \st \phi(x) = \phi(g)\}) \land (\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g)$ \pipe $(ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (o(G) = o(ker_\phi) o(im_\phi))$
+$KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (|G| = |ker_\phi| |im_\phi|)$
 \begin{enumerate}
-  \lit $\text{$im_\phi$ forms equivalence classes of G that maps to the same elements under $\phi$}$
-  \lit $\text{$(KerCountsMapSameEl) \land (CosetCardinality)$ counts the number of same element mappings / multiplicity for each pre-image class}$
-  \lit $o(G) = o(ker_\phi) o(im_\phi)$
-  \lit TODO: formalize
+  \lit $\forall_{g \in G}([g] = \{x \in G \st \phi(x) = \phi(g)\})$
+  \lit $\mathcal{G} = \{[g] | g \in G\}$ \pipe $(Partition[\mathcal{G}, G]) \land (|\mathcal{G}| = |im_\phi|)$
+  \lit $KerMultiplicityMap$ \pipe $\forall_{g \in G}(|[g]| = |ker_\phi|)$
+  \lit $Partition[\mathcal{G}, G]$ \pipe $|G| = |\mathcal{G}| |ker_\phi| = |im_\phi| |ker_\phi|$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$ImageDividesGH \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies ((Divides[o(im_\phi), o(G)]) \land (Divides[o(im_\phi), o(H)]))$
+$ImDivDomCod \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies ((Divides[|im_\phi|, |G|]) \land (Divides[|im_\phi|, |H|]))$
 \begin{enumerate}
-  \lit $KerImPartitionsG$ \pipe $Divides[r, o(G)]$
-  \lit $(LagrangeTheorem) \land (ImageSubgroupCodomain)$ \pipe $Divides[r, o(H)]$
+  \lit $KerImPartitionsG$ \pipe \pipe $|G| = |ker_\phi| |im_\phi|$ \pipe $Divides[|im_\phi|, |G|]$
+  \lit $(LagrangeTheorem) \land (ImageSubgroupCodomain)$ \pipe $|H| = |im_\phi| |H : im_\phi|$ $Divides[|im_\phi|, |H|]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
@@ -1377,7 +1375,7 @@ $ConjugacyClass[C_g, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (EqClass[
 
 $ConjugacyClassEquiv \abr (ConjugacyClass[C_g, g, G, *]) \iff (\forall_{x \in G}((x \in C_g) \iff (\exists_{c \in G}(x = c^{-1} g c))))$
 \begin{enumerate}
-  \lit TODO: by definition
+  \lit By ConjugateEqRel and the definitions of ConjugacyClass, Conjugate
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $ConjugacyCenter \abr (g \in G) \implies ((C_g = \{g\}) \iff (g \in Z(G)))$
@@ -1732,19 +1730,21 @@ $ThirdIsoThm \abr \left(\begin{array}{ll}
   \lit $(g_1 K, g_2 K \in (G / K)) \implies (\phi(g_1 K \bbin{*} g_2 K) = \phi(g_1 K) \bbin{*} \phi(g_2 K))$ \pipe $\forall_{g_1 K, g_2 K \in (G / K)}(\phi(g_1 K \bbin{*} g_2 K) = \phi(g_1 K) \bbin{*} \phi(g_2 K))$
   \lit $(Func[\phi, G / K, G / H]) \land (\forall_{g_1 K, g_2 K \in (G / K)}(\phi(g_1 K \bbin{*} g_2 K) = \phi(g_1 K) \bbin{*} \phi(g_2 K)))$ \pipe $Homomorphism[\phi, G / K, \bbin{*}, G / H, \bbin{*}]$
   \lit $ker_\phi = \{g K \in (G / K) \st \phi(g K) = e_{G / H}\} = \{g K \in (G / K) \st g H = H\} = \{g K \in (G / K) \st g \in H\} = H / K$ \pipe $ker_\phi = H / K$
-  \lit $(g H \in (G / H)) \implies \ldots$
+  \lit $(y \in (G / H)) \implies \ldots$
   \begin{enumerate}
+    \lit $\exists_{g \in G}(y = g H)$
     \lit $g \in G$ \pipe $g K \in (G / K)$
-    \lit $g H = \phi(g K)$
-    \lit $(g K \in (G / K)) \land (g H = \phi(g K))$ \pipe $\exists_{g K \in (G / K)}(g H = \phi(g K))$
+    \lit $\phi(g K) = g H = y$ \pipe $y = \phi(g K)$
+    \lit $(g K \in (G / K)) \land (y = \phi(g K))$ \pipe $\exists_{g K \in (G / K)}(y = \phi(g K))$
   \end{enumerate}
-  \lit $(g H \in (G / H)) \implies (\exists_{g K \in (G / K)}(g H = \phi(g K)))$ \pipe $\forall_{g H \in (G / H)} \exists_{g K \in (G / K)}(g H = \phi(g K))$ \pipe $Surj[\phi, G / K, G / H]$ \pipe $im_\phi = G / H$
+  \lit $(y \in (G / H)) \implies (\exists_{g K \in (G / K)}(y = \phi(g K)))$ \pipe $\forall_{y \in (G / H)} \exists_{g K \in (G / K)}(y = \phi(g K))$ \pipe $Surj[\phi, G / K, G / H]$
+  \lit $(SurjEquiv) \land (Surj[\phi, G / K, G / H])$ \pipe $im_\phi = G / H$
   \lit $(FirstIsoThm) \land (Homomorphism[\phi, G / K, \bbin{*}, G / H, \bbin{*}])$ \pipe $Isomorphic[(G / K) / ker_\phi, \bbin{*}, im_\phi, \bbin{*}]$
   \lit $(ker_\phi = H / K) \land (im_\phi = G / H) \land (Isomorphic[(G / K) / ker_\phi, \bbin{*}, im_\phi, \bbin{*}])$ \pipe $Isomorphic[(G / K) / (H / K), \bbin{*}, G / H, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 % TODO INCLUDE COMMON NOTATIONS!!
-% TODO FIX OLD TODOS
+%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\((.+?)\)    $1[$2]
@@ -2819,21 +2819,21 @@ $RangeSubspace \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) 
   \lit $(SubspaceEquiv) \land (\emptyset \neq rng_L \subseteq W) \land (\forall_{\alpha, \beta \in rng_L}(\alpha + \beta \in rng_L)) \land (\forall_{r \in \mathbb{R}} \forall_{\alpha \in rng_L}(r * \alpha \in rng_L))$ \pipe $Subspace[rng_L, W, +_w, *_w]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$KerInjective \abr \forall_{L, V, W}((Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \implies ((Injective[L, V, W]) \iff (ker_L = \{O_v\})))$
+$KerInj \abr \forall_{L, V, W}((Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \implies ((Inj[L, V, W]) \iff (ker_L = \{O_v\})))$
 \begin{enumerate}
-  \lit $(Injective[L, V, W]) \implies \ldots$
+  \lit $(Inj[L, V, W]) \implies \ldots$
   \begin{enumerate}
     \lit $ZeroMapsToZero$ \pipe $L(O_v) = O_w$
     \lit $O_v \in ker_L$ \pipe $\{O_v\} \subseteq ker_L$
     \lit $(v \in ker_L) \implies \ldots$
     \begin{enumerate}
       \lit $L(v) = O_w$
-      \lit $(Injective[L, V, W]) \land (L(O_v) = O_w)$ \pipe $O_v = v$
+      \lit $(Inj[L, V, W]) \land (L(O_v) = O_w)$ \pipe $O_v = v$
     \end{enumerate}
     \lit $(v \in ker_L) \implies (v = O_v)$ \pipe $ker_L \subseteq \{O_v\}$
     \lit $(\{O_v\} \subseteq ker_L) \land (ker_L \subseteq \{O_v\})$ \pipe $ker_L = \{O_v\}$
   \end{enumerate}
-  \lit $(Injective[L, V, W]) \implies (ker_L = \{O_v\})$
+  \lit $(Inj[L, V, W]) \implies (ker_L = \{O_v\})$
   \lit $(ker_L = \{O_v\}) \implies \ldots$
   \begin{enumerate}
     \lit $((u, v \in V) \land (L(u) = L(v))) \implies \ldots$
@@ -2841,15 +2841,15 @@ $KerInjective \abr \forall_{L, V, W}((Ker[ker_L, L, V, +_v, *_v, W, +_w, *_w]) \
       \lit $O_w = L(u) - L(v) = L(u - v)$ \pipe $u - v \in ker_L$
       \lit $ker_L = \{O_v\}$ \pipe $u - v = O_v$ \pipe $u = v$
     \end{enumerate}
-    \lit $((u, v \in V) \land (L(u) = L(v))) \implies (u = v)$ \pipe $\forall_{u, v \in V}((L(u) = L(v)) \implies (u = v))$ \pipe $Injective[L, V, W]$
+    \lit $((u, v \in V) \land (L(u) = L(v))) \implies (u = v)$ \pipe $\forall_{u, v \in V}((L(u) = L(v)) \implies (u = v))$ \pipe $Inj[L, V, W]$
   \end{enumerate}
-  \lit $(ker_L = \{O_v\}) \implies (Injective[L, V, W])$
-  \lit $(Injective[L, V, W]) \iff (ker_L = \{O_v\})$
+  \lit $(ker_L = \{O_v\}) \implies (Inj[L, V, W])$
+  \lit $(Inj[L, V, W]) \iff (ker_L = \{O_v\})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$RngSurjective \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies ((Surjective[L, V, W]) \iff (rng_L = W)))$
+$RngSurj \abr \forall_{L, V, W}((Ran[rng_L, L, V, +_v, *_v, W, +_w, *_w]) \implies ((Surj[L, V, W]) \iff (rng_L = W)))$
 \begin{enumerate}
-  \lit $(SurjEquiv) \land (rng(L) = rng_L)$ \pipe $(Surjective[L, V, W]) \iff (rng_L = W)$
+  \lit $(SurjEquiv) \land (rng(L) = rng_L)$ \pipe $(Surj[L, V, W]) \iff (rng_L = W)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $RankNullityLT \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \implies (Dim[V] = Dim[ker_L] + Dim[rng_L]))$
@@ -2879,40 +2879,40 @@ $RankNullityLT \abr \forall_{L, V, W}((LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \i
   \lit $B = U \cup T$ \pipe $|B| = |U| + |T|$ \pipe $Dim[V] = Dim[ker_L] + Dim[rng_L]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$InjectiveSurjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
-  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Injective[T, V, W])) \hfill \implies \hfill \\
-  (Surjective[T, V, W])
+$InjSurjEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
+  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Inj[T, V, W])) \hfill \implies \hfill \\
+  (Surj[T, V, W])
 \end{array}\right)$
 \begin{enumerate}
-  \lit $(KerInjective) \land (Injective[T, V, W])$ \pipe $ker_T = \{O\}$ \pipe $Dim[ker_T] = 0$
+  \lit $(KerInj) \land (Inj[T, V, W])$ \pipe $ker_T = \{O\}$ \pipe $Dim[ker_T] = 0$
   \lit $(RankNullityLT) \land (Dim[ker_T] = 0)$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[V] = Dim[rng_T]$
   \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[rng_T])$ \pipe $Dim[W] = Dim[rng_T]$
   \lit $RangeSubspace$ \pipe $Subspace[rng_T, W, +_w, *_w]$
   \lit $(Subspace[rng_T, W, +_w, *_w]) \land (Dim[W] = Dim[rng_T])$ \pipe $\exists_{B}((Basis[B, W, +_w, *_w]) \land (Basis[B, rng_T, +_w, *_w]))$
-  \lit $(Spans[W] = Spans[rng_T])$ \pipe $W = rng_T$ \pipe $Surjective[T, V, W]$
+  \lit $(Spans[W] = Spans[rng_T])$ \pipe $W = rng_T$ \pipe $Surj[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SurjectiveInjectiveEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
-  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Surjective[T, V, W])) \hfill \implies \hfill \\
-  (Injective[T, V, W])
+$SurjInjEqualDim \abr \forall_{T, V, W}\left(\begin{array}{ll}
+  ((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] = Dim[W]) \land (Surj[T, V, W])) \hfill \implies \hfill \\
+  (Inj[T, V, W])
 \end{array}\right)$
 \begin{enumerate}
   \lit $RankNullityLT$ \pipe $Dim[V] = Dim[ker_T] + Dim[rng_T]$
-  \lit $Surjective[T, V, W]$ \pipe $rng_T = W$ \pipe $Dim[rng_T] = Dim[W]$
+  \lit $Surj[T, V, W]$ \pipe $rng_T = W$ \pipe $Dim[rng_T] = Dim[W]$
   \lit $(Dim[V] = Dim[W]) \land (Dim[V] = Dim[ker_T] + Dim[rng_T]) \land (Dim[rng_T] = Dim[W])$ \pipe $Dim[ker_T] + Dim[rng_T] = Dim[rng_T]$ \pipe $Dim[ker_T] = 0$ \pipe $ker_T = \{O\}$
-  \lit $(KerInjective) \land (er_T = \{O\})$ \pipe $Injective[T, V, W]$
+  \lit $(KerInj) \land (er_T = \{O\})$ \pipe $Inj[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$SmallerMapNotInjective \abr \forall_{T, V, W}(((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] > Dim[W])) \implies (\lnot Injective[T, V, W]))$
+$SmallerMapNotInj \abr \forall_{T, V, W}(((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] > Dim[W])) \implies (\lnot Inj[T, V, W]))$
 \begin{enumerate}
   \lit $(RankNullityLT) \land (Dim[W] \geq Dim[rng_T])$ \pipe $Dim[ker_T] = Dim[V] - Dim[rng_T] \geq Dim[V] - Dim[W] > 0$ \pipe $Dim[ker_T] \neq 0$
-  \lit $(KerInjective) \land (Dim[ker_T] \neq 0)$ \pipe $\lnot Injective[T, V, W]$
+  \lit $(KerInj) \land (Dim[ker_T] \neq 0)$ \pipe $\lnot Inj[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$LargerMapNotSurjective \abr \forall_{T, V, W}(((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] < Dim[W])) \implies (\lnot Surjective[T, V, W]))$
+$LargerMapNotSurj \abr \forall_{T, V, W}(((LinTrans[T, V, +_v, *_v, W, +_w, *_w]) \land (Dim[V] < Dim[W])) \implies (\lnot Surj[T, V, W]))$
 \begin{enumerate}
   \lit $RankNullityLT$ \pipe $Dim[rng_T] = Dim[V] - Dim[ker_T] \leq Dim[V] < Dim[W]$
-  \lit $Dim[rng_T] < Dim[W]$ \pipe $Dim[rng_T] \neq Dim[W]$ \pipe $\lnot Surjective[T, V, W]$
+  \lit $Dim[rng_T] < Dim[W]$ \pipe $Dim[rng_T] \neq Dim[W]$ \pipe $\lnot Surj[T, V, W]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 \begin{shaded} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2944,7 +2944,7 @@ $LTInvUniq \abr \forall_{L_1^{-1}, L_2^{-1}}(((LTInv[L_1^{-1}, L, V, +_v, *_v, W
 
 $LTInvertible[L, V, +_v, *_v, W, +_w, *_w] \abr \exists_{L^{-1}}(LTInv[L^{-1}, L, V, +_v, *_v, W, +_w, *_w])$ \\
 
-$InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \iff ((Injective[L, V, W]) \land (Surjective[L, V, W])))$
+$InvertibleBijEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \iff ((Inj[L, V, W]) \land (Surj[L, V, W])))$
 \begin{enumerate}
   \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \implies \ldots$
   \begin{enumerate}
@@ -2953,20 +2953,20 @@ $InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w,
     \begin{enumerate}
       \lit $u = L^{-1}(L(u)) = L^{-1}(L(v)) = v$ \pipe $u = v$
     \end{enumerate}
-    \lit $(L(u) = L(w)) \implies (u = w)$ \pipe $\forall_{u, w}((L(u) = L(w)) \implies (u = w))$ \pipe $Injective[L, V, W]$
+    \lit $(L(u) = L(w)) \implies (u = w)$ \pipe $\forall_{u, w}((L(u) = L(w)) \implies (u = w))$ \pipe $Inj[L, V, W]$
     \lit $(w \in W) \implies \ldots$
     \begin{enumerate}
       \lit $L^{-1}(w) \in V$
       \lit $L \circ L^{-1} = 1_w$ \pipe $L(L^{-1}(w) = w)$
       \lit $(L^{-1}(w) \in V) \land (L(L^{-1}(w) = w))$ \pipe $\exists_{v \in V}(w = (L(v)))$
     \end{enumerate}
-    \lit $(w \in W) \implies (\exists_{v \in V}(w = (L(v))))$ \pipe $\forall_{w \in W} \exists_{v \in V}(w = L(v))$ \pipe $Surjective[L, V, W]$
-    \lit $(Injective[L, V, W]) \land (Surjective[L, V, W])$
+    \lit $(w \in W) \implies (\exists_{v \in V}(w = (L(v))))$ \pipe $\forall_{w \in W} \exists_{v \in V}(w = L(v))$ \pipe $Surj[L, V, W]$
+    \lit $(Inj[L, V, W]) \land (Surj[L, V, W])$
   \end{enumerate}
-  \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \implies ((Injective[L, V, W]) \land (Surjective[L, V, W]))$
-  \lit $((Injective[L, V, W]) \land (Surjective[L, V, W])) \implies \ldots$
+  \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \implies ((Inj[L, V, W]) \land (Surj[L, V, W]))$
+  \lit $((Inj[L, V, W]) \land (Surj[L, V, W])) \implies \ldots$
   \begin{enumerate}
-    \lit $(Injective[L, V, W]) \land (Surjective[L, V, W])$ \pipe $\forall_{w \in W} \exists!_{v \in V}(w = L(v))$
+    \lit $(Inj[L, V, W]) \land (Surj[L, V, W])$ \pipe $\forall_{w \in W} \exists!_{v \in V}(w = L(v))$
     \lit $S \abr \{(w, v) \in W \times V \st w = L(v)\}$
     \lit $(\forall_{w \in W} \exists!_{v \in V}(w = L(v))) \land (S = \{(w, v) \in W \times V \st w = L(v)\})$ \pipe $Function[S, W, V]$
     \lit $(\forall_{v \in V}(S(L(v)) = v)) \land (\forall_{w \in W}(L(S(w)) = w))$
@@ -2975,7 +2975,7 @@ $InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w,
       \lit $(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (\forall_{w \in W}(L(S(w)) = w))$ \pipe $L(S(w_1) + S(w_2)) = L(S(w_1)) + L(S(w_2)) = w_1 + w_2$
       \lit $(\forall_{w \in W}(L(S(w)) = w)) \land (w_1 + w_2 \in W)$ \pipe $L(S(w_1 + w_2)) = w_1 + w_2$
       \lit $L(S(w_1) + S(w_2)) = w_1 + w_2 = L(S(w_1 + w_2))$ \pipe $L(S(w_1) + S(w_2)) = L(S(w_1 + w_2))$
-      \lit $(Injective[L, V, W]) \land (L(S(w_1) + S(w_2)) = L(S(w_1 + w_2)))$ \pipe $S(w_1) + S(w_2) = S(w_1 + w_2)$
+      \lit $(Inj[L, V, W]) \land (L(S(w_1) + S(w_2)) = L(S(w_1 + w_2)))$ \pipe $S(w_1) + S(w_2) = S(w_1 + w_2)$
     \end{enumerate}
     \lit $(w_1, w_2 \implies W) \implies (S(w_1 + w_2) = S(w_1) + S(w_2))$ \pipe $\forall_{w_1, w_2 \in W}(S(w_1 + w_2) = S(w_1) + S(w_2))$
     \lit $((r \in \mathbb{R}) \land (w \in W)) \implies \ldots$
@@ -2983,7 +2983,7 @@ $InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w,
       \lit $(LinTrans[L, V, +_v, *_v, W, +_w, *_w]) \land (\forall_{w \in W}(L(S(w)) = w))$ \pipe $L(r * S(w)) = r * L(S(w)) = r * w$
       \lit $(\forall_{w \in W}(L(S(w)) = w)) \land (r * w \in W)$ \pipe $L(S(r * w)) = r * w$
       \lit $L(r * S(w)) = r * w = L(S(r * w))$ \pipe $L(r * S(w)) = L(S(r * w))$
-      \lit $(Injective[L, V, W]) \land (L(r * S(w)) = L(S(r * w)))$ \pipe $r * S(w) = S(r * w)$
+      \lit $(Inj[L, V, W]) \land (L(r * S(w)) = L(S(r * w)))$ \pipe $r * S(w) = S(r * w)$
     \end{enumerate}
     \lit $((r \in \mathbb{R}) \land (w \in W)) \implies (r * S(w) = S(r * w))$ \pipe $\forall_{r \in \mathbb{R}} \forall_{w \in W}(S(r * w) = r * S(w)$
     \lit $(Function[S, W, V]) \land (\forall_{w_1, w_2 \in W}(S(w_1 + w_2) = S(w_1) + S(w_2))) \land (\forall_{r \in \mathbb{R}} \forall_{w \in W}(S(r * w) = r * S(w)))$
@@ -2993,11 +2993,11 @@ $InvertibleBijectiveEquiv \abr \forall_{L}((LTInvertible[L, V, +_v, *_v, W, +_w,
     \lit $(LinTrans[S, W, +_w, *_w, V, +_v, *_v]) \land (S \circ L = 1_v) \land (L \circ S = 1_w)$ \pipe $LTInv[S, L, V, +_v, *_v, W, +_w, *_w]$
     \lit $\exists_{L^{-1}}(LTInv[L^{-1}, L, V, +_v, *_v, W, +_w, *_w])$ \pipe $LTInvertible[L, V, +_v, *_v, W, +_w, *_w]$
   \end{enumerate}
-  \lit $((Injective[L, V, W]) \land (Surjective[L, V, W])) \implies (LTInvertible[L, V, +_v, *_v, W, +_w, *_w])$
-  \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \iff ((Injective[L, V, W]) \land (Surjective[L, V, W]))$
+  \lit $((Inj[L, V, W]) \land (Surj[L, V, W])) \implies (LTInvertible[L, V, +_v, *_v, W, +_w, *_w])$
+  \lit $(LTInvertible[L, V, +_v, *_v, W, +_w, *_w]) \iff ((Inj[L, V, W]) \land (Surj[L, V, W]))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO: some corollary of InjectiveSurjectiveEqualDim + SurjectiveInjectiveEqualDim + InvertibleBijectiveEquiv \\
+TODO: some corollary of InjSurjEqualDim + SurjInjEqualDim + InvertibleBijEquiv \\
 
 $Isomorphism[L, V, +_v, *_v, W, +_w, *_w] \abr LTInvertible[L, V, +_v, *_v, W, +_w, *_w]$ \\
 $Isomorphic[V, +_v, *_v, W, +_w, *_w] \abr \exists_{L}(Isomorphism[L, V, +_v, *_v, W, +_w, *_w])$ \\
