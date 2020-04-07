@@ -1199,8 +1199,8 @@ $MapElDivOrderCorollary \abr \pr{(Monomorphism[\phi, G, *, H, \diamond]) \land (
   \lit $\pr{\forall_{g_1, g_2 \in G}\pr{\pr{\phi(g_1) = \phi(g_2)} \implies (g_1 = g_2)}} \land \pr{e_H = \phi(g^m)} \land \pr{e_H = \phi(g^n)}$ \pipe $g^m = g^n$
   \lit $\pr{OrderEl[m, \phi(g), H, \diamond]} \land (Order[n, G, *]) \land (g^m = g^n)$ \pipe $m = n$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-CONTHERE
-$HomoCompInduceHomo \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \mathbin{\square}])} \implies (Homomorphism[\theta \circ \phi, G, *, K, \mathbin{\square}])$
+
+$HomoCompHomo \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \mathbin{\square}])} \implies (Homomorphism[\theta \circ \phi, G, *, K, \mathbin{\square}])$
 \begin{enumerate}
   \lit $FuncComp$ \pipe $Func[\theta \circ \phi, G, K]$
   \lit $(g_1, g_2 \in G) \implies \ldots$
@@ -1212,11 +1212,17 @@ $HomoCompInduceHomo \abr \pr{(Homomorphism[\phi, G, *, H, \diamond]) \land (Homo
   \lit $(Func[\theta \circ \phi, G, K]) \land \pr{\forall_{g_1, g_2 \in G}\pr{\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \mathbin{\square} \theta \circ \phi(g_2)}}$ \pipe $Homomorphism[\theta \circ \phi, G, *, K, \mathbin{\square}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$IsoInvInduceIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\phi^{-1}, H, \diamond, G, *])$
+$IsoInvIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\phi^{-1}, H, \diamond, G, *])$
 \begin{enumerate}
   \lit $Isomorphism[\phi, G, *, H, \diamond]$ \pipe $(Homomorphism[\phi, G, *, H, \diamond]) \land (Bij[\phi, G, H])$
-  \lit $BijEquiv$ \pipe $\exists_{\phi^{-1}}(Inv[\phi^{-1}, \phi, G, H])$
-  \lit TODO continue
+  \lit $BijEquiv$ \pipe $\exists_{\phi^{-1}}(Inv[\phi^{-1}, \phi, G, H])$ \pipe $Bij[\phi^{-1}, H, G]$
+  \lit $(x, y \in H) \implies \ldots$
+  \begin{enumerate}
+    \lit $Homomorphism[\phi, G, *, H, \diamond]$ \pipe $\phi\pr{\phi^{-1}(x) * \phi^{-1}(y)} = \phi\pr{\phi^{-1}(x)} \diamond \phi\pr{\phi^{-1}(y)} = x \diamond y$
+    \lit $\phi^{-1}(x \diamond y) = \phi^{-1}\pr{\phi\pr{\phi^{-1}(x) * \phi^{-1}(y)}} = (\phi^{-1} \circ \phi)\pr{\phi^{-1}(x) * \phi^{-1}(y)} = \phi^{-1}(x) * \phi^{-1}(y)$ \pipe $\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y)$
+  \end{enumerate}
+  \lit $(x, y \in H) \implies \pr{\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y)}$ \pipe $\forall_{x, y \in H}\pr{\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y)}$
+  \lit $(Bij[\phi^{-1}, H, G]) \land \pr{\forall_{x, y \in H}\pr{\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y)}}$ \pipe $Isomorphism[\phi^{-1}, H, \diamond, G, *]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
@@ -1228,16 +1234,21 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   \lit $\phi \abr \{\langle g^n, h^n \rangle \in (G \times H) \st n \in \mathbb{Z}\}$
   \lit $(n_1, n_2 \in \mathbb{Z}) \implies \ldots$
   \begin{enumerate}
-    \lit $(ExpModOrder) \land (Order[n, G, *]) \land (Order[n, H, \diamond])$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{n_1 \equiv n_2 (mod \phantom{.} n)} \iff (h^{n_1} = h^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}$
+    \lit $(ExpModOrder) \land (Order[n, G, *]) \land (Order[n, H, \diamond])$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{n_1 \equiv n_2 (mod \phantom{.} n)} \iff (h^{n_1} = h^{n_2}) \iff$ \cont
+    \lit \cont $\pr{\phi(g^{n_1}) = \phi(g^{n_2})}$ \pipe $(g^{n_1} = g^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}$
   \end{enumerate}
   \lit $(n_1, n_2 \in \mathbb{Z}) \implies \pr{(g^{n_1} = g^{n_2}) \iff \pr{\phi(g^{n_1}) = \phi(g^{n_2})}}$ \cont
   \lit \cont $(Func[\phi, G, H]) \land (Inj[\phi, G, H]) \land (Surj[\phi, G, H]])$ \pipe $Bij[\phi, G, H]$ % TODO ANALYZE
-  \lit TODO: $Homomorphism[\phi, G, *, H, \diamond]$
-  \lit $(Homomorphism[\phi, G, *, H, \diamond]) \land (Bij[\phi, G, H])$ \pipe $Isomorphism[\phi, G, *, H, \diamond]$
+  \lit $(g^n, g^m \in G) \implies \ldots$
+  \begin{enumerate}
+    \lit $\phi(g^n * g^m) = \phi(g^{n + m}) = h^{n + m} = h^n \diamond h^m = \phi(g^n) \diamond \phi(g^m)$ \pipe $\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m)$
+  \end{enumerate}
+  \lit $(g^n, g^m \in G) \implies \pr{\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m)}$ \pipe $\forall_{g^n, g^m \in G}\pr{\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m)}$
+  \lit $(Bij[\phi, G, H]) \land \pr{\forall_{g^n, g^m \in G}\pr{\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m)}}$ \pipe $Isomorphism[\phi, G, *, H, \diamond]$
   \lit $\exists_{\phi}(Isomorphism[\phi, G, *, H, \diamond])$ \pipe $Isomorphic[G, *, H, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-
+CONTHERE
 \section{Kernel and Image Homomorphisms}
 $Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{ker_\phi = \{g \in G \st \phi(g) = e_H\}}$ \\
 $Image[im_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land \pr{im_\phi = \{\phi(g) \in H \st g \in G\}}$ \\
