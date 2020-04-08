@@ -1607,11 +1607,11 @@ $QuotientGroupThm \abr \left(\begin{array}{ll}
   \lit \cont $(\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bbin{*} a^{-1} = e = a^{-1} \bbin{*} a))$ \pipe $Group[G / H, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$QuotientMap[\bar{\phi}, H, G, *] \abr (NormalSubgroup[H, G, *]) \land (Func[\bar{\phi}, G, *, G / H, \bbin{*}]) \land (\forall_{g \in G}(\bar{\phi}(g) = H g))$ \\
+$NaturalMap[\bar{\phi}, H, G, *] \abr (NormalSubgroup[H, G, *]) \land (Func[\bar{\phi}, G, *, G / H, \bbin{*}]) \land (\forall_{g \in G}(\bar{\phi}(g) = H g))$ \\
 
-$QuotientMapHomo \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[\bar{\phi}, G, *, G / H, \bbin{*}])$
+$NaturalMapHomo \abr (NaturalMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[\bar{\phi}, G, *, G / H, \bbin{*}])$
 \begin{enumerate}
-  \lit $QuotientMap[\bar{\phi}, H, G, *]$ \pipe $Func[\bar{\phi}, G, *, G / H, \bbin{*}]$
+  \lit $NaturalMap[\bar{\phi}, H, G, *]$ \pipe $Func[\bar{\phi}, G, *, G / H, \bbin{*}]$
   \lit $(x, y \in G) \implies \ldots$
   \begin{enumerate}
     \lit $\bar{\phi}(x * y) = H x y = H x \bbin{*} H y = \bar{\phi}(x) \bbin{*} \bar{\phi}(y)$ \pipe $\bar{\phi}(x * y) = \bar{\phi}(x) \bbin{*} \bar{\phi}(y)$
@@ -1620,14 +1620,16 @@ $QuotientMapHomo \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[
   \lit $(Func[\bar{\phi}, G, *, G / H, \bbin{*}]) \land (\forall_{x, y \in G}(\bar{\phi}(x) \bbin{*} \bar{\phi}(y))))$ \pipe $Homomorphism[\bar{\phi}, G, *, G / H, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$QuotientMapKer \abr (QuotientMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi}} = H)$
+$NaturalMapKerH \abr (NaturalMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi}} = H)$
 \begin{enumerate}
   \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G \st \bar{\phi}(x) = H e\} = \{x \in G \st H x = H\} = H$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$FirstIso[\psi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (\psi = \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) \st g \in G\})$ \\
+
 $FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond])$
 \begin{enumerate}
-  \lit $\psi \abr \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) \st g \in G\}$
+  \lit $FirstIso[\psi, \phi, G, *, H, \diamond]$
   \lit $(g, h \in G) \implies \ldots$
   \begin{enumerate}
      \lit $(ker_\phi g = ker_\phi h) \iff (ker_\phi g h^{-1} = ker_\phi) \iff (g h^{-1} \in ker_\phi) \iff (\phi(g h^{-1}) = e_H) \iff$ \cont
@@ -1644,6 +1646,8 @@ $FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G
   \lit $(Bij[\psi, G / ker_\phi, im_\phi]) \land (\forall_{ker_\phi g, ker_\phi h \in G / ker_\phi}(\psi(ker_\phi g {\bbin{*}} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h)))$ \pipe $Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
   \lit $\exists_{\psi}(Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond])$ \pipe $Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$SecondIso[\psi, \phi, G, *, H, \diamond] \abr (Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *]) \land (\psi = ...)$ \\
 
 $SecondIsoLemma \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implies ((Group[(H N) / N, \bbin{*}]) \land (Group[H / (H \cap N), \bbin{*}]))$
 \begin{enumerate}
@@ -1709,6 +1713,8 @@ $SecondIsoThm \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implie
   \lit $(ker_\phi = H \cap N) \land (im_\phi = (H N) / N) \land (Isomorphic[H / ker_\phi, \bbin{*}, im_\phi, \bbin{*}])$ \pipe $Isomorphic[H / (H \cap N), \bbin{*}, (H N) / N, \bbin{*}]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$ThirdIso[\psi, \phi, G, *, H, \diamond] \abr (NormalSubgroup[K, G, *]) \land (NormalSubgroup[H, G, *]) \land (Subgroup[K, H, *]) \land (\psi = ...)$ \\
+
 $ThirdIsoThm \abr \left(\begin{array}{ll}
   ((NormalSubgroup[K, G, *]) \hfill \land \hfill (NormalSubgroup[H, G, *]) \hfill \land \hfill (Subgroup[K, H, *])) \hfill \implies \hfill \\
   (Isomorphic[(G / K) / (H / K), \bbin{*}, G / H, \bbin{*}])
@@ -1744,8 +1750,8 @@ $ThirdIsoThm \abr \left(\begin{array}{ll}
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 % TODO INCLUDE COMMON NOTATIONS!!
-%
-%
+% TODO CREATE ALL FOUR NATURAL MAPS!!!!!!!
+% TODO FORMALIZE ALL ISOMORPHIC MAPS OF THE ISOMORPHISM THEOREMS!!!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Linear Algebra} % ([a-zA-Z]+?)\((.+?)\)    $1[$2]
 
