@@ -3071,7 +3071,13 @@ $IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma \st Perm[\sigma, \ma
 
 $IntPermSetCard \abr (IntPermSet[\mathcal{S}_n, n]) \implies (|\mathcal{S}_n| = n!)$
 \begin{enumerate}
-  \lit TODO: Combinatorics / induction on N
+  \lit $|\mathcal{S}_1| = |\{(1)\}| = 1 = 1!$
+  \lit $(|\mathcal{S}_m| = m!) \implies \ldots$
+  \begin{enumerate}
+    \lit $|\mathcal{S}_{m + 1}| = |\mathbb{N}_{1, m + 1} \times \mathcal{S}_m| = (m + 1) (m!) = (m + 1)!$
+  \end{enumerate}
+  \lit $(|\mathcal{S}_m| = m!) \implies (|\mathcal{S}_{m + 1}| = (m + 1)!)$
+  \lit $\mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
@@ -3087,15 +3093,46 @@ $IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
   \lit $Group[\mathcal{S}_n, \circ]$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-
-
-$IntPermSetDecomp \abr (IntPermSet[\mathcal{S}_n, n]) \land (Perm[\tau, \mathbb{N}_{1, n}]) \implies (\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\})$
+$IntPermSetEquiv \abr (IntPermSet[\mathcal{S}_n, n]) \land (\tau \in \mathcal{S}_n) \implies (\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
 \begin{enumerate}
-  \lit $(\sigma \in \mathcal{S}_n) \iff ()$
+  \lit $(\alpha \in \mathcal{S}_n) \iff (\alpha = \tau \circ (\tau^{-1} \circ \alpha) \in \mathcal{S}_n) \iff (\alpha \in \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\})$
+  \lit $(\alpha \in \mathcal{S}_n) \iff (\alpha = (\alpha \circ \tau^{-1}) \circ \tau) \in \mathcal{S}_n) \iff (\alpha \in \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\})$
+  \lit $(\alpha \in \mathcal{S}_n) \iff (\alpha = (\alpha^{-1})^{-1} \in \mathcal{S}_n) \iff (\alpha \in \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
+  \lit $\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$Inversions[n(\sigma), \sigma] \abr (\sigma \in \mathcal{S}_n) \land (n(\sigma) = |\{(i, j) \st (i < j) \land (\sigma(i) > \sigma(j))\}| = \sum_{i = 1}^{n}(|\{(i, j) \st (\sigma(i) > \sigma(j)) \land (i < j \leq n)\}|))$ \\
+$Transposition[\tau, m, r] \abr (\tau \in \mathcal{S}_n) \land (\forall_{i \in \mathbb{N}_{1, n}}((i \notin \{m, r\}) \implies (\tau(i) = i))) \land (\tau(m) = r) \land (\tau(r) = m)$ \\
 
-% TODO: script that updates completions based on completions snippet in a file!!!
+$TranspositionInv \abr (Transposition[\tau]) \implies (\tau = \tau^{-1})$
+\begin{enumerate}
+  \lit $\tau \circ \tau^{-1} = I_n$ \pipe $\tau = \tau^{-1}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$TranspositionDecomp \abr (\sigma \in \mathcal{S}_n) \implies (\exists_{T}((Transpositions[T]) \land (\sigma = \circ_{\tau_i \in T}(\tau_i))))$
+\begin{enumerate}
+  \lit $(n(\sigma) = 0) \implies \ldots$
+  \begin{enumerate}
+    \lit $\sigma = I_n$
+    \lit $(Transpositions[\langle (1 2), (1 2) \rangle]) \land (\sigma = I_n = (1 2) \circ (1 2))$
+    \lit $\exists_{T}((Transpositions[T]) \land (\sigma = \circ_{\tau_i \in T}(\tau_i)))$
+  \end{enumerate}
+  \lit $(n(\sigma) = 0) \implies (\exists_{T}((Transpositions[T]) \land (\sigma = \circ_{\tau_i \in T}(\tau_i))))$
+  \lit $((n(\sigma) = k + 1) \land (\forall_{\sigma' \in \mathcal{S}_n}((n(\sigma') \leq k) \implies (\exists_{T}((Transpositions[T]) \land (\sigma' = \circ_{\tau_i \in T}(\tau_i))))))) \implies \ldots$
+  \begin{enumerate}
+    \lit $n(\sigma) = k + 1$ \pipe $n(\sigma) > 1$ \pipe $\exists_{l \in \mathbb{N}}((\sigma(l) \neq l) \land (\forall_{i \in \mathbb{N}_{1, l}}(\sigma(i) = i)))$
+    \lit $Transposition[\delta, l, \tau(l)]$ \pipe $n(\delta \circ \sigma) < n(\sigma)$
+    \lit $\forall_{\sigma' \in \mathcal{S}_n}((n(\sigma') \leq k) \implies (\exists_{T}((Transpositions[T]) \land (\sigma' = \circ_{\tau_i \in T}(\tau_i)))))$ \pipe $\exists_{T'}((Transpositions[T']) \land (\delta \circ \sigma = \circ_{\tau_i \in T'}(\tau_i)))$
+    \lit $\sigma = \delta^{-1} \circ \circ_{\tau_i \in T'}(\tau_i) = \delta \circ \circ_{\tau_i \in T'}(\tau_i) = \circ_{\tau_i \in T''}(\tau_i)$
+    \lit $\exists_{T''}((Transpositions[T'']) \land (\sigma = \circ_{\tau_i \in T''}(\tau_i)))$
+  \end{enumerate}
+  \lit $((n(\sigma) = k + 1) \land (\forall_{\sigma' \in \mathcal{S}_n}((n(\sigma') \leq k) \implies (\exists_{T}((Transpositions[T]) \land (\sigma' = \circ_{\tau_i \in T}(\tau_i))))))) \implies$ \cont
+  \lit \cont $(\exists_{T''}((Transpositions[T'']) \land (\sigma = \circ_{\tau_i \in T''}(\tau_i))))$
+  \lit $Induction$ \pipe $\exists_{T}((Transpositions[T]) \land (\sigma = \circ_{\tau_i \in T}(\tau_i)))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+244
+
 %############################################################################
 % \left(\begin{array}{ll}
 %   XXX \hfill \land \hfill \\

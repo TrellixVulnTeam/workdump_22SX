@@ -1,7 +1,9 @@
 { "completions": [
 
 { "trigger": "cc\t\\circ", "contents": "\\circ " },
-
+{ "trigger": "sn\t\\mathcal{S}_n", "contents": "\\mathcal{S}_n" },
+{ "trigger": "mbn\t\\mathbb{N}_{1, n}", "contents": "\\mathbb{N}_{1, n}" },
+{ "trigger": "sum\t\\sum_{}^{}()", "contents": "\\sum_{}^{}()" },
 
 
 { "trigger": "dr\t\\vdash", "contents": "\\vdash " },

@@ -142,6 +142,7 @@ Metaproof by contradictory
 	===================================================================================================================
 \subsection{(Metatheorem) Proof by induction on complexity} %=1.4.2
 	- If $J \subseteq \set{x: P(x)}$ and (if $stage(J, Q, n) \subseteq \set{x: P(x)}$, then $stage(J, Q, n+1) \subseteq \set{x: P(x)}$), then $S_{J, Q} \subseteq \set{x: P(x)}$ \\
+	- PROOF SKETCH: Assume induction on structure. Construct the strong induction hypothesis as a big conjunction $Q(n) = \land_{j \leq n}(P(n))$. Use weak induction on $Q$ and show it is equivalent to strong induction.
 	- BACKLOG: PROPERLY DEFINE STAGE AND SAY STAGE = CLOSURE AND PROOF!!! \\
 	===================================================================================================================
 \subsection{(Definition) Initial segment} %=1.4.1.6
