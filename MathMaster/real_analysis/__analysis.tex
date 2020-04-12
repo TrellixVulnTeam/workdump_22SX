@@ -3066,6 +3066,61 @@ $SimRank \abr (SimMatrix[A, B]) \implies (Rank[A] = Rank[B])$
 
 
 \section{Determinants}
+% Permutations: Humphreys; 90-100
+% Determinants: Lal; 215-223, 49-57
+\begin{comment}
+  $IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
+  \begin{enumerate}
+    \lit $Perm[I_n, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $I_n \in \mathcal{S}_n$
+    \lit $(\sigma, \tau, \upsilon \in \mathcal{S}_n) \implies \ldots$
+    \begin{enumerate}
+      \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $Bij[\sigma \circ \tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \tau \in \mathcal{S}_n$
+      \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\upsilon, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $(\sigma \circ \tau) \circ \upsilon = \sigma \circ (\tau \circ \upsilon)$
+      \lit $\sigma \circ I_n = \sigma = I_n \circ \sigma$
+      \lit $Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \sigma^{-1} = I_n = \sigma^{-1} \circ \sigma$
+    \end{enumerate}
+    \lit $Group[\mathcal{S}_n, \circ]$
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+  $IntPermSetEquiv \abr (IntPermSet[\mathcal{S}_n, n]) \land (\tau \in \mathcal{S}_n) \implies (\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
+  \begin{enumerate}
+    \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = \tau \circ (\tau^{-1} \circ \alpha) \in \mathcal{S}_n} \iff (\alpha \in \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\})$
+    \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = (\alpha \circ \tau^{-1}) \circ \tau} \in \mathcal{S}_n) \iff (\alpha \in \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\})$
+    \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = (\alpha^{-1})^{-1} \in \mathcal{S}_n} \iff (\alpha \in \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
+    \lit $\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\}$
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+  $Inversions[n(\sigma), \sigma] \abr (\sigma \in \mathcal{S}_n) \land \pr{n(\sigma) = |\{(i, j) \st (i < j) \land \pr{\sigma(i) > \sigma(j)}\}| = \sum_{i = 1}^{n}\pr{|\{(i, j) \st \pr{\sigma(i) > \sigma(j)} \land (i < j \leq n)\}|}}$ \\
+  $Transposition[\tau, m, r] \abr (\tau \in \mathcal{S}_n) \land \pr{\forall_{i \in \mathbb{N}_{1, n}}\pr{(i \notin \{m, r\}) \implies \pr{\tau(i) = i}}} \land \pr{\tau(m) = r} \land \pr{\tau(r) = m}$ \\
+
+  $TranspositionInv \abr (Transposition[\tau]) \implies (\tau = \tau^{-1})$
+  \begin{enumerate}
+    \lit $\tau \circ \tau^{-1} = I_n$ \pipe $\tau = \tau^{-1}$
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+  $TranspositionDecomp \abr (\sigma \in \mathcal{S}_n) \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}}$
+  \begin{enumerate}
+    \lit $\pr{n(\sigma) = 0} \implies \ldots$
+    \begin{enumerate}
+      \lit $\sigma = I_n$
+      \lit $\pr{Transpositions[\langle (1 2), (1 2) \rangle]} \land \pr{\sigma = I_n = (1 2) \circ (1 2)}$
+      \lit $\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}$
+    \end{enumerate}
+    \lit $\pr{n(\sigma) = 0} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}}$
+    \lit $\pr{\pr{n(\sigma) = k + 1} \land \pr{\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}}} \implies \ldots$
+    \begin{enumerate}
+      \lit $n(\sigma) = k + 1$ \pipe $n(\sigma) > 1$ \pipe $\exists_{l \in \mathbb{N}}\pr{\pr{\sigma(l) \neq l} \land \pr{\forall_{i \in \mathbb{N}_{1, l}}\pr{\sigma(i) = i}}}$
+      \lit $Transposition[\delta, l, \tau(l)]$ \pipe $n(\delta \circ \sigma) < n(\sigma)$
+      \lit $\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}$ \pipe $\exists_{T'}\pr{(Transpositions[T']) \land \pr{\delta \circ \sigma = \circ_{\tau_i \in T'}(\tau_i)}}$
+      \lit $\sigma = \delta^{-1} \circ \circ_{\tau_i \in T'}(\tau_i) = \delta \circ \circ_{\tau_i \in T'}(\tau_i) = \circ_{\tau_i \in T''}(\tau_i)$
+      \lit $\exists_{T''}\pr{(Transpositions[T'']) \land \pr{\sigma = \circ_{\tau_i \in T''}(\tau_i)}}$
+    \end{enumerate}
+    \lit $\pr{\pr{n(\sigma) = k + 1} \land \pr{\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}}} \implies$ \cont
+    \lit \cont $\pr{\exists_{T''}\pr{(Transpositions[T'']) \land \pr{\sigma = \circ_{\tau_i \in T''}(\tau_i)}}}$
+    \lit $Induction$ \pipe $\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}$
+  \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{comment}
+
 $Perm[\sigma, S] \abr Bij[\sigma, S, S]$ \\
 $IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$ \\
 
@@ -3080,58 +3135,39 @@ $IntPermSetCard \abr (IntPermSet[\mathcal{S}_n, n]) \implies (|\mathcal{S}_n| = 
   \lit $\mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
+$Inversion[\langle \sigma_i, \sigma_j \rangle, \sigma] \abr (\sigma \in \mathcal{S}_n) \land (i < j \leq n) \land \pr{\sigma(i) > \sigma(j)}$ \\
+$Signature[sgn(\sigma), \sigma] \abr (\sigma \in \mathcal{S}_n) \land (v = |\{\langle \sigma_i, \sigma_j \rangle \st Inversion[\langle \sigma_i, \sigma_j \rangle, \sigma]\}|) \land \pr{sgn(\sigma) = (-1)^v}$ \\
+$Determinant[det(A), A, n] \abr det(A) = \sum_{\sigma \in \mathcal{S}_n}^{}\pr{sgn(\sigma) \prod_{i = 1}^{n}\pr{a_{i, \sigma(i)}}}$ \\
+
+$DeterminantTheorems \abr \left(\begin{array}{ll}
+det(A) = det(A^T) \\
+Triangular(A) \implies det(A) = \prod_{i = 1}^{n}(a_{ii}) \\
+O \in A \implies det(A) = 0 \\
+det(E_1) = -1 \\
+det(E_2) = c \\
+det(E_3) = 1 \\
+det(A B) = det(A) det(B) \\
+det(A^{-1}) = 1/\pr{det(A)} \\
+\end{array}\right)$
+
+$Minor[M_{i, j}, M, i, j] \abr M_{i, j} = \text{M with ith row and jth column removed}$ \\
+$Cofactor[A_{i, j}, M, i, j] \abr A_{i, j} = (-1)^{i + j} det(M_{i, j})$ \\
+
+$DetEquiv \abr \pr{\forall_{i \in \mathbb{N}_{1, n}}\pr{det(A) = \sum_{j = 1}^{n}(a_{i j} A_{i, j})}} \land \pr{\forall_{j \in \mathbb{N}_{1, n}}\pr{det(A) = \sum_{i = 1}^{n}(a_{i j} A_{i, j})}}$
 \begin{enumerate}
-  \lit $Perm[I_n, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $I_n \in \mathcal{S}_n$
-  \lit $(\sigma, \tau, \upsilon \in \mathcal{S}_n) \implies \ldots$
-  \begin{enumerate}
-    \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $Bij[\sigma \circ \tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \tau \in \mathcal{S}_n$
-    \lit $(Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\tau, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]) \land (Bij[\upsilon, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}])$ \pipe $(\sigma \circ \tau) \circ \upsilon = \sigma \circ (\tau \circ \upsilon)$
-    \lit $\sigma \circ I_n = \sigma = I_n \circ \sigma$
-    \lit $Bij[\sigma, \mathbb{N}_{1, n}, \mathbb{N}_{1, n}]$ \pipe $\sigma \circ \sigma^{-1} = I_n = \sigma^{-1} \circ \sigma$
-  \end{enumerate}
-  \lit $Group[\mathcal{S}_n, \circ]$
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-$IntPermSetEquiv \abr (IntPermSet[\mathcal{S}_n, n]) \land (\tau \in \mathcal{S}_n) \implies (\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
-\begin{enumerate}
-  \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = \tau \circ (\tau^{-1} \circ \alpha) \in \mathcal{S}_n} \iff (\alpha \in \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\})$
-  \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = (\alpha \circ \tau^{-1}) \circ \tau} \in \mathcal{S}_n) \iff (\alpha \in \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\})$
-  \lit $(\alpha \in \mathcal{S}_n) \iff \pr{\alpha = (\alpha^{-1})^{-1} \in \mathcal{S}_n} \iff (\alpha \in \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\})$
-  \lit $\mathcal{S}_n = \{\tau \circ \sigma \st \sigma \in \mathcal{S}_n\} = \{\sigma \circ \tau \st \sigma \in \mathcal{S}_n\} = \{\sigma^{-1} \st \sigma \in \mathcal{S}_n\}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+adjoint blabla
 
-$Inversions[n(\sigma), \sigma] \abr (\sigma \in \mathcal{S}_n) \land \pr{n(\sigma) = |\{(i, j) \st (i < j) \land \pr{\sigma(i) > \sigma(j)}\}| = \sum_{i = 1}^{n}\pr{|\{(i, j) \st \pr{\sigma(i) > \sigma(j)} \land (i < j \leq n)\}|}}$ \\
-$Transposition[\tau, m, r] \abr (\tau \in \mathcal{S}_n) \land \pr{\forall_{i \in \mathbb{N}_{1, n}}\pr{(i \notin \{m, r\}) \implies \pr{\tau(i) = i}}} \land \pr{\tau(m) = r} \land \pr{\tau(r) = m}$ \\
 
-$TranspositionInv \abr (Transposition[\tau]) \implies (\tau = \tau^{-1})$
-\begin{enumerate}
-  \lit $\tau \circ \tau^{-1} = I_n$ \pipe $\tau = \tau^{-1}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\section{Diagonalizable, Eigenvalues, and Eigenvectors}
+% Lal; 149-166
 
-$TranspositionDecomp \abr (\sigma \in \mathcal{S}_n) \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}}$
-\begin{enumerate}
-  \lit $\pr{n(\sigma) = 0} \implies \ldots$
-  \begin{enumerate}
-    \lit $\sigma = I_n$
-    \lit $\pr{Transpositions[\langle (1 2), (1 2) \rangle]} \land \pr{\sigma = I_n = (1 2) \circ (1 2)}$
-    \lit $\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}$
-  \end{enumerate}
-  \lit $\pr{n(\sigma) = 0} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}}$
-  \lit $\pr{\pr{n(\sigma) = k + 1} \land \pr{\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}}} \implies \ldots$
-  \begin{enumerate}
-    \lit $n(\sigma) = k + 1$ \pipe $n(\sigma) > 1$ \pipe $\exists_{l \in \mathbb{N}}\pr{\pr{\sigma(l) \neq l} \land \pr{\forall_{i \in \mathbb{N}_{1, l}}\pr{\sigma(i) = i}}}$
-    \lit $Transposition[\delta, l, \tau(l)]$ \pipe $n(\delta \circ \sigma) < n(\sigma)$
-    \lit $\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}$ \pipe $\exists_{T'}\pr{(Transpositions[T']) \land \pr{\delta \circ \sigma = \circ_{\tau_i \in T'}(\tau_i)}}$
-    \lit $\sigma = \delta^{-1} \circ \circ_{\tau_i \in T'}(\tau_i) = \delta \circ \circ_{\tau_i \in T'}(\tau_i) = \circ_{\tau_i \in T''}(\tau_i)$
-    \lit $\exists_{T''}\pr{(Transpositions[T'']) \land \pr{\sigma = \circ_{\tau_i \in T''}(\tau_i)}}$
-  \end{enumerate}
-  \lit $\pr{\pr{n(\sigma) = k + 1} \land \pr{\forall_{\sigma' \in \mathcal{S}_n}\pr{\pr{n(\sigma') \leq k} \implies \pr{\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma' = \circ_{\tau_i \in T}(\tau_i)}}}}}} \implies$ \cont
-  \lit \cont $\pr{\exists_{T''}\pr{(Transpositions[T'']) \land \pr{\sigma = \circ_{\tau_i \in T''}(\tau_i)}}}$
-  \lit $Induction$ \pipe $\exists_{T}\pr{(Transpositions[T]) \land \pr{\sigma = \circ_{\tau_i \in T}(\tau_i)}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-244
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
 
 %############################################################################
 % \left(\begin{array}{ll}
@@ -3139,20 +3175,3 @@ $TranspositionDecomp \abr (\sigma \in \mathcal{S}_n) \implies \pr{\exists_{T}\pr
 %   YYY \hfill \land \hfill \\
 % \end{array}\right)
 %############################################################################
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\end{document}
-
-% $\exists_{x} \forall_{y}\pr{\pr{P(y)} \iff (y = x)}$
-% DUMP
-% This will be an empty chapter and I will put some text here
-% \begin{equation}
-% \label{eq:1}
-% \sum_{i=0}^{\infty} a_i x^i
-% \end{equation}
-% The equation \ref{eq:1} shows a sum that is divergent. This formula 
-% will later be used in the page \pageref{second}.
-% For further references \pipe see \href{http://www.sharelatex.com}{Something 
-% Linky} or go to the next url: \url{http://www.sharelatex.com} or open 
-% the next file \href{run:./file.txt}{File.txt}
