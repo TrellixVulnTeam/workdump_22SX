@@ -3065,7 +3065,7 @@ $SimRank \abr (SimMatrix[A, B]) \implies (Rank[A] = Rank[B])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
-\section{Determinants}
+\section{Determinants} la_pdf-p:49,215
 $Perm[\sigma, S] \abr Bij[\sigma, S, S]$ \\
 $IntPermSet[\mathcal{S}_n, n] \abr \mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$ \\
 
@@ -3079,6 +3079,17 @@ $IntPermSetCard \abr (IntPermSet[\mathcal{S}_n, n]) \implies (|\mathcal{S}_n| = 
   \lit $(|\mathcal{S}_m| = m!) \implies (|\mathcal{S}_{m + 1}| = (m + 1)!)$
   \lit $\mathcal{S}_n = \{\sigma \st Perm[\sigma, \mathbb{N}_{1, n}]\}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Inversion[\langle \sigma_i, \sigma_j \rangle, \sigma] \abr (\sigma \in \mathcal{S}_n) \land (i < j \leq n) \land (\sigma(i) > \sigma(j))$ \\
+$Signature[sgn(\sigma), \sigma] \abr (\sigma \in \mathcal{S}_n) \land (v = |\{\langle \sigma_i, \sigma_j \rangle \st Inversion[\langle \sigma_i, \sigma_j \rangle, \sigma]\}|) \land (sgn(\sigma) = (-1)^v)$ \\
+
+TODO WRITE PERMUTATION SKETCH
+
+$Determinant[det(A), A, n] \abr det(A) = \sum_{\sigma \in \mathcal{S}_n}^{}(sgn(\sigma) \prod_{i = 1}^{n}(a_{i, \sigma(i)}))$
+
+TODO WRITE DETERMINANT SKETCH
+
+\begin{comment}
 
 $IntPermGroup \abr Group[\mathcal{S}_n, \circ]$
 \begin{enumerate}
@@ -3130,8 +3141,11 @@ $TranspositionDecomp \abr (\sigma \in \mathcal{S}_n) \implies (\exists_{T}((Tran
   \lit \cont $(\exists_{T''}((Transpositions[T'']) \land (\sigma = \circ_{\tau_i \in T''}(\tau_i))))$
   \lit $Induction$ \pipe $\exists_{T}((Transpositions[T]) \land (\sigma = \circ_{\tau_i \in T}(\tau_i)))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{comment}
 
-244
+
+\section{Diagonalizable, Eigenvalues, and Eigenvectors}
+la_pdf-p:149
 
 %############################################################################
 % \left(\begin{array}{ll}
