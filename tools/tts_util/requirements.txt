@@ -1,0 +1,5 @@
+pywin32; platform_system == "Windows"
+pyttsx3==2.71
+keyboard
+mouse
+pyperclip
