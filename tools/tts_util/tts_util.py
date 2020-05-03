@@ -5,11 +5,11 @@ import pyperclip
 
 import time
 
-start_key = "ctrl+alt+t"
+start_key = "ctrl+`"
 stop_key = "esc"
 copy_key = "ctrl+c"
 copy_wait = 0.1
-rate_factor = 1.33
+rate_factor = 1.25
 volume_factor = 5
 
 def copy():
@@ -47,6 +47,14 @@ def speak_selected(hotkeys):
     print(f"Speaking: =====\n\n{message}\n\n===============\n\n")
     speak(message)
 
+def display_vars():
+    print("Variables:")
+    for (_name, _obj) in globals().items():
+        if type(_obj) not in [str, float, int, bool] or _name.startswith("_"):
+            continue
+        print(f"{_name}: {_obj}")
+
 if __name__ == '__main__':
+    display_vars()
     keyboard.add_hotkey(start_key, speak_selected, args=[start_key])
     keyboard.wait()
