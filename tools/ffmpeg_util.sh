@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 set -x
-alias ffmpeg_exe="C:/Users/guzma/Downloads/PortableInstallations/ffmpeg-20190604-d3f236b-win64-static/ffmpeg-20190604-d3f236b-win64-static/bin/ffmpeg.exe"
-dump_path="C:/Users/guzma/Music"
+#dump_path="C:\Users\guzma\AppData\Roaming\Slippi Desktop App\dolphin\User\Dump"
+dump_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 mode=${1:-$(read in && echo ${in})}
 
 if [ "${mode}" == "gen" ]; then
-    ffmpeg_exe \
+    ffmpeg \
         -i "${dump_path}/Frames/framedump0.avi" \
         -i "${dump_path}/Audio/dspdump.wav" \
         -c copy \
@@ -15,7 +15,7 @@ elif [ "${mode}" == "clip" ]; then
     echo "Start time: " && read t1
     echo "End time: " && read t2
     echo "Filename suffix: " && read suff
-    ffmpeg_exe \
+    ffmpeg \
         -i "${dump_path}\dump.avi" \
         -ss ${t1} \
         -to ${t2} \
@@ -24,7 +24,7 @@ elif [ "${mode}" == "clip" ]; then
     echo "Clip file: ${dump_path}/dump_${suff}.avi"
 elif [ "${mode}" == "sync" ]; then
     echo "Audio offset time: " && read ast
-    ffmpeg_exe \
+    ffmpeg \
         -i "${dump_path}\dump.avi" \
         -itsoffset ${ast} \
         -i "${dump_path}\dump.avi" \
@@ -35,7 +35,7 @@ elif [ "${mode}" == "sync" ]; then
     echo "Sync file: ${dump_path}\dump_ast_${ast}.avi"
 elif [ "${mode}" == "split" ]; then
     echo "Segment time (format in hh:mm:ss): " && read seg
-    ffmpeg_exe \
+    ffmpeg \
         -i "${dump_path}\dump.avi" \
         -c copy \
         -map 0 \
@@ -44,9 +44,14 @@ elif [ "${mode}" == "split" ]; then
         -reset_timestamps 1 \
         "${dump_path}\dump_split_%03d.avi"
     echo "Split files: ${dump_path}\dump_split_%03d.avi"
+elif [ "${mode}" == "concat" ]; then
+    echo "Video dir: " && read vdir
+    echo "Video height: " && read vheight
+    cd "${vdir}"
+    ls | grep .avi | xargs -I{} echo "file '{}'" > "concat.txt"
+    ffmpeg -f concat -safe 0 -i "concat.txt" -c copy "concat.avi" -y
+    ffmpeg -i "concat.avi" -vf scale=-2:${vheight} -c:v libx264 -crf 18 -preset veryslow -c:a copy "concat_720p.avi" -y
 else
-    echo "Try adding an available parameter (gen|clip|sync|split)"
+    echo "Try adding an available parameter (gen|clip|sync|split|concat)"
 fi
 echo "Press enter to continue..." && read
-
-
