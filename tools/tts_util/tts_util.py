@@ -11,6 +11,17 @@ copy_key = "ctrl+c"
 copy_wait = 0.1
 rate_factor = 1.25
 volume_factor = 5
+pattern_replacements = [
+    ("\r", ""),
+    ("\n", " "),
+    ("  ", " "),
+    ("∈", "in"),
+    ("=", "equals"),
+    ("⊂", "proper subset"),
+    ("⊆", "subset"),
+    ("∩", "intersect"),
+    ("∪", "union"),
+]
 
 def copy():
     keyboard.press_and_release(copy_key)
@@ -20,8 +31,9 @@ def copy():
     return contents
 
 def clean(text):
-    cleaned_text = text.replace("\r", "").replace("\n", " ").replace("  ", " ")
-    return cleaned_text
+    for (pattern, replacement) in pattern_replacements:
+        text = text.replace(pattern, replacement)
+    return text
 
 def speak(text):
     engine = pyttsx3.init()
@@ -44,13 +56,14 @@ def speak_selected(hotkeys):
         keyboard.release(hotkey)
     raw_message = copy()
     message = clean(raw_message)
+    print(f"Detected: =====\n\n{raw_message}\n\n===============\n\n")
     print(f"Speaking: =====\n\n{message}\n\n===============\n\n")
     speak(message)
 
 def display_vars():
     print("Variables:")
     for (_name, _obj) in globals().items():
-        if type(_obj) not in [str, float, int, bool] or _name.startswith("_"):
+        if type(_obj) not in [str, float, int, bool, list] or _name.startswith("_"):
             continue
         print(f"{_name}: {_obj}")
 
