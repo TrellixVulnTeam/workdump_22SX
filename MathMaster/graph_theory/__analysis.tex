@@ -99,20 +99,32 @@
 \chapter{Graph Theory}
 \section{Graphs}
 $Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
-$Adjacent[x, y, G] \abr (Graph[G]) \land \pr{\{x, y\} \in E(G)}$ \\
-$Incident[e, x, y, G] \abr (Graph[G]) \land \pr{e = \{x, y\} \in E(G)}$ \\
+$VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
+$EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
+$Adjacent[x, y, G] \abr \{x, y\} \in E(G)$ \\
+$Incident[e, x, y, G] \abr e = \{x, y\} \in E(G)$ \\
+$Order[|G|, G] \abr |G| = |V(G)|$ \\
+$Size[e(G), G] \abr e(G) = |E(G)|$ \\
+
 $SimpleGraph[(V, E)] \abr \pr{Graph[(V, E)]} \land (E \subseteq \{\{a, b\} \in V^{\{2\}} \st a \neq b\})$ \\
-$Subgraph[H, G] \abr (Graph[H]) \land (Graph[G]) \land \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
+$Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
 $SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) = V(G)}$ \\
-$RestrictionV[G[V'], V', G] \abr (Graph[G]) \land \pr{G[V'] = \pr{V', \{e \in E(G) \st \exists_{a, b \in V'}(e = \{a, b\})\}}}$ \\
+$RestrictionV[G[V'], V', G] \abr G[V'] = \pr{V', \{e \st \exists_{a, b \in V'}(Incident[e, a, b, G])\}}$ \\
 $InducedSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{RestrictionV[H, V(H), G]}$ \\
-$RemoveV[G - v, v, G] \abr (Graph[G]) \land \pr{v \in V(G)} \land \pr{RestrictionV[G - v, V(G) \setminus \{v\}, G]}$ \\
-$RemoveE[G - e, e, G] \abr (Graph[G]) \land \pr{e \in E(G)} \land \pr{G - e = \pr{V(G), E(G) \setminus \{e\}}}$ \\
-$AddE[G + e, e, G] \abr (Graph[G]) \land \pr{e \notin E(G)} \land \pr{e \in V(G)^{\{2\}}} \land \pr{G + e = \pr{V(G), E(G) \cup \{e\}}}$ \\
-$Order[|G|, G] \abr (Graph[G]) \land (|G| = |V(G)|$ \\
-$Size[e(G), G] \abr (Graph[G]) \land \pr{e(G) = |E(G)}|$ \\
+$RemoveV[G - v, v, G] \abr \pr{v \in V(G)} \land \pr{RestrictionV[G - v, V(G) \setminus \{v\}, G]}$ \\
+$RemoveE[G - e, e, G] \abr \pr{e \in E(G)} \land \pr{G - e = \pr{V(G), E(G) \setminus \{e\}}}$ \\
+$AddE[G + e, e, G] \abr \pr{e \notin E(G)} \land \pr{e \in V(G)^{\{2\}}} \land \pr{G + e = \pr{V(G), E(G) \cup \{e\}}}$ \\
+
+$Join[E_G(U, W), U, W, G] \abr \pr{U, W \subseteq V(G)} \land (U \cap W = \emptyset) \land \pr{E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\}}$ \\
+$JoinSize[e_G(U, W), U, W, G] \abr \pr{Join[E_G(U, W), U, W, G]} \land \pr{e_G(U, W) = |E_G(U, W)|}$ \\
+$Isomorphic[H, G] \abr \exists_{\phi}\pr{\pr{Bijection[\phi, V(H), V(G)]} \land \pr{\forall_{x, y \in V(H)}\pr{\{x, y\} \in E(H) \iff \{\phi(x), \phi(y)\} \in E(G)}}}$ \\
 
 
+
+
+% v \in G \abr v \in V(G)
+% G^n \abr Order(n)
+% G(n, m) \abr Order(n) \land Size(m)
 
 \chapter{Abstract Algebra}
 \section{Functions}
