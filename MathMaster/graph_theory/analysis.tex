@@ -99,6 +99,7 @@
 \chapter{Graph Theory}
 \section{Graphs}
 $Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
+$SimpleGraph[(V, E)] \abr (Graph[(V, E)]) \land (E \subseteq \{\{a, b\} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (V((V, E)) = V)$ \\
 $EdgeSet[E((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (E((V, E)) = E)$ \\
 $Adjacent[x, y, G] \abr \{x, y\} \in E(G)$ \\
@@ -106,7 +107,6 @@ $Incident[e, x, y, G] \abr e = \{x, y\} \in E(G)$ \\
 $Order[|G|, G] \abr |G| = |V(G)|$ \\
 $Size[e(G), G] \abr e(G) = |E(G)|$ \\
 
-$SimpleGraph[(V, E)] \abr (Graph[(V, E)]) \land (E \subseteq \{\{a, b\} \in V^{\{2\}} \st a \neq b\})$ \\
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
 $SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land (V(H) = V(G))$ \\
 $RestrictionV[G[V'], V', G] \abr G[V'] = (V', \{e \st \exists_{a, b \in V'}(Incident[e, a, b, G])\})$ \\
@@ -115,12 +115,18 @@ $RemoveV[G - v, v, G] \abr (v \in V(G)) \land (RestrictionV[G - v, V(G) \setminu
 $RemoveE[G - e, e, G] \abr (e \in E(G)) \land (G - e = (V(G), E(G) \setminus \{e\}))$ \\
 $AddE[G + e, e, G] \abr (e \notin E(G)) \land (e \in V(G)^{\{2\}}) \land (G + e = (V(G), E(G) \cup \{e\}))$ \\
 
-$Join[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
-$JoinSize[e_G(U, W), U, W, G] \abr (Join[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
-$Isomorphic[H, G] \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}(\{x, y\} \in E(H) \iff \{\phi(x), \phi(y)\} \in E(G))))$ \\
+# THIS IS NOT A GRAPH!!!
+$Walk[W_n, n] \abr (V = \{x_i \st i \in \mathbb{N}_1^{n + 1}\}) \land (E = \{\{x_i, x_{i+1}\} \st i \in \mathbb{N}_1^n\}) \land (W_n = (V, E))$ \\
+$ClosedWalk[\bar{W}_n] \abr (\bar{W}_n = (V(W_n), E(W_n) \cup \{\{x_1, x_n+1\}\}))$ \\
 
-$SizeOrderN \abr ((n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2} = \frac{(n-1) (n)}{2})$ \\
-$TODO CONT HERE$
+
+%$Join[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
+%$JoinSize[e_G(U, W), U, W, G] \abr (Join[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
+%$Isomorphic[H, G] \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}(\{x, y\} \in E(H) \iff \{\phi(x), \phi(y)\} \in E(G))))$ \\
+
+%$SizeOrderN \abr ((n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2} = \frac{(n-1) (n)}{2})$ \\
+%$TODO CONT HERE$
+
 
 % v \in G \abr v \in V(G)
 % G^n \abr Order(n)
