@@ -9,7 +9,7 @@ start_key = "ctrl+`"
 stop_key = "esc"
 copy_key = "ctrl+c"
 copy_wait = 0.1
-rate_factor = 1.00
+rate_factor = 1.20
 volume_factor = 5
 pattern_replacements = [
     ("\r", ""),

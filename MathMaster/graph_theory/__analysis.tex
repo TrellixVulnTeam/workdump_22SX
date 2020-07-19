@@ -81,6 +81,8 @@
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 \newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
 \newcommand{\st}{\mathbin{|}}
+\newcommand{\utup}[1]{\{#1\}}
+
 
 %\usepackage[author={Max Schlepzig}]{pdfcomment}
 %Here we\pdfcomment[icon=Insert]{insert: miss} a word!
@@ -99,11 +101,11 @@
 \chapter{Graph Theory}
 \section{Graphs}
 $Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
-$SimpleGraph[(V, E)] \abr \pr{Graph[(V, E)]} \land (E \subseteq \{\{a, b\} \in V^{\{2\}} \st a \neq b\})$ \\
+$SimpleGraph[(V, E)] \abr \pr{Graph[(V, E)]} \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
 $EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
-$Adjacent[x, y, G] \abr \{x, y\} \in E(G)$ \\
-$Incident[e, x, y, G] \abr e = \{x, y\} \in E(G)$ \\
+$Adjacent[x, y, G] \abr \utup{x, y} \in E(G)$ \\
+$Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
 $Order[|G|, G] \abr |G| = |V(G)|$ \\
 $Size[e(G), G] \abr e(G) = |E(G)|$ \\
 
@@ -115,12 +117,74 @@ $RemoveV[G - v, v, G] \abr \pr{v \in V(G)} \land \pr{RestrictionV[G - v, V(G) \s
 $RemoveE[G - e, e, G] \abr \pr{e \in E(G)} \land \pr{G - e = \pr{V(G), E(G) \setminus \{e\}}}$ \\
 $AddE[G + e, e, G] \abr \pr{e \notin E(G)} \land \pr{e \in V(G)^{\{2\}}} \land \pr{G + e = \pr{V(G), E(G) \cup \{e\}}}$ \\
 
-$Walk[W_n, n] \abr (V = \{x_i \st i \in \mathbb{N}_1^{n + 1}\}) \land (E = \{\{x_i, x_{i+1}\} \st i \in \mathbb{N}_1^n\})$ \\
+$Walk[V_n, n, G] \abr \pr{V_n = \{v_i \in V(G) \st i \in \mathbb{N}_1^{n + 1}\}} \land \pr{\forall_{i \in \mathbb{N}_1^n}\pr{\utup{v_i, v_{i + 1}} \in E(G)}}$ \\
+$Path[V_n, n, G] \abr (Walk[V_n, n, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{n + 1}}\pr{(i \neq j) \implies (v_i \neq v_j)}}$ \\
+$ClosedWalk[V_n, n, G] \abr (Walk[V_n, n, G]) \land (v_{n + 1} = v_1)$ \\
+$Cycle[V_n, n, G] \abr (ClosedWalk[V_n, n, G]) \land (n > 1)$ \\
+$Triangle[T, G] \abr Cycle[T, 3, G]$ \\
+$Girth[G] \abr min\pr{\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\}}$ \\
+$Circumference[G] \abr max\pr{\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\}}$ \\
 
+$ConnectedV[(x, y), G] \abr \exists_{n, V_n}\pr{(Path[V_n, n, G]) \land \pr{(x, y) = (v_1, v_{n + 1})}}$ \\
+$Connected[G] \abr \forall_{x, y \in V(G)}\pr{ConnectedV[(x, y), G]}$ \\
+$Component[C, G] \abr (Subgraph[C, G]) \land \pr{\forall_{c \in V(C)} \forall_{g \in V(G)}\pr{\pr{g \notin V(C)} \implies \pr{\lnot ConnectedV[(g, c), G]}}}$ \\
+
+$Degree[deg(v), v, G] \abr deg(v) = |\{e \in E(G) | v \in e\}|$ \\
+$Regular[G, r] \abr \forall_{v \in V(G)}\pr{deg(v) = r}$ \\
+
+$SumDeg \abr \sum_{v \in V(G)}\pr{deg(v)} = 2 |E(G)|$ \\
+\begin{enumerate}
+  \lit $\sum_{v \in V(G)}\pr{deg(v)} = \sum_{v \in V(G)}\pr{|\{e \in E(G) | v \in e\}|} = 2 |E(G)|$ \\
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$OddDeg \abr Even\pr{|\{v \st Odd\pr{deg(v)}\}|}$ \\
+\begin{enumerate}
+  \lit SumDeg
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} = 
+\begin{cases} 
+  1 & x_i x_j \in E(G) \\
+  0 &  x_i x_j \notin E(G) \\
+\end{cases}\right]$ \\
+
+$PathG[P_n, n] \abr (V = \{v_i \st i \in \mathbb{N}_1^n\}) \land (E = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{n - 1}\}) \land \pr{P_n = (V, E)}$ \\
+
+$CycleG[C_n, n] \abr \pr{V = V(P_n)} \land \pr{E = E(P_n) \cup \{\utup{v_n, v_1}\}} \land \pr{C_n = (V, E)}$ \\
+$FanG[F_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{F_n = (V, E)}$ \\
+$WheelG[W_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{W_n = (V, E)}$ \\
+$StarG[S_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land (E = \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}) \land \pr{S_n = (V, E)}$ \\
+$CompleteG[K_n, n] \abr \pr{V = V(P_n)} \land \pr{E = \{\utup{v_i, v_j} \st (i, j \in \mathbb{N}_1^n) \land (i \neq j)\}}$ \\
+
+$Isomorphic[H, G] \abr \exists_{\phi}\pr{\pr{Bijection[\phi, V(H), V(G)]} \land \pr{\forall_{x, y \in V(H)}\pr{\pr{\utup{x, y} \in E(H)} \iff \pr{\utup{\phi(x), \phi(y)} \in E(G)}}}}$ \\
+
+$Complement[\bar{G}, G] \abr \pr{V = V(G)} \land \pr{E = \{\utup{a, b} \in V^{\{2\}} \st (a \neq b) \land \pr{\utup{a, b} \notin E(G)}\}} \land \pr{\bar{G} = (V, E)}$ \\
+
+$Distance[d(x, y), x, y, G] \abr d(x, y) = min\pr{{n \in \mathbb{N} \st \pr{\exists_{V_n}(Path[V_n, n, G]) \land \pr{(v_1, v_{n + 1}) = (x, y)}}}}$ \\
+$DMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \in V(G)}} \implies 
+\left(\begin{array}{ll}
+  \pr{d(x, y) \geq 0} \hfill \land \hfill \\
+  \pr{\pr{d(x, y) = 0} \iff (x = y)} \hfill \land \hfill \\
+  \pr{d(x, y) = d(y, x)} \hfill \land \hfill \\
+  \pr{d(x, y) + d(y, z) \geq d(x, z)} \\
+\end{array}\right)}$ \\
+\begin{enumerate}
+  \lit By definition of cardinality and sets, $d(x, y) \geq 0$, $\pr{d(x, y) = 0} \iff (x = y)$, $d(x, y) = d(y, x)$
+  \lit By cases:
+  \begin{enumerate}
+    \lit If $y \in [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
+    \lit If $y \notin [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
+  \end{enumerate}
+  \lit By cases, $d(x, y) + d(y, z) \geq d(x, z)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+
+%$ \abr $ \\
 
 %$Join[E_G(U, W), U, W, G] \abr \pr{U, W \subseteq V(G)} \land (U \cap W = \emptyset) \land \pr{E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\}}$ \\
 %$JoinSize[e_G(U, W), U, W, G] \abr \pr{Join[E_G(U, W), U, W, G]} \land \pr{e_G(U, W) = |E_G(U, W)|}$ \\
-%$Isomorphic[H, G] \abr \exists_{\phi}\pr{\pr{Bijection[\phi, V(H), V(G)]} \land \pr{\forall_{x, y \in V(H)}\pr{\{x, y\} \in E(H) \iff \{\phi(x), \phi(y)\} \in E(G)}}}$ \\
+
 
 %$SizeOrderN \abr \pr{(n = |G|) \land \pr{m = e(G)}} \implies \pr{0 \leq m \leq {n \choose 2} = \frac{(n-1) (n)}{2}}$ \\
 %$TODO CONT HERE$
