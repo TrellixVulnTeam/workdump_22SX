@@ -153,34 +153,68 @@ $PathG[P_n, n] \abr (V = \{v_i \st i \in \mathbb{N}_1^n\}) \land (E = \{\utup{v_
 $CycleG[C_n, n] \abr (V = V(P_n)) \land (E = E(P_n) \cup \{\utup{v_n, v_1}\}) \land (C_n = (V, E))$ \\
 $FanG[F_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = E(P_n) \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}) \land (F_n = (V, E))$ \\
 $WheelG[W_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}) \land (W_n = (V, E))$ \\
-$StarG[S_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}) \land (S_n = (V, E))$ \\
+$StarG[S_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = \{\utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}\}) \land (S_n = (V, E))$ \\
 $CompleteG[K_n, n] \abr (V = V(P_n)) \land (E = \{\utup{v_i, v_j} \st (i, j \in \mathbb{N}_1^n) \land (i \neq j)\})$ \\
+$BipartiteG[] \abr TODO$ \\
+$CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n})) \land (X \cap Y = \emptyset) \land (E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}))$ \\
 
 $Isomorphic[H, G] \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}((\utup{x, y} \in E(H)) \iff (\utup{\phi(x), \phi(y)} \in E(G)))))$ \\
+$SnIsoKmn \abr TODO$
 
 $Complement[\bar{G}, G] \abr (V = V(G)) \land (E = \{\utup{a, b} \in V^{\{2\}} \st (a \neq b) \land (\utup{a, b} \notin E(G))\}) \land (\bar{G} = (V, E))$ \\
 
-$Distance[d(x, y), x, y, G] \abr d(x, y) = min({n \in \mathbb{N} \st (\exists_{V_n}(Path[V_n, n, G]) \land ((v_1, v_{n + 1}) = (x, y)))})$ \\
+$Distance[d_G(x, y), x, y, G] \abr d_G(x, y) = min({n \in \mathbb{N} \st (\exists_{V_n}(Path[V_n, n, G]) \land ((v_1, v_{n + 1}) = (x, y)))})$ \\
 $DMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies 
 \left(\begin{array}{ll}
-  (d(x, y) \geq 0) \hfill \land \hfill \\
-  ((d(x, y) = 0) \iff (x = y)) \hfill \land \hfill \\
-  (d(x, y) = d(y, x)) \hfill \land \hfill \\
-  (d(x, y) + d(y, z) \geq d(x, z)) \\
+  (d_G(x, y) \geq 0) \hfill \land \hfill \\
+  ((d_G(x, y) = 0) \iff (x = y)) \hfill \land \hfill \\
+  (d_G(x, y) = d(y, x)) \hfill \land \hfill \\
+  (d_G(x, y) + d_G(y, z) \geq d_G(x, z)) \\
 \end{array}\right)}$ \\
 \begin{enumerate}
-  \lit By definition of cardinality and sets, $d(x, y) \geq 0$, $(d(x, y) = 0) \iff (x = y)$, $d(x, y) = d(y, x)$
+  \lit By definition of cardinality and sets, $d_G(x, y) \geq 0$, $(d_G(x, y) = 0) \iff (x = y)$, $d_G(x, y) = d(y, x)$
   \lit By cases:
   \begin{enumerate}
-    \lit If $y \in [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
-    \lit If $y \notin [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
+    \lit If $y \in [ShortestPath[x, z]]$, then $d_G(x, y) + d(y, z) = d_G(x, z)$
+    \lit If $y \notin [ShortestPath[x, z]]$, then $d_G(x, y) + d(y, z) > d_G(x, z)$
   \end{enumerate}
-  \lit By cases, $d(x, y) + d(y, z) \geq d(x, z)$
+  \lit By cases, $d_G(x, y) + d_G(y, z) \geq d_G(x, z)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
+$GraphPower[G^r, r, G] \abr (V = V(G)) \land (E = \{\utup{x, y} \st d_G(x, y) \leq r\}) \land (G^r = (V, E))$ \\
+$GraphSum[G_1 + G_2, G_1, G_2] \abr (V = V(G_1) \cup V(G_2)) \land (E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st (x \in V(G_1)) \land y \in V(G_2)\}) \land (G_1 + G_2 = (V, E))$ \\
+$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr 
+\left(\begin{array}{ll}
+  (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
+  (E = \{((x_1, y_1), (x_2, y_2)) \st ((x_1 = x_2) \land (\utup{y_1, y_2} \in E(G_2))) \lor ((y_1 = y_2) \land (\utup{x_1, x_2} \in E(G_1)))\}) \hfill \land \hfill \\
+  (G_1 \times G_2 = (V, E)) \\
+\end{array}\right)$ \\
+$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr 
+\left(\begin{array}{ll}
+  (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
+  (E = \{((x_1, y_1), (x_2, y_2)) \st ((x_1 = x_2) \land (\utup{y_1, y_2} \in E(G_2))) \lor (\utup{x_1, x_2} \in E(G_1))\}) \hfill \land \hfill \\
+  (G_1 \circ G_2 = (V, E)) \\
+\end{array}\right)$ \\
+$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr 
+\left(\begin{array}{ll}
+  (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
+  (E = \{((x_1, y_1), (x_2, y_2)) \st (\utup{x_1, x_2} \in E(G_1)) \land (\utup{y_1, y_2} \in E(G_2))\}) \hfill \land \hfill \\
+  (G_1 \land G_2 = (V, E)) \\
+\end{array}\right)$ \\
 
+$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B = 
+\begin{bmatrix} 
+  a_{1,1} B & \dots & a_{1, n} B \\
+  \vdots & \ddots & \vdots \\
+  a_{m, 1} B & \dots & a_{m, n} B \\
+\end{bmatrix} \in \mathbb{R}^{m p} \times \mathbb{R}^{n q})$ \\
 
-%$ \abr $ \\
+$KroneckerProperties \abr \ldots$
+\begin{enumerate}
+  \lit TODO: https://archive.siam.org/books/textbooks/OT91sample.pdf
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+% TODO: add remarks
 
 %$Join[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
 %$JoinSize[e_G(U, W), U, W, G] \abr (Join[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
