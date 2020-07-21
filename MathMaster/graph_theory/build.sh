@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Use as: { "keys": [ "ctrl+alt+b" ], "command": "exec", "args": { "shell_cmd": bash build.sh" } }
+# Use as: { "keys": [ "ctrl+alt+b" ], "command": "exec", "args": { "shell_cmd": "bash build.sh" } }
 work_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 original_path="analysis.tex"
 transpile_path="__analysis.tex"

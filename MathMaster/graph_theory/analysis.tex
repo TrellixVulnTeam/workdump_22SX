@@ -155,11 +155,14 @@ $FanG[F_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = E(P_n) \cup \utup{v_0, v
 $WheelG[W_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}) \land (W_n = (V, E))$ \\
 $StarG[S_n, n] \abr (V = V(P_n) \cup \{v_0\}) \land (E = \{\utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}\}) \land (S_n = (V, E))$ \\
 $CompleteG[K_n, n] \abr (V = V(P_n)) \land (E = \{\utup{v_i, v_j} \st (i, j \in \mathbb{N}_1^n) \land (i \neq j)\})$ \\
-$BipartiteG[] \abr TODO$ \\
+$BipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n})) \land (X \cap Y = \emptyset) \land (E(K_{m, n}) \subseteq \{\utup{x, y} \st (x \in X) \land (y \in Y)\}))$ \\
 $CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n})) \land (X \cap Y = \emptyset) \land (E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}))$ \\
 
-$Isomorphic[H, G] \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}((\utup{x, y} \in E(H)) \iff (\utup{\phi(x), \phi(y)} \in E(G)))))$ \\
-$SnIsoKmn \abr TODO$
+$Isomorphic[H, G] \text{\ or\ } H \cong G \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}((\utup{x, y} \in E(H)) \iff (\utup{\phi(x), \phi(y)} \in E(G)))))$ \\
+$SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
+\begin{enumerate}
+  \lit TODO $\phi = \ldots$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Complement[\bar{G}, G] \abr (V = V(G)) \land (E = \{\utup{a, b} \in V^{\{2\}} \st (a \neq b) \land (\utup{a, b} \notin E(G))\}) \land (\bar{G} = (V, E))$ \\
 
@@ -212,21 +215,38 @@ $KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, 
 $KroneckerProperties \abr \ldots$
 \begin{enumerate}
   \lit TODO: https://archive.siam.org/books/textbooks/OT91sample.pdf
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$AdjacencyKroneckerIdentity \abr \forall_{G, H}(\mathcal{A}(G \land H) = \mathcal{A}(H) \otimes \mathcal{A}(G))$
+\begin{enumerate}
+  \lit TODO
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-% TODO: add remarks
+$Tree[G] \abr (Connected[G]) \land (\not \exists_{n, V_n}(Cycle[V_n, n, G]))$ \\
+
+$GraphEquivalences \abr (Tree[G]) \iff ()$ \\
+\begin{enumerate}
+  \lit TODO
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
 
 %$Join[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
 %$JoinSize[e_G(U, W), U, W, G] \abr (Join[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
 
 
 %$SizeOrderN \abr ((n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2} = \frac{(n-1) (n)}{2})$ \\
-%$TODO CONT HERE$
-
 
 % v \in G \abr v \in V(G)
 % G^n \abr Order(n)
 % G(n, m) \abr Order(n) \land Size(m)
+
+
+
+
+
+
+
 
 \chapter{Abstract Algebra}
 \section{Functions}
