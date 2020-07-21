@@ -61,7 +61,7 @@
 \newcommand{\cont}{\phantom{.}. . .\phantom{.}}
 \newcommand{\pipe}{$\phantom{(}\vrectangleblack\phantom{)}$}
 \newcommand{\pr}[1]{\left(#1\right)}
-\newcommand{\thmcontext}[1]{\centerline{\\ ************************ #1 ************************ \\}}
+\newcommand{\thmcontext}[1]{\centerline{\\************************ #1 ************************ \\}}
 
 
 \usepackage{xifthen}% provides \isempty test
@@ -82,7 +82,7 @@
 \newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
 \newcommand{\st}{\mathbin{|}}
 \newcommand{\utup}[1]{\{#1\}}
-
+\newcommand{\notation}[2]{\fbox{{[Notation] \phantom{-} $#1 \abr #2$}}}
 
 %\usepackage[author={Max Schlepzig}]{pdfcomment}
 %Here we\pdfcomment[icon=Insert]{insert: miss} a word!
@@ -99,23 +99,66 @@
 
 % https://brilliant.org/wiki/cauchy-schwarz-inequality/
 \chapter{Graph Theory}
+\section{NotationDump} % TODO: remove
+
+
 \section{Graphs}
 $Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
 $SimpleGraph[(V, E)] \abr (Graph[(V, E)]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (V((V, E)) = V)$ \\
 $EdgeSet[E((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (E((V, E)) = E)$ \\
-$Adjacent[x, y, G] \abr \utup{x, y} \in E(G)$ \\
+$AdjacentV[(x, y), G] \abr \utup{x, y} \in E(G)$ \\
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
-$Order[|G|, G] \abr |G| = |V(G)|$ \\
-$Size[e(G), G] \abr e(G) = |E(G)|$ \\
+$AdjacentE[(e_1, e_2), G] \abr \exists!_{x \in V(G)}((x \in e_1) \land (x \in e_2))$ \\
+\notation{x ~ y}{djacentV[(x, y), G]} \\
 
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
+$SubgraphInducedByV[G[V'], V', G] \abr (E' = \{e \in E(G) \st \exists_{a, b \in V'}(Incident[e, a, b, G])\}) \land (G[V'] = (V', E'))$ \\
+$InducedSubgraph[H, G] \abr (Subgraph[H, G]) \land (SpannedBy[H, V(H), G])$ \\
 $SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land (V(H) = V(G))$ \\
-$RestrictionV[G[V'], V', G] \abr G[V'] = (V', \{e \st \exists_{a, b \in V'}(Incident[e, a, b, G])\})$ \\
-$InducedSubgraph[H, G] \abr (Subgraph[H, G]) \land (RestrictionV[H, V(H), G])$ \\
-$RemoveV[G - v, v, G] \abr (v \in V(G)) \land (RestrictionV[G - v, V(G) \setminus \{v\}, G])$ \\
-$RemoveE[G - e, e, G] \abr (e \in E(G)) \land (G - e = (V(G), E(G) \setminus \{e\}))$ \\
+
+$RemoveV[G - W, W, G] \abr (W \subseteq V(G)) \land (SubgraphInducedByV[G - W, V(G) \setminus W, G])$ \\
+$RemoveE[G - E, E, G] \abr (E \subseteq E(G)) \land (G - E = (V(G), E(G) \setminus E))$ \\
 $AddE[G + e, e, G] \abr (e \notin E(G)) \land (e \in V(G)^{\{2\}}) \land (G + e = (V(G), E(G) \cup \{e\}))$ \\
+
+$Order[|G|, G] \abr |G| = |V(G)|$ \\
+$Size[e(G), G] \abr e(G) = |E(G)|$ \\
+$DisjointEdges[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \in E(G) \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
+$DisjointEdgesSize[e_G(U, W), U, W, G] \abr (DisjointEdges[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
+$Isomorphic[H, G] \text{\ or\ } H \cong G \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}((\utup{x, y} \in E(H)) \iff (\utup{\phi(x), \phi(y)} \in E(G)))))$ \\
+\notation{x \in G}{x \in V(G)} \\
+\notation{G^n}{Order[n, G]} \\
+\notation{G(n, m)}{(Order[n, G]) \land (Size[m, G])} \\
+
+$SizeOrderN \abr ((Graph[G]) \land (n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2})$ \\
+\begin{enumerate}
+  \lit $0 \leq m \leq \sum_{i = 0}^{n - 1}(i) = \frac{(n-1)(n)}{2} = {n \choose 2}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$CompleteGraph[K_n, n] \abr (|K_n| = n) \land (e(K_n) = {n \choose 2})$ \\
+$EmptyGraph[E_n, n] \abr (|K_n| = n) \land (e(K_n) = 0)$ \\
+$TrivialGraph[G] \abr G = K_1 = E_1$ \\
+$ComplementGraph[\bar{G}, G] \abr \bar{G} = (V, V^{\{2\}} \setminus (E \cup \{\utup{x, x} \st x \in V(G)\}))$ \\
+$OpenNbhd[\Gamma_G(x), x, G] \abr \Gamma_G(x) = \{y \in V(G) \st AdjacentV[(y, x), G]\}$ \\
+$ClosedNbhd[\Gamma_G^*(x), x, G] \abr (OpenNbhd[\Gamma_G(x), x, G]) \land (\Gamma_G^*(x) = \Gamma_G(x) \cup \{x\})$ \\
+$Degree[d_G(x), x, G] \abr d_G(x) = |\Gamma_G(x)|$ \\
+$MinDegree[\delta(G), G] \abr \delta(G) = min(\{d_G(x) \st x \in V(G)\})$ \\
+$MaxDegree[\Delta(G), G] \abr \Delta(G) = max(\{d_G(x) \st x \in V(G)\})$ \\
+$IsolatedV[v, G] \abr d_G(v) = 0$ \\
+$KRegularGraph[G, k] \abr k = \delta(G) = \Delta(G)$ \\
+$RegularGraph[G] \abr \exists_{k \in \mathbb{N}}(KRegularGraph[G, k])$ \\
+$DegreeSequence[(d_G(x_i))_1^n, G] \abr (Order[n, G]) \land (((d_G(x_i))_1^n) = sort(\{d_G(x) \st x \in V(G)\})) \land (\delta(G) = d_G(x_1) \leq d_G(x_n) = \Delta(G))$ \\
+
+% TODO: CONT HERE FIXUP
+$SumDegrees \abr \sum_{v \in V(G)}(deg(v)) = 2 |E(G)|$ \\
+\begin{enumerate}
+  \lit $\sum_{v \in V(G)}(deg(v)) = \sum_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)|$ \\
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$HandshakingLemma \abr Even(|\{v \st Odd(deg(v))\}|)$ \\
+\begin{enumerate}
+  \lit SumDeg
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Walk[V_n, n, G] \abr (V_n = \{v_i \in V(G) \st i \in \mathbb{N}_1^{n + 1}\}) \land (\forall_{i \in \mathbb{N}_1^n}(\utup{v_i, v_{i + 1}} \in E(G)))$ \\
 $Path[V_n, n, G] \abr (Walk[V_n, n, G]) \land (\forall_{i, j \in \mathbb{N}_1^{n + 1}}((i \neq j) \implies (v_i \neq v_j)))$ \\
@@ -135,12 +178,12 @@ $Regular[G, r] \abr \forall_{v \in V(G)}(deg(v) = r)$ \\
 $SumDeg \abr \sum_{v \in V(G)}(deg(v)) = 2 |E(G)|$ \\
 \begin{enumerate}
   \lit $\sum_{v \in V(G)}(deg(v)) = \sum_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)|$ \\
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $OddDeg \abr Even(|\{v \st Odd(deg(v))\}|)$ \\
 \begin{enumerate}
   \lit SumDeg
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} = 
 \begin{cases} 
@@ -158,13 +201,11 @@ $CompleteG[K_n, n] \abr (V = V(P_n)) \land (E = \{\utup{v_i, v_j} \st (i, j \in 
 $BipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n})) \land (X \cap Y = \emptyset) \land (E(K_{m, n}) \subseteq \{\utup{x, y} \st (x \in X) \land (y \in Y)\}))$ \\
 $CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n})) \land (X \cap Y = \emptyset) \land (E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}))$ \\
 
-$Isomorphic[H, G] \text{\ or\ } H \cong G \abr \exists_{\phi}((Bijection[\phi, V(H), V(G)]) \land (\forall_{x, y \in V(H)}((\utup{x, y} \in E(H)) \iff (\utup{\phi(x), \phi(y)} \in E(G)))))$ \\
 $SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
 \begin{enumerate}
   \lit TODO $\phi = \ldots$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Complement[\bar{G}, G] \abr (V = V(G)) \land (E = \{\utup{a, b} \in V^{\{2\}} \st (a \neq b) \land (\utup{a, b} \notin E(G))\}) \land (\bar{G} = (V, E))$ \\
 
 $Distance[d_G(x, y), x, y, G] \abr d_G(x, y) = min({n \in \mathbb{N} \st (\exists_{V_n}(Path[V_n, n, G]) \land ((v_1, v_{n + 1}) = (x, y)))})$ \\
 $DMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies 
@@ -182,7 +223,7 @@ $DMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \imp
     \lit If $y \notin [ShortestPath[x, z]]$, then $d_G(x, y) + d(y, z) > d_G(x, z)$
   \end{enumerate}
   \lit By cases, $d_G(x, y) + d_G(y, z) \geq d_G(x, z)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $GraphPower[G^r, r, G] \abr (V = V(G)) \land (E = \{\utup{x, y} \st d_G(x, y) \leq r\}) \land (G^r = (V, E))$ \\
 $GraphSum[G_1 + G_2, G_1, G_2] \abr (V = V(G_1) \cup V(G_2)) \land (E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st (x \in V(G_1)) \land y \in V(G_2)\}) \land (G_1 + G_2 = (V, E))$ \\
@@ -220,22 +261,28 @@ $KroneckerProperties \abr \ldots$
 $AdjacencyKroneckerIdentity \abr \forall_{G, H}(\mathcal{A}(G \land H) = \mathcal{A}(H) \otimes \mathcal{A}(G))$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Tree[G] \abr (Connected[G]) \land (\not \exists_{n, V_n}(Cycle[V_n, n, G]))$ \\
+acyclic graph
+
+$Tree[G] \abr (Connected[G]) \land (\lnot \exists_{n, V_n}(Cycle[V_n, n, G]))$ \\
+
+forest  -> decomponents into trees
+
+p = |V(G)|
+q = |E(G)|
+
+
 
 $GraphEquivalences \abr (Tree[G]) \iff ()$ \\
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 
-%$Join[E_G(U, W), U, W, G] \abr (U, W \subseteq V(G)) \land (U \cap W = \emptyset) \land (E_G(U, W) = \{e \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\})$ \\
-%$JoinSize[e_G(U, W), U, W, G] \abr (Join[E_G(U, W), U, W, G]) \land (e_G(U, W) = |E_G(U, W)|)$ \\
 
 
-%$SizeOrderN \abr ((n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2} = \frac{(n-1) (n)}{2})$ \\
 
 % v \in G \abr v \in V(G)
 % G^n \abr Order(n)
@@ -257,12 +304,12 @@ $Comp[g \circ f, f, g, X, Y, Z] \abr (Func[f, X, Y]) \land (Func[g, Y, Z]) \land
 $FuncComp \abr (Comp[g \circ f, f, g, X, Y, Z]) \implies (Func[g \circ f, X, Z])$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $CompAssoc \abr h \circ (g \circ f) = (h \circ g) \circ f$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Domain[dom(f), f, X, Y] \abr (Func[f, X, Y]) \land (dom(f) = X)$ \\
 $Codomain[cod(f), f, X, Y] \abr (Func[f, X, Y]) \land (cod(f) = Y)$ \\
@@ -270,37 +317,37 @@ $Image[im(A), A, f, X, Y] \abr (Func[f, X, Y]) \land (A \subseteq X) \land (im(A
 $Preimage[pim(B), B, f, X, Y] \abr (Func[f, X, Y]) \land (B \subseteq Y) \land (pim(B) = \{a \in X \st f(a) \in B\})$ \\
 $Range[rng(f), f, X, Y] \abr (Func[f, X, Y]) \land (Image[rng(f), dom(f), f, X, Y])$ \\
 
-$Inj[f, X, Y] \abr (Func[f, X, Y]) \land (\forall_{x_1, x_2 \in X}((f(x_1) = f(x_2)) \implies (x_1 = x_2)))$ \\ % or One-to-One
-$Surj[f, X, Y] \abr (Func[f, X, Y]) \land (\forall_{y \in Y} \exists_{x \in X}(y = f(x)))$ \\ % or Onto
-$Bij[f, X, Y] \abr (Inj[f, X, Y]) \land (Surj[f, X, Y])$ \\ % or One-to-One Correspondence
+$Inj[f, X, Y] \abr (Func[f, X, Y]) \land (\forall_{x_1, x_2 \in X}((f(x_1) = f(x_2)) \implies (x_1 = x_2)))$ \\% or One-to-One
+$Surj[f, X, Y] \abr (Func[f, X, Y]) \land (\forall_{y \in Y} \exists_{x \in X}(y = f(x)))$ \\% or Onto
+$Bij[f, X, Y] \abr (Inj[f, X, Y]) \land (Surj[f, X, Y])$ \\% or One-to-One Correspondence
 $Inv[f^{-1}, f, X, Y] \abr (Func[f, X, Y]) \land (Func[f^{-1}, Y, X]) \land (f \circ f^{-1} = I_Y) \land (f^{-1} \circ f = I_X)$ \\
 
 $SurjEquiv \abr (Surj[f, X, Y]) \iff (rng(f) = cod(f))$ \\
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $BijEquiv \abr (Bij[f, X, Y]) \iff (\exists_{f_{-1}}(Inv[f^{-1}, f, X, Y]))$ \\
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $InjComp \abr ((Inj[f]) \land (Inj[g])) \implies (Inj[g \circ f])$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $SurjComp \abr ((Surj[f]) \land (Surj[g])) \implies (Surj[g \circ f])$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Divisibility, Equivalence Relations, Paritions}
 $DivisionAlgorithm \abr \forall_{b \in \mathbb{Z}} \forall_{a \in \mathbb{Z}^+} \exists!_{q, r \in \mathbb{Z}}((b = a q + r) \land (0 \leq r < a))$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Divides[a, b] \abr (a, b \in \mathbb{Z}) \land (\exists_{c \in \mathbb{Z}}(b = a c))$ \\
 $ComDiv[a, b, c] \abr (Divides[a, b]) \land (Divides[a, c])$ \\
@@ -315,24 +362,24 @@ $EqClass[[s], s, \sim, S] \abr (Rel[\sim, S]) \land (s \in S) \land ([s] = \{x \
 $PartitionInducesEqRel \abr (Partition[\mathcal{P}, S]) \implies (\exists_{\sim}(EqRel[\sim, S]))$
 \begin{enumerate}
   \lit TODO : $\sim = \{\langle a, b \rangle \in S \times S \st (P \in \mathcal{P}) \land (a, b \in P)\}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $EqRelInducesPartition \abr (EqRel[\sim, S]) \implies (\exists_{\mathcal{P}}(Partition[\mathcal{P}, S]))$
 \begin{enumerate}
   \lit TODO : $Partition[EqClass_1, EqClass_2, \ldots]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $EqRelCong \abr \forall_{n \in \mathbb{Z}^+}(EqRel[CongRel, \mathbb{Z}])$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Groups}
 $Group[G, *] \abr \left(\begin{array}{ll}
-  (Function[*, G, G]) \hfill \land \hfill \\  % binary operation / magma
-  (\forall_{a, b, c \in G}((a * b) * c = a * (b * c))) \hfill \land \hfill \\  % semigroup
-  (\exists_{e \in G} \forall_{a \in G}(a * e = a = e * a)) \hfill \land \hfill \\  % monoid
+  (Function[*, G, G]) \hfill \land \hfill \\ % binary operation / magma
+  (\forall_{a, b, c \in G}((a * b) * c = a * (b * c))) \hfill \land \hfill \\ % semigroup
+  (\exists_{e \in G} \forall_{a \in G}(a * e = a = e * a)) \hfill \land \hfill \\ % monoid
   (\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a))
 \end{array}\right)$ \\
 $AbelianGroup[G, *] \abr (Group[G, *]) \land (\forall_{a, b \in G}(a * b = b * a))$ \\
@@ -352,24 +399,24 @@ $CancelLaws \abr \forall_{G}((Group[G, *]) \implies (\forall_{a, b, c \in G}(((a
   \end{enumerate}
   \lit $(a * c = b * c) \implies (a = b)$
   \lit $((a * b = a * c) \implies (b = c)) \land ((a * c = b * c) \implies (a = b))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $IdUniq \abr \forall_{G}((Group[G, *]) \implies (\forall_{e_1, e_2 \in G} \forall_{a \in G}(((a * e_1 = a = e_1 * a) \land (a * e_2 = a = e_2 * a)) \implies (e_1 = e_2))))$
 \begin{enumerate}
   \lit $(CancelLaws) \land (\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a))$ \pipe $a * e_1 = a = a * e_2$ \pipe $e_1 = e_2$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $InvUniq \abr \forall_{G}((Group[G, *]) \implies (\forall_{a \in G} \forall_{a_1^{-1}, a_2^{-1} \in G}(((a * a_1^{-1} = e = a_1^{-1} * a) \land (a * a_2^{-1} = e = a_2^{-1} * a)) \implies (a_1^{-1} = a_2^{-1}))))$
 \begin{enumerate}
   \lit $(CancelLaws) \land (\forall_{a \in G} \exists_{a^{-1} \in G}(a * a^{-1} = e = a^{-1} * a))$ \pipe $a * a_1^{-1} = e = a * a_2^{-1}$ \pipe $a_1^{-1} = a_2^{-1}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $InvProd \abr \forall_{G} \forall_{a, b \in G}((a * b)^{-1} = b^{-1} * a^{-1})$
 \begin{enumerate}
   \lit $(a * b) * (a * b)^{-1} = e$
   \lit $(a * b) * (b^{-1} * a^{-1}) = (a * (b * b^{-1}) * a^{-1}) = e$
   \lit $InvUniq$ \pipe $(a * b)^{-1} = b^{-1} * a^{-1}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $OrderEl[o(G), G, *] \abr (Group[G, *]) \land (o(G) = |G|)$ \\
 $gWitness[n, g, G, *] \abr (Group[G, *]) \land (n \in \mathbb{Z}^+) \land (g^n = e) \land (\forall_{m \in \mathbb{Z}^+} (m < n) \implies (g^m \neq e))$ \\
@@ -399,12 +446,12 @@ $SubgroupEquiv \abr \forall_{H, G}\left(\begin{array}{ll}
   \end{enumerate}
   \lit $((\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land (\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a))) \implies (Subgroup[H, G, *])$
   \lit $(Subgroup[H, G, *]) \iff ((Group[G, *]) \land (\emptyset \neq H \subseteq G) \land (Function[*, H, H]) \land (\forall_{a \in H} \exists_{a^{-1} \in H}(a * a^{-1} = e = a^{-1} * a)))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $SubgroupEquivOST \abr \forall_{H, G}((Subgroup[H, G, *]) \iff ((Group[G, *]) \land (\emptyset \neq H \subseteq G) \land (\forall_{a, b \in H}(a * b^{-1} \in H))))$
 \begin{enumerate}
   \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $SubgroupIntersection \abr \forall_{H_1, H_2, G}(((Subgroup[H_1, G, *]) \land (Subgroup[H_2, G, *])) \implies (Subgroup[H_1 \cap H_2, G, *]))$
 \begin{enumerate}
@@ -426,7 +473,7 @@ $SubgroupIntersection \abr \forall_{H_1, H_2, G}(((Subgroup[H_1, G, *]) \land (S
   \lit $(a \in H_1 \cap H_2) \implies (a^{-1} \in H_1 \cap H_2)$ \pipe $\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a)$
   \lit $(SubgroupEquiv) \land (Group[G, *]) \land (\emptyset \neq H_1 \cap H_2 \subseteq G) \land (Function[*, H_1 \cap H_2, H_1 \cap H_2]) \land$ \cont
   \lit \cont $(\forall_{a \in H_1 \cap H_2} \exists_{a^{-1} \in H_1 \cap H_2}(a * a^{-1} = e = a^{-1} * a))$ \pipe $Subgroup[H_1 \cap H_2, G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Centralizer[C(g), g, G, *] \abr (Group[G, *]) \land (g \in G) \land (C(g) = \{h \in G \st g * h = h * g\})$ \\
 
@@ -447,14 +494,14 @@ $SubgroupCentralizer \abr \forall_{g, G}((Centralizer[C(g), g, G, *]) \implies (
   \end{enumerate}
   \lit $(a \in C(g)) \implies (a^{-1} \in C(g))$ \pipe $\forall_{a \in C(g)}(a^{-1} \in C(g))$
   \lit $(SubgroupEquiv) \land (\emptyset \neq C(g) \subseteq G) \land (\forall_{a, b \in C(g)}(a * b \in C(g))) \land (\forall_{a \in C(g)}(a^{-1} \in C(g)))$ \pipe $Subgroup[C(g), G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Center[Z(G), G, *] \abr (Group[G, *]) \land (Z(G) = \bigcap\limits_{g \in G}(C(g)))$ \\
 
 $SubgroupCenter \abr \forall_{G}((Center[Z(G), G, *]) \implies (Subgroup[Z(G), G, *]))$
 \begin{enumerate}
   \lit $(SubgroupCentralizer) \land (SubgroupIntersection)$ \pipe $Subgroup[Z(G), G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Special Groups}
@@ -485,18 +532,18 @@ $SubgroupOfCyclicGroupIsCyclic \abr \forall_{G, H}(((CyclicGroup[G, *]) \land (S
   \end{enumerate}
   \lit $(b \in <g^m>) \implies (b \in H)$ \pipe $<g^m> \subseteq H$
   \lit $(H \subseteq <g^m>) \land (<g^m> \subseteq H)$ \pipe $H = <g^m>$ \pipe $Generator[g^m, H, *]$ \pipe $\exists_{h \in G}(Generator[h, G, *])$ \pipe $CyclicGroup[H, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ExpModOrder \abr \forall_{G, g, n, s, t}(((Group[G, *]) \land (OrderEl[n, g, G, *])) \implies ((g^s = g^t) \iff (s \equiv t (mod \phantom{.} n))))$
 \begin{enumerate}
   \lit $(s \equiv t (mod \phantom{.} n)) \iff (Divides[n, s - t]) \iff (\exists_{k \in \mathbb{N}}(s - t = k n)) \iff$ \cont
   \lit \cont $(\exists_{k \in \mathbb{N}}(s = k n + t)) \iff (g^{s} = g^{k n + t} = g^{k n} * g^t = e^k * g^t = g^t) \iff (g^s = g^t)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ExpModOrderCorollary \abr \forall_{G, g, n, s, t}(((Group[G, *]) \land (OrderEl[n, g, G, *])) \implies ((g^s = e) \iff (Divides[n, s])))$
 \begin{enumerate}
   \lit $ExpModOrder$ \pipe $(g^s = e) \iff (g^s = g^0) \iff (s \equiv 0 (mod \phantom{.} n)) \iff (Divides[n, s - 0]) \iff (Divides[n, s])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \subsection{Symmetric and Alternating Groups}
@@ -533,7 +580,7 @@ $RightCoset[H g, g, H, G, *] \abr (Subgroup[H, G, *]) \land (g \in G) \land (H g
 $CosetCardinality \abr (RightCoset[H g, g, H, G, *]) \implies (|H| = |H g|)$
 \begin{enumerate}
   \lit $CancellationLaws$ \pipe $(h_1 g = h_2 g) \implies (h_1 = h_2)$ \pipe $|H| = |H g|$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $CosetInduceEqRel \abr \forall_{G, H}(((Subgroup[H, G, *]) \land (\sim = \{\langle a, b \rangle \st a * b^{-1} \in H\})) \implies ((EqRel[\sim, G]) \land (EqClass[H a, a, \sim, G])))$
 \begin{enumerate}
@@ -549,33 +596,33 @@ $CosetInduceEqRel \abr \forall_{G, H}(((Subgroup[H, G, *]) \land (\sim = \{\lang
     \lit $(x \sim a) \iff (x * a^{-1} \in H) \iff (\exists_{h \in H}(x * a^{-1} = h)) \iff (\exists_{h \in H}(x = h * a)) \iff (x \in H a)$
   \end{enumerate}
   \lit $[a] = \{x \in G \st x \sim a\} = H a$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$CosetSet[G : H, H, G, *] \abr (Subgroup[H, G, *]) \land (G : H = \{g H \st g \in G\})$ \\ % similar to QuotientSet
+$CosetSet[G : H, H, G, *] \abr (Subgroup[H, G, *]) \land (G : H = \{g H \st g \in G\})$ \\% similar to QuotientSet
 $IndexSubgroup[|G : H|, H, G, *] \abr (CosetSet[G : H, H, G, *]) \land (|G : H| = |G : H|) \land (|G| = (|H|) (|G : H|))$ \\
 
 $LagrangeTheorem \abr \forall_{G, H}(((Subgroup[H, G, *]) \land (o(G), o(H) \in \mathbb{N})) \implies (o(G) = o(H) |G: H|) \land (Divides[o(H), o(G)])$
 \begin{enumerate}
   \lit $(CosetInduceEqRel) \land (EqRelInducesPartition) \land (CosetCardinality)$ \pipe $(o(G) = o(H) |G: H|) \land (Divides[o(H), o(G)])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $OrderElDivOrder \abr \forall_{g, G}(((Order[n, G, *]) \land (OrderEl[m, g, G, *])) \implies ((Divides[m, n]) \land (g^n = e)))$
 \begin{enumerate}
   \lit $CyclicSubgroup[<g>, g, G, *]$ \pipe $Order[<g>] = m$
   \lit $(LagrangeTheorem) \land (CyclicSubgroup)$ \pipe $Divides[Order[<g>], Order[G]]$ \pipe $Divides[m, n]$
   \lit $g^n = g^{m k} = e ^k = e$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $\text{Any prime ordered cyclic group has no proper non-trivial subgroups and any non-identity element is a generator.}$
 \begin{enumerate}
   \lit $LagrangeTheorem$ \pipe $\text{Subgroups must have the order 1 or p}$ \pipe $\text{Subgroups are trivial}$
   \lit $\text{CyclicSubgroup of a non-identity element is G}$ \pipe $\text{Non-identity elements generates G}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $((Subgroup[H, G, *]) \land (Subgroup[K, G, *] \land (RelPrime(o(H), o(K)))) \implies (H \cap K = \{e\})$
 \begin{enumerate}
   \lit $(LagrangeTheorem) \land (SubgroupIntersection) \land (RelPrime(o(H), o(K)))$ \pipe $H \cap K = \{e\}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Homomorphisms}
@@ -590,12 +637,12 @@ $IdMapsId \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\phi(e_G) = e_H
 \begin{enumerate}
   \lit $\phi(e_G) = \phi(e_G * e_G) = \phi(e_G) \diamond \phi(e_G)$ \pipe $\phi(e_G) = \phi(e_G) \diamond \phi(e_G)$
   \lit $e_H = \phi(e_G)^{-1} \diamond \phi(e_G) = \phi(e_G)^{-1} \diamond (\phi(e_G) \diamond \phi(e_G)) = \phi(e_G)$ \pipe $e_H = \phi(e_G)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $InvMapsInv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\phi(g^{-1}) = \phi(g)^{-1})$
 \begin{enumerate}
   \lit $IdMapsId$ \pipe $e_H = \phi(e_G) = \phi(g * g^{-1}) = \phi(g) \diamond \phi(g^{-1})$ \pipe $e_H = \phi(g) \diamond \phi(g^{-1})$ \pipe $\phi(g^{-1}) = \phi(g)^{-1}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ExpMapsExp \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\forall_{n \in \mathbb{N}^+}(\phi(g^n) = \phi(g)^n))$
 \begin{enumerate}
@@ -611,14 +658,14 @@ $ExpMapsExp \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (\forall_{n \i
   \lit $(\forall_{m \in \mathbb{N}^+}((m \leq n) \implies (\phi(g^m) = \phi(g)^m))) \implies (\phi(g^{n + 1}) = \phi(g)^{n + 1})$
   \lit $((n = 1) \implies (\phi(g^n) = \phi(g)^n)) \land ((\forall_{m \in \mathbb{N}^+}((m \leq n) \implies (\phi(g^m) = \phi(g)^m))) \implies (\phi(g^{n + 1}) = \phi(g)^{n + 1}))$ \cont
   \lit \cont $\forall_{n \in \mathbb{N}^+}(\phi(g^n) = \phi(g)^n)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $MapElDivOrder \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (Order[n, G, *])) \implies (\forall_{g \in G}((OrderEl[m, \phi(g), H, \diamond]) \implies (Divides[m, n])))$
 \begin{enumerate}
   \lit $OrderElDivOrder$ \pipe $g^n = e_G$
   \lit $(IdMapsId) \land (ExpMapsExp)$ \pipe $e_H = \phi(e_G) = \phi(g^n) = \phi(g)^n$ \pipe $\phi(g)^n = e_H$
   \lit $(ExpModOrderCorollary) \land (OrderEl[m, \phi(g), H, \diamond]) \land (\phi(g)^n = e_H)$ \pipe $Divides[m, n]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $MapElDivOrderCorollary \abr ((Monomorphism[\phi, G, *, H, \diamond]) \land (Order[n, G, *])) \implies (\forall_{g \in G}((OrderEl[m, \phi(g), H, \diamond]) \implies (m = n)))$
 \begin{enumerate}
@@ -627,7 +674,7 @@ $MapElDivOrderCorollary \abr ((Monomorphism[\phi, G, *, H, \diamond]) \land (Ord
   \lit $e_H = \phi(e_G) = \phi(g^n)$ \pipe $e_H = \phi(g^n)$
   \lit $(\forall_{g_1, g_2 \in G}((\phi(g_1) = \phi(g_2)) \implies (g_1 = g_2))) \land (e_H = \phi(g^m)) \land (e_H = \phi(g^n))$ \pipe $g^m = g^n$
   \lit $(OrderEl[m, \phi(g), H, \diamond]) \land (Order[n, G, *]) \land (g^m = g^n)$ \pipe $m = n$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $HomoCompHomo \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[\theta, H, \diamond, K, \mathbin{\square}])) \implies (Homomorphism[\theta \circ \phi, G, *, K, \mathbin{\square}])$
 \begin{enumerate}
@@ -639,7 +686,7 @@ $HomoCompHomo \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (Homomorphism[
   \end{enumerate}
   \lit $(g_1, g_2 \in G) \implies (\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \mathbin{\square} \theta \circ \phi(g_2))$ \pipe $\forall_{g_1, g_2 \in G}(\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \mathbin{\square} \theta \circ \phi(g_2))$
   \lit $(Func[\theta \circ \phi, G, K]) \land (\forall_{g_1, g_2 \in G}(\theta \circ \phi(g_1 * g_2) = \theta \circ \phi(g_1) \mathbin{\square} \theta \circ \phi(g_2)))$ \pipe $Homomorphism[\theta \circ \phi, G, *, K, \mathbin{\square}]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $IsoInvIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\phi^{-1}, H, \diamond, G, *])$
 \begin{enumerate}
@@ -652,7 +699,7 @@ $IsoInvIso \abr (Isomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphism[\ph
   \end{enumerate}
   \lit $(x, y \in H) \implies (\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y))$ \pipe $\forall_{x, y \in H}(\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y))$
   \lit $(Bij[\phi^{-1}, H, G]) \land (\forall_{x, y \in H}(\phi^{-1}(x \diamond y) = \phi^{-1}(x) * \phi^{-1}(y)))$ \pipe $Isomorphism[\phi^{-1}, H, \diamond, G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   ((CyclicGroup[G, *]) \hfill \land \hfill (CyclicGroup[H, \diamond]) \hfill \land \hfill (Order[n, G, *]) \hfill \land \hfill (Order[n, H, \diamond])) \hfill \implies \hfill \\
@@ -675,7 +722,7 @@ $KCycleGroupIsomorphic \abr \left(\begin{array}{ll}
   \lit $(g^n, g^m \in G) \implies (\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m))$ \pipe $\forall_{g^n, g^m \in G}(\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m))$
   \lit $(Bij[\phi, G, H]) \land (\forall_{g^n, g^m \in G}(\phi(g^n * g^m) = \phi(g^n) \diamond \phi(g^m)))$ \pipe $Isomorphism[\phi, G, *, H, \diamond]$
   \lit $\exists_{\phi}(Isomorphism[\phi, G, *, H, \diamond])$ \pipe $Isomorphic[G, *, H, \diamond]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 \section{Kernel and Image Homomorphisms}
 $Kernel[ker_\phi, \phi, G, *, H, \diamond] \abr (Homomorphism[\phi, G, *, H, \diamond]) \land (ker_\phi = \{g \in G \st \phi(g) = e_H\})$ \\
@@ -697,7 +744,7 @@ $KernelSubgroupDomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Sub
   \end{enumerate}
   \lit $(a \in ker_\phi) \implies (a^{-1} \in ker_\phi)$ \pipe $\forall_{a \in ker_\phi}(a^{-1} \in ker_\phi)$
   \lit $(SubgroupEquiv) \land (\emptyset \neq ker_\phi \subseteq G) \land (\forall_{a, b \in ker_\phi}(a * b \in ker_\phi)) \land (\forall_{a \in ker_\phi}(a^{-1} \in ker_\phi))$ \pipe $Subgroup[ker_\phi, G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Subgroup[im_\phi, H, \diamond])$
 \begin{enumerate}
@@ -718,14 +765,14 @@ $ImageSubgroupCodomain \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Su
   \end{enumerate}
   \lit $(a \in im_\phi) \implies (a^{-1} \in im_\phi)$ \pipe $\forall_{a \in im_\phi}(a^{-1} \in im_\phi)$
   \lit $(SubgroupEquiv) \land (\emptyset \neq im_\phi \subseteq H) \land (\forall_{a, b \in im_\phi}(a * b \in im_\phi)) \land (\forall_{a \in im_\phi}(a^{-1} \in im_\phi))$ \pipe $Subgroup[im_\phi, H, \diamond]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ImageCyclicIsCyclic \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (CyclicGroup[G, *])) \implies (CyclicGroup[im_\phi, \diamond])$
 \begin{enumerate}
   \lit $CyclicGroup[G, *]$ \pipe $\exists_{r \in G}(Generator[r, G, *])$ \pipe $G = <r> = \{{r}^n \st n \in \mathbb{Z}\}$
   \lit $ExpMapsExp$ \pipe $im_\phi = \{\phi(g) | g \in G\} = \{\phi(r^n) | n \in \mathbb{Z}\} = \{\phi(r)^n | n \in \mathbb{Z}\} = <\phi(r)>$
   \lit $Generator[\phi(r), im_\phi, \diamond]$ \pipe $\exists_{s \in im_\phi}(Generator[s, im_\phi, \diamond])$ \pipe $CyclicGroup[im_\phi, \diamond]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $HomoInjEquiv \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies ((Inj[\phi, G, H]) \iff (ker_\phi = \{e_G\}))$
 \begin{enumerate}
@@ -768,7 +815,7 @@ $KerMultiplicityMap \abr ((Homomorphism[\phi, G, *, H, \diamond]) \land (g \in G
   \end{enumerate}
   \lit $((x \in G) \land (\phi(x) = \phi(g))) \implies (x \in (ker_\phi) g)$ \pipe $\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g$
   \lit $((ker_\phi) g \subseteq \{x \in G \st \phi(x) = \phi(g)\}) \land (\{x \in G \st \phi(x) = \phi(g)\} \subseteq (ker_\phi) g)$ \pipe $(ker_\phi) g = \{x \in G \st \phi(x) = \phi(g)\}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (|G| = |ker_\phi| |im_\phi|)$
 \begin{enumerate}
@@ -776,13 +823,13 @@ $KerImPartitionsG \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (|G| = |
   \lit $\mathcal{G} = \{[g] | g \in G\}$ \pipe $(Partition[\mathcal{G}, G]) \land (|\mathcal{G}| = |im_\phi|)$
   \lit $KerMultiplicityMap$ \pipe $\forall_{g \in G}(|[g]| = |ker_\phi|)$
   \lit $Partition[\mathcal{G}, G]$ \pipe $|G| = |\mathcal{G}| |ker_\phi| = |im_\phi| |ker_\phi|$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ImDivDomCod \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies ((Divides[|im_\phi|, |G|]) \land (Divides[|im_\phi|, |H|]))$
 \begin{enumerate}
   \lit $KerImPartitionsG$ \pipe \pipe $|G| = |ker_\phi| |im_\phi|$ \pipe $Divides[|im_\phi|, |G|]$
   \lit $(LagrangeTheorem) \land (ImageSubgroupCodomain)$ \pipe $|H| = |im_\phi| |H : im_\phi|$ $Divides[|im_\phi|, |H|]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Conjugacy}
@@ -798,14 +845,14 @@ $ConjugateEqRel \abr EqRel[\sim^*, G]$
     \lit \cont $(c = x_{c}^{-1} * x_{b}^{-1} * a * x_{b} * x_{c} = (x_{b} * x_{c})^{-1} * a * (x_{b} * x_{c}))$ \pipe $a \sim^* c$
   \end{enumerate}
   \lit $EqRel[\sim^*, G]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugacyClass[C_g, g, G, *] \abr (Group[G, *]) \land (g \in G) \land (EqClass[C_g, g, \sim^*, G])$ \\
 
 $ConjugacyClassEquiv \abr (ConjugacyClass[C_g, g, G, *]) \iff (\forall_{x \in G}((x \in C_g) \iff (\exists_{c \in G}(x = c^{-1} g c))))$
 \begin{enumerate}
   \lit By ConjugateEqRel and the definitions of ConjugacyClass, Conjugate
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugacyCenter \abr (g \in G) \implies ((C_g = \{g\}) \iff (g \in Z(G)))$
 \begin{enumerate}
@@ -834,12 +881,12 @@ $ConjugacyCenter \abr (g \in G) \implies ((C_g = \{g\}) \iff (g \in Z(G)))$
   %\lit $ConjugacyClassEquiv$ \pipe $(g \in Z(g)) \iff (\forall_{c \in G}(c * g = g * c)) \iff (\forall_{c \in G}(g = c^{-1} * g * c)) \iff$ \cont
   %\lit \cont $(\forall_{x \in G}((x \neq g) \iff (\forall_{c \in G}(x \neq c^{-1} * g * c)))) \iff$ \cont
   %\lit \cont $(\forall_{x \in G}((x \in \{g\}) \iff (\exists_{c \in G}(x = c^{-1} * g * c)))) \iff (C_g = \{g\})$ \pipe $(C_g = \{g\}) \iff (g \in Z(G))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugacyAbelian \abr (\forall_{g \in G}(C_g = \{g\})) \iff (AbelianGroup[G, *])$
 \begin{enumerate}
   \lit $ConjugacyCenter$ \pipe $(\forall_{g \in G}(C_g = \{g\})) \iff (\forall_{g \in G}(g \in Z(g))) \iff (AbelianGroup[G, *])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugateExp \abr \forall_{n \in \mathbb{N}^+}((x^{-1} g x)^n = x^{-1} g^n x)$
 \begin{enumerate}
@@ -854,7 +901,7 @@ $ConjugateExp \abr \forall_{n \in \mathbb{N}^+}((x^{-1} g x)^n = x^{-1} g^n x)$
   \end{enumerate}
   \lit $((n > 1) \land (\forall_{m \in \mathbb{N}^+}((m \leq n) \implies ((x^{-1} g x)^m = x^{-1} g^m x)))) \implies ((x^{-1} g x)^{n + 1} = x^{-1} g^{n + 1} x)$
   \lit $\forall_{n \in \mathbb{N}^+}((x^{-1} g x)^n = x^{-1} g^n x)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugateOrder \abr ((g_1, g_2 \in G) \land (g_1 \sim^* g_2)) \implies (o(g_1) = o(g_2))$
 \begin{enumerate}
@@ -889,7 +936,7 @@ $CentralizerConjugateCosets \abr \forall_{c, g, h \in G}((h = c^{-1} g c) \impli
   \end{enumerate}
   \lit $(a \in C(h)) \implies (a \in c^{-1} C(g) c)$ \pipe $C(h) \subseteq c^{-1} C(g) c$
   \lit $(c^{-1} C(g) c \subseteq C(h)) \land (C(h) \subseteq c^{-1} C(g) c)$ \pipe $C(h) = c^{-1} C(g) c$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConjugatesMultiplicity \abr (g \in G) \implies (o(G) = o(C(g)) |C_g|)$
 \begin{enumerate}
@@ -903,7 +950,7 @@ $ConjugatesMultiplicity \abr (g \in G) \implies (o(G) = o(C(g)) |C_g|)$
   \lit \cont $(Func[\phi, C_g, G : C(g)]) \land (Inj[\phi, C_g, G : C(g)]) \land (Surj[\phi, C_g, G : C(g)])$ \pipe $Bij[\phi, C_g, G : C(g)]$ % TODO ANALYZE
   \lit $\exists_{\phi}(Bij[\phi, C_g, G : C(g)])$ \pipe $|C_g| = |G : C(g)|$
   \lit $(LagrangeTheorem) \land (SubgroupCenter) \land (|C_g| = |G : C(g)|)$ \pipe $o(G) = o(C(g)) |G : C(g)|$ \pipe $o(G) = o(C(g)) |C_g|$ 
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Normal Subgroups}
@@ -918,7 +965,7 @@ $CenterNormalSubgroup \abr NormalSubgroup[Z(G), G, *]$
   \end{enumerate}
   \lit $((h \in Z(G)) \land (g \in G)) \implies (g^{-1} h g \in Z(G))$ \pipe $\forall_{h \in Z(G)} \forall_{g \in G}(g^{-1} h g \in Z(G))$
   \lit $(Subgroup[Z(G), G, *]) \land (\forall_{h \in Z(G)} \forall_{g \in G}(g^{-1} h g \in Z(G)))$ \pipe $NormalSubgroup[Z(G), G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies (H = \bigcup\limits_{z \in H}(C_z))$
 \begin{enumerate}
@@ -950,19 +997,19 @@ $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies (H 
   %  \lit $(Subgroup[H, G, *]) \land (\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H))$ \pipe $NormalSubgroup[H, G, *]$
   %\end{enumerate}
   %\lit 
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $NormalSubgroupCosetEquiv \abr (NormalSubgroup[H, G, *]) \iff (\forall_{g \in G}(g H = H g))$
 \begin{enumerate}
   \lit $CosetCardinality$ \pipe $\forall_{g \in G}(|H g| = |g H|)$ \pipe $(\forall_{g \in G}((H g \subseteq g H) \iff (H g = g H)))$
   \lit $(\forall_{g \in G}((H g \subseteq g H) \iff (H g = g H)))$ \pipe $(NormalSubgroup[H, G, *]) \iff (\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)) \iff$ \cont
   \lit \cont $(\forall_{h \in H} \forall_{g \in G}(h g \in g H)) \iff (\forall_{g \in G}(H g \subseteq g H)) \iff (\forall_{g \in G}(H g = g H))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $NormalSubgroupIndexEquiv \abr (NormalSubgroup[H, G, *]) \iff (IndexSubgroup[2, H, G, *])$
 \begin{enumerate}
   \lit $NormalSubgroupCosetEquiv$ \pipe $(IndexSubgroup[2, H, G, *]) \iff (\forall_{g \in G}(g H = H g)) \iff (NormalSubgroup[H, G, *])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $KerInduceNormalSubgroup \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (NormalSubgroup[ker_\phi, G, *])$
 \begin{enumerate}
@@ -975,7 +1022,7 @@ $KerInduceNormalSubgroup \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (
   \end{enumerate}
   \lit $((h \in ker_\phi) \land (g \in G)) \implies (g^{-1} h g \in ker_\phi)$ \pipe $\forall_{h \in ker_\phi} \forall_{g \in G}(g^{-1} h g \in ker_\phi)$
   \lit $(Subgroup[ker_\phi, G, *]) \land (\forall_{h \in ker_\phi} \forall_{g \in G}(g^{-1} h g \in ker_\phi))$ \pipe $NormalSubgroup[ker_\phi, G, *]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 \section{Quotient Groups}
@@ -1004,7 +1051,7 @@ $QuotientGroupLemma \abr ((NormalSubgroup[H, G, *]) \land (x, y, z \in G)) \impl
   \lit $(\exists_{h_3 \in H}(z = h_3 x y)) \implies (\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y))$
   \lit $((\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)) \implies (\exists_{h_3 \in H}(z = h_3 x y))) \land ((\exists_{h_3 \in H}(z = h_3 x y)) \implies (\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)))$
   \lit $(\exists_{h_1, h_2 \in H}(z = h_1 x h_2 y)) \iff (\exists_{h_3 \in H}(z = h_3 x y))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $QuotientGroupThm \abr \left(\begin{array}{ll}
   ((NormalSubgroup[H, G, *]) \hfill \land \hfill (QuotientSet[G / H, H, G, *]) \hfill \land \hfill (CosetMul[\bbin{*}, x, y, H, G, *])) \hfill \implies \hfill \\
@@ -1034,7 +1081,7 @@ $QuotientGroupThm \abr \left(\begin{array}{ll}
   \lit $(H x \in G / H) \implies (\exists_{H x^{-1} \in G / H}(H x \bbin{*} H x^{-1} = H e = H x^{-1} \bbin{*} H x))$ \pipe $\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bbin{*} a^{-1} = e = a^{-1} \bbin{*} a)$
   \lit $(Func[\bbin{*}, G / H, G / H]) \land (\forall_{a, b, c \in G / H}((a \bbin{*} b) \bbin{*} c = a \bbin{*} (b \bbin{*} c))) \land (\exists_{e \in G / H} \forall_{a \in G / H}(a \bbin{*} e = a = e \bbin{*} a)) \land$ \cont
   \lit \cont $(\forall_{a \in G / H} \exists_{a^{-1} \in G / H}(a \bbin{*} a^{-1} = e = a^{-1} \bbin{*} a))$ \pipe $Group[G / H, \bbin{*}]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $NaturalMap[\bar{\phi}, H, G, *] \abr (\bar{\phi} = \{\langle g, H g \rangle \in (G, G / H) \st g \in G\}) \land (NormalSubgroup[H, G, *])$ \\
 
@@ -1052,7 +1099,7 @@ $NaturalMapHomo \abr (NaturalMap[\bar{\phi}, H, G, *]) \implies (Homomorphism[\b
 $NaturalMapKerH \abr (NaturalMap[\bar{\phi}, H, G, *]) \implies (ker_{\bar{\phi}} = H)$
 \begin{enumerate}
   \lit $Group[H, *]$ \pipe $ker_{\bar{\phi}} = \{x \in G \st \bar{\phi}(x) = H e\} = \{x \in G \st H x = H\} = H$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $FirstMap[\psi, \phi, G, *, H, \diamond] \abr (\psi = \{\langle ker_\phi g, \phi(g) \rangle \in (G / ker_\phi \times im_\phi) \st g \in G\}) \land (Homomorphism[\phi, G, *, H, \diamond])$ \\
 
@@ -1076,7 +1123,7 @@ $FirstIsoThm \abr (Homomorphism[\phi, G, *, H, \diamond]) \implies (Isomorphic[G
   \lit $(ker_\phi g, ker_\phi h \in G / ker_\phi) \implies (\psi(ker_\phi g \bbin{*} ker_\phi h) = \psi(ker_\phi g) \diamond \psi(ker_\phi h))$ \pipe $\forall_{a, b \in G / ker_\phi}(\psi(a \bbin{*} b) = \psi(a) \diamond \psi(b))$
   \lit $(Group[G / ker_\phi, \bbin{*}]) \land (Group[im_\phi, \diamond]) \land (Bij[\psi, G / ker_\phi, im_\phi]) \land (\forall_{a, b \in G / ker_\phi}(\psi(a \bbin{*} b) = \psi(a) \diamond \psi(b)))$
   \lit $Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond]$ \pipe $\exists_{\psi}(Isomorphism[\psi, G / ker_\phi, \bbin{*}, im_\phi, \diamond])$ \pipe $Isomorphic[G / ker_\phi, \bbin{*}, im_\phi, \diamond]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $SecondIsoLemma \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implies ((Group[(H N) / N, \bbin{*}]) \land (Group[H / (H \cap N), \bbin{*}]))$
 \begin{enumerate}
@@ -1119,7 +1166,7 @@ $SecondIsoLemma \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \impl
   \lit $(Subgroup[H \cap N, H, *]) \land (\forall_{x \in H \cap N} \forall_{h \in H}(h^{-1} x h \in H \cap N))$ \pipe $NormalSubgroup[H \cap N, H, *]$
   \lit $(Group[H N, *]) \land (NormalSubgroup[N, H N, *]) \land (Group[H, *]) \land (NormalSubgroup[H \cap N, H, *])$
   \lit $QuotientGroupThm$ \pipe $(Group[(H N) / N, \bbin{*}]) \land (Group[H / (H \cap N), \bbin{*}])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $SecondMap[\phi, H, N, G, *] \abr (\phi = \{\langle h, h N \rangle \in (H \times (H N) / N) \st h \in H\}) \land (Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])$ \\
 
@@ -1142,7 +1189,7 @@ $SecondIsoThm \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \implie
   \lit $im_\phi = \{\phi(h) \st h \in H\} = \{h N \st h \in H\} = (H N) / N$ \pipe $im_\phi = (H N) / N$
   \lit $(FirstMapThm) \land (Homomorphism[\phi, H, *, (H N) / N, \bbin{*}])$ \pipe $Isomorphic[H / ker_\phi, \bbin{*}, im_\phi, \bbin{*}]$
   \lit $(ker_\phi = H \cap N) \land (im_\phi = (H N) / N) \land (Isomorphic[H / ker_\phi, \bbin{*}, im_\phi, \bbin{*}])$ \pipe $Isomorphic[H / (H \cap N), \bbin{*}, (H N) / N, \bbin{*}]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ThirdMap[\phi, K, H, G, *] \abr \left(\begin{array}{ll}
   (\phi = \{\langle g K, g H \rangle \in ((G / K) \times (G / H)) \st g \in G\}) \hfill \land \hfill \\
@@ -1181,7 +1228,7 @@ $ThirdIsoThm \abr \left(\begin{array}{ll}
   \lit $(SurjEquiv) \land (Surj[\phi, G / K, G / H])$ \pipe $im_\phi = G / H$
   \lit $(FirstMapThm) \land (Homomorphism[\phi, G / K, \bbin{*}, G / H, \bbin{*}])$ \pipe $Isomorphic[(G / K) / ker_\phi, \bbin{*}, im_\phi, \bbin{*}]$
   \lit $(ker_\phi = H / K) \land (im_\phi = G / H) \land (Isomorphic[(G / K) / ker_\phi, \bbin{*}, im_\phi, \bbin{*}])$ \pipe $Isomorphic[(G / K) / (H / K), \bbin{*}, G / H, \bbin{*}]$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
