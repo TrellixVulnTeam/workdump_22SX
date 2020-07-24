@@ -134,7 +134,7 @@ $Isomorphic[H, G] \text{\ or\ } H \cong G \abr \exists_{\phi}((Bijection[\phi, V
 
 $SizeOrderN \abr ((Graph[G]) \land (n = |G|) \land (m = e(G))) \implies (0 \leq m \leq {n \choose 2})$ \\
 \begin{enumerate}
-  \lit $0 \leq m \leq \sum_{i = 0}^{n - 1}(i) = \frac{(n-1)(n)}{2} = {n \choose 2}$
+  \lit $0 \leq m \leq \sum \limits_{i = 0}^{n - 1}(i) = \frac{(n-1)(n)}{2} = {n \choose 2}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $CompleteGraph[K_n, n] \abr (|K_n| = n) \land (e(K_n) = {n \choose 2})$ \\
@@ -143,68 +143,70 @@ $TrivialGraph[G] \abr G = K_1 = E_1$ \\
 $ComplementGraph[\bar{G}, G] \abr \bar{G} = (V, V^{\{2\}} \setminus (E \cup \{\utup{x, x} \st x \in V(G)\}))$ \\
 $OpenNbhd[\Gamma_G(x), x, G] \abr \Gamma_G(x) = \{y \in V(G) \st AdjacentV[(y, x), G]\}$ \\
 $ClosedNbhd[\Gamma_G^*(x), x, G] \abr (OpenNbhd[\Gamma_G(x), x, G]) \land (\Gamma_G^*(x) = \Gamma_G(x) \cup \{x\})$ \\
-$Degree[d_G(x), x, G] \abr d_G(x) = |\Gamma_G(x)|$ \\
-$MinDegree[\delta(G), G] \abr \delta(G) = min(\{d_G(x) \st x \in V(G)\})$ \\
-$MaxDegree[\Delta(G), G] \abr \Delta(G) = max(\{d_G(x) \st x \in V(G)\})$ \\
-$IsolatedV[v, G] \abr d_G(v) = 0$ \\
+$Degree[d(x), x, G] \abr d(x) = |\Gamma_G(x)|$ \\
+$MinDegree[\delta(G), G] \abr \delta(G) = min(\{d(x) \st x \in V(G)\})$ \\
+$MaxDegree[\Delta(G), G] \abr \Delta(G) = max(\{d(x) \st x \in V(G)\})$ \\
+$IsolatedV[v, G] \abr d(v) = 0$ \\
 $KRegularGraph[G, k] \abr k = \delta(G) = \Delta(G)$ \\
 $RegularGraph[G] \abr \exists_{k \in \mathbb{N}}(KRegularGraph[G, k])$ \\
-$DegreeSequence[(d_G(x_i))_1^n, G] \abr (Order[n, G]) \land (((d_G(x_i))_1^n) = sort(\{d_G(x) \st x \in V(G)\})) \land (\delta(G) = d_G(x_1) \leq d_G(x_n) = \Delta(G))$ \\
+$DegreeSequence[(d(x_i))_1^n, G] \abr (Order[n, G]) \land (((d(x_i))_1^n) = sort(\{d(x) \st x \in V(G)\})) \land (\delta(G) = d(x_1) \leq d(x_n) = \Delta(G))$ \\
 
-$SumDegrees \abr \sum_{v \in V(G)}(d_G(v)) = 2 e(G)$ \\
+$SumDegrees \abr \sum \limits_{v \in V(G)}(d(v)) = 2 e(G)$ \\
 \begin{enumerate}
-  \lit $\sum_{v \in V(G)}(d_G(v)) = \sum_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)| = 2 e(G)$ \\
+  \lit $\sum \limits_{v \in V(G)}(d(v)) = \sum \limits_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)| = 2 e(G)$ \\
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$HandshakingLemma \abr \sum_{v \in V(G)}(d_G(v)) \equiv 0 \pmod{2}$ \\
+$HandshakingLemma \abr \sum \limits_{v \in V(G)}(d(v)) \equiv 0 \pmod{2}$ \\
 \begin{enumerate}
-  \lit SumDegrees \pipe $\sum_{v \in V(G)}(d_G(v)) = 2 e(G)$ \pipe $\exists_{k \in \mathbb{Z}}(\sum_{v \in V(G)}(d_G(v)) - 0 = 2 k)$ \pipe $\sum_{v \in V(G)}(d_G(v)) \equiv 0 \pmod{2}$
+  \lit SumDegrees \pipe $\sum \limits_{v \in V(G)}(d(v)) = 2 e(G)$ \pipe $\exists_{k \in \mathbb{Z}}(\sum \limits_{v \in V(G)}(d(v)) - 0 = 2 k)$ \pipe $\sum \limits_{v \in V(G)}(d(v)) \equiv 0 \pmod{2}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$DegreeCorollaries \abr (Even(|\{v \in V(G) \st Odd(d_G(v))\}|)) \land (\delta(G) \leq \floor{2 e(G) / n}) \land (\Delta(G) \geq \ceil{2 e(G) / n})$
+$DegreeCorollaries \abr (Even(|\{v \in V(G) \st Odd(d(v))\}|)) \land (\delta(G) \leq \floor{2 e(G) / n}) \land (\Delta(G) \geq \ceil{2 e(G) / n})$
 \begin{enumerate}
-  \lit $HandshakingLemma$ \pipe $Even(|\{v \in V(G) \st Odd(d_G(v))\}|)$
+  \lit $HandshakingLemma$ \pipe $Even(|\{v \in V(G) \st Odd(d(v))\}|)$
   \lit $SumDegrees$ \pipe $(\delta(G) \leq \floor{2 e(G) / n}) \land (\Delta(G) \geq \ceil{2 e(G) / n})$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Walk[W, G] \abr (\forall_{i \in \mathbb{N}_1^{|W|}}(w_i \in V(G))) \land (\forall_{i \in \mathbb{N}_1^{|W| - 1}}(\utup{v_i, v_{i + 1}} \in E(G)))$ \\
-$WalkEV[(x, y), (W, G)] \abr (Path[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
-$WalkL[l, (W, G)] \abr (Path[W, G]) \land (l = |W| - 1)$ \\
+$WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
+$WalkL[l, (W, G)] \abr (Walk[W, G]) \land (l = |W| - 1)$ \\
 $Trail[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}((i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})))$ \\
-$Path[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W|}}((i \neq j) \implies (w_i \neq w_j)))$ \\
+$PathW[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W|}}((i \neq j) \implies (w_i \neq w_j)))$ \\
 
 $ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
 $Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
-$Cycle[W, G] \abr (ClosedWalk[W, G]) \land (\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})) \land (\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}((i \neq j) \implies (w_i \neq w_j))) \land (|W| - 1 \geq 3)$ \\
-$CycleE[E, (W, G)] \abr (Cycle[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
-$EvenCycle[W, G] \abr (Cycle[W, G]) \land (Even(|W| - 1))$ \\
-$OddCycle[W, G] \abr (Cycle[W, G]) \land (Odd(|W| - 1))$ \\
-$Triangle[W, G] \abr (Cycle[W, G]) \land (|W| - 1 = 3)$ \\
+$CycleW[W, G] \abr (ClosedWalk[W, G]) \land (\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})) \land (\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}((i \neq j) \implies (w_i \neq w_j))) \land (|W| - 1 \geq 3)$ \\
+$CycleE[E, (W, G)] \abr (CycleW[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
+$EvenCycle[W, G] \abr (CycleW[W, G]) \land (Even(|W| - 1))$ \\
+$OddCycle[W, G] \abr (CycleW[W, G]) \land (Odd(|W| - 1))$ \\
+$Triangle[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
 
 $IndependentV[V, G] \abr \forall_{x, y \in V}(\lnot AdjacentV[(x, y), G])$ \\
 $IndependentE[E, G] \abr \forall_{a, b \in E}(\lnot AdjacentE[(a, b), G])$ \\
 $IndependentPath[\mathcal{P}, G] \abr \exists_{x, y \in V(G)} \forall_{P, Q \in \mathcal{P}}((P \neq Q) \implies (V(P) \cap V(Q) = \utup{x, y}))$ \\
-$IndependentVEquiv \abr IndependentV \iff SubgraphInducedByV[] \cong E_n$
+$IndependentVEquiv \abr IndependentV \iff (SubgraphInducedByV[] \cong E_n)$ \\
 
-$PathG[P_n, n] \abr (V(P_n) = \{x_i \st i \in \mathbb{N}_1^{n}\}) \land (E(P_n) = \{\utup{x_i, x_{i + 1}} \st i \in \mathbb{N}_1^{n - 1}\})$ \\
+$Path[P, V] \abr (V(P) = V) \land (E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\})$ \\
 $CycleG[C_n, n] \abr (V(C_n) = V(P_ n)) \land (E(C_n) = E(P_n) \cup \{\utup{x_n, x_1}\})$ \\
+$PathInG[P, V, G] \abr (Path[P, V]) \land (V \subseteq V(G))$ \\
+$PathXY[P, (x, y), V, G] \abr (PathInG[P, V, G]) \land ((v_1, v_{|V|}) = (x, y))$ \\
 
-$CyclePartition \abr (\forall_{v \in V(G)}(Even(d_G(v)))) \iff (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$ \\
+$CyclePartition \abr (\forall_{v \in V(G)}(Even(d(v)))) \iff (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$ \\
 \begin{enumerate}
   \lit $(\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)]))) \implies \ldots$
   \begin{enumerate}
-    \lit $\forall_{v \in V(G)}(d_G(v) = 2 * |\{v \st (C \in \mathcal{C}) \land (v \in C)\})|$ \pipe $\forall_{v \in V(G)}(Even(d_G(v)))$
+    \lit $\forall_{v \in V(G)}(d(v) = 2 * |\{v \st (C \in \mathcal{C}) \land (v \in C)\})|$ \pipe $\forall_{v \in V(G)}(Even(d(v)))$
   \end{enumerate}
-  \lit $(\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)]))) \implies (\forall_{v \in V(G)}(Even(d_G(v))))$
-  \lit $(\forall_{v \in V(G)}(Even(d_G(v)))) \implies \ldots$
+  \lit $(\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)]))) \implies (\forall_{v \in V(G)}(Even(d(v))))$
+  \lit $(\forall_{v \in V(G)}(Even(d(v)))) \implies \ldots$
   \begin{enumerate}
     \lit $(e(G) = 0) \implies (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
     \lit $(e(G) \neq 0) \implies \ldots$
     \begin{enumerate}
-      \lit $(e(G) > 0) \land (\forall_{v \in V(G)}(Even(d_G(v))))$ \pipe $\exists_{x_0 \in V(G)}(d_G(x_0) \geq 2)$
-      \lit There exists a PathG $P$ of maximal length with endvertices $(x_0, x_l)$.
-      \lit $(d_G(x_0) \geq 2)$ \pipe Let $y$ be another vertex adjacent to $x_0$ that is not $x_1$.
-      \lit If $y$ is not in $P$, then $P$ is not a maximal PathG - contradiction.
+      \lit $(e(G) > 0) \land (\forall_{v \in V(G)}(Even(d(v))))$ \pipe $\exists_{x_0 \in V(G)}(d(x_0) \geq 2)$
+      \lit There exists a Path $P$ of maximal length with endvertices $(x_0, x_l)$.
+      \lit $(d(x_0) \geq 2)$ \pipe Let $y$ be another vertex adjacent to $x_0$ that is not $x_1$.
+      \lit If $y$ is not in $P$, then $P$ is not a maximal Path - contradiction.
       \lit Thus $y$ is in $P$, and $P$ contains a cycle $C$.
       \lit Let $G' = G - E(C)$. \pipe $(\forall_{v \in V(G')}(Even(d_{G'}(v))))$ \pipe Repeat on $G'$ until all disjoint cycles $\mathcal{C}$ are found.
       \lit $\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)]))$
@@ -212,31 +214,65 @@ $CyclePartition \abr (\forall_{v \in V(G)}(Even(d_G(v)))) \iff (\exists_{\mathca
     \lit $(e(G) \neq 0) \implies (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
     \lit $\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)]))$
   \end{enumerate}
-  \lit $(\forall_{v \in V(G)}(Even(d_G(v)))) \implies (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
-  \lit $(\forall_{v \in V(G)}(Even(d_G(v)))) \iff (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
+  \lit $(\forall_{v \in V(G)}(Even(d(v)))) \implies (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
+  \lit $(\forall_{v \in V(G)}(Even(d(v)))) \iff (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-% https://brilliant.org/wiki/cauchy-schwarz-inequality/
-p. 21
+$MantelThm \abr ((|G| = n) \land (e(G) > \floor{n^2 / 4})) \implies (\exists_{W}(Triangle[W, G]))$
+\begin{enumerate}
+  \lit $(\lnot \exists_{W}(Triangle[W, G])) \implies \ldots$
+  \begin{enumerate}
+    \lit $\lnot \exists_{W}(Triangle[W, G])$ \pipe $\forall_{\utup{x, y} \in E(G)}(\Gamma(x) \cap \Gamma(y) = \emptyset)$ \pipe $\forall_{\utup{x, y} \in E(G)}(d(x) + d(y) \leq n)$
+    \lit $\sum \limits_{\utup{x, y} \in E(G)}^{ }(d(x) + d(y)) \leq n (e(G))$
+    \lit $\sum \limits_{\utup{x, y} \in E(G)}^{ }(d(x) + d(y)) = \sum \limits_{v \in V(G)}^{ }((d(v))^2)$
+    \lit $\sum \limits_{v \in V(G)}^{ }((d(v))^2) \leq n (e(G))$ \pipe $n \sum \limits_{v \in V(G)}^{ }((d(v))^2) \leq n^2 (e(G))$
+    \lit $(SumDegrees) \land (CauchysInequality)$ \pipe $(2 e(G))^2 = (\sum \limits_{v \in V(G)}(d(v)))^2 \leq \sum \limits_{v \in V(G)}(d(v))^2$ % https://brilliant.org/wiki/cauchy-schwarz-inequality/
+
+    \lit $(2 e(G))^2 \leq n^2 (e(G))$ \pipe $e(G) \leq n^2 /4$
+    \lit $(e(G) > \floor{n^2 / 4}) \land (e(G) \leq n^2 /4)$ \pipe $\bot$
+  \end{enumerate}
+  \lit $(\lnot \exists_{W}(Triangle[W, G])) \implies (\bot)$ \pipe $\exists_{W}(Triangle[W, G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$Distance[d(x, y), x, y, G] \abr d(x, y) = min(\{e(P) \st \exists_{V}(PathXY[P, (x, y), V G])\})$ \\
+
+$DistanceMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies 
+\left(\begin{array}{ll}
+  (d(x, y) \geq 0) \hfill \land \hfill \\
+  ((d(x, y) = 0) \iff (x = y)) \hfill \land \hfill \\
+  (d(x, y) = d(y, x)) \hfill \land \hfill \\
+  (d(x, y) + d(y, z) \geq d(x, z)) \\
+\end{array}\right)}$ \\
+\begin{enumerate}
+  \lit By definition of cardinality and sets, $(d(x, y) \geq 0) \land (d(x, y) = 0 \iff (x = y))$
+  \lit By cases:
+  \begin{enumerate}
+    \lit If $y \in [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
+    \lit If $y \notin [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
+  \end{enumerate}
+  \lit By cases, $d(x, y) + d(y, z) \geq d(x, z)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$ConnectedV[(x, y), G] \abr \exists_{P, V}(PathXY[P, (x, y), V, G])$ \\
+$ConnectedG[G] \abr \forall_{x, y \in V(G)}((x \neq y) \implies (ConnectedV[(x, y), G]))$ \\
+$Component[C, G] \abr (Subgraph[C, G]) \land (\lnot \exists_{D}((Subgraph[D, G]) \land (Subgraph[C, D])))$ \\
+page 21
 
 %%%%%%%%%%%%
 
 $Girth[G] \abr min(\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\})$ \\
 $Circumference[G] \abr max(\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\})$ \\
 
-$ConnectedV[(x, y), G] \abr \exists_{n, V_n}((Path[V_n, n, G]) \land ((x, y) = (v_1, v_{n + 1})))$ \\
-$Connected[G] \abr \forall_{x, y \in V(G)}(ConnectedV[(x, y), G])$ \\
-$Component[C, G] \abr (Subgraph[C, G]) \land (\forall_{c \in V(C)} \forall_{g \in V(G)}((g \notin V(C)) \implies (\lnot ConnectedV[(g, c), G])))$ \\
 
-$Degree[d_G(v), v, G] \abr d_G(v) = |\{e \in E(G) | v \in e\}|$ \\
-$Regular[G, r] \abr \forall_{v \in V(G)}(d_G(v) = r)$ \\
+$Degree[d(v), v, G] \abr d(v) = |\{e \in E(G) | v \in e\}|$ \\
+$Regular[G, r] \abr \forall_{v \in V(G)}(d(v) = r)$ \\
 
-$SumDeg \abr \sum_{v \in V(G)}(d_G(v)) = 2 |E(G)|$ \\
+$SumDeg \abr \sum \limits_{v \in V(G)}(d(v)) = 2 |E(G)|$ \\
 \begin{enumerate}
-  \lit $\sum_{v \in V(G)}(d_G(v)) = \sum_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)|$ \\
+  \lit $\sum \limits_{v \in V(G)}(d(v)) = \sum \limits_{v \in V(G)}(|\{e \in E(G) | v \in e\}|) = 2 |E(G)|$ \\
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$OddDeg \abr Even(|\{v \st Odd(d_G(v))\}|)$ \\
+$OddDeg \abr Even(|\{v \st Odd(d(v))\}|)$ \\
 \begin{enumerate}
   \lit SumDeg
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
@@ -261,25 +297,9 @@ $SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
-$Distance[d_G(x, y), x, y, G] \abr d_G(x, y) = min({n \in \mathbb{N} \st (\exists_{V_n}(Path[V_n, n, G]) \land ((v_1, v_{n + 1}) = (x, y)))})$ \\
-$DMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies 
-\left(\begin{array}{ll}
-  (d_G(x, y) \geq 0) \hfill \land \hfill \\
-  ((d_G(x, y) = 0) \iff (x = y)) \hfill \land \hfill \\
-  (d_G(x, y) = d(y, x)) \hfill \land \hfill \\
-  (d_G(x, y) + d_G(y, z) \geq d_G(x, z)) \\
-\end{array}\right)}$ \\
-\begin{enumerate}
-  \lit By definition of cardinality and sets, $d_G(x, y) \geq 0$, $(d_G(x, y) = 0) \iff (x = y)$, $d_G(x, y) = d(y, x)$
-  \lit By cases:
-  \begin{enumerate}
-    \lit If $y \in [ShortestPath[x, z]]$, then $d_G(x, y) + d(y, z) = d_G(x, z)$
-    \lit If $y \notin [ShortestPath[x, z]]$, then $d_G(x, y) + d(y, z) > d_G(x, z)$
-  \end{enumerate}
-  \lit By cases, $d_G(x, y) + d_G(y, z) \geq d_G(x, z)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$GraphPower[G^r, r, G] \abr (V = V(G)) \land (E = \{\utup{x, y} \st d_G(x, y) \leq r\}) \land (G^r = (V, E))$ \\
+
+$GraphPower[G^r, r, G] \abr (V = V(G)) \land (E = \{\utup{x, y} \st d(x, y) \leq r\}) \land (G^r = (V, E))$ \\
 $GraphSum[G_1 + G_2, G_1, G_2] \abr (V = V(G_1) \cup V(G_2)) \land (E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st (x \in V(G_1)) \land y \in V(G_2)\}) \land (G_1 + G_2 = (V, E))$ \\
 $GraphCartesian[G_1 \times G_2, G_1, G_2] \abr 
 \left(\begin{array}{ll}
