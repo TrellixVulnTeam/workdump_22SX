@@ -105,14 +105,38 @@
 \chapter{Graph Theory}
 
 \section{Graphs}
-$Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
-$SimpleGraph[(V, E)] \abr \pr{Graph[(V, E)]} \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
-$VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
-$EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{Graph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
-$AdjacentV[(x, y), G] \abr \utup{x, y} \in E(G)$ \\
+$SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
+$VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
+$EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{GrSimpleGraphaph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
+$AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbors
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
-$AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}\pr{(x \in a) \land (x \in b)}$ \\
-\notation{x ~ y}{AdjacentV[(x, y), G]} \\
+%$AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}\pr{(x \in a) \land (x \in b)}$ \\
+%\notation{x ~ y}{AdjacentV[(x, y), G]} \\
+
+$ComplementG[\bar{G}, G] \abr \bar{G} = \pr{V, V^{\{2\}} \setminus \pr{E \cup \{\utup{x, x} \st x \in V(G)\}}}$ \\
+$Clique[X, G] \abr \forall_{x_1, x_2 \in X}(AdjacentV[\utup{x_1, x_2}, G])$ \\
+$IndependentSet[X, G] \abr \forall_{x_1, x_2 \in X}(\lnot AdjacentV[\utup{x_1, x_2}, G])$ \\
+$BipartiteG[G] \abr \exists_{X, Y}\pr{(IndependentSet[X, G]) \land (IndependentSet[Y, G]) \land \pr{V(G) = X \dot{\cup} Y}}$ \\
+$Coloring[\phi, C, G] \abr \pr{Function[\phi, V(G), C]} \land \pr{\forall_{\utup{x, y} \in E(G)}\pr{\phi(x) \neq \phi(y)}}$ \\
+$ChromaticNumber[\chi(G), G] \abr \chi(G) = min\pr{\{|C| \st \exists_{\phi, C}(Coloring[\phi, C, G])\}}$ \\
+$kPartiteG[G, k] \abr \exists_{\mathcal{S}}\pr{(|\mathcal{S}| = k) \land \pr{\forall_{S \in \mathcal{S}}(IndependentSet[S, G])} \land \pr{V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)}}$ \\
+$PartiteSets[\mathcal{S}, G] \abr \pr{\forall_{S \in \mathcal{S}}(IndependentSet[S, G])} \land \pr{V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)}$ \\
+% \chi(G) \leq min num of partites
+% kPartite iff ChromaticNumber \leq k
+
+$Path[G] \abr \exists_{P}\pr{\pr{Ordering[P, V(G)]} \land \pr{E(G) = \{\utup{p_i, p_{i + 1}} \st i \in \mathbb{N}_1^{|P| - 1}\}}}$ \\
+$Cycle[G] \abr \exists_{C}\pr{\pr{Ordering[C, V(G)]} \land \pr{E(G) = \{\utup{c_i, c_{i + 1}} \st i \in \mathbb{N}_1^{|C| - 1}\} \cup \{c_n, c_1\}}}$ \\
+
+$Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
+$ConnectedV[\{x, y\}, G] \abr \exists{H}\pr{(Subgraph[H, G]) \land (Path[H]) \land \pr{\{x, y\} \subseteq V(H)}}$ \\
+$ConnectedG[G] \abr \forall_{x, y \in V(G)}(ConnectedV[\{x, y\}, G])$ \\
+
+p.6 MATRICES
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 $Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
 $SubgraphStrict[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) \neq V(G)}$ \\
@@ -171,7 +195,7 @@ $DegreeCorollaries \abr \pr{Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}} \land \p
 $Walk[W, G] \abr \pr{\forall_{i \in \mathbb{N}_1^{|W|}}\pr{w_i \in V(G)}} \land \pr{\forall_{i \in \mathbb{N}_1^{|W| - 1}}\pr{\utup{v_i, v_{i + 1}} \in E(G)}}$ \\
 $WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
 $WalkL[l, (W, G)] \abr (Walk[W, G]) \land (l = |W| - 1)$ \\
-$Trail[W, G] \abr (Walk[W, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}\pr{(i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})}}$ \\
+$TrailW[W, G] \abr (Walk[W, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}\pr{(i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})}}$ \\
 $PathW[W, G] \abr (Walk[W, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{|W|}}\pr{(i \neq j) \implies (w_i \neq w_j)}}$ \\
 
 $ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
@@ -269,10 +293,17 @@ $CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m
 \notation{\pr{K(n_1, ..., n_r)}}{CompleteRpartiteG} \\
 \notation{\pr{K_r(t)}}{K(t, ..., t)} \\
 
+$UnionG(G \cup H, G, H) \abr \pr{V(G \cup H) = V(G) \cup V(H)} \land \pr{E(G \cup H) = E(G) \cup E(H)}$ \\
+$kG[k G, k, G] \abr k G = \bigcup \limits_{i \in \mathbb{N}_1^k}\pr{uniqueCopy(G, i)}$ \\
+$Join[G + H, G, H,] \abr \pr{V(G + H) = V(G \cup H)} \land \pr{E(G + H) = E(G \cup H) \cup \{\utup{g, h} \st \pr{g \in V(G)} \land \pr{h \in V(H)}\}}$ \\
 
+$ComponentEquiv \abr \pr{(Component[W, G]) \land (x \in W)} \implies 
+\left(\begin{array}{ll}
+  \pr{W = \{y \in V(G) \st \exists_{P, V}\pr{PathXY[P, (x, y), V, G]}\}} \hfill \land \hfill \\
+  \pr{W = \{y \in V(G) \st d(x, y) \in \mathbb{N}\}} \hfill \land \hfill \\
+  \pr{\pr{R = \{\langle u, v \rangle \st \utup{u, v} \in E(G)\}} \land (W = [x]_R)} \\
+\end{array}\right)$ \\
 
-
-page 21
 
 %%%%%%%%%%%%
 

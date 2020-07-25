@@ -105,14 +105,38 @@
 \chapter{Graph Theory}
 
 \section{Graphs}
-$Graph[(V, E)] \abr (V \cap E = \emptyset) \land (E \subseteq V^{\{2\}})$ \\
-$SimpleGraph[(V, E)] \abr (Graph[(V, E)]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
-$VertexSet[V((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (V((V, E)) = V)$ \\
-$EdgeSet[E((V, E)), (V, E)] \abr (Graph[(V, E)]) \land (E((V, E)) = E)$ \\
-$AdjacentV[(x, y), G] \abr \utup{x, y} \in E(G)$ \\
+$SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
+$VertexSet[V((V, E)), (V, E)] \abr (SimpleGraph[(V, E)]) \land (V((V, E)) = V)$ \\
+$EdgeSet[E((V, E)), (V, E)] \abr (GrSimpleGraphaph[(V, E)]) \land (E((V, E)) = E)$ \\
+$AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbors
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
-$AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}((x \in a) \land (x \in b))$ \\
-\notation{x ~ y}{AdjacentV[(x, y), G]} \\
+%$AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}((x \in a) \land (x \in b))$ \\
+%\notation{x ~ y}{AdjacentV[(x, y), G]} \\
+
+$ComplementG[\bar{G}, G] \abr \bar{G} = (V, V^{\{2\}} \setminus (E \cup \{\utup{x, x} \st x \in V(G)\}))$ \\
+$Clique[X, G] \abr \forall_{x_1, x_2 \in X}(AdjacentV[\utup{x_1, x_2}, G])$ \\
+$IndependentSet[X, G] \abr \forall_{x_1, x_2 \in X}(\lnot AdjacentV[\utup{x_1, x_2}, G])$ \\
+$BipartiteG[G] \abr \exists_{X, Y}((IndependentSet[X, G]) \land (IndependentSet[Y, G]) \land (V(G) = X \dot{\cup} Y))$ \\
+$Coloring[\phi, C, G] \abr (Function[\phi, V(G), C]) \land (\forall_{\utup{x, y} \in E(G)}(\phi(x) \neq \phi(y)))$ \\
+$ChromaticNumber[\chi(G), G] \abr \chi(G) = min(\{|C| \st \exists_{\phi, C}(Coloring[\phi, C, G])\})$ \\
+$kPartiteG[G, k] \abr \exists_{\mathcal{S}}((|\mathcal{S}| = k) \land (\forall_{S \in \mathcal{S}}(IndependentSet[S, G])) \land (V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)))$ \\
+$PartiteSets[\mathcal{S}, G] \abr (\forall_{S \in \mathcal{S}}(IndependentSet[S, G])) \land (V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S))$ \\
+% \chi(G) \leq min num of partites
+% kPartite iff ChromaticNumber \leq k
+
+$Path[G] \abr \exists_{P}((Ordering[P, V(G)]) \land (E(G) = \{\utup{p_i, p_{i + 1}} \st i \in \mathbb{N}_1^{|P| - 1}\}))$ \\
+$Cycle[G] \abr \exists_{C}((Ordering[C, V(G)]) \land (E(G) = \{\utup{c_i, c_{i + 1}} \st i \in \mathbb{N}_1^{|C| - 1}\} \cup \{c_n, c_1\}))$ \\
+
+$Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
+$ConnectedV[\{x, y\}, G] \abr \exists{H}((Subgraph[H, G]) \land (Path[H]) \land (\{x, y\} \subseteq V(H)))$ \\
+$ConnectedG[G] \abr \forall_{x, y \in V(G)}(ConnectedV[\{x, y\}, G])$ \\
+
+p.6 MATRICES
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
 $SubgraphStrict[H, G] \abr (Subgraph[H, G]) \land (V(H) \neq V(G))$ \\
@@ -270,7 +294,7 @@ $CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}((X \cup Y = V(K_{m, n}))
 \notation{(K_r(t))}{K(t, ..., t)} \\
 
 $UnionG(G \cup H, G, H) \abr (V(G \cup H) = V(G) \cup V(H)) \land (E(G \cup H) = E(G) \cup E(H))$ \\
-$kG[k G, k, G] \abr k G = \cup \limits_{i \in \mathbb{N}_1^k}(uniqueCopy(G, i))$ \\
+$kG[k G, k, G] \abr k G = \bigcup \limits_{i \in \mathbb{N}_1^k}(uniqueCopy(G, i))$ \\
 $Join[G + H, G, H,] \abr (V(G + H) = V(G \cup H)) \land (E(G + H) = E(G \cup H) \cup \{\utup{g, h} \st (g \in V(G)) \land (h \in V(H))\})$ \\
 
 $ComponentEquiv \abr ((Component[W, G]) \land (x \in W)) \implies 
@@ -278,7 +302,7 @@ $ComponentEquiv \abr ((Component[W, G]) \land (x \in W)) \implies
   (W = \{y \in V(G) \st \exists_{P, V}(PathXY[P, (x, y), V, G])\}) \hfill \land \hfill \\
   (W = \{y \in V(G) \st d(x, y) \in \mathbb{N}\}) \hfill \land \hfill \\
   ((R = \{\langle u, v \rangle \st \utup{u, v} \in E(G)\}) \land (W = [x]_R)) \\
-\end{array}\right)}$ \\
+\end{array}\right)$ \\
 
 
 %%%%%%%%%%%%
