@@ -115,6 +115,7 @@ $AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}\pr{(x \in a) \land (x \in b)}$ 
 \notation{x ~ y}{AdjacentV[(x, y), G]} \\
 
 $Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
+$SubgraphStrict[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) \neq V(G)}$ \\
 $SubgraphInducedByV[G[V'], V', G] \abr \pr{E' = \{e \in E(G) \st \exists_{a, b \in V'}(Incident[e, a, b, G])\}} \land \pr{G[V'] = (V', E')}$ \\
 $InducedSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{SpannedBy[H, V(H), G]}$ \\
 $SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) = V(G)}$ \\
@@ -137,18 +138,18 @@ $SizeOrderN \abr \pr{(Graph[G]) \land (n = |G|) \land \pr{m = e(G)}} \implies (0
   \lit $0 \leq m \leq \sum \limits_{i = 0}^{n - 1}(i) = \frac{(n-1)(n)}{2} = {n \choose 2}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$CompleteGraph[K_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = {n \choose 2}}$ \\
-$EmptyGraph[E_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = 0}$ \\
-$TrivialGraph[G] \abr G = K_1 = E_1$ \\
-$ComplementGraph[\bar{G}, G] \abr \bar{G} = \pr{V, V^{\{2\}} \setminus \pr{E \cup \{\utup{x, x} \st x \in V(G)\}}}$ \\
+$CompleteG[K_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = {n \choose 2}}$ \\
+$EmptyG[E_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = 0}$ \\
+$TrivialG[G] \abr G = K_1 = E_1$ \\
+$ComplementG[\bar{G}, G] \abr \bar{G} = \pr{V, V^{\{2\}} \setminus \pr{E \cup \{\utup{x, x} \st x \in V(G)\}}}$ \\
 $OpenNbhd[\Gamma_G(x), x, G] \abr \Gamma_G(x) = \{y \in V(G) \st AdjacentV[(y, x), G]\}$ \\
 $ClosedNbhd[\Gamma_G^*(x), x, G] \abr \pr{OpenNbhd[\Gamma_G(x), x, G]} \land \pr{\Gamma_G^*(x) = \Gamma_G(x) \cup \{x\}}$ \\
 $Degree[d(x), x, G] \abr d(x) = |\Gamma_G(x)|$ \\
 $MinDegree[\delta(G), G] \abr \delta(G) = min\pr{\{d(x) \st x \in V(G)\}}$ \\
 $MaxDegree[\Delta(G), G] \abr \Delta(G) = max\pr{\{d(x) \st x \in V(G)\}}$ \\
 $IsolatedV[v, G] \abr d(v) = 0$ \\
-$KRegularGraph[G, k] \abr k = \delta(G) = \Delta(G)$ \\
-$RegularGraph[G] \abr \exists_{k \in \mathbb{N}}(KRegularGraph[G, k])$ \\
+$KRegularG[G, k] \abr k = \delta(G) = \Delta(G)$ \\
+$RegularG[G] \abr \exists_{k \in \mathbb{N}}(KRegularG[G, k])$ \\
 $DegreeSequence[\pr{d(x_i)}_1^n, G] \abr (Order[n, G]) \land \pr{\pr{\pr{d(x_i)}_1^n} = sort\pr{\{d(x) \st x \in V(G)\}}} \land \pr{\delta(G) = d(x_1) \leq d(x_n) = \Delta(G)}$ \\
 
 $SumDegrees \abr \sum \limits_{v \in V(G)}\pr{d(v)} = 2 e(G)$ \\
@@ -177,19 +178,20 @@ $ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
 $Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
 $CycleW[W, G] \abr (ClosedWalk[W, G]) \land \pr{\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})} \land \pr{\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}\pr{(i \neq j) \implies (w_i \neq w_j)}} \land (|W| - 1 \geq 3)$ \\
 $CycleE[E, (W, G)] \abr (CycleW[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
-$EvenCycle[W, G] \abr (CycleW[W, G]) \land \pr{Even(|W| - 1)}$ \\
-$OddCycle[W, G] \abr (CycleW[W, G]) \land \pr{Odd(|W| - 1)}$ \\
-$Triangle[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
+$EvenCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Even(|W| - 1)}$ \\
+$OddCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Odd(|W| - 1)}$ \\
+$TriangleW[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
 
 $IndependentV[V, G] \abr \forall_{x, y \in V}\pr{\lnot AdjacentV[(x, y), G]}$ \\
 $IndependentE[E, G] \abr \forall_{a, b \in E}\pr{\lnot AdjacentE[(a, b), G]}$ \\
-$IndependentPath[\mathcal{P}, G] \abr \exists_{x, y \in V(G)} \forall_{P, Q \in \mathcal{P}}\pr{(P \neq Q) \implies \pr{V(P) \cap V(Q) = \utup{x, y}}}$ \\
+$IndependentPathG[\mathcal{P}, G] \abr \exists_{x, y \in V(G)} \forall_{P, Q \in \mathcal{P}}\pr{(P \neq Q) \implies \pr{V(P) \cap V(Q) = \utup{x, y}}}$ \\
 $IndependentVEquiv \abr IndependentV \iff (SubgraphInducedByV[] \cong E_n)$ \\
 
-$Path[P, V] \abr \pr{V(P) = V} \land \pr{E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\}}$ \\
-$CycleG[C_n, n] \abr \pr{V(C_n) = V(P_ n)} \land \pr{E(C_n) = E(P_n) \cup \{\utup{x_n, x_1}\}}$ \\
-$PathInG[P, V, G] \abr (Path[P, V]) \land \pr{V \subseteq V(G)}$ \\
+$PathG[P, V] \abr \pr{V(P) = V} \land \pr{E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\}}$ \\
+$CycleG[P, V] \abr \pr{V(P) = V} \land \pr{E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\} \cup \{v_{|V|}, v_1\}}$ \\
+$PathInG[P, V, G] \abr (PathG[P, V]) \land (Subgraph[P, G])$ \\
 $PathXY[P, (x, y), V, G] \abr (PathInG[P, V, G]) \land \pr{(v_1, v_{|V|}) = (x, y)}$ \\
+$CycleInG[C, V, G] \abr (CycleG[C, V]) \land (Subgraph[C, G])$ \\
 
 $CyclePartition \abr \pr{\forall_{v \in V(G)}\pr{Even\pr{d(v)}}} \iff \pr{\exists_{\mathcal{C}}\pr{\pr{\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land \pr{CycleE[C_E, (C, G)]}\}} \land \pr{Partition[\mathcal{E}, E(G)]}}}$ \\
 \begin{enumerate}
@@ -227,7 +229,6 @@ $MantelThm \abr \pr{(|G| = n) \land \pr{e(G) > \floor{n^2 / 4}}} \implies \pr{\e
     \lit $\sum \limits_{\utup{x, y} \in E(G)}^{ }\pr{d(x) + d(y)} = \sum \limits_{v \in V(G)}^{ }\pr{\pr{d(v)}^2}$
     \lit $\sum \limits_{v \in V(G)}^{ }\pr{\pr{d(v)}^2} \leq n \pr{e(G)}$ \pipe $n \sum \limits_{v \in V(G)}^{ }\pr{\pr{d(v)}^2} \leq n^2 \pr{e(G)}$
     \lit $(SumDegrees) \land (CauchysInequality)$ \pipe $\pr{2 e(G)}^2 = \pr{\sum \limits_{v \in V(G)}\pr{d(v)}}^2 \leq \sum \limits_{v \in V(G)}\pr{d(v)}^2$ % https://brilliant.org/wiki/cauchy-schwarz-inequality/
-
     \lit $\pr{2 e(G)}^2 \leq n^2 \pr{e(G)}$ \pipe $e(G) \leq n^2 /4$
     \lit $\pr{e(G) > \floor{n^2 / 4}} \land \pr{e(G) \leq n^2 /4}$ \pipe $\bot$
   \end{enumerate}
@@ -235,7 +236,6 @@ $MantelThm \abr \pr{(|G| = n) \land \pr{e(G) > \floor{n^2 / 4}}} \implies \pr{\e
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $Distance[d(x, y), x, y, G] \abr d(x, y) = min\pr{\{e(P) \st \exists_{V}\pr{PathXY[P, (x, y), V G]}\}}$ \\
-
 $DistanceMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \in V(G)}} \implies 
 \left(\begin{array}{ll}
   \pr{d(x, y) \geq 0} \hfill \land \hfill \\
@@ -247,21 +247,37 @@ $DistanceMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \i
   \lit By definition of cardinality and sets, $\pr{d(x, y) \geq 0} \land \pr{d(x, y) = 0 \iff (x = y)}$
   \lit By cases:
   \begin{enumerate}
-    \lit If $y \in [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
-    \lit If $y \notin [ShortestPath[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
+    \lit If $y \in [ShortestPathG[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
+    \lit If $y \notin [ShortestPathG[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
   \end{enumerate}
   \lit By cases, $d(x, y) + d(y, z) \geq d(x, z)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
+$AcyclicG[G] \abr \lnot \exists_{C}(CycleIn[C, G])$ \\
 $ConnectedV[(x, y), G] \abr \exists_{P, V}\pr{PathXY[P, (x, y), V, G]}$ \\
 $ConnectedG[G] \abr \forall_{x, y \in V(G)}\pr{(x \neq y) \implies \pr{ConnectedV[(x, y), G]}}$ \\
-$Component[C, G] \abr (Subgraph[C, G]) \land \pr{\lnot \exists_{D}\pr{(Subgraph[D, G]) \land (Subgraph[C, D])}}$ \\
+$ConnectedSG[H, G] \abr (Subgraph[H, G]) \land (ConnectedG[H])$ \\
+$Component[C, G] \abr (ConnectedSG[C, G]) \land \pr{\lnot \exists_{D}\pr{(SubgraphStrict[C, D]) \land (ConnectedSG[D, G])}}$ \\
+$NComponent[n, G] \abr n = |\{C \st Component[C, G]\}|$ \\
+$CutVertex[v, G] \abr \pr{v \in V(G)} \land (NComponent[n, G]) \land (NComponent[m, G - v]]) \land (m > n)$ \\
+$Bridge[e, G] \abr \pr{e \in E(G)} \land (NComponent[n, G]) \land (NComponent[m, G - e]]) \land (m > n)$ \\
+$TreeG[G] \abr (AcyclicG[G]) \land (ConnectedG[G])$ \\
+$ForestG[G] \abr AcyclicG[G]$ \\
+
+$BipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) \subseteq \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
+$CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
+\notation{\pr{K(n_1, ..., n_r)}}{CompleteRpartiteG} \\
+\notation{\pr{K_r(t)}}{K(t, ..., t)} \\
+
+
+
+
 page 21
 
 %%%%%%%%%%%%
 
-$Girth[G] \abr min\pr{\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\}}$ \\
-$Circumference[G] \abr max\pr{\{n \in \mathbb{N} \st \exists_{V_n}(Cycle[V_n, n, G])\}}$ \\
+$Girth[G] \abr min\pr{\{n \in \mathbb{N} \st \exists_{V_n}(CycleG[V_n, n, G])\}}$ \\
+$Circumference[G] \abr max\pr{\{n \in \mathbb{N} \st \exists_{V_n}(CycleG[V_n, n, G])\}}$ \\
 
 
 $Degree[d(v), v, G] \abr d(v) = |\{e \in E(G) | v \in e\}|$ \\
@@ -287,9 +303,7 @@ $AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} =
 $FanG[F_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{F_n = (V, E)}$ \\
 $WheelG[W_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{W_n = (V, E)}$ \\
 $StarG[S_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land (E = \{\utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}\}) \land \pr{S_n = (V, E)}$ \\
-$CompleteG[K_n, n] \abr \pr{V = V(P_n)} \land \pr{E = \{\utup{v_i, v_j} \st (i, j \in \mathbb{N}_1^n) \land (i \neq j)\}}$ \\
-$BipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) \subseteq \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
-$CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
+
 
 $SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
 \begin{enumerate}
@@ -339,7 +353,7 @@ $AdjacencyKroneckerIdentity \abr \forall_{G, H}\pr{\mathcal{A}(G \land H) = \mat
 
 acyclic graph
 
-$Tree[G] \abr (Connected[G]) \land \pr{\lnot \exists_{n, V_n}(Cycle[V_n, n, G])}$ \\
+$Tree[G] \abr (Connected[G]) \land \pr{\lnot \exists_{n, V_n}(CycleG[V_n, n, G])}$ \\
 
 forest  -> decomponents into trees
 
