@@ -148,7 +148,6 @@ $IncidenceMatrix[\mathcal{I}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, e(G)) \la
 
 $Isomorphism[\phi, G, H] \abr (Bijection[\phi, V(G), V(H)]) \land (\forall_{x, y \in V(G)}((\utup{x, y} \in E(G)) \iff (\utup{\phi(x), \phi(y)} \in E(H))))$ \\
 $Isomorphic[G, H] \abr \exists_{\phi}(Isomorphism[\phi, G, H])$ \\
-
 $IsomorphismEqRel \abr \forall_{G_1, G_2, G_3}
 \left(\begin{array}{ll}
   (G_1 \cong G_1) \hfill \land \hfill \\
@@ -158,7 +157,6 @@ $IsomorphismEqRel \abr \forall_{G_1, G_2, G_3}
 \begin{enumerate}
   \lit Bijection and composition properties
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
-
 $IsomorphismClass[\mathcal{G}] \abr (G \in \mathcal{G}) \land (\mathcal{G} = [G]_{\cong})$ \\
 
 $PathN[P_n, n] \abr (PathG[P_n]) \land (|P_n| = n)$ \\
@@ -192,12 +190,16 @@ $VertexTransitive[G] \abr \forall_{x, y \in V(G)} \exists_{\phi}((Automorphism[\
 $VWalk[W, G] \abr (\forall_{i \in \mathbb{N}_1^{|W| - 1}}(\utup{w_i, w_{i + 1}} \in E(G)))$ \\
 $VTrail[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}((i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})))$ \\
 $VPath[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W|}}((i \neq j) \implies (w_i \neq w_j)))$ \\
+$VCycle[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1) \land (\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}((i \neq j) \implies (w_i \neq w_j)))$ \\
 $xyWalk[(x, y), W, G] \abr (VWalk[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
 $xyTrail[(x, y), W, G] \abr (VTrail[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
 $xyPath[(x, y), W, G] \abr (VPath[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
 $VLength[len(W), W, G] \abr (Walk[W, G]) \land (l(W) = |W| - 1)$ \\
 $VClosed[W, G] \abr (Walk[W, G]) \land (w_0 = w_{|W|})$ \\
+$VOdd[W, G] \abr (Walk[W, G]) \land (Odd(len(W)))$ \\
+$VEven[W, G] \abr (Walk[W, G]) \land (Even(len(W)))$ \\
 $PathInWalk[P, W, G] \abr (VPath[P, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (P = \phi(W)))$ \\
+$CycleInWalk[C, W, G] \abr (VCycle[C, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (C = \phi(W)))$ \\
 % Parentheses denote a cycle vs path
 % u-w Path + w-v Path = u-w Walk (may contain repeated vertices)
 % Walk[W] contains Path[P] means elements of P occur in W in the same order, but not necessarily consecutive
@@ -206,7 +208,7 @@ $xyWalkInxyPath \abr (xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y)
 \begin{enumerate}
   \lit $(l(W) = 0) \implies (P = W)$ \pipe $PathInWalk[P, W, G]$
   \lit $((l(W) > 0) \land (\forall_{W'}((l(W') < l(W)) \implies \\
-  ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies \ldots$
+        ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies \ldots$
   \begin{enumerate}
     \lit If W has no duplicate vertices, then P = W \pipe $PathInWalk[P, W, G]$
     \lit If W has duplicate vertices, then delete the duplicate vertices and edges between extra copies of unique vertices. This shorter xyWalk W' has a xyPath P' by IH. \pipe $PathInWalk[P', W, G]$
@@ -238,18 +240,79 @@ $Isolated[v, G] \abr d(v) = 0$ \\
 % Deleting an edge increases the number of components by 0 or 1
 
 $Components[\mathcal{H}, G] \abr Partition[\mathcal{H}, G, C_G]$ \\
+$NumComponents[c, G] \abr (Components[\mathcal{H}, G]) \land (c = |\mathcal{H}|)$ \\
 $NumComponentsBound \abr ((|V(G)| = n) \land (|E(G)| = k)) \implies (n - k \leq |mathcal{H}|)$ \\
 \begin{enumerate}
   \lit Starting from $E(G) = \emptyset$, $|mathcal{H}| = n$
   \lit Adding an edge would decrease the number of components by 0 or 1, so after adding $k$ edges, $n - k \leq |mathcal{H}|$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-GraphOperations
-p 23
+$RemoveV[G - W, W, G] \abr (V(G - W) = V(G) \setminus W) \land (E(G - W) = \{\utup{x, y} \in E(G) \st x, y \in V(G - W)\})$ \\
+$RemoveE[G - E, E, G] \abr (V(G - E) = V(G)) \land (E(G - E) = E(G) \setminus E)$ \\
+$AddE[G + e, e, G] \abr (e \in V(G)^{\{2\}}) \land (V(G + e) = V(G)) \land (E(G + e) = E(G) \cup \{e\})$ \\
+$InducedSubgraph[G[T], T, G] \abr G[T] = G - \bar{T}$ \\
+$SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land (V(H) = V(G))$ \\
+% IndependentSet iff E(G[S]) = \emptyset 
+
+$CutVertex[v, G] \abr (NumComponents[c_1, G]) \land (NumComponents[c_2, G - v]) \land (c_2 > c_1)$ \\
+$CutEdge[e, G] \abr (NumComponents[c_1, G]) \land (NumComponents[c_2, G - e]) \land (c_2 > c_1)$ \\
+$CutEdgeEquiv \abr (CutEdge[e, G]) \iff (\lnot \exists_{C}((Subgraph[C, G]) \land (CycleG[C]) \land (e \in E(C))))$
+\begin{enumerate}
+  \lit Let $(Component[H, G]) \land (e = \utup{x, y} \in E(H))$
+  \lit $(CutEdge[e, G])) \iff (CutEdge[e, H])) \iff (\lnot Connected[H - e])$
+  \lit WTS: $(Connected[H - e]) \iff (\exists_{C}(((CycleG[C]) \land Subgraph[C, G]) \land (e \in E(C))))$
+  \lit $(Connected[H - e]) \implies \ldots$
+  \begin{enumerate}
+    \lit $\exists_{P}((PathG[P]) \land (Subgraph[P, H - e]))$ \pipe $P + e$ must contain a cycle \pipe $\exists_{C}(((CycleG[C]) \land Subgraph[C, G]) \land (e \in E(C)))$
+  \end{enumerate}
+  \lit $(Connected[H - e]) \implies (\exists_{C}(((CycleG[C]) \land Subgraph[C, G]) \land (e \in E(C))))$
+  \lit $(\exists_{C}(((CycleG[C]) \land Subgraph[C, G]) \land (e \in E(C)))) \implies \ldots$
+  \begin{enumerate}
+    \lit $Component[H, G]$ \pipe $Connected[H]$
+    \lit $(u, v \in V(H)) \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{P}(xyPath[(u, v), P, H])$
+      \lit $(e \notin E(P)) \implies (\exists_{P}(xyPath[(u, v), P, H]))$
+      \lit $(e \in E(P)) \implies \ldots$
+      \begin{enumerate}
+        \lit $P' = u-x Path + x-y CycleG + y-v Path$
+        \lit $xyPath[(u, v), P', H - e]$ \pipe $\exists_{P}(xyPath[(u, v), P, H])$
+      \end{enumerate}
+      \lit $(e \in E(P)) \implies (\exists_{P}(xyPath[(u, v), P, H]))$
+      \lit $\exists_{P}(xyPath[(u, v), P, H])$
+    \end{enumerate}
+    \lit $(u, v \in V(H)) \implies (\exists_{P}(xyPath[(u, v), P, H - e]))$ \pipe $Connected[H - e]$
+  \end{enumerate}
+  \lit $(\exists_{C}(((CycleG[C]) \land Subgraph[C, G]) \land (e \in E(C)))) \implies (Connected[H - e])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$OddCycleInClosedOddWalk \abr ((VClosed[W, G]) \land (VOdd[W, G])) \implies (\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G])))$
+\begin{enumerate}
+  \lit $(len(W) = 1) \implies (W = C)$ \pipe $\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G]))$
+  \lit $((len(W) > 1) \land (\forall_{W'}((len(W') < len(W)) \implies \\
+        (((VClosed[W', G]) \land (VOdd[W', G])) \implies (\exists_{C'}((VCycle[C', G]) \land (VOdd[C', G]) \land (CycleInWalk[C', W', G]))))))) \implies \ldots$
+  \begin{enumerate}
+    \lit If $W$ has no repeated vertex other than the first and last, then $C = W$ \pipe $\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G]))$
+    \lit If $W$ has a repeated vertex $v$, then break $W$ into two $v$ Walks $W_1, W_2$. Since $W$ is odd, $W_1, W_2$ are odd and even walks (not necessarily respectively).
+    \lit WLOG let $W_1$ be the smaller odd walk, then by IH $\exists_{C'}((VCycle[C', G]) \land (VOdd[C', G]) \land (CycleInWalk[C', W_1, G]))$
+    \lit $\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G])$
+  \end{enumerate}
+  \lit $((len(W) > 1) \land (\forall_{W'}((len(W') < len(W)) \implies \\
+        (((VClosed[W', G]) \land (VOdd[W', G])) \implies (\exists_{C'}((VCycle[C', G]) \land (VOdd[C', G]) \land (CycleInWalk[C', W', G]))))))) \implies \\
+        (\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G])$
+  \lit By induction: $\exists_{C}((VCycle[C, G]) \land (VOdd[C, G]) \land (CycleInWalk[C, W, G]))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+% ClosedEvenWalk with a unique edge can construct a cycle via xyWalkInxyPath
+
+$Bipartiton \abr $
+% $PartiteSets[\mathcal{S}, G] \abr (\forall_{S \in \mathcal{S}}(IndependentSet[S, G])) \land (V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S))$ \\
+p 24
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 
 
 $ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
@@ -265,13 +328,6 @@ $TriangleW[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
 
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
 $SubgraphStrict[H, G] \abr (Subgraph[H, G]) \land (V(H) \neq V(G))$ \\
-$SubgraphInducedByV[G[V'], V', G] \abr (E' = \{e \in E(G) \st \exists_{a, b \in V'}(Incident[e, a, b, G])\}) \land (G[V'] = (V', E'))$ \\
-$InducedSubgraph[H, G] \abr (Subgraph[H, G]) \land (SpannedBy[H, V(H), G])$ \\
-$SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land (V(H) = V(G))$ \\
-
-$RemoveV[G - W, W, G] \abr (W \subseteq V(G)) \land (SubgraphInducedByV[G - W, V(G) \setminus W, G])$ \\
-$RemoveE[G - E, E, G] \abr (E \subseteq E(G)) \land (G - E = (V(G), E(G) \setminus E))$ \\
-$AddE[G + e, e, G] \abr (e \notin E(G)) \land (e \in V(G)^{\{2\}}) \land (G + e = (V(G), E(G) \cup \{e\}))$ \\
 
 $Order[|G|, G] \abr |G| = |V(G)|$ \\
 $Size[e(G), G] \abr e(G) = |E(G)|$ \\
