@@ -121,21 +121,146 @@ $Coloring[\phi, C, G] \abr (Function[\phi, V(G), C]) \land (\forall_{\utup{x, y}
 $ChromaticNumber[\chi(G), G] \abr \chi(G) = min(\{|C| \st \exists_{\phi, C}(Coloring[\phi, C, G])\})$ \\
 $kPartiteG[G, k] \abr \exists_{\mathcal{S}}((|\mathcal{S}| = k) \land (\forall_{S \in \mathcal{S}}(IndependentSet[S, G])) \land (V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)))$ \\
 $PartiteSets[\mathcal{S}, G] \abr (\forall_{S \in \mathcal{S}}(IndependentSet[S, G])) \land (V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S))$ \\
+$CompleteBipartiteG[G] \abr (PartiteSets[\{X, Y\}, G]) \land (E(G) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\})$ \\
 % \chi(G) \leq min num of partites
 % kPartite iff ChromaticNumber \leq k
 
-$Path[G] \abr \exists_{P}((Ordering[P, V(G)]) \land (E(G) = \{\utup{p_i, p_{i + 1}} \st i \in \mathbb{N}_1^{|P| - 1}\}))$ \\
-$Cycle[G] \abr \exists_{C}((Ordering[C, V(G)]) \land (E(G) = \{\utup{c_i, c_{i + 1}} \st i \in \mathbb{N}_1^{|C| - 1}\} \cup \{c_n, c_1\}))$ \\
+$PathG[G] \abr \exists_{P}((Ordering[P, V(G)]) \land (E(G) = \{\utup{p_i, p_{i + 1}} \st i \in \mathbb{N}_1^{|P| - 1}\}))$ \\
+$CycleG[G] \abr \exists_{C}((Ordering[C, V(G)]) \land (E(G) = \{\utup{c_i, c_{i + 1}} \st i \in \mathbb{N}_1^{|C| - 1}\} \cup \{c_n, c_1\}))$ \\
+$CompleteG[G] \abr \forall_{x, y \in V(G)}((x \neq y) \implies \utup{x, y} \in E(G))$ \\
+$TriangleG[G] \abr (CompleteG[G]) \land (|G| = 3)$ \\
 
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
-$ConnectedV[\{x, y\}, G] \abr \exists{H}((Subgraph[H, G]) \land (Path[H]) \land (\{x, y\} \subseteq V(H)))$ \\
+$ConnectedV[\{x, y\}, G] \abr \exists{H}((Subgraph[H, G]) \land (PathG[H]) \land (\{x, y\} \subseteq V(H)))$ \\
 $ConnectedG[G] \abr \forall_{x, y \in V(G)}(ConnectedV[\{x, y\}, G])$ \\
 
-p.6 MATRICES
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, |G|) \land \pr{\mathcal{A}(G)_{i, j} = 
+\begin{cases} 
+  1 & \utup{v_i, v_j} \in E(G) \\
+  0 & \utup{v_i, v_j} \notin E(G) \\
+\end{cases}}$ \\
+
+$IncidenceMatrix[\mathcal{I}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, e(G)) \land \pr{\mathcal{I}(G)_{i, j} = 
+\begin{cases} 
+  1 & v_i \in e_j \\
+  0 & v_i \notin e_j \\
+\end{cases}}$ \\
+
+$Isomorphism[\phi, G, H] \abr (Bijection[\phi, V(G), V(H)]) \land (\forall_{x, y \in V(G)}((\utup{x, y} \in E(G)) \iff (\utup{\phi(x), \phi(y)} \in E(H))))$ \\
+$Isomorphic[G, H] \abr \exists_{\phi}(Isomorphism[\phi, G, H])$ \\
+
+$IsomorphismEqRel \abr \forall_{G_1, G_2, G_3}
+\left(\begin{array}{ll}
+  (G_1 \cong G_1) \hfill \land \hfill \\
+  ((G_1 \cong G_2) \implies (G_2 \cong G_1)) \hfill \land \hfill \\
+  (((G_1 \cong G_2) \land (G_2 \cong G_3)) \implies (G_1 \cong G_3)) \\
+\end{array}\right)$
+\begin{enumerate}
+  \lit Bijection and composition properties
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$IsomorphismClass[\mathcal{G}] \abr (G \in \mathcal{G}) \land (\mathcal{G} = [G]_{\cong})$ \\
+
+$PathN[P_n, n] \abr (PathG[P_n]) \land (|P_n| = n)$ \\
+$CycleN[C_n, n] \abr (CycleG[C_n]) \land (|C_n| = n)$ \\
+$CompleteN[K_n, n] \abr (CompleteG[K_n]) \land (|K_n| = n)$ \\
+$BicliqueRS[K_{r, s}, r, s] \abr (CompleteBipartiteG[K_{r, s}]) \land (PartiteSets[\{R, S\}, G]) \land (|R| = r) \land (S = s)$ \\
+
+$SelfComplementary[G] \abr G \cong \bar{G}$ \\
+$Decomposition[\mathcal{H}, G] \abr (\forall_{H \in \mathcal{H}}(Subgraph[H, G])) \land (\forall_{e \in V(G)} \exists!_{H \in \mathcal{H}}(e \in E(H)))$ \\
+% SelfComplementary[G] \iff Decomposition[\{H_1, H_2\}, K_n] \land H_1 \cong G \cong H_2
+
+% Triangle, claw, paw, kite, ...
+% Petersen graph (V = 5 C 2) \land (E = x, y \st x \cap y = \emptyset)
+% Petersen nonadjacent x, y \implies \exists!_{z}(z is a common neighbor of x, y)
+
+$CycleLengths[L, G] \abr L = \{|H| \st (Subgraph[H, G]) \land (CycleG[H])\}$ \\
+$Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) = 
+\begin{cases} 
+  min(L) & L \neq \emptyset \\
+  \infty & L = \emptyset
+\end{cases}\right)$ \\
+$Circumference[circumference(G), G] \abr (CycleLengths[L, G]) \land \left(circumference(G) = 
+\begin{cases} 
+  max(L) & L \neq \emptyset \\
+  \infty & L = \emptyset
+\end{cases}\right)$ \\
+
+$Automorphism[\phi, G] \abr (Isomorphism[\phi, G, G])$ \\ % like a permutation of V(G)
+$VertexTransitive[G] \abr \forall_{x, y \in V(G)} \exists_{\phi}((Automorphism[\phi, G]) \land (\phi(x) = y))$ \\
+
+$VWalk[W, G] \abr (\forall_{i \in \mathbb{N}_1^{|W| - 1}}(\utup{w_i, w_{i + 1}} \in E(G)))$ \\
+$VTrail[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}((i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})))$ \\
+$VPath[W, G] \abr (Walk[W, G]) \land (\forall_{i, j \in \mathbb{N}_1^{|W|}}((i \neq j) \implies (w_i \neq w_j)))$ \\
+$xyWalk[(x, y), W, G] \abr (VWalk[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
+$xyTrail[(x, y), W, G] \abr (VTrail[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
+$xyPath[(x, y), W, G] \abr (VPath[W, G]) \land (W_1 = x) \land (W_{|W|} = y)$ \\
+$VLength[len(W), W, G] \abr (Walk[W, G]) \land (l(W) = |W| - 1)$ \\
+$VClosed[W, G] \abr (Walk[W, G]) \land (w_0 = w_{|W|})$ \\
+$PathInWalk[P, W, G] \abr (VPath[P, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (P = \phi(W)))$ \\
+% Parentheses denote a cycle vs path
+% u-w Path + w-v Path = u-w Walk (may contain repeated vertices)
+% Walk[W] contains Path[P] means elements of P occur in W in the same order, but not necessarily consecutive
+
+$xyWalkInxyPath \abr (xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathInWalk[P, W, G])))$
+\begin{enumerate}
+  \lit $(l(W) = 0) \implies (P = W)$ \pipe $PathInWalk[P, W, G]$
+  \lit $((l(W) > 0) \land (\forall_{W'}((l(W') < l(W)) \implies \\
+  ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies \ldots$
+  \begin{enumerate}
+    \lit If W has no duplicate vertices, then P = W \pipe $PathInWalk[P, W, G]$
+    \lit If W has duplicate vertices, then delete the duplicate vertices and edges between extra copies of unique vertices. This shorter xyWalk W' has a xyPath P' by IH. \pipe $PathInWalk[P', W, G]$
+  \end{enumerate}
+  \lit $((l(W) > 0) \land (\forall_{W'}((l(W') < l(W)) \implies \\
+  ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies (PathInWalk[P, W, G])$
+  \lit By induction: $(xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathInWalk[P, W, G])))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConnectedV[(x, y), G] \abr \exists_{P}(xyPath[(x, y), P, G])$ \\
+$Connected[G] \abr \forall_{x, y \in V(G)}(ConnectedV[(x, y), G])$ \\
+$Connection[C_G, G] \abr C_G = \{\langle x, y \rangle \st ConnectedV[(x, y), G]\}$ \\
+$ConnectionEqRel \abr \forall_{G} \forall_{x_1, x_2, x_3 \in G}
+\left(\begin{array}{ll}
+  (x_1 C_G x_1) \hfill \land \hfill \\
+  ((x_1 C_G x_2) \implies (x_2 C_G x_1)) \hfill \land \hfill \\
+  (((x_1 C_G x_2) \land (x_2 C_G x_3)) \implies (x_1 \cong x_3)) \\
+\end{array}\right)$
+\begin{enumerate}
+  \lit By $(xyWalkInxyPath) \land (xyPath[(x, y), W, G]) \iff (xyPath[(y, x), W, G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$ConnectedSubgraph[H, G] \abr (Subgraph[H, G]) \land (Connected[H])$ \\
+$Component[H, G] \abr ConnectedSubgraph[H, G] \land (\lnot \exists_{K \neq H}((Subgraph[H, K]) \land (ConnectedSubgraph[K, G])))$ \\
+$Trivial[G] \abr E(G) = \emptyset$ \\
+$Degree[d(x), x, G] \abr d(x) = |\{y \in V(G) \st AdjacentV[\utup{x, y}, G]\}|$ \\
+$Isolated[v, G] \abr d(v) = 0$ \\
+% Adding an edge decreases the number of components by 0 or 1
+% Deleting an edge increases the number of components by 0 or 1
+
+$Components[\mathcal{H}, G] \abr Partition[\mathcal{H}, G, C_G]$ \\
+$NumComponentsBound \abr ((|V(G)| = n) \land (|E(G)| = k)) \implies (n - k \leq |mathcal{H}|)$ \\
+\begin{enumerate}
+  \lit Starting from $E(G) = \emptyset$, $|mathcal{H}| = n$
+  \lit Adding an edge would decrease the number of components by 0 or 1, so after adding $k$ edges, $n - k \leq |mathcal{H}|$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+GraphOperations
+p 23
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+$ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
+$Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
+$CycleW[W, G] \abr (ClosedWalk[W, G]) \land (\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})) \land (\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}((i \neq j) \implies (w_i \neq w_j))) \land (|W| - 1 \geq 3)$ \\
+$CycleE[E, (W, G)] \abr (CycleW[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
+$EvenCycleW[W, G] \abr (CycleW[W, G]) \land (Even(|W| - 1))$ \\
+$OddCycleW[W, G] \abr (CycleW[W, G]) \land (Odd(|W| - 1))$ \\
+$TriangleW[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
+
+
 
 
 $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
@@ -307,8 +432,6 @@ $ComponentEquiv \abr ((Component[W, G]) \land (x \in W)) \implies
 
 %%%%%%%%%%%%
 
-$Girth[G] \abr min(\{n \in \mathbb{N} \st \exists_{V_n}(CycleG[V_n, n, G])\})$ \\
-$Circumference[G] \abr max(\{n \in \mathbb{N} \st \exists_{V_n}(CycleG[V_n, n, G])\})$ \\
 
 
 $Degree[d(v), v, G] \abr d(v) = |\{e \in E(G) | v \in e\}|$ \\
