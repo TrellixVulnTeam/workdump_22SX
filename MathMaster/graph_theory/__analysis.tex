@@ -305,9 +305,35 @@ $OddCycleInClosedOddWalk \abr \pr{(VClosed[W, G]) \land (VOdd[W, G])} \implies \
 
 % ClosedEvenWalk with a unique edge can construct a cycle via xyWalkInxyPath
 
-$Bipartiton \abr $
-% $PartiteSets[\mathcal{S}, G] \abr \pr{\forall_{S \in \mathcal{S}}(IndependentSet[S, G])} \land \pr{V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)}$ \\
-p 24
+$Bipartiton[\{X, Y\}, G] \abr PartiteSets[\{X, Y\}, G]$ \\
+$ConnectedBipartite[G] \abr \exists!_{\{X, Y\}}(Bipartiton[\{X, Y\}, G])$ \\
+
+$BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}}$
+\begin{enumerate}
+  \lit $(Bipartite[G]) \implies \ldots$
+  \begin{enumerate}
+    \lit Every step alternates between each bipartition. Thus the end vertex of the odd walk cannot be the start vertex, and it is not a cycle.
+    \lit $\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}$
+  \end{enumerate}
+  \lit $(Bipartite[G]) \implies \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}}$
+  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}} \implies \ldots$
+  \begin{enumerate}
+    \lit Consider each nontrivial component $H$, and pick a $u \in V(H)$.
+    \lit Let $X = \{v \in H \st Even\pr{d(v, u)}\}$ and let $Y = \{v \in H \st Odd\pr{d(v, u)}\}$.
+    \lit Suppose $X$ or $Y$ are not independent sets. WLOG choose $X$.
+    \begin{enumerate}
+      \lit $X$ must contain an edge - call it $\utup{v, v'}$
+      \lit A closed odd walk could be: min u-v path (+ even) and v-v' (+ 1) and min v'-u path (+ even)
+      \lit By $OddCycleInClosedOddWalk$, there exists an odd cycle in $G$. \pipe $\bot$
+    \end{enumerate}
+    \lit $X$ and $Y$ are independent sets; futhermore X, Y are bipartitions of G. \pipe $Bipartite[G]$
+  \end{enumerate}
+  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}} \implies (Bipartite[G])$
+  \lit $(Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO: verify "contains in" definition
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
