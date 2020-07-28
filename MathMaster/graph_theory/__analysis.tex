@@ -121,7 +121,7 @@ $Coloring[\phi, C, G] \abr \pr{Function[\phi, V(G), C]} \land \pr{\forall_{\utup
 $ChromaticNumber[\chi(G), G] \abr \chi(G) = min\pr{\{|C| \st \exists_{\phi, C}(Coloring[\phi, C, G])\}}$ \\
 $kPartiteG[G, k] \abr \exists_{\mathcal{S}}\pr{(|\mathcal{S}| = k) \land \pr{\forall_{S \in \mathcal{S}}(IndependentSet[S, G])} \land \pr{V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)}}$ \\
 $PartiteSets[\mathcal{S}, G] \abr \pr{\forall_{S \in \mathcal{S}}(IndependentSet[S, G])} \land \pr{V(G) = \dot{\bigcup \limits_{S \in \mathcal{S}}^{}}(S)}$ \\
-$CompleteBipartiteG[G] \abr (PartiteSets[\{X, Y\}, G]) \land \pr{E(G) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}$ \\
+$CompleteBipartiteG[G, X, Y] \abr (PartiteSets[\{X, Y\}, G]) \land \pr{E(G) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}$ \\
 % \chi(G) \leq min num of partites
 % kPartite iff ChromaticNumber \leq k
 
@@ -333,11 +333,11 @@ $BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \l
 
 $UnionG[\cup(\mathcal{G}), \mathcal{G}] \abr \pr{V\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{V(G)}} \land \pr{E\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{E(G)}}$ \\
 
-$CompleteAsBipartiteUnion \abr \pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k) \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (n \leq 2^k)$
+$CompleteAsBipartiteUnion \abr \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2^k)$
 \begin{enumerate}
   \lit $(k = 1) \implies \ldots$
   \begin{enumerate}
-    \lit $\pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k) \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (Bipartite[K_n])$
+    \lit $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (Bipartite[K_n])$
     \lit $(n \leq 2^k) \implies \ldots$
     \begin{enumerate}
       \lit $n \leq 2^1 = 2$ \pipe $\pr{(n = 1) \lor (n = 2)}$
@@ -354,18 +354,36 @@ $CompleteAsBipartiteUnion \abr \pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k) 
       \lit $(n > 2) \implies (\bot)$ \pipe $n \leq 2$
     \end{enumerate}
     \lit $(Bipartite[K_n]) \implies (n \leq 2)$
-    \lit $(Bipartite[K_n]) \iff (n \leq 2)$ \pipe $\pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k) \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (n \leq 2)$
+    \lit $(Bipartite[K_n]) \iff (n \leq 2)$ \pipe $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
   \end{enumerate}
-  \lit $(k = 1) \implies \pr{\pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k) \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (n \leq 2)}$
-  \lit $\pr{(k > 1) \land \pr{\forall_{k'}\pr{(k' < k) \implies \pr{\pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k') \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (n \leq 2^{k'})}}}} \implies \ldots$
+  \lit $(k = 1) \implies \pr{\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)}$
+  \lit $\pr{(k > 1) \land \pr{\forall_{k'}\pr{(k' < k) \implies \pr{\pr{\exists_{\langle B \rangle_1^{k'}}\pr{\pr{\forall_{B \in \langle B \rangle_1^{k'}}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^{k'}])}} \iff (n \leq 2^{k'})}}}} \implies \ldots$
   \begin{enumerate}
-    \lit THE SUBGRAPH INDUCED BY X AND Y ARE NECESSARILY COMPLETE!!!!!!!!!!!!
+    \lit $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \implies \ldots$
+    \begin{enumerate}
+      \lit $K_n = \cup(\langle B \rangle_1^k) = \bigcup \limits_{i=1}^{k}(B_i) = \bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k$ \pipe $K_n = \bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k$
+      \lit $Bipartite[B_k]$ \pipe $\exists_{X_0, Y_0}(PartiteSets[\{X_0, Y_0\}, B_k])$ \pipe $\exists_{X, Y}\pr{PartiteSets[\{X, Y\}, \pr{V(G), E(B_k)}]}$
+      \lit $K_n = \pr{\bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k} \land (PartiteSets[\{X, Y\}, B_k])$ \pipe $\bigcup \limits_{i=1}^{k - 1}(B_i) = K_n[X] \cup K_n[Y]$
+      \lit $\bigcup \limits_{i=1}^{k - 1}(B_i) = K_n[X] \cup K_n[Y]$ and IH \pipe $(|X| = |K_n[X]| \leq 2^{k - 1}) \land (|Y| = |K_n[Y]| \leq 2^{k - 1})$
+      \lit $n = |G| = |X| + |Y| \leq 2^{k - 1} + 2^{k - 1} = 2^k$ \pipe $n \leq 2^k$
+    \end{enumerate}
+    \lit $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \implies (n \leq 2^k)$
+    \lit $(n \leq 2^k) \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{X, Y}\pr{\pr{X \dot{\cup} Y = V(K_n)} \land (|X| \leq 2^{k - 1}) \land (|Y| \leq 2^{k-1})}$
+      \lit IH \pipe $\pr{\exists_{\langle X \rangle_1^{k - 1}}\pr{\pr{\forall_{X \in \langle X \rangle_1^{k - 1}}(BipartiteG[X])} \land (UnionG[K_n[X], \langle X \rangle_1^{k - 1}])}} \land \\
+           \pr{\exists_{\langle Y \rangle_1^{k - 1}}\pr{\pr{\forall_{Y \in \langle Y \rangle_1^{k - 1}}(BipartiteG[Y])} \land (UnionG[K_n[Y], \langle Y \rangle_1^{k - 1}])}}$
+      \lit $(\langle Z \rangle_1^{k - 1} = \langle X_i \cup Y_i \rangle_{i = 1}^{k - 1}) \land (CompleteBipartiteG[Z_k, X, Y])$ \pipe $\pr{\forall_{Z \in \langle Z \rangle_1^k}(BipartiteG[Z])} \land (UnionG[K_n, \langle Z \rangle_1^k])$
+    \end{enumerate}
+    \lit $(n \leq 2^k) \implies \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}}$
+    \lit $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2^k)$
   \end{enumerate}
-  \lit $\pr{(k > 1) \land \pr{\forall_{k'}\pr{(k' < k) \implies \pr{\pr{\exists_{\mathcal{B}}\pr{(|\mathcal{B}| = k') \land \pr{\forall_{B \in \mathcal{B}}(BipartiteG[B])} \land (UnionG[K_n, \mathcal{B}])}} \iff (n \leq 2^{k'})}}}} \implies 123123$
+  \lit $\pr{(k > 1) \land \pr{\forall_{k'}\pr{(k' < k) \implies \pr{\pr{\exists_{\langle B \rangle_1^k}\pr{(|\langle B \rangle_1^k| = k') \land \pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2^{k'})}}}} \implies \\
+       \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
+  \lit By induction: $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-
-
+p 26. eulerian circuits
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
