@@ -198,24 +198,23 @@ $VLength[len(W), W, G] \abr (Walk[W, G]) \land (l(W) = |W| - 1)$ \\
 $VClosed[W, G] \abr (Walk[W, G]) \land (w_0 = w_{|W|})$ \\
 $VOdd[W, G] \abr (Walk[W, G]) \land (Odd(len(W)))$ \\
 $VEven[W, G] \abr (Walk[W, G]) \land (Even(len(W)))$ \\
-$PathInWalk[P, W, G] \abr (VPath[P, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (P = \phi(W)))$ \\
-$CycleInWalk[C, W, G] \abr (VCycle[C, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (C = \phi(W)))$ \\
+$PathContainsWalk[P, W, G] \abr (VPath[P, G]) \land (VWalk[W, G]) \land \exists_{\phi}((OrderedDeletion[\phi, W]) \land (P = \phi(W)))$ \\
 % Parentheses denote a cycle vs path
 % u-w Path + w-v Path = u-w Walk (may contain repeated vertices)
 % Walk[W] contains Path[P] means elements of P occur in W in the same order, but not necessarily consecutive
 
-$xyWalkInxyPath \abr (xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathInWalk[P, W, G])))$
+$xyWalkInxyPath \abr (xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathContainsWalk[P, W, G])))$
 \begin{enumerate}
-  \lit $(l(W) = 0) \implies (P = W)$ \pipe $PathInWalk[P, W, G]$
+  \lit $(l(W) = 0) \implies (P = W)$ \pipe $PathContainsWalk[P, W, G]$
   \lit $((l(W) > 0) \land (\forall_{W'}((l(W') < l(W)) \implies \\
-        ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies \ldots$
+        ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathContainsWalk[P', W', G]))))))) \implies \ldots$
   \begin{enumerate}
-    \lit If W has no duplicate vertices, then P = W \pipe $PathInWalk[P, W, G]$
-    \lit If W has duplicate vertices, then delete the duplicate vertices and edges between extra copies of unique vertices. This shorter xyWalk W' has a xyPath P' by IH. \pipe $PathInWalk[P', W, G]$
+    \lit If W has no duplicate vertices, then P = W \pipe $PathContainsWalk[P, W, G]$
+    \lit If W has duplicate vertices, then delete the duplicate vertices and edges between extra copies of unique vertices. This shorter xyWalk W' has a xyPath P' by IH. \pipe $PathContainsWalk[P', W, G]$
   \end{enumerate}
   \lit $((l(W) > 0) \land (\forall_{W'}((l(W') < l(W)) \implies \\
-  ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathInWalk[P', W', G]))))))) \implies (PathInWalk[P, W, G])$
-  \lit By induction: $(xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathInWalk[P, W, G])))$
+  ((xyWalk[(x, y), W', G]) \implies (\exists_{P'}((xyPath[(x, y), P', G]) \land (PathContainsWalk[P', W', G]))))))) \implies (PathContainsWalk[P, W, G])$
+  \lit By induction: $(xyWalk[(x, y), W, G]) \implies (\exists_{P}((xyPath[(x, y), P, G]) \land (PathContainsWalk[P, W, G])))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $ConnectedV[(x, y), G] \abr \exists_{P}(xyPath[(x, y), P, G])$ \\
@@ -332,7 +331,40 @@ $BipartiteEquiv \abr (Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (S
   \lit $(Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (VOdd[C, G])))$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO: verify "contains in" definition
+$UnionG[\cup(\mathcal{G}), \mathcal{G}] \abr (V(\cup(\mathcal{G})) = \bigcup \limits_{G \in \mathcal{G}}^{}(V(G))) \land (E(\cup(\mathcal{G})) = \bigcup \limits_{G \in \mathcal{G}}^{}(E(G)))$ \\
+
+$CompleteAsBipartiteUnion \abr (\exists_{\mathcal{B}}((|\mathcal{B}| = k) \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (n \leq 2^k)$
+\begin{enumerate}
+  \lit $(k = 1) \implies \ldots$
+  \begin{enumerate}
+    \lit $(\exists_{\mathcal{B}}((|\mathcal{B}| = k) \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (Bipartite[K_n])$
+    \lit $(n \leq 2^k) \implies \ldots$
+    \begin{enumerate}
+      \lit $n \leq 2^1 = 2$ \pipe $((n = 1) \lor (n = 2))$
+      \lit $(BipartiteG[K_1]) \land (BipartiteG[K_2])$ \pipe $Bipartite[K_n]$
+    \end{enumerate}
+    \lit $(n \leq 2^k) \implies (Bipartite[K_n])$
+    \lit $(Bipartite[K_n]) \implies \ldots$
+    \begin{enumerate}
+      \lit $(n > 2) \implies \ldots$
+      \begin{enumerate}
+        \lit $K_n$ has an odd cycle 
+        \lit $BipartiteEquiv$ and $K_n$ has an odd cycle \pipe $\lnot Bipartite[K_n]$ \pipe $\bot$
+      \end{enumerate}
+      \lit $(n > 2) \implies (\bot)$ \pipe $n \leq 2$
+    \end{enumerate}
+    \lit $(Bipartite[K_n]) \implies (n \leq 2)$
+    \lit $(Bipartite[K_n]) \iff (n \leq 2)$ \pipe $(\exists_{\mathcal{B}}((|\mathcal{B}| = k) \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (n \leq 2)$
+  \end{enumerate}
+  \lit $(k = 1) \implies ((\exists_{\mathcal{B}}((|\mathcal{B}| = k) \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (n \leq 2))$
+  \lit $((k > 1) \land (\forall_{k'}((k' < k) \implies ((\exists_{\mathcal{B}}((|\mathcal{B}| = k') \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (n \leq 2^{k'}))))) \implies \ldots$
+  \begin{enumerate}
+    \lit THE SUBGRAPH INDUCED BY X AND Y ARE NECESSARILY COMPLETE!!!!!!!!!!!!
+  \end{enumerate}
+  \lit $((k > 1) \land (\forall_{k'}((k' < k) \implies ((\exists_{\mathcal{B}}((|\mathcal{B}| = k') \land (\forall_{B \in \mathcal{B}}(BipartiteG[B])) \land (UnionG[K_n, \mathcal{B}]))) \iff (n \leq 2^{k'}))))) \implies 123123$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
