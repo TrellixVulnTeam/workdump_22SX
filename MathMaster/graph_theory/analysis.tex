@@ -3,13 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[margin=0.3in]{geometry} % for margins
- 
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     citecolor=green
-    filecolor=cyan,      
+    filecolor=cyan,
     urlcolor=magenta,
 }
 
@@ -79,8 +79,8 @@
     {wts: $#2$}}}}$%
 \ }
 
-\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
-\newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
+\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}
+\newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 \newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
 \newcommand{\st}{\mathbin{|}}
@@ -107,7 +107,7 @@
 \section{Graphs}
 $SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V((V, E)), (V, E)] \abr (SimpleGraph[(V, E)]) \land (V((V, E)) = V)$ \\
-$EdgeSet[E((V, E)), (V, E)] \abr (GrSimpleGraphaph[(V, E)]) \land (E((V, E)) = E)$ \\
+$EdgeSet[E((V, E)), (V, E)] \abr (SimpleGraph[(V, E)]) \land (E((V, E)) = E)$ \\
 $AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbors
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
 $Degree[d(x), x, G] \abr d(x) = |\{y \in V(G) \st AdjacentV[\utup{x, y}, G]\}|$ \\
@@ -135,14 +135,14 @@ $Subgraph[H, G] \abr (V(H) \subseteq V(G)) \land (E(H) \subseteq E(G))$ \\
 $ConnectedV[\{x, y\}, G] \abr \exists{H}((Subgraph[H, G]) \land (PathG[H]) \land (\{x, y\} \subseteq V(H)))$ \\
 $ConnectedG[G] \abr \forall_{x, y \in V(G)}(ConnectedV[\{x, y\}, G])$ \\
 
-$AdjacencyMatrix[\mathcal{A}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, |G|) \land \pr{\mathcal{A}(G)_{i, j} = 
-\begin{cases} 
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, |G|) \land \pr{\mathcal{A}(G)_{i, j} =
+\begin{cases}
   1 & \utup{v_i, v_j} \in E(G) \\
   0 & \utup{v_i, v_j} \notin E(G) \\
 \end{cases}}$ \\
 
-$IncidenceMatrix[\mathcal{I}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, e(G)) \land \pr{\mathcal{I}(G)_{i, j} = 
-\begin{cases} 
+$IncidenceMatrix[\mathcal{I}(G), G] \abr (Matrix[\mathcal{A}(G)], |G|, e(G)) \land \pr{\mathcal{I}(G)_{i, j} =
+\begin{cases}
   1 & v_i \in e_j \\
   0 & v_i \notin e_j \\
 \end{cases}}$ \\
@@ -158,7 +158,7 @@ $IsomorphismEqRel \abr \forall_{G_1, G_2, G_3}
 \end{array}\right)$
 \begin{enumerate}
   \lit Bijection and composition properties
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 $IsomorphismClass[\mathcal{G}] \abr (G \in \mathcal{G}) \land (\mathcal{G} = [G]_{\cong})$ \\
 
 $PathN[P_n, n] \abr (PathG[P_n]) \land (|P_n| = n)$ \\
@@ -175,13 +175,13 @@ $Decomposition[\mathcal{H}, G] \abr (\forall_{H \in \mathcal{H}}(Subgraph[H, G])
 % Petersen nonadjacent x, y \implies \exists!_{z}(z is a common neighbor of x, y)
 
 $CycleLengths[L, G] \abr L = \{|H| \st (Subgraph[H, G]) \land (CycleG[H])\}$ \\
-$Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) = 
-\begin{cases} 
+$Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) =
+\begin{cases}
   min(L) & L \neq \emptyset \\
   \infty & L = \emptyset
 \end{cases}\right)$ \\
-$Circumference[circumference(G), G] \abr (CycleLengths[L, G]) \land \left(circumference(G) = 
-\begin{cases} 
+$Circumference[circumference(G), G] \abr (CycleLengths[L, G]) \land \left(circumference(G) =
+\begin{cases}
   max(L) & L \neq \emptyset \\
   \infty & L = \emptyset
 \end{cases}\right)$ \\
@@ -216,7 +216,7 @@ $uvWalkContainsuvPath \abr (uvWalk[(x, y), W, G]) \implies (\exists_{P}((uvPath[
   \lit $((e(W) > 0) \land (\forall_{W'}((e(W') < e(W)) \implies \\
   ((uvWalk[(x, y), W', G]) \implies (\exists_{P'}((uvPath[(x, y), P']) \land (WalkContainsPath[P', W', G]))))))) \implies (WalkContainsPath[P, W, G])$
   \lit By induction: $(uvWalk[(x, y), W, G]) \implies (\exists_{P}((uvPath[(x, y), P]) \land (WalkContainsPath[P, W, G])))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConnectedV[(x, y), G] \abr \exists_{P}((Subgraph[P, G]) \land (uvPath[(x, y), P]))$ \\
 $Connected[G] \abr \forall_{x, y \in V(G)}(ConnectedV[(x, y), G])$ \\
@@ -230,7 +230,7 @@ $ConnectionEqRel \abr \forall_{G} \forall_{x_1, x_2, x_3 \in G}
 \end{array}\right)$
 \begin{enumerate}
   \lit By $(uvWalkContainsuvPath) \land (uvPath[(x, y), W]) \iff (uvPath[(y, x), W])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConnectedSubgraph[H, G] \abr (Subgraph[H, G]) \land (Connected[H])$ \\
 $Component[H, G] \abr ConnectedSubgraph[H, G] \land (\lnot \exists_{K \neq H}((Subgraph[H, K]) \land (ConnectedSubgraph[K, G])))$ \\
@@ -246,7 +246,7 @@ $NumComponentsBound \abr ((|V(G)| = n) \land (|E(G)| = k)) \implies (n - k \leq 
 \begin{enumerate}
   \lit Starting from $E(G) = \emptyset$, $|\mathcal{H}| = n$
   \lit Adding an edge would decrease the number of components by 0 or 1, so after adding $k$ edges, $n - k \leq |\mathcal{H}|$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $RemoveV[G - W, W, G] \abr (V(G - W) = V(G) \setminus W) \land (E(G - W) = \{\utup{x, y} \in E(G) \st x, y \in V(G - W)\})$ \\
 $RemoveE[G - E, E, G] \abr (V(G - E) = V(G)) \land (E(G - E) = E(G) \setminus E)$ \\
@@ -291,7 +291,7 @@ $CutEdgeEquiv \abr (CutEdge[e, G]) \iff (\lnot \exists_{C}((Subgraph[C, G]) \lan
   \end{enumerate}
   \lit $(\exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (e \in E(C)))) \implies (Connected[H - e])$
   \lit $(Connected[H - e]) \iff (\exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (e \in E(C))))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $COWalkContainsOCycle \abr ((ClosedWalk[W, G]) \land (OddWalk[W, G])) \implies (\exists_{C}((WalkContainsCycle[C, W, G]) \land (Odd(e(C)))))$
 \begin{enumerate}
@@ -317,20 +317,18 @@ $COWalkContainsOCycle \abr ((ClosedWalk[W, G]) \land (OddWalk[W, G])) \implies (
 
 % ClosedEvenWalk with a unique edge can construct a cycle via uvWalkContainsuvPath
 
-% CONTINUE REFACTOR HERE
-
 $Bipartiton[\{X, Y\}, G] \abr PartiteSets[\{X, Y\}, G]$ \\
 $ConnectedBipartite[G] \abr \exists!_{\{X, Y\}}(Bipartiton[\{X, Y\}, G])$ \\
 
-$BipartiteEquiv \abr (Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])))$
+$BipartiteEquiv \abr (Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C)))))$
 \begin{enumerate}
   \lit $(Bipartite[G]) \implies \ldots$
   \begin{enumerate}
     \lit Every step alternates between each bipartition. Thus the end vertex of the odd walk cannot be the start vertex, and it is not a cycle.
-    \lit $\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G]))$
+    \lit $\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C))))$
   \end{enumerate}
-  \lit $(Bipartite[G]) \implies (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])))$
-  \lit $(\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G]))) \implies \ldots$
+  \lit $(Bipartite[G]) \implies (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C)))))$
+  \lit $(\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C))))) \implies \ldots$
   \begin{enumerate}
     \lit Consider each nontrivial component $H$, and pick a $u \in V(H)$.
     \lit Let $X = \{v \in H \st Even(d(v, u))\}$ and let $Y = \{v \in H \st Odd(d(v, u))\}$.
@@ -342,9 +340,9 @@ $BipartiteEquiv \abr (Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (S
     \end{enumerate}
     \lit $X$ and $Y$ are independent sets; futhermore X, Y are bipartitions of G. \pipe $Bipartite[G]$
   \end{enumerate}
-  \lit $(\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G]))) \implies (Bipartite[G])$
-  \lit $(Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+  \lit $(\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C))))) \implies (Bipartite[G])$
+  \lit $(Bipartite[G]) \iff (\lnot \exists_{C}((CycleG[C]) \land (Subgraph[C, G]) \land (Odd(e(C)))))$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $UnionG[\cup(\mathcal{G}), \mathcal{G}] \abr (V(\cup(\mathcal{G})) = \bigcup \limits_{G \in \mathcal{G}}^{}(V(G))) \land (E(\cup(\mathcal{G})) = \bigcup \limits_{G \in \mathcal{G}}^{}(E(G)))$ \\
 
@@ -363,7 +361,7 @@ $CompleteAsBipartiteUnion \abr (\exists_{\langle B \rangle_1^k}((\forall_{B \in 
     \begin{enumerate}
       \lit $(n > 2) \implies \ldots$
       \begin{enumerate}
-        \lit $K_n$ has an odd cycle 
+        \lit $K_n$ has an odd cycle
         \lit $BipartiteEquiv$ and $K_n$ has an odd cycle \pipe $\lnot Bipartite[K_n]$ \pipe $\bot$
       \end{enumerate}
       \lit $(n > 2) \implies (\bot)$ \pipe $n \leq 2$
@@ -396,9 +394,56 @@ $CompleteAsBipartiteUnion \abr (\exists_{\langle B \rangle_1^k}((\forall_{B \in 
   \lit $((k > 1) \land (\forall_{k'}((k' < k) \implies ((\exists_{\langle B \rangle_1^k}((|\langle B \rangle_1^k| = k') \land (\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])) \land (UnionG[K_n, \langle B \rangle_1^k]))) \iff (n \leq 2^{k'}))))) \implies \\
        (\exists_{\langle B \rangle_1^k}((\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])) \land (UnionG[K_n, \langle B \rangle_1^k]))) \iff (n \leq 2)$
   \lit By induction: $(\exists_{\langle B \rangle_1^k}((\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])) \land (UnionG[K_n, \langle B \rangle_1^k]))) \iff (n \leq 2)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-p 26. eulerian circuits
+$Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
+$EulerianTrail[W, G] \abr ((Trail[W, G])) \land (E(W) = E(G))$ \\
+$EulerianCircuit[W, G] \abr ((Circuit[W, G])) \land (E(W) = E(G))$ \\
+$Eulerian[G] \abr \exists_{W}(EulerianCircuit[W, G])$ \\
+
+$OddVertex[v, G] \abr Odd(d(v))$ \\
+$EvenVertex[v, G] \abr Even(d(v))$ \\
+$EvenGraph[G] \abr \forall_{v \in V(G)}(EvenVertex[v, G])$ \\
+
+$MaximalPath[P, G] \abr (Subgraph[P, G]) \land (PathG[P]) \land (\lnot \exists_{P' \neq P}((Subgraph[P, P']) \land (Subgraph[P', G]) \land (PathG[P']))$ \\
+
+$VertexDegreeCycle \abr (\forall_{v \in V(G)}(2 \leq d(v))) \implies (\exists_{C}((Subgraph[C, G]) \land (CycleG[C])))$
+\begin{enumerate}
+  \lit $\exists_{P}(MaximalPath[P, G])$ \pipe $\exists_{u, v}(uvPath[(u, v), P])$
+  \lit Since $P$ is maximal, adjacent vertices of $u$ must be contained in $P$
+  \lit Since $2 \leq d(u)$, then $u$ has at least two edges that are incident among the vertices in $P$. Thus, $\exists_{C}((Subgraph[C, G]) \land (CycleG[C]))$.
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+$EulerianEquiv \abr (Components[\mathcal{H}, G]) \implies ((Eulerian[G]) \iff ((|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1) \land (EvenGraph[G])))$
+\begin{enumerate}
+  \lit $(Eulerian[G]) \implies \ldots$
+  \begin{enumerate}
+    \lit $Eulerian[G]$ \pipe $\exists_{W}(EulerianCircuit[W, G])$
+    \lit The first and last vertices have even degree, and the intermediate vertices have even degree. \pipe $EvenGraph[G]$
+    \lit $E(G)$ must be covered by the $W$, thus they must lie on the same non-trivial component. \pipe $|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1$
+    \lit $(|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1) \land (EvenGraph[G])$
+  \end{enumerate}
+  \lit $(Eulerian[G]) \implies ((|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1) \land (EvenGraph[G]))$
+  \lit $((|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1) \land (EvenGraph[G])) \implies \ldots$
+  \begin{enumerate}
+    \lit $(E(G) = 0) \implies \ldots$
+    \begin{enumerate}
+      \lit 123123
+      \lit $Eulerian[G]$
+    \end{enumerate}
+    \lit $(E(G) = 0) \implies (Eulerian[G])$
+    \lit $((E(G) > 0) \land (\forall_{G'}((E(G') < E(G)) \implies (Eulerian[G'])))) \implies \ldots$
+    \begin{enumerate}
+      \lit 123123
+      \lit $Eulerian[G]$
+    \end{enumerate}
+    \lit $((E(G) > 0) \land (\forall_{G'}((E(G') < E(G)) \implies (Eulerian[G'])))) \implies ((Eulerian[G]))$
+  \end{enumerate}
+  \lit $((|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1) \land (EvenGraph[G])) \implies (Eulerian[G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -462,7 +507,7 @@ $DegreeCorollaries \abr (Even(|\{v \in V(G) \st Odd(d(v))\}|)) \land (\delta(G) 
 \begin{enumerate}
   \lit $HandshakingLemma$ \pipe $Even(|\{v \in V(G) \st Odd(d(v))\}|)$
   \lit $SumDegrees$ \pipe $(\delta(G) \leq \floor{2 e(G) / n}) \land (\Delta(G) \geq \ceil{2 e(G) / n})$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Walk[W, G] \abr (\forall_{i \in \mathbb{N}_1^{|W|}}(w_i \in V(G))) \land (\forall_{i \in \mathbb{N}_1^{|W| - 1}}(\utup{v_i, v_{i + 1}} \in E(G)))$ \\
 $WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
@@ -514,7 +559,7 @@ $CyclePartition \abr (\forall_{v \in V(G)}(Even(d(v)))) \iff (\exists_{\mathcal{
   \end{enumerate}
   \lit $(\forall_{v \in V(G)}(Even(d(v)))) \implies (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
   \lit $(\forall_{v \in V(G)}(Even(d(v)))) \iff (\exists_{\mathcal{C}}((\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land (CycleE[C_E, (C, G)])\}) \land (Partition[\mathcal{E}, E(G)])))$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $MantelThm \abr ((|G| = n) \land (e(G) > \floor{n^2 / 4})) \implies (\exists_{W}(Triangle[W, G]))$
 \begin{enumerate}
@@ -529,10 +574,10 @@ $MantelThm \abr ((|G| = n) \land (e(G) > \floor{n^2 / 4})) \implies (\exists_{W}
     \lit $(e(G) > \floor{n^2 / 4}) \land (e(G) \leq n^2 /4)$ \pipe $\bot$
   \end{enumerate}
   \lit $(\lnot \exists_{W}(Triangle[W, G])) \implies (\bot)$ \pipe $\exists_{W}(Triangle[W, G])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Distance[d(x, y), x, y, G] \abr d(x, y) = min(\{e(P) \st \exists_{V}(PathXY[P, (x, y), V G])\})$ \\
-$DistanceMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies 
+$DistanceMetric \abr \forall_{G, x, y, z}\pr{((Graph[G]) \land (x, y, z \in V(G))) \implies
 \left(\begin{array}{ll}
   (d(x, y) \geq 0) \hfill \land \hfill \\
   ((d(x, y) = 0) \iff (x = y)) \hfill \land \hfill \\
@@ -569,7 +614,7 @@ $UnionG(G \cup H, G, H) \abr (V(G \cup H) = V(G) \cup V(H)) \land (E(G \cup H) =
 $kG[k G, k, G] \abr k G = \bigcup \limits_{i \in \mathbb{N}_1^k}(uniqueCopy(G, i))$ \\
 $Join[G + H, G, H,] \abr (V(G + H) = V(G \cup H)) \land (E(G + H) = E(G \cup H) \cup \{\utup{g, h} \st (g \in V(G)) \land (h \in V(H))\})$ \\
 
-$ComponentEquiv \abr ((Component[W, G]) \land (x \in W)) \implies 
+$ComponentEquiv \abr ((Component[W, G]) \land (x \in W)) \implies
 \left(\begin{array}{ll}
   (W = \{y \in V(G) \st \exists_{P, V}(PathXY[P, (x, y), V, G])\}) \hfill \land \hfill \\
   (W = \{y \in V(G) \st d(x, y) \in \mathbb{N}\}) \hfill \land \hfill \\
@@ -594,8 +639,8 @@ $OddDeg \abr Even(|\{v \st Odd(d(v))\}|)$ \\
   \lit SumDeg
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} = 
-\begin{cases} 
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} =
+\begin{cases}
   1 & x_i x_j \in E(G) \\
   0 &  x_i x_j \notin E(G) \\
 \end{cases}\right]$ \\
@@ -616,27 +661,27 @@ $SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
 
 $GraphPower[G^r, r, G] \abr (V = V(G)) \land (E = \{\utup{x, y} \st d(x, y) \leq r\}) \land (G^r = (V, E))$ \\
 $GraphSum[G_1 + G_2, G_1, G_2] \abr (V = V(G_1) \cup V(G_2)) \land (E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st (x \in V(G_1)) \land y \in V(G_2)\}) \land (G_1 + G_2 = (V, E))$ \\
-$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr 
+$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
   (E = \{((x_1, y_1), (x_2, y_2)) \st ((x_1 = x_2) \land (\utup{y_1, y_2} \in E(G_2))) \lor ((y_1 = y_2) \land (\utup{x_1, x_2} \in E(G_1)))\}) \hfill \land \hfill \\
   (G_1 \times G_2 = (V, E)) \\
 \end{array}\right)$ \\
-$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr 
+$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
   (E = \{((x_1, y_1), (x_2, y_2)) \st ((x_1 = x_2) \land (\utup{y_1, y_2} \in E(G_2))) \lor (\utup{x_1, x_2} \in E(G_1))\}) \hfill \land \hfill \\
   (G_1 \circ G_2 = (V, E)) \\
 \end{array}\right)$ \\
-$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr 
+$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   (V = V(G_1) \times V(G_2)) \hfill \land \hfill \\
   (E = \{((x_1, y_1), (x_2, y_2)) \st (\utup{x_1, x_2} \in E(G_1)) \land (\utup{y_1, y_2} \in E(G_2))\}) \hfill \land \hfill \\
   (G_1 \land G_2 = (V, E)) \\
 \end{array}\right)$ \\
 
-$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B = 
-\begin{bmatrix} 
+$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B =
+\begin{bmatrix}
   a_{1,1} B & \dots & a_{1, n} B \\
   \vdots & \ddots & \vdots \\
   a_{m, 1} B & \dots & a_{m, n} B \\
@@ -1338,7 +1383,7 @@ $ConjugatesMultiplicity \abr (g \in G) \implies (o(G) = o(C(g)) |C_g|)$
   \lit $(x, y \in G) \implies ((x^{-1} g x = y^{-1} g y) \iff (C(g) x = C(g) y))$ \cont
   \lit \cont $(Func[\phi, C_g, G : C(g)]) \land (Inj[\phi, C_g, G : C(g)]) \land (Surj[\phi, C_g, G : C(g)])$ \pipe $Bij[\phi, C_g, G : C(g)]$ % TODO ANALYZE
   \lit $\exists_{\phi}(Bij[\phi, C_g, G : C(g)])$ \pipe $|C_g| = |G : C(g)|$
-  \lit $(LagrangeTheorem) \land (SubgroupCenter) \land (|C_g| = |G : C(g)|)$ \pipe $o(G) = o(C(g)) |G : C(g)|$ \pipe $o(G) = o(C(g)) |C_g|$ 
+  \lit $(LagrangeTheorem) \land (SubgroupCenter) \land (|C_g| = |G : C(g)|)$ \pipe $o(G) = o(C(g)) |G : C(g)|$ \pipe $o(G) = o(C(g)) |C_g|$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
@@ -1385,7 +1430,7 @@ $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies (H 
   %  \lit $((h \in H) \land (g \in G)) \implies (g^{-1} h g \in H)$ \pipe $\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)$
   %  \lit $(Subgroup[H, G, *]) \land (\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H))$ \pipe $NormalSubgroup[H, G, *]$
   %\end{enumerate}
-  %\lit 
+  %\lit
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $NormalSubgroupCosetEquiv \abr (NormalSubgroup[H, G, *]) \iff (\forall_{g \in G}(g H = H g))$
@@ -1528,7 +1573,7 @@ $SecondIsoLemma \abr ((Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])) \impl
   \lit $(h_1 n_1, h_2 n_2 \in H N) \implies ((h_1 n_1) (h_2 n_2) \in N)$ \pipe $\forall_{h_1 n_1, h_2 n_2 \in H N}((h_1 n_1) (h_2 n_2) \in N)$
   \lit $(h n \in H N) \implies \ldots$
   \begin{enumerate}
-    \lit $(Subgroup[H, G, *]) \land (Group[N, *])$ \pipe $(h^{-1} \in G) \land (n^{-1} \in N)$ 
+    \lit $(Subgroup[H, G, *]) \land (Group[N, *])$ \pipe $(h^{-1} \in G) \land (n^{-1} \in N)$
     \lit $(NormalSubgroup[N, G, *]) \land (h^{-1} \in G) \land (n^{-1} \in N)$ \pipe  $h n^{-1} h^{-1} \in N$
     \lit $(h n)^{-1} = n^{-1} h^{-1} = (h^{-1} h) n^{-1} h^{-1} = h^{-1} (h n^{-1} h^{-1}) \in H N$ \pipe $(h n)^{-1} \in H N$
   \end{enumerate}

@@ -107,7 +107,7 @@
 \section{Graphs}
 $SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
-$EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{GrSimpleGraphaph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
+$EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
 $AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbors
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
 $Degree[d(x), x, G] \abr d(x) = |\{y \in V(G) \st AdjacentV[\utup{x, y}, G]\}|$ \\
@@ -317,20 +317,18 @@ $COWalkContainsOCycle \abr \pr{(ClosedWalk[W, G]) \land (OddWalk[W, G])} \implie
 
 % ClosedEvenWalk with a unique edge can construct a cycle via uvWalkContainsuvPath
 
-% CONTINUE REFACTOR HERE
-
 $Bipartiton[\{X, Y\}, G] \abr PartiteSets[\{X, Y\}, G]$ \\
 $ConnectedBipartite[G] \abr \exists!_{\{X, Y\}}(Bipartiton[\{X, Y\}, G])$ \\
 
-$BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}}$
+$BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}}$
 \begin{enumerate}
   \lit $(Bipartite[G]) \implies \ldots$
   \begin{enumerate}
     \lit Every step alternates between each bipartition. Thus the end vertex of the odd walk cannot be the start vertex, and it is not a cycle.
-    \lit $\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}$
+    \lit $\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}$
   \end{enumerate}
-  \lit $(Bipartite[G]) \implies \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}}$
-  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}} \implies \ldots$
+  \lit $(Bipartite[G]) \implies \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}}$
+  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}} \implies \ldots$
   \begin{enumerate}
     \lit Consider each nontrivial component $H$, and pick a $u \in V(H)$.
     \lit Let $X = \{v \in H \st Even\pr{d(v, u)}\}$ and let $Y = \{v \in H \st Odd\pr{d(v, u)}\}$.
@@ -342,8 +340,8 @@ $BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \l
     \end{enumerate}
     \lit $X$ and $Y$ are independent sets; futhermore X, Y are bipartitions of G. \pipe $Bipartite[G]$
   \end{enumerate}
-  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}} \implies (Bipartite[G])$
-  \lit $(Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land (OddWalk[C, G])}}$
+  \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}} \implies (Bipartite[G])$
+  \lit $(Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 $UnionG[\cup(\mathcal{G}), \mathcal{G}] \abr \pr{V\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{V(G)}} \land \pr{E\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{E(G)}}$ \\
@@ -398,7 +396,44 @@ $CompleteAsBipartiteUnion \abr \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\foral
   \lit By induction: $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-p 26. eulerian circuits
+$Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
+$EulerianTrail[W, G] \abr \pr{(Trail[W, G])} \land \pr{E(W) = E(G)}$ \\
+$EulerianCircuit[W, G] \abr \pr{(Circuit[W, G])} \land \pr{E(W) = E(G)}$ \\
+$Eulerian[G] \abr \exists_{W}(EulerianCircuit[W, G])$ \\
+
+$OddVertex[v, G] \abr Odd\pr{d(v)}$ \\
+$EvenVertex[v, G] \abr Even\pr{d(v)}$ \\
+$EvenGraph[G] \abr \forall_{v \in V(G)}(EvenVertex[v, G])$ \\
+
+$MaximalPath[P, G] \abr (Subgraph[P, G]) \land (PathG[P]) \land \pr{\lnot \exists_{P' \neq P}((Subgraph[P, P']) \land (Subgraph[P', G]) \land (PathG[P'])}$ \\
+
+$VertexDegreeCycle \abr \pr{\forall_{v \in V(G)}\pr{2 \leq d(v)}} \implies \pr{\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}}$
+\begin{enumerate}
+  \lit $\exists_{P}(MaximalPath[P, G])$ \pipe $\exists_{u, v}\pr{uvPath[(u, v), P]}$
+  \lit Since $P$ is maximal, adjacent vertices of $u$ must be contained in $P$
+  \lit Since $2 \leq d(u)$, then $u$ has at least two edges that are incident among the vertices in $P$. Thus, $\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}$.   
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$EulerianEquiv \abr (Components[\mathcal{H}, G]) \implies \pr{(Eulerian[G]) \iff \pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])}}$
+\begin{enumerate}
+  \lit $(Eulerian[G]) \implies \ldots$
+  \begin{enumerate}
+    \lit $Eulerian[G]$ \pipe $\exists_{W}(EulerianCircuit[W, G])$
+    \lit The first and last vertices have even degree, and the intermediate vertices have even degree. \pipe $EvenGraph[G]$
+    \lit $E(G)$ must be covered by the $W$, thus they must lie on the same non-trivial component. \pipe $|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1$
+    \lit $\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])$
+  \end{enumerate}
+  \lit $(Eulerian[G]) \implies \pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])}$
+  \lit $\pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])} \implies \ldots$
+  \begin{enumerate}
+    \lit 
+  \end{enumerate}
+  \lit $\pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])} \implies (Eulerian[G])$
+
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
