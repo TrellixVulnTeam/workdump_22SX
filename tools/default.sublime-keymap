@@ -1,0 +1,14 @@
+[  // Use Ctrl+`, sublime.log_commands(True) and Ctrl+Shift+P to find commands
+	{ "keys": [ "ctrl+alt+b" ], "command": "exec", "args": { "shell_cmd": "bash build.sh" } },
+	{ "keys": [ "ctrl+alt+o" ], "command": "reopen_last_file" },
+	{ "keys": ["alt+space"], "command": "auto_complete" },
+	{ "keys": ["alt+shift+space"], "command": "sublime_jedi_params_autocomplete" },
+	{ "keys": ["ctrl+shift+g"], "command": "goto_definition" },
+	//{ "keys": ["ctrl+shift+g"], "command": "sublime_jedi_goto" },
+	{ "keys": ["ctrl+shift+left"], "command": "jump_back" },
+	{ "keys": ["ctrl+shift+right"], "command": "jump_forward" },
+	{ "keys": ["ctrl+shift+up"], "command": "scroll_lines", "args": {"amount": 30.0} },
+	{ "keys": ["ctrl+shift+down"], "command": "scroll_lines", "args": {"amount": -30.0} },
+	{ "keys": ["ctrl+shift+f"], "command": "sublime_jedi_find_usages" },
+	{ "keys": ["ctrl+shift+d"], "command": "sublime_jedi_docstring" },
+]
