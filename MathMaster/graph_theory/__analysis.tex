@@ -3,13 +3,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[margin=0.3in]{geometry} % for margins
- 
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     citecolor=green
-    filecolor=cyan,      
+    filecolor=cyan,
     urlcolor=magenta,
 }
 
@@ -79,8 +79,8 @@
     {wts: $#2$}}}}$%
 \ }
 
-\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}  
-\newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}    
+\newcommand{\setbackgroundcolour}{\pagecolor[rgb]{0.2,0.2,0.2}}
+\newcommand{\settextcolour}{\color[rgb]{0.8,0.8,0.8}}
 \newcommand{\invertbackgroundtext}{\setbackgroundcolour\settextcolour}
 \newcommand{\bbin}[1]{\mathbin{{\bar{#1}}}}
 \newcommand{\st}{\mathbin{|}}
@@ -105,12 +105,15 @@
 \chapter{Graph Theory}
 
 \section{Graphs}
+\subsection{Graphs}
 $SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
 $EdgeSet[E\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{E\pr{(V, E)} = E}$ \\
-$AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbors
+$AdjacentV[\utup{x, y}, G] \abr \utup{x, y} \in E(G)$ \\ % or Neighbor
 $Incident[e, x, y, G] \abr e = \utup{x, y} \in E(G)$ \\
 $Degree[d(x), x, G] \abr d(x) = |\{y \in V(G) \st AdjacentV[\utup{x, y}, G]\}|$ \\
+$Order[n(G), G] \abr n(G) = |V(G)|$ \\
+$Size[e(G), G] \abr e(G) = |E(G)|$ \\
 %$AdjacentE[(a, b), G] \abr \exists!_{x \in V(G)}\pr{(x \in a) \land (x \in b)}$ \\
 %\notation{x ~ y}{AdjacentV[(x, y), G]} \\
 
@@ -126,23 +129,25 @@ $CompleteBipartiteG[G, X, Y] \abr (PartiteSets[\{X, Y\}, G]) \land \pr{E(G) = \{
 % \chi(G) \leq min num of partites
 % kPartite iff ChromaticNumber \leq k
 
+
+\subsection{Paths, Cycles, Trails}
 $PathG[G] \abr \exists_{P}\pr{\pr{Ordering[P, V(G)]} \land \pr{E(G) = \{\utup{p_i, p_{i + 1}} \st i \in \mathbb{N}_1^{|P| - 1}\}}}$ \\
 $CycleG[G] \abr \exists_{C}\pr{\pr{Ordering[C, V(G)]} \land \pr{E(G) = \{\utup{c_i, c_{i + 1}} \st i \in \mathbb{N}_1^{|C| - 1}\} \cup \{c_n, c_1\}}}$ \\
 $CompleteG[G] \abr \forall_{x, y \in V(G)}\pr{(x \neq y) \implies \utup{x, y} \in E(G)}$ \\
-$TriangleG[G] \abr (CompleteG[G]) \land (|G| = 3)$ \\
+$TriangleG[G] \abr (CompleteG[G]) \land \pr{n(G) = 3}$ \\
 
 $Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
 $ConnectedV[\{x, y\}, G] \abr \exists{H}\pr{(Subgraph[H, G]) \land (PathG[H]) \land \pr{\{x, y\} \subseteq V(H)}}$ \\
 $ConnectedG[G] \abr \forall_{x, y \in V(G)}(ConnectedV[\{x, y\}, G])$ \\
 
-$AdjacencyMatrix[\mathcal{A}(G), G] \abr \pr{Matrix[\mathcal{A}(G)], |G|, |G|} \land \pr{\mathcal{A}(G)_{i, j} = 
-\begin{cases} 
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr \pr{Matrix[\mathcal{A}(G)], n(G), n(G)} \land \pr{\mathcal{A}(G)_{i, j} =
+\begin{cases}
   1 & \utup{v_i, v_j} \in E(G) \\
   0 & \utup{v_i, v_j} \notin E(G) \\
 \end{cases}}$ \\
 
-$IncidenceMatrix[\mathcal{I}(G), G] \abr \pr{Matrix[\mathcal{A}(G)], |G|, e(G)} \land \pr{\mathcal{I}(G)_{i, j} = 
-\begin{cases} 
+$IncidenceMatrix[\mathcal{I}(G), G] \abr \pr{Matrix[\mathcal{A}(G)], n(G), e(G)} \land \pr{\mathcal{I}(G)_{i, j} =
+\begin{cases}
   1 & v_i \in e_j \\
   0 & v_i \notin e_j \\
 \end{cases}}$ \\
@@ -158,30 +163,30 @@ $IsomorphismEqRel \abr \forall_{G_1, G_2, G_3}
 \end{array}\right)$
 \begin{enumerate}
   \lit Bijection and composition properties
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 $IsomorphismClass[\mathcal{G}] \abr (G \in \mathcal{G}) \land (\mathcal{G} = [G]_{\cong})$ \\
 
-$PathN[P_n, n] \abr (PathG[P_n]) \land (|P_n| = n)$ \\
-$CycleN[C_n, n] \abr (CycleG[C_n]) \land (|C_n| = n)$ \\
-$CompleteN[K_n, n] \abr (CompleteG[K_n]) \land (|K_n| = n)$ \\
-$BicliqueRS[K_{r, s}, r, s] \abr (CompleteBipartiteG[K_{r, s}]) \land (PartiteSets[\{R, S\}, G]) \land (|R| = r) \land (S = s)$ \\
+$PathN[P_n, n] \abr (PathG[P_n]) \land \pr{n(P_n) = n}$ \\
+$CycleN[C_n, n] \abr (CycleG[C_n]) \land \pr{n(C_n) = n}$ \\
+$CompleteN[K_n, n] \abr (CompleteG[K_n]) \land \pr{n(K_n) = n}$ \\
+$BicliqueRS[K_{r, s}, r, s] \abr (CompleteBipartiteG[K_{r, s}]) \land (PartiteSets[\{R, S\}, G]) \land (|R| = r) \land (|S| = s)$ \\
 
 $SelfComplementary[G] \abr G \cong \bar{G}$ \\
-$Decomposition[\mathcal{H}, G] \abr \pr{\forall_{H \in \mathcal{H}}(Subgraph[H, G])} \land \pr{\forall_{e \in V(G)} \exists!_{H \in \mathcal{H}}\pr{e \in E(H)}}$ \\
+$Decomposition[\mathcal{D}, G] \abr \pr{\forall_{D \in \mathcal{D}}(Subgraph[D, G])} \land \pr{\forall_{e \in E(G)} \exists!_{D \in \mathcal{D}}\pr{e \in E(D)}}$ \\
 % SelfComplementary[G] \iff Decomposition[\{H_1, H_2\}, K_n] \land H_1 \cong G \cong H_2
 
 % Triangle, claw, paw, kite, ...
 % Petersen graph (V = 5 C 2) \land (E = x, y \st x \cap y = \emptyset)
 % Petersen nonadjacent x, y \implies \exists!_{z}(z is a common neighbor of x, y)
+% $CycleLengths[L, G] \abr L = \{|H| \st (Subgraph[H, G]) \land (CycleG[H])\}$ \\ ???
 
-$CycleLengths[L, G] \abr L = \{|H| \st (Subgraph[H, G]) \land (CycleG[H])\}$ \\
-$Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) = 
-\begin{cases} 
+$Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) =
+\begin{cases}
   min(L) & L \neq \emptyset \\
   \infty & L = \emptyset
 \end{cases}\right)$ \\
-$Circumference[circumference(G), G] \abr (CycleLengths[L, G]) \land \left(circumference(G) = 
-\begin{cases} 
+$Circumference[circumference(G), G] \abr (CycleLengths[L, G]) \land \left(circumference(G) =
+\begin{cases}
   max(L) & L \neq \emptyset \\
   \infty & L = \emptyset
 \end{cases}\right)$ \\
@@ -216,7 +221,7 @@ $uvWalkContainsuvPath \abr \pr{uvWalk[(x, y), W, G]} \implies \pr{\exists_{P}\pr
   \lit $\pr{(e(W) > 0} \land \pr{\forall_{W'}((e(W') < e(W)} \implies \\
   \pr{\pr{uvWalk[(x, y), W', G]} \implies \pr{\exists_{P'}\pr{\pr{uvPath[(x, y), P']} \land (WalkContainsPath[P', W', G])}}}))) \implies (WalkContainsPath[P, W, G])$
   \lit By induction: $\pr{uvWalk[(x, y), W, G]} \implies \pr{\exists_{P}\pr{\pr{uvPath[(x, y), P]} \land (WalkContainsPath[P, W, G])}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConnectedV[(x, y), G] \abr \exists_{P}\pr{(Subgraph[P, G]) \land \pr{uvPath[(x, y), P]}}$ \\
 $Connected[G] \abr \forall_{x, y \in V(G)}\pr{ConnectedV[(x, y), G]}$ \\
@@ -230,7 +235,7 @@ $ConnectionEqRel \abr \forall_{G} \forall_{x_1, x_2, x_3 \in G}
 \end{array}\right)$
 \begin{enumerate}
   \lit By $(uvWalkContainsuvPath) \land \pr{uvPath[(x, y), W]} \iff \pr{uvPath[(y, x), W]}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $ConnectedSubgraph[H, G] \abr (Subgraph[H, G]) \land (Connected[H])$ \\
 $Component[H, G] \abr ConnectedSubgraph[H, G] \land \pr{\lnot \exists_{K \neq H}\pr{(Subgraph[H, K]) \land (ConnectedSubgraph[K, G])}}$ \\
@@ -246,14 +251,13 @@ $NumComponentsBound \abr \pr{\pr{|V(G)| = n} \land \pr{|E(G)| = k}} \implies (n 
 \begin{enumerate}
   \lit Starting from $E(G) = \emptyset$, $|\mathcal{H}| = n$
   \lit Adding an edge would decrease the number of components by 0 or 1, so after adding $k$ edges, $n - k \leq |\mathcal{H}|$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $RemoveV[G - W, W, G] \abr \pr{V(G - W) = V(G) \setminus W} \land \pr{E(G - W) = \{\utup{x, y} \in E(G) \st x, y \in V(G - W)\}}$ \\
 $RemoveE[G - E, E, G] \abr \pr{V(G - E) = V(G)} \land \pr{E(G - E) = E(G) \setminus E}$ \\
 $AddE[G + e, e, G] \abr \pr{e \in V(G)^{\{2\}}} \land \pr{V(G + e) = V(G)} \land \pr{E(G + e) = E(G) \cup \{e\}}$ \\
 $InducedSubgraph[G[T], T, G] \abr G[T] = G - \bar{T}$ \\
 $IndependentSet[S, G] \abr E(G[S]) = \emptyset $ \\
-$SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) = V(G)}$ \\
 
 $CutVertex[v, G] \abr (NumComponents[c_1, G]) \land (NumComponents[c_2, G - v]) \land (c_2 > c_1)$ \\
 $CutEdge[e, G] \abr (NumComponents[c_1, G]) \land (NumComponents[c_2, G - e]) \land (c_2 > c_1)$ \\
@@ -291,7 +295,7 @@ $CutEdgeEquiv \abr (CutEdge[e, G]) \iff \pr{\lnot \exists_{C}\pr{(Subgraph[C, G]
   \end{enumerate}
   \lit $\pr{\exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{e \in E(C)}}} \implies (Connected[H - e])$
   \lit $(Connected[H - e]) \iff \pr{\exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{e \in E(C)}}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $COWalkContainsOCycle \abr \pr{(ClosedWalk[W, G]) \land (OddWalk[W, G])} \implies \pr{\exists_{C}\pr{(WalkContainsCycle[C, W, G]) \land \pr{Odd\pr{e(C)}}}}$
 \begin{enumerate}
@@ -342,7 +346,7 @@ $BipartiteEquiv \abr (Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \l
   \end{enumerate}
   \lit $\pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}} \implies (Bipartite[G])$
   \lit $(Bipartite[G]) \iff \pr{\lnot \exists_{C}\pr{(CycleG[C]) \land (Subgraph[C, G]) \land \pr{Odd\pr{e(C)}}}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $UnionG[\cup(\mathcal{G}), \mathcal{G}] \abr \pr{V\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{V(G)}} \land \pr{E\pr{\cup(\mathcal{G})} = \bigcup \limits_{G \in \mathcal{G}}^{}\pr{E(G)}}$ \\
 
@@ -361,7 +365,7 @@ $CompleteAsBipartiteUnion \abr \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\foral
     \begin{enumerate}
       \lit $(n > 2) \implies \ldots$
       \begin{enumerate}
-        \lit $K_n$ has an odd cycle 
+        \lit $K_n$ has an odd cycle
         \lit $BipartiteEquiv$ and $K_n$ has an odd cycle \pipe $\lnot Bipartite[K_n]$ \pipe $\bot$
       \end{enumerate}
       \lit $(n > 2) \implies (\bot)$ \pipe $n \leq 2$
@@ -377,7 +381,7 @@ $CompleteAsBipartiteUnion \abr \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\foral
       \lit $K_n = \cup(\langle B \rangle_1^k) = \bigcup \limits_{i=1}^{k}(B_i) = \bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k$ \pipe $K_n = \bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k$
       \lit $Bipartite[B_k]$ \pipe $\exists_{X_0, Y_0}(PartiteSets[\{X_0, Y_0\}, B_k])$ \pipe $\exists_{X, Y}\pr{PartiteSets[\{X, Y\}, \pr{V(G), E(B_k)}]}$
       \lit $K_n = \pr{\bigcup \limits_{i=1}^{k - 1}(B_i) \cup B_k} \land (PartiteSets[\{X, Y\}, B_k])$ \pipe $\bigcup \limits_{i=1}^{k - 1}(B_i) = K_n[X] \cup K_n[Y]$
-      \lit $\bigcup \limits_{i=1}^{k - 1}(B_i) = K_n[X] \cup K_n[Y]$ and IH \pipe $(|X| = |K_n[X]| \leq 2^{k - 1}) \land (|Y| = |K_n[Y]| \leq 2^{k - 1})$
+      \lit $\bigcup \limits_{i=1}^{k - 1}(B_i) = K_n[X] \cup K_n[Y]$ and IH \pipe $\pr{|X| = n(K_n[X]) \leq 2^{k - 1}} \land \pr{|Y| = n(K_n[Y]) \leq 2^{k - 1}}$
       \lit $n = |G| = |X| + |Y| \leq 2^{k - 1} + 2^{k - 1} = 2^k$ \pipe $n \leq 2^k$
     \end{enumerate}
     \lit $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \implies (n \leq 2^k)$
@@ -394,7 +398,7 @@ $CompleteAsBipartiteUnion \abr \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\foral
   \lit $\pr{(k > 1) \land \pr{\forall_{k'}\pr{(k' < k) \implies \pr{\pr{\exists_{\langle B \rangle_1^k}\pr{(|\langle B \rangle_1^k| = k') \land \pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2^{k'})}}}} \implies \\
        \pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
   \lit By induction: $\pr{\exists_{\langle B \rangle_1^k}\pr{\pr{\forall_{B \in \langle B \rangle_1^k}(BipartiteG[B])} \land (UnionG[K_n, \langle B \rangle_1^k])}} \iff (n \leq 2)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
 $EulerianTrail[W, G] \abr \pr{(Trail[W, G])} \land \pr{E(W) = E(G)}$ \\
@@ -406,38 +410,291 @@ $EvenVertex[v, G] \abr Even\pr{d(v)}$ \\
 $EvenGraph[G] \abr \forall_{v \in V(G)}(EvenVertex[v, G])$ \\
 
 $MaximalPath[P, G] \abr (Subgraph[P, G]) \land (PathG[P]) \land \pr{\lnot \exists_{P' \neq P}((Subgraph[P, P']) \land (Subgraph[P', G]) \land (PathG[P'])}$ \\
+$MaximalTrail[W, G] \abr (Trail[W, G]) \land \pr{\lnot \exists_{W' \neq W}\pr{(W \subseteq W') \land (Trail[W', G])}}$ \\
 
 $VertexDegreeCycle \abr \pr{\forall_{v \in V(G)}\pr{2 \leq d(v)}} \implies \pr{\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}}$
 \begin{enumerate}
   \lit $\exists_{P}(MaximalPath[P, G])$ \pipe $\exists_{u, v}\pr{uvPath[(u, v), P]}$
-  \lit Since $P$ is maximal, adjacent vertices of $u$ must be contained in $P$
-  \lit Since $2 \leq d(u)$, then $u$ has at least two edges that are incident among the vertices in $P$. Thus, $\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}$.   
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+  \lit Since $P$ is maximal, adjacent vertices of $u$ must be contained in $P$.
+  \lit Since $2 \leq d(u)$, then $u$ has at least $2$ edges that are incident among the vertices in $P$.
+  \lit These edges form a cycle from $u$. $\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}$.
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$EulerianEquiv \abr (Components[\mathcal{H}, G]) \implies \pr{(Eulerian[G]) \iff \pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])}}$
+$EulerianEquiv \abr (Components[\mathcal{H}, G]) \implies \pr{(Eulerian[G]) \iff \pr{\pr{(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])} \land (EvenGraph[G])}}$
 \begin{enumerate}
   \lit $(Eulerian[G]) \implies \ldots$
   \begin{enumerate}
     \lit $Eulerian[G]$ \pipe $\exists_{W}(EulerianCircuit[W, G])$
     \lit The first and last vertices have even degree, and the intermediate vertices have even degree. \pipe $EvenGraph[G]$
-    \lit $E(G)$ must be covered by the $W$, thus they must lie on the same non-trivial component. \pipe $|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1$
-    \lit $\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])$
+    \lit $E(G)$ must be covered by the $W$, thus they must lie on the same non-trivial component. \pipe $(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])$
+    \lit $\pr{(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])} \land (EvenGraph[G])$
   \end{enumerate}
-  \lit $(Eulerian[G]) \implies \pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])}$
-  \lit $\pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])} \implies \ldots$
+  \lit $(Eulerian[G]) \implies \pr{\pr{(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])} \land (EvenGraph[G])}$
+  \lit $\pr{\pr{(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])} \land (EvenGraph[G])} \implies \ldots$
   \begin{enumerate}
-    \lit 
+    \lit $\pr{E(G) = 0} \implies \ldots$
+    \begin{enumerate}
+      \lit Let the Eulerian circuit be consist of just one vertex. \pipe $Eulerian[G]$
+    \end{enumerate}
+    \lit $\pr{E(G) = 0} \implies (Eulerian[G])$
+    \lit $\pr{\pr{E(G) > 0} \land \pr{\forall_{G'}\pr{\pr{E(G') < E(G)} \implies (Eulerian[G'])}}} \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists!_{H}(H \in \mathcal{H} \st \lnot Trivial[H])$
+      \lit $EvenGraph[G]$ \pipe $EvenGraph[H]$ \pipe $\forall_{v \in V(H)}\pr{2 \leq d(v)}$
+      \lit $VertexDegreeCycle$ \pipe $\exists_{C}\pr{(Subgraph[C, H]) \land (CycleG[C])}$
+      \lit $G' \abr G - E(C)$
+      \lit Since the vertices in a cycle have degree 2, $EvenGraph[G']$. Each $H'$ component of $G'$ is also an $EvenGraph[H']$.
+      \lit By IH and $\forall_{H' \in \mathcal{H}'}\pr{E(H') < E(G)}$ \pipe $\forall_{H' \in \mathcal{H}'}(Eulerian[H'])$
+      \lit The Eulerian circuit of $G$ can be constructed by:
+      \begin{enumerate}
+        \lit Start at some vertex in $C$
+        \lit Go around $C$, until the trail reaches a vertex of some $H' \in \mathcal{H}'$
+        \lit Trail around $H'$ using it's own Eulerian trail, and return to the vertex in $C'$.
+        \lit Continue the last two steps until the trail of $C$ is complete.
+      \end{enumerate}
+      \lit $Eulerian[G]$
+    \end{enumerate}
+    \lit $\pr{\pr{E(G) > 0} \land \pr{\forall_{G'}\pr{\pr{E(G') < E(G)} \implies (Eulerian[G'])}}} \implies \pr{(Eulerian[G])}$
   \end{enumerate}
-  \lit $\pr{\pr{|\{H \st (H \in \mathcal{H}) \land (\lnot Trivial[H])\}| \leq 1} \land (EvenGraph[G])} \implies (Eulerian[G])$
+  \lit $\pr{\pr{(\not \exists \lor \exists!)_{H \in \mathcal{H}}(\lnot Trivial[H])} \land (EvenGraph[G])} \implies (Eulerian[G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
+$EvenGraphCycles \abr (EvenGraph[G]) \implies \pr{\exists_{\mathcal{D}}\pr{(Decomposition[\mathcal{D}, G]) \land \pr{\forall_{D \in \mathcal{D}}(Cycle[D])}}}$
+\begin{enumerate}
+  \lit $\pr{E(G) = 0} \implies \ldots$
+  \begin{enumerate}
+    \lit $\mathcal{D} = \{G\}$ \pipe $\exists_{\mathcal{D}}\pr{(Decomposition[\mathcal{D}, G]) \land \pr{\forall_{D \in \mathcal{D}}(Cycle[D])}}$
+  \end{enumerate}
+  \lit $\pr{\pr{E(G) > 0} \land \pr{\forall_{G'}\pr{\pr{E(G') < E(G)} \implies \pr{(EvenGraph[G']) \implies \pr{\exists_{\mathcal{D}'}\pr{(Decomposition[\mathcal{D}', G']) \land \pr{\forall_{D' \in \mathcal{D}'}(Cycle[D'])}}}}}}} \\
+       \implies \ldots$
+  \begin{enumerate}
+    \lit $\pr{E(G) > 0} \land (EvenGraph[G])$ \pipe $\forall_{v \in V(G)}\pr{2 \leq d(v)}$
+    \lit $VertexDegreeCycle$ \pipe $\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}$
+    \lit $G' \abr G - E(C)$
+    \lit Since the vertices in a cycle have degree 2, $EvenGraph[G']$. Each $D'$ component of $G'$ is also an $EvenGraph[D']$.
+    \lit $E(D') < E(G)$ and IH, there exists a cycle decomposition of $D'$.
+    \lit The cycle decomposition of G can be constructed by collecting the cycle decompositions of all $D' \in \mathcal{D}'$ and including $C$.
+    \lit $\exists_{\mathcal{D}}\pr{(Decomposition[\mathcal{D}, G]) \land \pr{\forall_{D \in \mathcal{D}}(Cycle[D])}}$
+  \end{enumerate}
+  \lit $\pr{\pr{E(G) > 0} \land \pr{\forall_{G'}\pr{\pr{E(G') < E(G)} \implies \pr{(EvenGraph[G']) \implies \pr{\exists_{\mathcal{D}'}\pr{(Decomposition[\mathcal{D}', G']) \land \pr{\forall_{D' \in \mathcal{D}'}(Cycle[D'])}}}}}}} \\
+       \implies \pr{\exists_{\mathcal{D}}\pr{(Decomposition[\mathcal{D}, G]) \land \pr{\forall_{D \in \mathcal{D}}(Cycle[D])}}}$
+  \lit By induction, $\exists_{\mathcal{D}}\pr{(Decomposition[\mathcal{D}, G]) \land \pr{\forall_{D \in \mathcal{D}}(Cycle[D])}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+% TONCAS: The Obvious Necessary Conditions are Also Sufficient
+% VertexDegreeCycle shows the usefulness of "extremality" - choosing extreme cases may yield additional useful information.
+
+$VertexDegreePathk \abr \pr{\forall_{v \in V(G)}\pr{k \leq d(v)}} \implies \pr{\exists_{P}\pr{(Subgraph[P, G]) \land (PathG[P]) \land \pr{k \leq e(P)}}}$
+\begin{enumerate}
+  \lit $\exists_{P}(MaximalPath[P, G])$ \pipe $\exists_{u, v}\pr{uvPath[(u, v), P]}$
+  \lit Since $P$ is maximal, adjacent vertices of $u$ must be contained in $P$.
+  \lit Since $k \leq d(u)$, then $u$ has at least $k$ edges that are incident among the vertices in $P$.
+  \lit Thus $P$ has at least $k$ vertices. \pipe $k \leq E(P)$.
+  \lit $\exists_{P}\pr{(Subgraph[P, G]) \land (PathG[P]) \land \pr{k \leq e(P)}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$VertexDegreeCyclek \abr \pr{(k \geq 2) \land \pr{\forall_{v \in V(G)}\pr{k \leq d(v)}}} \implies \pr{\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C]) \land \pr{k + 1 \leq e(C)}}}$
+\begin{enumerate}
+  \lit $VertexDegreePathk$ \pipe $\exists_{P}\pr{(Subgraph[P, G]) \land (PathG[P]) \land \pr{k \leq e(P)}}$
+  \lit The edge formed by $u$ and it's farthest neighbor along $P$ will form a cycle $C$ with $k + 1 \leq e(C)$
+  \lit $\pr{(k \geq 2) \land \pr{\forall_{v \in V(G)}\pr{k \leq d(v)}}} \implies \pr{\exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C]) \land \pr{k + 1 \leq e(C)}}}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$NonCutVertices \abr \pr{n(G) \geq 2} \implies \pr{\exists_{x, y \in V(G)}\pr{(x \neq y) \land (\lnot CutVertex[x, G]) \land \pr{(\lnot CutVertex[y, G])}}}$
+\begin{enumerate}
+  \lit $\exists_{P}(MaximalPath[P, G])$ \pipe $\exists_{u, v}\pr{uvPath[(u, v), P]}$
+  \lit $Connected[P - u]$ \pipe $\lnot CutVertex[u, G]$
+  \lit $(v \neq u) \implies (\lnot CutVertex[v, G])$
+  \lit $(v = u) \implies \ldots$ \pipe Take another maximal path within $P - u$. \pipe Take another endpoint $u'$. \pipe $\lnot CutVertex[u', G]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$EvenGraphMaximalTrailClosed \abr \pr{(EvenGraph[G]) \land (MaximumTrail[W, G])} \implies (ClosedWalk[W, G])$
+\begin{enumerate}
+  \lit Every step in $W$ adds 1 degree to each endpoint.
+  \lit Thus when arriving at a vertex $u$ that is not the initial vertex, $u$ will have an odd count of edges incident to it.
+  \lit Since $u$ has an even degree, then there remains an edge where $W$ can continue.
+  \lit Therefore, the $W$ can only end (become maximal) when it reaches it's initial vertex. \pipe $ClosedWalk[W, G]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$OddVertexTrailDecomposition \abr \pr{(Connected[G]) \land \pr{|\{v \in V(G) \st Odd\pr{d(v)}\}| = 2 k}} \\
+                                  \implies \pr{\exists_{\mathcal{D}}\pr{\pr{\forall_{D \in \mathcal{D}}(Trail[D, G])} \land (Decomposition[\mathcal{D}, G]) \land \pr{|\mathcal{D}| = max(\{k, 1\})}}}$
+\begin{enumerate}
+  \lit $(k = 0) \implies \ldots$
+  \begin{enumerate}
+    \lit $k = 0$ \pipe $EvenGraph[G]$
+    \lit $Connected[G]$ \pipe $\exists!_{H \in \mathcal{H}}(\lnot Trivial[H])$
+    \lit $EulerianEquiv$ \pipe $Eulerian[G]$ \pipe $\exists_{W}(EulerianCircuit[W, G])$
+    \lit $D \abr \pr{V(G), E(W)}$ \pipe $(Trail[D, G]) \land (Decomposition[\{D\}, G]) \land \pr{\{D\} = 1 = max(\{k, 1\})}$
+  \end{enumerate}
+  \lit $(k = 0) \implies \pr{\exists_{\mathcal{D}}\pr{\pr{\forall_{D \in \mathcal{D}}(Trail[D, G])} \land (Decomposition[\mathcal{D}, G]) \land \pr{|\mathcal{D}| = max(\{k, 1\})}}}$
+  \lit $(k > 0) \implies \ldots$
+  \begin{enumerate}
+    \lit Since each trail adds an even degree to each non-endpoint vertex, we need at least $k$ trails to partition the $2 k$ odd vertices.
+    \lit Partition the edges into $k$ trails such that the ends of each trail will land on an odd vertex.
+    \lit Construct a new graph $G'$ where the $k$ trails are connected by an edge. \pipe $\pr{\exists!_{H' \in \mathcal{H}'}(\lnot Trivial[H'])} \land (EvenGraph[G'])$
+    \lit $EulerianEquiv$ \pipe $Eulerian[G']$ \pipe $\exists_{W'}(EulerianCircuit[W', G'])$
+    \lit Construct $\mathcal{D}$ to be the trails in $W'$ separated by $E(G) \setminus E(G')$. \pipe $(Decomposition[\mathcal{D}, G]) \land (\mathcal{D} = k))$
+  \end{enumerate}
+  \lit $(k > 0) \implies \pr{\exists_{\mathcal{D}}\pr{\pr{\forall_{D \in \mathcal{D}}(Trail[D, G])} \land (Decomposition[\mathcal{D}, G]) \land \pr{|\mathcal{D}| = max(\{k, 1\})}}}$
+  \lit $\exists_{\mathcal{D}}\pr{\pr{\forall_{D \in \mathcal{D}}(Trail[D, G])} \land (Decomposition[\mathcal{D}, G]) \land \pr{|\mathcal{D}| = max(\{k, 1\})}}$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
 
+\subsection{Vertex Degrees and Counting}
+$MinDegree[\delta(G), G] \abr \delta(G) = min\pr{\{d(v) \st v \in V(G)\}}$ \\
+$MinDegree[\Delta(G), G] \abr \Delta(G) = max\pr{\{d(v) \st v \in V(G)\}}$ \\
+$RegularG[G] \abr \delta(G) = \Delta(G)$ \\
+$kRegularG[G, k] \abr k = \delta(G) = \Delta(G)$ \\
+$Neighborhood[N(v), v, G] \abr N(v) = \{u \in V(G) \st AdjacentV[\utup{u, v}, G]\}$ \\
+
+$DegreeSumFormula \abr \sum \limits_{v \in V(G)}\pr{d(v)} = 2 e(G)$
+\begin{enumerate}
+  \lit $\sum \limits_{v \in V(G)}\pr{d(v)} = \sum \limits_{v \in V(G)}\pr{|\{e \in E(G) | v \in e\}|} = 2 |E(G)| = 2 e(G)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$AverageDegree \abr \delta(G) \leq \frac{2 e(G)}{n(G)} \leq \Delta(G)$
+\begin{enumerate}
+  \lit$ \delta(G) \leq \frac{2 e(G)}{n(G)} \leq \Delta(G)$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$EvenNumberOfOddVertices \abr Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}$
+\begin{enumerate}
+  \lit $DegreeSumFormula$ \pipe $Even\pr{\sum \limits_{v \in V(G)}\pr{d(v)}}$
+  \lit $\pr{Odd\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}} \implies \pr{Odd\pr{\sum \limits_{v \in V(G)}\pr{d(v)}}} \implies (\bot)$ \pipe $Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$kRegularGraphSize \abr \pr{(kRegularG[G, k]) \land \pr{n(G) = n}} \implies \pr{e(G) = n k / 2}$
+\begin{enumerate}
+  \lit $DegreeSumFormula$ \pipe $2 e(G) = \sum \limits_{i = 1}^{n}\pr{d(v_i)} = \sum \limits_{i = 1}^{n}(k) = n k$ \pipe $e(G) = n k / 2$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$kCube[Q_k, k] \abr \pr{V(Q_k) = \{0, 1\}^k} \land \pr{E(Q_k) = \{\utup{x, y} \st diff(x, y) = 1\}}$ \\
+
+$RegularPartiteSetSize \abr \pr{(k > 0) \land (kRegularG[G, k]) \land (Bipartiton[\{X, Y\}, G])} \implies (|X| = |Y|)$
+\begin{enumerate}
+  \lit $kRegularG[G, k]$ \pipe $\pr{e(G) = 2 |X|} \land \pr{e(G) = 2 |Y|}$ \pipe $|X| = |Y|$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+% Vertex-deleted subgraphs and results
 
 
+\subsection{Trees}
+$Acyclic[G] \abr \lnot \exists_{C}\pr{(Subgraph[C, G]) \land (CycleG[C])}$ \\
+$Forest[G] \abr Acyclic[G]$ \\
+$Tree[G] \abr (Connected[G]) \land (Acyclic[G])$ \\
+$Leaf[v, G] \abr d(v) = 1$ \\
+$SpanningSubgraph[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) = V(G)}$ \\
+$SpanningTree[H, G] \abr (SpanningSubgraph[H, G]) \land (Tree[G])$ \\
+% Components of a forest are trees
+% A graph with no cycles have no odd cycles. By BipartiteEquiv, trees and forest are bipartite
+% A path is a tree iff \Delta(G) = 2
+% A star is a tree \cong K_{1, n - 1}
+
+$LeafExistence \abr \pr{(Tree[G]) \land \pr{2 \leq n(G)}} \implies \pr{2 \leq |\{v \in V(G) \st Leaf[v, G]\}|}$
+\begin{enumerate}
+  \lit $Tree[G]$ \pipe $(Connected[G]) \land (Acyclic[G])$
+  \lit $\pr{2 \leq n(G)} \land (Connected[G])$ \pipe $\exists_{e}\pr{e \in E(G)}$ \pipe Let $P$ be the maximal path of $e$.
+  \lit A maximal non-trivial path with no cycles has two endpoints. \pipe $2 \leq |\{v \in V(G) \st Leaf[v, G]\}|$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$LeafDeletion \abr \pr{(Tree[G]) \land \pr{n(G) = n} \land (Leaf[v, G])} \implies \pr{(Tree[G - v]) \land \pr{n(G - v) = n - 1}}$
+\begin{enumerate}
+  \lit $Tree[G]$ \pipe $(Connected[G]) \land (Acyclic[G])$
+  \lit Since $d(v) = 1$, $v$ does not belong to any path connecting any other two $u_1, u_2 \in V(G)$. \pipe $Connected[G - v]$
+  \lit Since deleting a vertex cannot create a cycle. \pipe $Acyclic[G - v]$
+  \lit $Tree[G - v]$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+$TreeEquiv \abr \pr{n = n(G) \geq 1} \implies
+\left(\begin{array}{ll}
+  (A) \phantom{-} (Tree[G]) \hfill \iff \hfill \\
+  (B) \phantom{-} \pr{(Connected[G]) \land \pr{e(G) = n - 1}} \hfill \iff \hfill \\
+  (C) \phantom{-} \pr{(Acyclic[G]) \land \pr{e(G) = n - 1}} \hfill \iff \hfill \\
+  (D) \phantom{-} \pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}}
+\end{array}\right)$ \\
+\begin{enumerate}
+  \lit $(Tree[G]) \implies \ldots$    $[A \implies B]$
+  \begin{enumerate}
+    \lit $Tree[G]$ \pipe $Connected[G]$
+    \lit $(n = 1) \implies \pr{e(G) = 0 = n - 1}$
+    \lit $\pr{(n > 1) \land \pr{\forall_{G'}\pr{\pr{\pr{n(G') < n} \land (Tree[G'])} \implies \pr{e(G') = n(G') - 1}}}} \implies \ldots$
+    \begin{enumerate}
+      \lit $LeafExistence$ \pipe $\exists_{v \in V(G)}(Leaf[v, G])$
+      \lit $LeafDeletion$ \pipe $Tree[G - v]$
+      \lit By IH, $e(G - v) = (n - 1) - 1 = n - 2$
+      \lit $Leaf[v, G]$ \pipe $e(G) = e(G - v) + 1 = n - 1$
+    \end{enumerate}
+    \lit $\pr{(n > 1) \land \pr{\forall_{G'}\pr{\pr{\pr{n(G') < n} \land (Tree[G'])} \implies \pr{e(G') = n(G') - 1}}}} \implies \pr{e(G) = n - 1}$
+    \lit By induction, $e(G) = n - 1$ \pipe $(Connected[G]) \land \pr{e(G) = n - 1}$
+  \end{enumerate}
+  \lit $(Tree[G]) \implies \pr{(Connected[G]) \land \pr{e(G) = n - 1}}$
+  \lit $\pr{(Connected[G]) \land \pr{e(G) = n - 1}} \implies \ldots$    $[B \implies C]$
+  \begin{enumerate}
+    \lit Delete all edges that form a cycle in $G$ to form $G'$. \pipe $Acyclic[G']$
+    \lit $(Connected[G]) \land (CutEdgeEquiv)$ \pipe $Connected[G']$
+    \lit $(Connected[G']) \land (Acyclic[G']) \land ([A \implies B])$ \pipe $e(G') = n - 1$
+    \lit By construction of $G'$ and $e(G) = n - 1 = e(G')$, $G = G'$. \pipe $Acyclic[G]$
+    \lit $(Acyclic[G]) \land \pr{e(G) = n - 1}$
+  \end{enumerate}
+  \lit $\pr{(Connected[G]) \land \pr{e(G) = n - 1}} \implies \pr{(Acyclic[G]) \land \pr{e(G) = n - 1}}$
+  \lit $\pr{(Acyclic[G]) \land \pr{e(G) = n - 1}} \implies \ldots$    $[C \implies A]$
+  \begin{enumerate}
+    \lit $Acyclic[G]$
+    \lit $Components[\langle G_i \rangle_{i = 1}^k, G]$ \pipe $\sum \limits_{i = 1}^k\pr{n(G_i)} = n(G) = n$
+    \lit $\forall_{i \in \mathbb{N}_1^k}(Component[G_i, G])$ \pipe $\forall_{i \in \mathbb{N}_1^k}(Connected[G_i])$
+    \lit $\forall_{i \in \mathbb{N}_1^k}\pr{(Connected[G_i]) \land (Acyclic[G_i])}$
+    \lit $([A \implies B]) \land \pr{\forall_{i \in \mathbb{N}_1^k}\pr{(Connected[G_i]) \land (Acyclic[G_i])}}$ \pipe $\forall_{i \in \mathbb{N}_1^k}\pr{e(G_i) = n(G_i) - 1}$
+    \lit $e(G) = \sum \limits_{i = 1}^k\pr{e(G_i)} = \sum \limits_{i = 1}^k\pr{n(G_i) - 1} = n - k$
+    \lit $\pr{e(G) = n - k} \land \pr{e(G) = n - 1}$ \pipe $k = 1$ \pipe $Connected[G]$
+    \lit $(Connected[G]) \land (Acyclic[G])$ \pipe $Tree[G]$
+  \end{enumerate}
+  \lit $\pr{(Acyclic[G]) \land \pr{e(G) = n - 1}} \implies (Tree[G])$
+  \lit $(Tree[G]) \implies \ldots$    $[A \implies D]$
+  \begin{enumerate}
+    \lit $Tree[G]$ \pipe $(Connected[G]) \land (Acyclic[G])$
+    \lit $Connected[G]$ \pipe $\forall_{u, v \in V(G)} \exists_{P}\pr{uvPath[(u, v), P]}$
+    \lit $\pr{\pr{u, v \in V(G)} \land \pr{uvPath[(u, v), P_1]} \land \pr{uvPath[(u, v), P_2]}} \implies \ldots$
+    \begin{enumerate}
+      \lit $(P_1 \neq P_2) \implies \ldots$
+      \begin{enumerate}
+        \lit Take the shortest subpaths $P'_1, P'_2$ of $P_1, P_2$ that ends on the same endpoints $u', v'$.
+        \lit By the extremal choice, $P'_1, P'_2$ share the same endpoints, but no internal vertices. \pipe $Cycle[P'_1 \cup P'_2]$
+        \lit $(Acyclic[G]) \land (Cycle[P'_1 \cup P'_2])$ \pipe $\bot$
+      \end{enumerate}
+      \lit $(P_1 \neq P_2) \implies (\bot)$ \pipe $P_1 = P_2$
+    \end{enumerate}
+    \lit $\pr{\pr{u, v \in V(G)} \land \pr{uvPath[(u, v), P_1]} \land \pr{uvPath[(u, v), P_2]}} \implies (P_1 = P_2)$
+  \end{enumerate}
+  \lit $(Tree[G]) \implies \pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}}$
+  \lit $\pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}} \implies \ldots$    $[D \implies A]$
+  \begin{enumerate}
+    \lit $\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}$ \pipe $\forall_{u, v \in V(G)} \exists_{P}\pr{uvPath[(u, v), P]}$ \pipe $Connected[G]$
+    \lit $(\lnot Acyclic[G]) \implies \ldots$
+    \begin{enumerate}
+      \lit $\exists_{C}\pr{Cycle[C] \land (Subgraph[C, G])}$
+      \lit $\forall_{c_1, c_2 \in C} \exists_{P, P'}\pr{(P \neq P') \land \pr{uvPath[(c_1, c_2), P]} \land \pr{uvPath[(c_1, c_2), P']}}$
+      \lit $\pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}} \land \pr{\forall_{c_1, c_2 \in C} \exists_{P, P'}\pr{(P \neq P') \land \pr{uvPath[(c_1, c_2), P]} \land \pr{uvPath[(c_1, c_2), P']}}}$ \pipe $\bot$
+    \end{enumerate}
+    \lit $(\lnot Acyclic[G]) \implies (\bot)$ \pipe $Acyclic[G]$
+    \lit $(Connected[G]) \land (Acyclic[G])$
+  \end{enumerate}
+  \lit $\pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}} \implies (Tree[G])$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+TODO: p 69 corollaries
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newpage
 
 
@@ -497,7 +754,7 @@ $DegreeCorollaries \abr \pr{Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}} \land \p
 \begin{enumerate}
   \lit $HandshakingLemma$ \pipe $Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}$
   \lit $SumDegrees$ \pipe $\pr{\delta(G) \leq \floor{2 e(G) / n}} \land \pr{\Delta(G) \geq \ceil{2 e(G) / n}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Walk[W, G] \abr \pr{\forall_{i \in \mathbb{N}_1^{|W|}}\pr{w_i \in V(G)}} \land \pr{\forall_{i \in \mathbb{N}_1^{|W| - 1}}\pr{\utup{v_i, v_{i + 1}} \in E(G)}}$ \\
 $WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
@@ -549,7 +806,7 @@ $CyclePartition \abr \pr{\forall_{v \in V(G)}\pr{Even\pr{d(v)}}} \iff \pr{\exist
   \end{enumerate}
   \lit $\pr{\forall_{v \in V(G)}\pr{Even\pr{d(v)}}} \implies \pr{\exists_{\mathcal{C}}\pr{\pr{\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land \pr{CycleE[C_E, (C, G)]}\}} \land \pr{Partition[\mathcal{E}, E(G)]}}}$
   \lit $\pr{\forall_{v \in V(G)}\pr{Even\pr{d(v)}}} \iff \pr{\exists_{\mathcal{C}}\pr{\pr{\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land \pr{CycleE[C_E, (C, G)]}\}} \land \pr{Partition[\mathcal{E}, E(G)]}}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $MantelThm \abr \pr{(|G| = n) \land \pr{e(G) > \floor{n^2 / 4}}} \implies \pr{\exists_{W}(Triangle[W, G])}$
 \begin{enumerate}
@@ -564,10 +821,10 @@ $MantelThm \abr \pr{(|G| = n) \land \pr{e(G) > \floor{n^2 / 4}}} \implies \pr{\e
     \lit $\pr{e(G) > \floor{n^2 / 4}} \land \pr{e(G) \leq n^2 /4}$ \pipe $\bot$
   \end{enumerate}
   \lit $\pr{\lnot \exists_{W}(Triangle[W, G])} \implies (\bot)$ \pipe $\exists_{W}(Triangle[W, G])$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Distance[d(x, y), x, y, G] \abr d(x, y) = min\pr{\{e(P) \st \exists_{V}\pr{PathXY[P, (x, y), V G]}\}}$ \\
-$DistanceMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \in V(G)}} \implies 
+$DistanceMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \in V(G)}} \implies
 \left(\begin{array}{ll}
   \pr{d(x, y) \geq 0} \hfill \land \hfill \\
   \pr{\pr{d(x, y) = 0} \iff (x = y)} \hfill \land \hfill \\
@@ -604,7 +861,7 @@ $UnionG(G \cup H, G, H) \abr \pr{V(G \cup H) = V(G) \cup V(H)} \land \pr{E(G \cu
 $kG[k G, k, G] \abr k G = \bigcup \limits_{i \in \mathbb{N}_1^k}\pr{uniqueCopy(G, i)}$ \\
 $Join[G + H, G, H,] \abr \pr{V(G + H) = V(G \cup H)} \land \pr{E(G + H) = E(G \cup H) \cup \{\utup{g, h} \st \pr{g \in V(G)} \land \pr{h \in V(H)}\}}$ \\
 
-$ComponentEquiv \abr \pr{(Component[W, G]) \land (x \in W)} \implies 
+$ComponentEquiv \abr \pr{(Component[W, G]) \land (x \in W)} \implies
 \left(\begin{array}{ll}
   \pr{W = \{y \in V(G) \st \exists_{P, V}\pr{PathXY[P, (x, y), V, G]}\}} \hfill \land \hfill \\
   \pr{W = \{y \in V(G) \st d(x, y) \in \mathbb{N}\}} \hfill \land \hfill \\
@@ -629,8 +886,8 @@ $OddDeg \abr Even\pr{|\{v \st Odd\pr{d(v)}\}|}$ \\
   \lit SumDeg
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} = 
-\begin{cases} 
+$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} =
+\begin{cases}
   1 & x_i x_j \in E(G) \\
   0 &  x_i x_j \notin E(G) \\
 \end{cases}\right]$ \\
@@ -651,27 +908,27 @@ $SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
 
 $GraphPower[G^r, r, G] \abr \pr{V = V(G)} \land \pr{E = \{\utup{x, y} \st d(x, y) \leq r\}} \land \pr{G^r = (V, E)}$ \\
 $GraphSum[G_1 + G_2, G_1, G_2] \abr \pr{V = V(G_1) \cup V(G_2)} \land \pr{E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st \pr{x \in V(G_1)} \land y \in V(G_2)\}} \land \pr{G_1 + G_2 = (V, E)}$ \\
-$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr 
+$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
   \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{(y_1 = y_2) \land \pr{\utup{x_1, x_2} \in E(G_1)}}\}} \hfill \land \hfill \\
   \pr{G_1 \times G_2 = (V, E)} \\
 \end{array}\right)$ \\
-$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr 
+$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
   \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{\utup{x_1, x_2} \in E(G_1)}\}} \hfill \land \hfill \\
   \pr{G_1 \circ G_2 = (V, E)} \\
 \end{array}\right)$ \\
-$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr 
+$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr
 \left(\begin{array}{ll}
   \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
   \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{\utup{x_1, x_2} \in E(G_1)} \land \pr{\utup{y_1, y_2} \in E(G_2)}\}} \hfill \land \hfill \\
   \pr{G_1 \land G_2 = (V, E)} \\
 \end{array}\right)$ \\
 
-$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B = 
-\begin{bmatrix} 
+$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B =
+\begin{bmatrix}
   a_{1,1} B & \dots & a_{1, n} B \\
   \vdots & \ddots & \vdots \\
   a_{m, 1} B & \dots & a_{m, n} B \\
@@ -1373,7 +1630,7 @@ $ConjugatesMultiplicity \abr (g \in G) \implies \pr{o(G) = o\pr{C(g)} |C_g|}$
   \lit $(x, y \in G) \implies \pr{(x^{-1} g x = y^{-1} g y) \iff \pr{C(g) x = C(g) y}}$ \cont
   \lit \cont $\pr{Func[\phi, C_g, G : C(g)]} \land \pr{Inj[\phi, C_g, G : C(g)]} \land \pr{Surj[\phi, C_g, G : C(g)]}$ \pipe $Bij[\phi, C_g, G : C(g)]$ % TODO ANALYZE
   \lit $\exists_{\phi}\pr{Bij[\phi, C_g, G : C(g)]}$ \pipe $|C_g| = |G : C(g)|$
-  \lit $(LagrangeTheorem) \land (SubgroupCenter) \land \pr{|C_g| = |G : C(g)|}$ \pipe $o(G) = o\pr{C(g)} |G : C(g)|$ \pipe $o(G) = o\pr{C(g)} |C_g|$ 
+  \lit $(LagrangeTheorem) \land (SubgroupCenter) \land \pr{|C_g| = |G : C(g)|}$ \pipe $o(G) = o\pr{C(g)} |G : C(g)|$ \pipe $o(G) = o\pr{C(g)} |C_g|$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 
@@ -1420,7 +1677,7 @@ $UnionConjugacyClassesNormalSubgroup \abr (NormalSubgroup[H, G, *]) \implies \pr
   %  \lit $\pr{(h \in H) \land (g \in G)} \implies (g^{-1} h g \in H)$ \pipe $\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)$
   %  \lit $(Subgroup[H, G, *]) \land \pr{\forall_{h \in H} \forall_{g \in G}(g^{-1} h g \in H)}$ \pipe $NormalSubgroup[H, G, *]$
   %\end{enumerate}
-  %\lit 
+  %\lit
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $NormalSubgroupCosetEquiv \abr (NormalSubgroup[H, G, *]) \iff \pr{\forall_{g \in G}(g H = H g)}$
@@ -1563,7 +1820,7 @@ $SecondIsoLemma \abr \pr{(Subgroup[H, G, *]) \land (NormalSubgroup[N, G, *])} \i
   \lit $(h_1 n_1, h_2 n_2 \in H N) \implies \pr{(h_1 n_1) (h_2 n_2) \in N}$ \pipe $\forall_{h_1 n_1, h_2 n_2 \in H N}\pr{(h_1 n_1) (h_2 n_2) \in N}$
   \lit $(h n \in H N) \implies \ldots$
   \begin{enumerate}
-    \lit $(Subgroup[H, G, *]) \land (Group[N, *])$ \pipe $(h^{-1} \in G) \land (n^{-1} \in N)$ 
+    \lit $(Subgroup[H, G, *]) \land (Group[N, *])$ \pipe $(h^{-1} \in G) \land (n^{-1} \in N)$
     \lit $(NormalSubgroup[N, G, *]) \land (h^{-1} \in G) \land (n^{-1} \in N)$ \pipe  $h n^{-1} h^{-1} \in N$
     \lit $(h n)^{-1} = n^{-1} h^{-1} = (h^{-1} h) n^{-1} h^{-1} = h^{-1} (h n^{-1} h^{-1}) \in H N$ \pipe $(h n)^{-1} \in H N$
   \end{enumerate}
