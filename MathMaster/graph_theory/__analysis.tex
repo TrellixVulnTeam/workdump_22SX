@@ -105,6 +105,41 @@
 \chapter{Graph Theory}
 
 \section{Graphs}
+\subsection{**Graph operations**}
+$GraphPower[G^r, r, G] \abr \pr{V = V(G)} \land \pr{E = \{\utup{x, y} \st d(x, y) \leq r\}} \land \pr{G^r = (V, E)}$ \\
+$GraphSum[G_1 + G_2, G_1, G_2] \abr \pr{V = V(G_1) \cup V(G_2)} \land \pr{E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st \pr{x \in V(G_1)} \land y \in V(G_2)\}} \land \pr{G_1 + G_2 = (V, E)}$ \\
+$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr
+\left(\begin{array}{ll}
+  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
+  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{(y_1 = y_2) \land \pr{\utup{x_1, x_2} \in E(G_1)}}\}} \hfill \land \hfill \\
+  \pr{G_1 \times G_2 = (V, E)} \\
+\end{array}\right)$ \\
+$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr
+\left(\begin{array}{ll}
+  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
+  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{\utup{x_1, x_2} \in E(G_1)}\}} \hfill \land \hfill \\
+  \pr{G_1 \circ G_2 = (V, E)} \\
+\end{array}\right)$ \\
+$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr
+\left(\begin{array}{ll}
+  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
+  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{\utup{x_1, x_2} \in E(G_1)} \land \pr{\utup{y_1, y_2} \in E(G_2)}\}} \hfill \land \hfill \\
+  \pr{G_1 \land G_2 = (V, E)} \\
+\end{array}\right)$ \\
+
+$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B =
+\begin{bmatrix}
+  a_{1,1} B & \dots & a_{1, n} B \\
+  \vdots & \ddots & \vdots \\
+  a_{m, 1} B & \dots & a_{m, n} B \\
+\end{bmatrix} \in \mathbb{R}^{m p} \times \mathbb{R}^{n q})$ \\
+
+$AdjacencyKroneckerIdentity \abr \forall_{G, H}\pr{\mathcal{A}(G \land H) = \mathcal{A}(H) \otimes \mathcal{A}(G)}$
+\begin{enumerate}
+  \lit TODO: https://archive.siam.org/books/textbooks/OT91sample.pdf, etc.
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
+
+
 \subsection{Graphs}
 $SimpleGraph[(V, E)] \abr (Set[V]) \land (E \subseteq \{\utup{a, b} \in V^{\{2\}} \st a \neq b\})$ \\
 $VertexSet[V\pr{(V, E)}, (V, E)] \abr \pr{SimpleGraph[(V, E)]} \land \pr{V\pr{(V, E)} = V}$ \\
@@ -179,6 +214,10 @@ $Decomposition[\mathcal{D}, G] \abr \pr{\forall_{D \in \mathcal{D}}(Subgraph[D, 
 % Petersen graph (V = 5 C 2) \land (E = x, y \st x \cap y = \emptyset)
 % Petersen nonadjacent x, y \implies \exists!_{z}(z is a common neighbor of x, y)
 % $CycleLengths[L, G] \abr L = \{|H| \st (Subgraph[H, G]) \land (CycleG[H])\}$ \\ ???
+TODO: ADD SPECIAL GRAPHS
+%$FanG[F_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{F_n = (V, E)}$ \\
+%$WheelG[W_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{W_n = (V, E)}$ \\
+%$StarG[S_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land (E = \{\utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}\}) \land \pr{S_n = (V, E)}$ \\
 
 $Girth[girth(G), G] \abr (CycleLengths[L, G]) \land \left(girth(G) =
 \begin{cases}
@@ -681,7 +720,38 @@ $TreeEquiv \abr \pr{n = n(G) \geq 1} \implies
   \lit $\pr{\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}} \implies (Tree[G])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
 
-TODO: p 69 corollaries
+$TreeEquivCorollaries \abr
+\left(\begin{array}{ll}
+  (A) \phantom{-} \pr{(Tree[G]) \implies \pr{\forall_{e \in E(G)}(CutEdge[e, G])}} \hfill \land \hfill \\
+  (B) \phantom{-} \pr{(Tree[G]) \implies \pr{\exists!_{C}\pr{(Cycle[C]) \land (Subgraph[C, G + e])}}} \hfill \land \hfill \\
+  (C) \phantom{-} \pr{(Connected[G]) \implies \pr{\exists_{T}(SpanningTree[T, G])}}
+\end{array}\right)$
+\begin{enumerate}
+  \lit $(Tree[G]) \implies \ldots$    $[A]$
+  \begin{enumerate}
+    \lit $Tree[G]$ \pipe $Connected[G]$
+    \lit $TreeEquiv$ \pipe $\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}$ \pipe $\forall_{\utup{u, v} \in E(G)}(CutEdge[\utup{u, v}, G])$
+  \end{enumerate}
+  \lit $(Tree[G]) \implies \pr{\forall_{e \in E(G)}(CutEdge[e, G])}$
+  \lit $(Tree[G]) \implies \ldots$    $[B]$
+  \begin{enumerate}
+    \lit $Tree[G]$ \pipe $Connected[G]$
+    \lit $TreeEquiv$ \pipe $\forall_{u, v \in V(G)} \exists!_{P}\pr{uvPath[(u, v), P]}$ \pipe $\exists!_{C}\pr{(Cycle[C]) \land (Subgraph[C, G + e])}$
+  \end{enumerate}
+  \lit $(Tree[G]) \implies \pr{\exists!_{C}\pr{(Cycle[C]) \land (Subgraph[C, G + e])}}$
+  \lit $(Connected[G]) \implies \ldots$    $[C]$
+  \begin{enumerate}
+    \lit Delete all edges that form a cycle in $G$ to form $G'$. \pipe $(Acyclic[G']) \land \pr{V(G') = V(G)})$
+    \lit $V(G') = V(G)$ \pipe $SpanningSubgraph[G', G]$
+    \lit $(Connected[G]) \land (CutEdgeEquiv)$ \pipe $Connected[G']$
+    \lit $(Connected[G']) \land (Acyclic[G'])$ \pipe $Tree[G']$
+    \lit $(SpanningSubgraph[G', G]) \land (Tree[G'])$ \pipe $SpanningTree[G', G]$ \pipe $\exists_{T}(SpanningTree[T, G])$
+  \end{enumerate}
+  \lit $(Connected[G]) \implies \pr{\exists_{T}(SpanningTree[T, G])}$
+\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\ 
+
+CONTHERE p. 69 
+% Spanning tree theorems
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -698,63 +768,6 @@ TODO: p 69 corollaries
 \newpage
 
 
-$ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
-$Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
-$CycleW[W, G] \abr (ClosedWalk[W, G]) \land \pr{\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})} \land \pr{\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}\pr{(i \neq j) \implies (w_i \neq w_j)}} \land (|W| - 1 \geq 3)$ \\
-$CycleE[E, (W, G)] \abr (CycleW[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
-$EvenCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Even(|W| - 1)}$ \\
-$OddCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Odd(|W| - 1)}$ \\
-$TriangleW[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
-
-
-
-
-$Subgraph[H, G] \abr \pr{V(H) \subseteq V(G)} \land \pr{E(H) \subseteq E(G)}$ \\
-$SubgraphStrict[H, G] \abr (Subgraph[H, G]) \land \pr{V(H) \neq V(G)}$ \\
-
-$Order[|G|, G] \abr |G| = |V(G)|$ \\
-$Size[e(G), G] \abr e(G) = |E(G)|$ \\
-$DisjointEdges[E_G(U, W), U, W, G] \abr \pr{U, W \subseteq V(G)} \land (U \cap W = \emptyset) \land \pr{E_G(U, W) = \{e \in E(G) \st \exists_{u \in U} \exists_{w \in W}(Incident[e, u, w, G])\}}$ \\
-$DisjointEdgesSize[e_G(U, W), U, W, G] \abr \pr{DisjointEdges[E_G(U, W), U, W, G]} \land \pr{e_G(U, W) = |E_G(U, W)|}$ \\
-$Isomorphic[H, G] \text{\ or\ } H \cong G \abr \exists_{\phi}\pr{\pr{Bijection[\phi, V(H), V(G)]} \land \pr{\forall_{x, y \in V(H)}\pr{\pr{\utup{x, y} \in E(H)} \iff \pr{\utup{\phi(x), \phi(y)} \in E(G)}}}}$ \\
-\notation{x \in G}{x \in V(G)} \\
-\notation{G^n}{Order[n, G]} \\
-\notation{G(n, m)}{(Order[n, G]) \land (Size[m, G])} \\
-
-$SizeOrderN \abr \pr{(Graph[G]) \land (n = |G|) \land \pr{m = e(G)}} \implies (0 \leq m \leq {n \choose 2})$ \\
-\begin{enumerate}
-  \lit $0 \leq m \leq \sum \limits_{i = 0}^{n - 1}(i) = \frac{(n-1)(n)}{2} = {n \choose 2}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$CompleteG[K_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = {n \choose 2}}$ \\
-$EmptyG[E_n, n] \abr (|K_n| = n) \land \pr{e(K_n) = 0}$ \\
-$TrivialG[G] \abr G = K_1 = E_1$ \\
-$ComplementG[\bar{G}, G] \abr \bar{G} = \pr{V, V^{\{2\}} \setminus \pr{E \cup \{\utup{x, x} \st x \in V(G)\}}}$ \\
-$OpenNbhd[\Gamma_G(x), x, G] \abr \Gamma_G(x) = \{y \in V(G) \st AdjacentV[(y, x), G]\}$ \\
-$ClosedNbhd[\Gamma_G^*(x), x, G] \abr \pr{OpenNbhd[\Gamma_G(x), x, G]} \land \pr{\Gamma_G^*(x) = \Gamma_G(x) \cup \{x\}}$ \\
-$Degree[d(x), x, G] \abr d(x) = |\Gamma_G(x)|$ \\
-$MinDegree[\delta(G), G] \abr \delta(G) = min\pr{\{d(x) \st x \in V(G)\}}$ \\
-$MaxDegree[\Delta(G), G] \abr \Delta(G) = max\pr{\{d(x) \st x \in V(G)\}}$ \\
-$IsolatedV[v, G] \abr d(v) = 0$ \\
-$KRegularG[G, k] \abr k = \delta(G) = \Delta(G)$ \\
-$RegularG[G] \abr \exists_{k \in \mathbb{N}}(KRegularG[G, k])$ \\
-$DegreeSequence[\pr{d(x_i)}_1^n, G] \abr (Order[n, G]) \land \pr{\pr{\pr{d(x_i)}_1^n} = sort\pr{\{d(x) \st x \in V(G)\}}} \land \pr{\delta(G) = d(x_1) \leq d(x_n) = \Delta(G)}$ \\
-
-$SumDegrees \abr \sum \limits_{v \in V(G)}\pr{d(v)} = 2 e(G)$ \\
-\begin{enumerate}
-  \lit $\sum \limits_{v \in V(G)}\pr{d(v)} = \sum \limits_{v \in V(G)}\pr{|\{e \in E(G) | v \in e\}|} = 2 |E(G)| = 2 e(G)$ \\
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$HandshakingLemma \abr \sum \limits_{v \in V(G)}\pr{d(v)} \equiv 0 \pmod{2}$ \\
-\begin{enumerate}
-  \lit SumDegrees \pipe $\sum \limits_{v \in V(G)}\pr{d(v)} = 2 e(G)$ \pipe $\exists_{k \in \mathbb{Z}}\pr{\sum \limits_{v \in V(G)}\pr{d(v)} - 0 = 2 k}$ \pipe $\sum \limits_{v \in V(G)}\pr{d(v)} \equiv 0 \pmod{2}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$DegreeCorollaries \abr \pr{Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}} \land \pr{\delta(G) \leq \floor{2 e(G) / n}} \land \pr{\Delta(G) \geq \ceil{2 e(G) / n}}$
-\begin{enumerate}
-  \lit $HandshakingLemma$ \pipe $Even\pr{|\{v \in V(G) \st Odd\pr{d(v)}\}|}$
-  \lit $SumDegrees$ \pipe $\pr{\delta(G) \leq \floor{2 e(G) / n}} \land \pr{\Delta(G) \geq \ceil{2 e(G) / n}}$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
 $Walk[W, G] \abr \pr{\forall_{i \in \mathbb{N}_1^{|W|}}\pr{w_i \in V(G)}} \land \pr{\forall_{i \in \mathbb{N}_1^{|W| - 1}}\pr{\utup{v_i, v_{i + 1}} \in E(G)}}$ \\
 $WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
@@ -869,111 +882,10 @@ $ComponentEquiv \abr \pr{(Component[W, G]) \land (x \in W)} \implies
 \end{array}\right)$ \\
 
 
-%%%%%%%%%%%%
 
-
-
-$Degree[d(v), v, G] \abr d(v) = |\{e \in E(G) | v \in e\}|$ \\
-$Regular[G, r] \abr \forall_{v \in V(G)}\pr{d(v) = r}$ \\
-
-$SumDeg \abr \sum \limits_{v \in V(G)}\pr{d(v)} = 2 |E(G)|$ \\
-\begin{enumerate}
-  \lit $\sum \limits_{v \in V(G)}\pr{d(v)} = \sum \limits_{v \in V(G)}\pr{|\{e \in E(G) | v \in e\}|} = 2 |E(G)|$ \\
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$OddDeg \abr Even\pr{|\{v \st Odd\pr{d(v)}\}|}$ \\
-\begin{enumerate}
-  \lit SumDeg
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$AdjacencyMatrix[\mathcal{A}(G), G] \abr \mathcal{A}(G) = \left[a_{i, j} =
-\begin{cases}
-  1 & x_i x_j \in E(G) \\
-  0 &  x_i x_j \notin E(G) \\
-\end{cases}\right]$ \\
-
-
-$FanG[F_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{F_n = (V, E)}$ \\
-$WheelG[W_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land \pr{E = E(P_n) \cup \{\utup{v_n, v_1}\} \cup \utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}} \land \pr{W_n = (V, E)}$ \\
-$StarG[S_n, n] \abr \pr{V = V(P_n) \cup \{v_0\}} \land (E = \{\utup{v_0, v_i} \st i \in \mathbb{N}_1^n\}\}) \land \pr{S_n = (V, E)}$ \\
-
-
-$SnIsoKmn \abr S_n \cong K_{1, n} \cong K_{n, 1}$
-\begin{enumerate}
-  \lit TODO $\phi = \ldots$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-
-
-
-$GraphPower[G^r, r, G] \abr \pr{V = V(G)} \land \pr{E = \{\utup{x, y} \st d(x, y) \leq r\}} \land \pr{G^r = (V, E)}$ \\
-$GraphSum[G_1 + G_2, G_1, G_2] \abr \pr{V = V(G_1) \cup V(G_2)} \land \pr{E = E(G_1) \cup E(G_2) \cup \{\utup{x, y} \st \pr{x \in V(G_1)} \land y \in V(G_2)\}} \land \pr{G_1 + G_2 = (V, E)}$ \\
-$GraphCartesian[G_1 \times G_2, G_1, G_2] \abr
-\left(\begin{array}{ll}
-  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
-  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{(y_1 = y_2) \land \pr{\utup{x_1, x_2} \in E(G_1)}}\}} \hfill \land \hfill \\
-  \pr{G_1 \times G_2 = (V, E)} \\
-\end{array}\right)$ \\
-$GraphComposition[G_1 \circ G_2, G_1, G_2] \abr
-\left(\begin{array}{ll}
-  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
-  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{(x_1 = x_2) \land \pr{\utup{y_1, y_2} \in E(G_2)}} \lor \pr{\utup{x_1, x_2} \in E(G_1)}\}} \hfill \land \hfill \\
-  \pr{G_1 \circ G_2 = (V, E)} \\
-\end{array}\right)$ \\
-$GraphConjunction[G_1 \land G_2, G_1, G_2] \abr
-\left(\begin{array}{ll}
-  \pr{V = V(G_1) \times V(G_2)} \hfill \land \hfill \\
-  \pr{E = \{\pr{(x_1, y_1), (x_2, y_2)} \st \pr{\utup{x_1, x_2} \in E(G_1)} \land \pr{\utup{y_1, y_2} \in E(G_2)}\}} \hfill \land \hfill \\
-  \pr{G_1 \land G_2 = (V, E)} \\
-\end{array}\right)$ \\
-
-$KroneckerProduct[A \otimes B, A, B] \abr (Matrix[A, m, n]) \land (Matrix[B, p, q]) \land (A \otimes B =
-\begin{bmatrix}
-  a_{1,1} B & \dots & a_{1, n} B \\
-  \vdots & \ddots & \vdots \\
-  a_{m, 1} B & \dots & a_{m, n} B \\
-\end{bmatrix} \in \mathbb{R}^{m p} \times \mathbb{R}^{n q})$ \\
-
-$KroneckerProperties \abr \ldots$
-\begin{enumerate}
-  \lit TODO: https://archive.siam.org/books/textbooks/OT91sample.pdf
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$AdjacencyKroneckerIdentity \abr \forall_{G, H}\pr{\mathcal{A}(G \land H) = \mathcal{A}(H) \otimes \mathcal{A}(G)}$
-\begin{enumerate}
-  \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-acyclic graph
-
-$Tree[G] \abr (Connected[G]) \land \pr{\lnot \exists_{n, V_n}(CycleG[V_n, n, G])}$ \\
-
-forest  -> decomponents into trees
-
-p = |V(G)|
-q = |E(G)|
-
-
-
-$GraphEquivalences \abr (Tree[G]) \iff ()$ \\
-\begin{enumerate}
-  \lit TODO
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-
-
-
-
-
-% v \in G \abr v \in V(G)
-% G^n \abr Order(n)
-% G(n, m) \abr Order(n) \land Size(m)
-
-
-
-
-
-
+\newpage
+\newpage
+\newpage
 
 
 \chapter{Abstract Algebra}
