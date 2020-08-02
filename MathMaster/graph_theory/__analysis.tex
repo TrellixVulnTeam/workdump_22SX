@@ -673,6 +673,7 @@ $TreeEquiv \abr \pr{n = n(G) \geq 1} \implies
     \lit $(Connected[G]) \land (CutEdgeEquiv)$ \pipe $Connected[G']$
     \lit $(Connected[G']) \land (Acyclic[G']) \land ([A \implies B])$ \pipe $e(G') = n - 1$
     \lit By construction of $G'$ and $e(G) = n - 1 = e(G')$, $G = G'$. \pipe $Acyclic[G]$
+    \lit Equivalently, $G' = G - E = G - \emptyset = G$ \pipe $G = G'$
     \lit $(Acyclic[G]) \land \pr{e(G) = n - 1}$
   \end{enumerate}
   \lit $\pr{(Connected[G]) \land \pr{e(G) = n - 1}} \implies \pr{(Acyclic[G]) \land \pr{e(G) = n - 1}}$
@@ -768,32 +769,7 @@ CONTHERE p. 69
 \newpage
 
 
-
-$Walk[W, G] \abr \pr{\forall_{i \in \mathbb{N}_1^{|W|}}\pr{w_i \in V(G)}} \land \pr{\forall_{i \in \mathbb{N}_1^{|W| - 1}}\pr{\utup{v_i, v_{i + 1}} \in E(G)}}$ \\
-$WalkEV[(x, y), (W, G)] \abr (Walk[W, G]) \land (x, y) = (w_1, w_{|W|})$ \\
-$WalkL[l, (W, G)] \abr (Walk[W, G]) \land (l = |W| - 1)$ \\
-$TrailW[W, G] \abr (Walk[W, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{|W| - 1}}\pr{(i \neq j) \implies (\utup{w_i, w_{i + 1}} \neq \utup{w_j, w_{j + 1}})}}$ \\
-$PathW[W, G] \abr (Walk[W, G]) \land \pr{\forall_{i, j \in \mathbb{N}_1^{|W|}}\pr{(i \neq j) \implies (w_i \neq w_j)}}$ \\
-
-$ClosedWalk[W, G] \abr (Walk[W, G]) \land (w_{|W|} = w_1)$ \\
-$Circuit[W, G] \abr (Trail[W, G]) \land (ClosedWalk[W, G])$ \\
-$CycleW[W, G] \abr (ClosedWalk[W, G]) \land \pr{\forall_{i \in \mathbb{N}_2^{|W| - 1}}(w_0 \neq w_i \neq w_{|W|})} \land \pr{\forall_{i, j \in \mathbb{N}_2^{|W| - 1}}\pr{(i \neq j) \implies (w_i \neq w_j)}} \land (|W| - 1 \geq 3)$ \\
-$CycleE[E, (W, G)] \abr (CycleW[W, G]) \land (E = \{\utup{w_i, w_{i + 1}} \st i \in \mathbb{N}_1^{|W| - 1}\})$ \\
-$EvenCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Even(|W| - 1)}$ \\
-$OddCycleW[W, G] \abr (CycleW[W, G]) \land \pr{Odd(|W| - 1)}$ \\
-$TriangleW[W, G] \abr (CycleW[W, G]) \land (|W| - 1 = 3)$ \\
-
-$IndependentV[V, G] \abr \forall_{x, y \in V}\pr{\lnot AdjacentV[(x, y), G]}$ \\
-$IndependentE[E, G] \abr \forall_{a, b \in E}\pr{\lnot AdjacentE[(a, b), G]}$ \\
-$IndependentPathG[\mathcal{P}, G] \abr \exists_{x, y \in V(G)} \forall_{P, Q \in \mathcal{P}}\pr{(P \neq Q) \implies \pr{V(P) \cap V(Q) = \utup{x, y}}}$ \\
-$IndependentVEquiv \abr IndependentV \iff (SubgraphInducedByV[] \cong E_n)$ \\
-
-$PathG[P, V] \abr \pr{V(P) = V} \land \pr{E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\}}$ \\
-$CycleG[P, V] \abr \pr{V(P) = V} \land \pr{E(P) = \{\utup{v_i, v_{i + 1}} \st i \in \mathbb{N}_1^{|V| - 1}\} \cup \{v_{|V|}, v_1\}}$ \\
-$PathInG[P, V, G] \abr (PathG[P, V]) \land (Subgraph[P, G])$ \\
-$PathXY[P, (x, y), V, G] \abr (PathInG[P, V, G]) \land \pr{(v_1, v_{|V|}) = (x, y)}$ \\
-$CycleInG[C, V, G] \abr (CycleG[C, V]) \land (Subgraph[C, G])$ \\
-
+\begin{comment}
 $CyclePartition \abr \pr{\forall_{v \in V(G)}\pr{Even\pr{d(v)}}} \iff \pr{\exists_{\mathcal{C}}\pr{\pr{\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land \pr{CycleE[C_E, (C, G)]}\}} \land \pr{Partition[\mathcal{E}, E(G)]}}}$ \\
 \begin{enumerate}
   \lit $\pr{\exists_{\mathcal{C}}\pr{\pr{\mathcal{E} = \{C_E \st (C \in \mathcal{C}) \land \pr{CycleE[C_E, (C, G)]}\}} \land \pr{Partition[\mathcal{E}, E(G)]}}} \implies \ldots$
@@ -836,50 +812,13 @@ $MantelThm \abr \pr{(|G| = n) \land \pr{e(G) > \floor{n^2 / 4}}} \implies \pr{\e
   \lit $\pr{\lnot \exists_{W}(Triangle[W, G])} \implies (\bot)$ \pipe $\exists_{W}(Triangle[W, G])$
 \end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
 
-$Distance[d(x, y), x, y, G] \abr d(x, y) = min\pr{\{e(P) \st \exists_{V}\pr{PathXY[P, (x, y), V G]}\}}$ \\
-$DistanceMetric \abr \forall_{G, x, y, z}\pr{\pr{(Graph[G]) \land \pr{x, y, z \in V(G)}} \implies
-\left(\begin{array}{ll}
-  \pr{d(x, y) \geq 0} \hfill \land \hfill \\
-  \pr{\pr{d(x, y) = 0} \iff (x = y)} \hfill \land \hfill \\
-  \pr{d(x, y) = d(y, x)} \hfill \land \hfill \\
-  \pr{d(x, y) + d(y, z) \geq d(x, z)} \\
-\end{array}\right)}$ \\
-\begin{enumerate}
-  \lit By definition of cardinality and sets, $\pr{d(x, y) \geq 0} \land \pr{d(x, y) = 0 \iff (x = y)}$
-  \lit By cases:
-  \begin{enumerate}
-    \lit If $y \in [ShortestPathG[x, z]]$, then $d(x, y) + d(y, z) = d(x, z)$
-    \lit If $y \notin [ShortestPathG[x, z]]$, then $d(x, y) + d(y, z) > d(x, z)$
-  \end{enumerate}
-  \lit By cases, $d(x, y) + d(y, z) \geq d(x, z)$
-\end{enumerate} \vspace{.75mm} \hrule \vspace{.75mm} \ \\
-
-$AcyclicG[G] \abr \lnot \exists_{C}(CycleIn[C, G])$ \\
-$ConnectedV[(x, y), G] \abr \exists_{P, V}\pr{PathXY[P, (x, y), V, G]}$ \\
-$ConnectedG[G] \abr \forall_{x, y \in V(G)}\pr{(x \neq y) \implies \pr{ConnectedV[(x, y), G]}}$ \\
-$ConnectedSG[H, G] \abr (Subgraph[H, G]) \land (ConnectedG[H])$ \\
-$Component[C, G] \abr (ConnectedSG[C, G]) \land \pr{\lnot \exists_{D}\pr{(SubgraphStrict[C, D]) \land (ConnectedSG[D, G])}}$ \\
-$NComponent[n, G] \abr n = |\{C \st Component[C, G]\}|$ \\
-$CutVertex[v, G] \abr \pr{v \in V(G)} \land (NComponent[n, G]) \land (NComponent[m, G - v]]) \land (m > n)$ \\
-$Bridge[e, G] \abr \pr{e \in E(G)} \land (NComponent[n, G]) \land (NComponent[m, G - e]]) \land (m > n)$ \\
-$TreeG[G] \abr (AcyclicG[G]) \land (ConnectedG[G])$ \\
-$ForestG[G] \abr AcyclicG[G]$ \\
-
-$BipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) \subseteq \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
-$CompleteBipartiteG[K_{m, n}, m, n] \abr \exists_{X, Y}\pr{\pr{X \cup Y = V(K_{m, n})} \land (X \cap Y = \emptyset) \land \pr{E(K_{m, n}) = \{\utup{x, y} \st (x \in X) \land (y \in Y)\}}}$ \\
-\notation{\pr{K(n_1, ..., n_r)}}{CompleteRpartiteG} \\
-\notation{\pr{K_r(t)}}{K(t, ..., t)} \\
-
-$UnionG(G \cup H, G, H) \abr \pr{V(G \cup H) = V(G) \cup V(H)} \land \pr{E(G \cup H) = E(G) \cup E(H)}$ \\
-$kG[k G, k, G] \abr k G = \bigcup \limits_{i \in \mathbb{N}_1^k}\pr{uniqueCopy(G, i)}$ \\
-$Join[G + H, G, H,] \abr \pr{V(G + H) = V(G \cup H)} \land \pr{E(G + H) = E(G \cup H) \cup \{\utup{g, h} \st \pr{g \in V(G)} \land \pr{h \in V(H)}\}}$ \\
-
 $ComponentEquiv \abr \pr{(Component[W, G]) \land (x \in W)} \implies
 \left(\begin{array}{ll}
   \pr{W = \{y \in V(G) \st \exists_{P, V}\pr{PathXY[P, (x, y), V, G]}\}} \hfill \land \hfill \\
   \pr{W = \{y \in V(G) \st d(x, y) \in \mathbb{N}\}} \hfill \land \hfill \\
   \pr{\pr{R = \{\langle u, v \rangle \st \utup{u, v} \in E(G)\}} \land (W = [x]_R)} \\
 \end{array}\right)$ \\
+\end{comment}
 
 
 
