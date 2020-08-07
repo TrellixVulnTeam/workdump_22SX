@@ -754,6 +754,22 @@ $TreeEquivCorollaries \abr
 CONTHERE p. 69 
 % Spanning tree theorems
 
+
+\subsection{Coloring}
+$Coloring[\phi, G] \abr (Function[\phi, V(G), \mathbb{N}])$ \\
+$ProperColoring[\phi, G] \abr (Coloring[\phi, G]) \land (\forall_{\utup{x, y} \in E(G)}(\phi(x) \neq \phi(y)))$ \\
+$kColoring[\phi, k, G] \abr (Coloring[\phi, G]) \land (|\phi(V(G))| =  k)$ \\
+$ProperkColoring[\phi, k, G] \abr (kColoring[\phi, k, G]) \land (ProperColoring[\phi, G])$ \\
+$kColorable[G, k] \abr \exists_{\phi}(ProperkColoring[\phi, k, G])$ \\
+$ChromaticNumber[\chi(G), G] \abr min(\{k \in \mathbb{N} \st kColorable[G, k]\})$ \\
+
+$ListAssignment[L, G] \abr Function[L, V(G), \mathcal{P}(\mathbb{N})]$ \\
+$LColoring[\phi, L, G] \abr (Coloring[\phi, G]) \land (ListAssignment[L, G]) \land (\forall_{v \in V(G)}(\phi(v) \in L(v))$ \\
+$ProperLColoring[\phi, L, G] \abr (LColoring[\phi, L, G]) \land (\forall_{\utup{x, y} \in E(G)}(\phi(x) \neq \phi(y)))$ \\
+$LColorable[G, L] \abr \exists_{\phi}(ProperLColoring[\phi, L, G])$ \\
+$kChoosable[G, k] \abr \forall_{L}(((ListAssignment[L, G]) \land (\forall_{v \in V(G)}(|L(v)| = k))) \implies (LColorable[G, L]))$ \\
+$ListChromaticNumber[\chi_l(G), G] \abr min(\{k \in \mathbb{N} \st kChoosable[G, k]\})$ \\
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
