@@ -759,16 +759,20 @@ CONTHERE p. 69
 $Coloring[\phi, G] \abr (Function[\phi, V(G), \mathbb{N}])$ \\
 $ProperColoring[\phi, G] \abr (Coloring[\phi, G]) \land (\forall_{\utup{x, y} \in E(G)}(\phi(x) \neq \phi(y)))$ \\
 $kColoring[\phi, k, G] \abr (Coloring[\phi, G]) \land (|\phi(V(G))| =  k)$ \\
-$ProperkColoring[\phi, k, G] \abr (kColoring[\phi, k, G]) \land (ProperColoring[\phi, G])$ \\
-$kColorable[G, k] \abr \exists_{\phi}(ProperkColoring[\phi, k, G])$ \\
+$kColorable[G, k] \abr \exists_{\phi}((ProperColoring[\phi, G]) \land (kColoring[\phi, k, G]))$ \\
 $ChromaticNumber[\chi(G), G] \abr min(\{k \in \mathbb{N} \st kColorable[G, k]\})$ \\
 
-$ListAssignment[L, G] \abr Function[L, V(G), \mathcal{P}(\mathbb{N})]$ \\
-$LColoring[\phi, L, G] \abr (Coloring[\phi, G]) \land (ListAssignment[L, G]) \land (\forall_{v \in V(G)}(\phi(v) \in L(v))$ \\
-$ProperLColoring[\phi, L, G] \abr (LColoring[\phi, L, G]) \land (\forall_{\utup{x, y} \in E(G)}(\phi(x) \neq \phi(y)))$ \\
-$LColorable[G, L] \abr \exists_{\phi}(ProperLColoring[\phi, L, G])$ \\
-$kChoosable[G, k] \abr \forall_{L}(((ListAssignment[L, G]) \land (\forall_{v \in V(G)}(|L(v)| = k))) \implies (LColorable[G, L]))$ \\
+$ColorAssignment[L, G] \abr Function[L, V(G), \mathcal{P}(\mathbb{N})]$ \\
+$LColoring[\phi, L, G] \abr (Coloring[\phi, G]) \land (ColorAssignment[L, G]) \land (\forall_{v \in V(G)}(\phi(v) \in L(v))$ \\
+$LColorable[G, L] \abr \exists_{\phi}((ProperColoring[\phi, G]) \land (LColoring[\phi, L, G]))$ \\
+$kChoosable[G, k] \abr \forall_{L}(((ColorAssignment[L, G]) \land (\forall_{v \in V(G)}(|L(v)| = k))) \implies (LColorable[G, L]))$ \\
 $ListChromaticNumber[\chi_l(G), G] \abr min(\{k \in \mathbb{N} \st kChoosable[G, k]\})$ \\
+
+$ChromaticChoosable[G] \abr \chi_l(G) = \chi(G)$ \\
+
+$Ohba \abr (n(G) \leq 2 \chi(G) + 1) \implies (ChromaticChoosable[G])$ \\
+$OhbaEquiv \abr ((CompletekPartite[G, k]) \land (n(G) \leq 2 k + 1)) \implies (\chi_l(G) = \chi(G) = k)$ \\
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
