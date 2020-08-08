@@ -759,19 +759,29 @@ CONTHERE p. 69
 $Coloring[\phi, G] \abr \pr{Function[\phi, V(G), \mathbb{N}]}$ \\
 $ProperColoring[\phi, G] \abr (Coloring[\phi, G]) \land \pr{\forall_{\utup{x, y} \in E(G)}\pr{\phi(x) \neq \phi(y)}}$ \\
 $kColoring[\phi, k, G] \abr (Coloring[\phi, G]) \land \pr{|\phi\pr{V(G)}| =  k}$ \\
-$kColorable[G, k] \abr \exists_{\phi}\pr{(ProperColoring[\phi, G]) \land (kColoring[\phi, k, G])}$ \\
+$kAcceptableColoring[\phi, k, G] \abr (ProperColoring[\phi, G]) \land (kColoring[\phi, k, G])$ \\
+$kColorable[G, k] \abr \exists_{\phi}(kAcceptableColoring[\phi, k, G])$ \\
 $ChromaticNumber[\chi(G), G] \abr min(\{k \in \mathbb{N} \st kColorable[G, k]\})$ \\
 
-$ColorAssignment[L, G] \abr Function[L, V(G), \mathcal{P}(\mathbb{N})]$ \\
-$LColoring[\phi, L, G] \abr (Coloring[\phi, G]) \land (ColorAssignment[L, G]) \land \pr{\forall_{v \in V(G)}(\phi(v) \in L(v)}$ \\
-$LColorable[G, L] \abr \exists_{\phi}\pr{(ProperColoring[\phi, G]) \land (LColoring[\phi, L, G])}$ \\
-$kChoosable[G, k] \abr \forall_{L}\pr{\pr{(ColorAssignment[L, G]) \land \pr{\forall_{v \in V(G)}\pr{|L(v)| = k}}} \implies (LColorable[G, L])}$ \\
+$ListAssignment[L, G] \abr Function[L, V(G), \mathcal{P}(\mathbb{N})]$ \\
+$TotalColors[C, L, G] \abr (ListAssignment[L, G]) \land \pr{C = \bigcup \limits_{v \in V(G)}^{}\pr{L(v)}}$ \\
+$LColoring[\phi, L, G] \abr (Coloring[\phi, G]) \land (ListAssignment[L, G]) \land \pr{\forall_{v \in V(G)}(\phi(v) \in L(v)}$ \\
+$LAcceptableColoring[\phi, L, G] \abr (ProperColoring[\phi, G]) \land (LColoring[\phi, L, G])$ \\
+$LColorable[G, L] \abr \exists_{\phi}(LAcceptableColoring[\phi, L, G])$ \\
+$kChoosable[G, k] \abr \forall_{L}\pr{\pr{(ListAssignment[L, G]) \land \pr{\forall_{v \in V(G)}\pr{|L(v)| = k}}} \implies (LColorable[G, L])}$ \\
 $ListChromaticNumber[\chi_l(G), G] \abr min(\{k \in \mathbb{N} \st kChoosable[G, k]\})$ \\
 
 $ChromaticChoosable[G] \abr \chi_l(G) = \chi(G)$ \\
+$PartialLAcceptableColoring[\phi, L, G, A] \abr \pr{\emptyset \neq A \subseteq V(G)} \land (LAcceptableColoring[\phi, L, G[A]])$
 
+\subsection{Scratch}
 $Ohba \abr \pr{n(G) \leq 2 \chi(G) + 1} \implies (ChromaticChoosable[G])$ \\
-$OhbaEquiv \abr \pr{(CompletekPartite[G, k]) \land \pr{n(G) \leq 2 k + 1}} \implies \pr{\chi_l(G) = \chi(G) = k}$ \\
+$OhbaEquiv \abr \pr{\pr{n(G) \leq 2 k + 1} \land (CompletekPartite[G, k])} \implies \pr{\chi_l(G) = k = \chi(G)}$ \\
+
+$G \abr min_{|V(G)|} \st \pr{\pr{n(G) \leq 2 k + 1} \land (CompletekPartite[G, k])} \land \pr{\chi_l(G) > k = \chi(G)}$ \\
+$L \abr \pr{(ListAssignment[L, G]) \land \pr{\forall_{v \in V(G)}\pr{|L(v)| = k}}} \land (\lnot LColorable[G, L])$ \\
+$C \abr TotalColors[C, L, G]$ \\
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
