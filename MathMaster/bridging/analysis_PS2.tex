@@ -1,4 +1,4 @@
-%1(23(45)678)9
+%1\pr{23(45)678}9
 \documentclass{book}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -103,70 +103,55 @@
 %\tableofcontents
 %\chapter{Problem Set 1}
 \section{Problem Set 2}
-Suppose $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}}, (c_n)_{n \in \mathbb{N}} \in \mathfrak{c}(\mathbb{R})$ and $\lim \limits_{n \to \infty}{}(c_n) \neq 0$ and for any $n \in \mathbb{N}$, $c_n \neq 0$.
+Suppose $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}}, (c_n)_{n \in \mathbb{N}} \in \mathfrak{c}(\mathbb{R})$ and $\lim \limits_{n \to \infty}{}(c_n) \neq 0$ and for any $n \in \mathbb{N}$, $c_n \neq 0$. \\ \\
 
-1.) Prove $\lim \limits_{n \to \infty}{}(c) = c$:
+
+1.) Prove $\lim \limits_{n \to \infty}{}(c) = c$: \\
 Observe that $(c)_{n \in \mathbb{N}} = c (1)_{n \in \mathbb{N}}$. By Theorem 4, $\lim \limits_{n \to \infty}{}(c) = \lim \limits_{n \to \infty}{}(c * 1) = c \lim \limits_{n \to \infty}{}(1)$. Since $\lim \limits_{n \to \infty}{}(1) = 1$, $\lim \limits_{n \to \infty}{}(c) = c * 1 = c$.
-
-2.) Prove $\lim \limits_{n \to \infty}{}(|a_n|) = |\lim \limits_{n \to \infty}{}(a_n)|$:
-Let $\lim \limits_{n \to \infty}{}(a_n) = a$ and let $\epsilon > 0$. There exists an $N \in \mathbb{N}$ such that for any $n \geq N$, $|a_n - a| < \epsilon$. By the reverse triangle inequality, $||a_n| - |a|| \leq |a_n - a|$. Furthermore $||a_n| - |a|| < \epsilon$, $n \geq N$. Thus $\lim \limits_{n \to \infty}{}(|a_n|) = |a| = |\lim \limits_{n \to \infty}{}(a_n)|$.
-
-3.) ...
-
-TODO: improve build.sh!
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-
-1.) Prove Proposition 6: For any $a, b \in \mathbb{R}$,
-$\left(\begin{array}{ll}
-    a \lor b = \frac{1}{2}(a + b + |a - b|)
-\\  a \land b = \frac{1}{2}(a + b - |a - b|)
-\end{array}\right)$.
-
-Let $a, b \in \mathbb{R}$. Suppose $a \geq b$. Clearly, $a \lor b = a$ and $a \land b = b$. Furthermore, $|a - b| = a - b$ since $a - b \geq 0$. Thus, 
-\begin{align}
-    a \lor b = a = \frac{1}{2}(a + b + (a - b)) = \frac{1}{2}(a + b + |a - b|)
-\\  a \land b = b = \frac{1}{2}(a + b - (a - b)) = \frac{1}{2}(a + b - |a - b|).
-\end{align}
-
-Suppose $a < b$. Clearly, $a \lor b = b$ and $a \land b = a$. Furthermore, $|a - b| = -(a - b)$ since $a - b < 0$. Thus, 
-\begin{align}
-    a \lor b = b = \frac{1}{2}(a + b + (-(a - b))) = \frac{1}{2}(a + b + |a - b|)
-\\  a \land b = a = \frac{1}{2}(a + b - (-(a - b))) = \frac{1}{2}(a + b - |a - b|).
-\end{align}
-
-In either case, $a \lor b = \frac{1}{2}(a + b + |a - b|)$ and $a \land b = \frac{1}{2}(a + b - |a - b|)$ holds.
 $\hfill \blacksquare$ \\ \\
 
 
-2.) Prove Proposition 7: For any $a, b, r \in \mathbb{R}$,
-$\left(\begin{array}{ll}
-    a \lor b = b \lor a
-\\  a \land b = b \land a
-\\  (a \land b \leq r \leq a \lor b) \implies ((|r - a| \leq |a - b|) \land (r - b \leq |a - b|))
-\end{array}\right)$. \\
-
-Let $a, b, r \in \mathbb{R}$. The first two statements immediately follow by applying the commutativity of real numbers and $|a - b| = |-(a - b)| = |b - a|$ to Proposition 6. \\
-
-Suppose $a \land b \leq r \leq a \lor b$. Without loss of generality, let $a \geq b$. Thus, 
-\begin{align}
-    b \leq r \leq a
-\\  r - a \leq 0
-\\  b - r \leq 0
-\\  b - a \leq 0
-\end{align}
-
-From (5), $r - a \geq b - a$. This along with (6) and (8) implies $|r - a| = -(r - a) \leq -(b - a) = |b - a|$.
-
-From (5), $r - b \leq a - b$. This along with (7) and (8) implies $|r - b| = r - b \leq a - b = |a - b|$.
+2.) Prove $\lim \limits_{n \to \infty}{}(|a_n|) = |\lim \limits_{n \to \infty}{}(a_n)|$: \\
+Let $\epsilon > 0$. By the hypotheses, $(a_n)_{n \in \mathbb{N}}$ converges to some $a \in \mathbb{R}$. Furthermore, there exists an $N \in \mathbb{N}$ such that for any $n \geq N$, $|a_n - a| < \epsilon$. This with the reverse triangle inequality yields $||a_n| - |a|| \leq |a_n - a| < \epsilon$, for any $n \geq N$. By transitivity of the order relation on $\mathbb{R}$, $||a_n| - |a|| < \epsilon$, for any $n \geq N$. Therefore, $\lim \limits_{n \to \infty}{}(|a_n|) = |a| = |\lim \limits_{n \to \infty}{}(a_n)|$.
 $\hfill \blacksquare$ \\ \\
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+3.) Prove $\lim \limits_{n \to \infty}{}(a_n - b_n) = \lim \limits_{n \to \infty}{}(a_n) - \lim \limits_{n \to \infty}{}(b_n)$: \\
+Observe that $(a_n - b_n)_{n \in \mathbb{N}} = (a_n)_{n \in \mathbb{N}} + (-1) (b_n)_{n \in \mathbb{N}}$. By Theorem 4, $(-1) (b_n)_{n \in \mathbb{N}} \in \mathfrak{c}(\mathbb{R})$ and $\lim \limits_{n \to \infty}{}(a_n - b_n) = \lim \limits_{n \to \infty}{}(a_n + (-1) b_n) = \\
+\lim \limits_{n \to \infty}{}(a_n) + (-1) \lim \limits_{n \to \infty}{}(b_n) = \lim \limits_{n \to \infty}{}(a_n) - \lim \limits_{n \to \infty}{}(b_n)$
+$\hfill \blacksquare$ \\ \\
+
+
+4.) Prove $\lim \limits_{n \to \infty}{}\left(\frac{a_n}{c_n}\right) = \frac{\lim \limits_{n \to \infty}{}(a_n)}{\lim \limits_{n \to \infty}{}(c_n)}$: \\
+Observe that $\left(\frac{a_n}{c_n}\right)_{n \in \mathbb{N}} = (a_n)_{n \in \mathbb{N}} * \left(\frac{1}{c_n}\right)_{n \in \mathbb{N}}$. By the hypotheses, $(a_n)_{n \in \mathbb{N}}$ converges to some $a \in \mathbb{R}$ and $(c_n)_{n \in \mathbb{N}}$ converges to some $c \in \mathbb{R}$. We can apply Theorem 8 on $(c_n)_{n \in \mathbb{N}}$ since it satisfies the necessary assumptions. Thus, $\left(\frac{1}{c_n}\right)_{n \in \mathbb{N}} \in \mathfrak{c}(\mathbb{R})$ and $\lim \limits_{n \to \infty}{}\left(\frac{1}{c_n}\right) = \frac{1}{c}$. We can now apply Theorem 6 to get $\lim \limits_{n \to \infty}{}\left(\frac{a_n}{c_n}\right) = \lim \limits_{n \to \infty}{}\left(a_n * \frac{1}{c_n}\right) = \lim \limits_{n \to \infty}{}(a_n) * \lim \limits_{n \to \infty}{}\left(\frac{1}{c_n}\right) = a * \frac{1}{c} = \frac{\lim \limits_{n \to \infty}{}(a_n)}{\lim \limits_{n \to \infty}{}(c_n)}$.
+$\hfill \blacksquare$ \\ \\
+
+
+5.) Prove $\lim \limits_{n \to \infty}{}(a_n \lor b_n) = \lim \limits_{n \to \infty}{}(a_n) \lor \lim \limits_{n \to \infty}{}(b_n)$: \\
+By the definition of the lattice operations,
+\begin{align}
+    (a_n \lor b_n)_{n \in \mathbb{N}} = \frac{1}{2} (a_n)_{n \in \mathbb{N}} + \frac{1}{2} (b_n)_{n \in \mathbb{N}} + \frac{1}{2} (|a_n - b_n|)_{n \in \mathbb{N}}
+\end{align}
+
+By the hypotheses, $(a_n)_{n \in \mathbb{N}}$ converges to some $a \in \mathbb{R}$ and $(b_n)_{n \in \mathbb{N}}$ converges to some $b \in \mathbb{R}$. Using Item 3, Item 2, and Theorem 4, we can say that the RHS of (1) must also be convergent, and we apply them on (1)
+\begin{align}
+    \lim \limits_{n \to \infty}{}(a_n \lor b_n) = \frac{1}{2} \lim \limits_{n \to \infty}{}(a_n) + \frac{1}{2} \lim \limits_{n \to \infty}{}(b_n) + \frac{1}{2} \lim \limits_{n \to \infty}{}(|a_n - b_n|) = \frac{1}{2}(a + b + |a - b|) = a \lor b = \lim \limits_{n \to \infty}{}(a_n) \lor \lim \limits_{n \to \infty}{}(b_n)
+\end{align}
+$\hfill \blacksquare$ \\ \\
+
+
+6.) Prove $\lim \limits_{n \to \infty}{}(a_n \land b_n) = \lim \limits_{n \to \infty}{}(a_n) \land \lim \limits_{n \to \infty}{}(b_n)$: \\
+By the definition of the lattice operations,
+\begin{align}
+    (a_n \land b_n)_{n \in \mathbb{N}} = \frac{1}{2} (a_n)_{n \in \mathbb{N}} + \frac{1}{2} (b_n)_{n \in \mathbb{N}} + \frac{-1}{2} (|a_n - b_n|)_{n \in \mathbb{N}}
+\end{align}
+
+By the hypotheses, $(a_n)_{n \in \mathbb{N}}$ converges to some $a \in \mathbb{R}$ and $(b_n)_{n \in \mathbb{N}}$ converges to some $b \in \mathbb{R}$. Using Item 3, Item 2, and Theorem 4, we can say that the RHS of (3) must also be convergent, and we apply them on (3)
+\begin{align}
+    \lim \limits_{n \to \infty}{}(a_n \land b_n) = \frac{1}{2} \lim \limits_{n \to \infty}{}(a_n) + \frac{1}{2} \lim \limits_{n \to \infty}{}(b_n) + \frac{-1}{2} \lim \limits_{n \to \infty}{}(|a_n - b_n|) = \frac{1}{2}(a + b - |a - b|) = a \land b = \lim \limits_{n \to \infty}{}(a_n) \land \lim \limits_{n \to \infty}{}(b_n)
+\end{align}
+$\hfill \blacksquare$ \\ \\
+
 
 % \newpage
 
