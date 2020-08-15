@@ -20,11 +20,11 @@ def transpile(build_path, max_nested=10):
     with open(build_path, 'w') as f:
         f.write(tex)
 
-def clean(build_dir, build_path):
+def clean(build_dir, *additional_files):
     unwanted_extensions = [".aux", ".log", ".out"]
     unwanted_files = [file for file in os.listdir(build_dir)
                       if any((file.endswith(ext) for ext in unwanted_extensions))]
-    unwanted_files += [build_path]
+    unwanted_files += additional_files
     map(os.remove, unwanted_files)
 
 if __name__ == '__main__':
