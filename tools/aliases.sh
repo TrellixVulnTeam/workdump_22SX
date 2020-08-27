@@ -5,7 +5,7 @@ cd ~/Repositories
 
 alias ssh='cd ~ && ssh '
 alias caf='/Applications/Caffeine.app/Contents/MacOS/Caffeine -u'
-alias yt='youtube-dl --format "bestvideo[height<=1080]+bestaudio/best --continue --sub-lang en --write-sub --write-auto-sub --no-check-certificate --verbose $(pbpaste) &'
+alias yt='youtube-dl --format "bestvideo[height<=1080]+bestaudio/best" --continue --sub-lang en --write-sub --write-auto-sub --no-check-certificate --verbose $(pbpaste) &'
 alias gf='git fetch --all '
 alias gl='git log --date=short --pretty=format:"%ad:%Cgreen%an:%Cred%h%d:%Creset%s" '
 alias grh='git reset --hard '
