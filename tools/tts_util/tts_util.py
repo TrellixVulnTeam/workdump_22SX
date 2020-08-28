@@ -1,9 +1,13 @@
 import pyttsx3
 import keyboard
-import mouse
 import pyperclip
-
+import os
 import time
+if os.name == 'posix':
+    mouse = lambda: print("Placeholder")
+    mouse.click = lambda: print("Dummy click")
+else:
+    import mouse
 
 start_key = "ctrl+`"
 stop_key = "esc"
