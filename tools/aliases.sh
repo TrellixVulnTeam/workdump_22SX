@@ -19,4 +19,7 @@ alias gg='git grep -n --break --heading -E '
 alias glg='git ls-tree -r --name-only HEAD | grep -E '
 alias gri='git rebase -i --autosquash '
 
+alias cdkd='cdk deploy --require-approval never'
+alias tmd='terminal-notifier -message done'
+
 echo "Successfully loaded custom aliases."
