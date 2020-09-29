@@ -21,5 +21,6 @@ alias gri='git rebase -i --autosquash '
 
 alias cdkd='cdk deploy --require-approval never'
 alias tmd='terminal-notifier -message done'
+alias acts='python3 ~/Repositories/workdump/tools/act_util.py'
 
 echo "Successfully loaded custom aliases."
