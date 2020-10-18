@@ -23,6 +23,7 @@ class TTSUtil:
             self.is_active = True
             text = self.text_interface.retrieve_text()
             self.tts.speak(text)
+            # Note: you need manually deactivate due to a pyttsx3 bug
             self.is_active = False
 
     def _on_deactivate(self):

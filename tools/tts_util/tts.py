@@ -8,7 +8,7 @@ logger.setLevel(logging.DEBUG)
 
 class TTS:
     def __init__(self):
-        self.rate_factor = 1.20
+        self.rate_factor = 1.33
         self.engine = pyttsx3.init()
         self._set_rate()
 
