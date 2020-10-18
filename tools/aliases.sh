@@ -22,6 +22,8 @@ alias gri='git rebase -i --autosquash '
 alias cdkd='cdk deploy --require-approval never'
 alias tmd='terminal-notifier -message done'
 alias acts='python3 ~/Repositories/workdump/tools/act_util.py'
+alias tts ='python3 ~/Repositories/workdump/tools/tts_util/tts_util.py'
+alias myblack='black . --config=$HOME/Repositories/workdump/tools/.black'
 alias aliases='less +G ~/Repositories/workdump/tools/aliases.sh'
 
 echo "Successfully loaded custom aliases."
