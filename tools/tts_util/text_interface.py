@@ -2,7 +2,6 @@ from pynput import keyboard, mouse
 import pyperclip
 import logging
 import time
-import os
 
 logging.basicConfig()
 logger = logging.getLogger(__name__)
@@ -22,16 +21,20 @@ class TextInferface:
             ("∩", "intersect"),
             ("∪", "union"),
         ]
-        self.copy_hotkey = "<cmd>+c" if os.name == 'posix' else "<ctrl>+c"
+        self.copy_hotkeys = ["<cmd>+c", "<ctrl>+c"]
         self.copy_wait = 0.10
         self.keyboard_controller = keyboard.Controller()
         self.mouse_controller = mouse.Controller()
 
-    def _copy_selected(self):
-        for key in keyboard.HotKey.parse(self.copy_hotkey):
+    def _input_hotkey(self, hotkey):
+        for key in keyboard.HotKey.parse(hotkey):
             self.keyboard_controller.press(key)
-        for key in keyboard.HotKey.parse(self.copy_hotkey):
+        for key in keyboard.HotKey.parse(hotkey):
             self.keyboard_controller.release(key)
+
+    def _copy_selected(self):
+        for copy_hotkey in self.copy_hotkeys:
+            self._input_hotkey(copy_hotkey)
         time.sleep(self.copy_wait)
         contents = pyperclip.paste()
         self.mouse_controller.click(mouse.Button.left)
