@@ -11,6 +11,7 @@ logger.setLevel(logging.DEBUG)
 class TextInferface:
     def __init__(self):
         self.pattern_replacements = [
+            ("-\n", ""),
             ("\r", ""),
             ("\n", " "),
             ("  ", " "),
