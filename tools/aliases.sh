@@ -3,6 +3,7 @@
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 cd ~/Repositories
 
+alias e='evince '
 alias ssh='cd ~ && ssh '
 alias caf='/Applications/Caffeine.app/Contents/MacOS/Caffeine -u'
 alias yt='youtube-dl --format "bestvideo[height<=1080]+bestaudio/best" --continue --sub-lang en --write-sub --write-auto-sub --no-check-certificate --verbose $(pbpaste) &'
