@@ -43,6 +43,8 @@ class TextInferface:
         return contents
 
     def _process_text(self, content):
+        if content is None:
+            return "None"
         for (pattern, replacement) in self.pattern_replacements:
             content = content.replace(pattern, replacement)
         logger.info(f"Processed text: {content}")
