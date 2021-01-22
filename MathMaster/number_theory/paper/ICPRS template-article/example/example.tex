@@ -17,6 +17,9 @@
 \usepackage{times}
 \usepackage{amsmath}
 
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \begin{document}
 \noindent
@@ -31,6 +34,11 @@
 
 \maketitle
 
+% TODO:
+% - signatures 
+% - How to solve for d with public data?
+% -- It does this by having separate keys to do: discuss one way? trap doors?? security of factoring algos???
+
 \abstract
 Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet in our 
  activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, social security number, and home addresses. Encryption prevents unwanted individuals from having access to these types of information.
@@ -39,76 +47,112 @@ Encryption is the process of scrambling information in such a way that it can on
 Cryptography, Internet security, Prime numbers.
 
 \section{Introduction}
-The RSA encryption algorithm is a widely used encryption algorithm that secures sensitive data from “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information [1]. It is one of the earliest implementations of public-key or asymmetric encryption which allows users to establish a private communication over a public channel [5].
-
-  \ \ // It does this by having separate keys to do: discuss one way? trap doors?? security of factoring algos???
+The RSA encryption algorithm is a widely used encryption algorithm that secures sensitive data from “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information [1]. It is one of the earliest implementations of public-key or asymmetric encryption which allows users to establish a private communication over a public channel [5]. This is accomplished by having separate keys for encryption (public key) and decryption (private key).
 
 Another key feature of RSA is the ability to create electronic signatures. Similar to a physical signature, an electronic signature provides a way to prove that a message originated from the sender [5]. It also provides the means to show that the message was not tampered with.
 
 RSA uses Euler’s theorem to: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the original message, (c) generate electronic signatures.
 
 
-\section{Cryptographic System}
-In order to create the public key and private key, we first need to choose two large distinct prime numbers $p$ and $q$ at random, and let $n$ be the product of the two. Then, pick a large random integer $d$ such that it is relatively prime to $\phi(n)$ where $\phi$ is the Euler totient function. Finally, we choose $e$ to be the multiplicative inverse of $d$ modulo $\phi(n)$.
+\section{Cryptographic Operations}
+In order to create the public key and private key, we need to choose two large distinct prime numbers $p$ and $q$ at random. Let $n$ be the product of $p$ and $q$. Next, pick a large random integer $d$ that is relatively prime to $\phi(n)$ where $\phi$ is the Euler totient function. Finally, we choose $e$ to be the multiplicative inverse of $d$ modulo $\phi(n)$.
+\begin{equation*}
+	e d \equiv 1 \mod \phi(n).
+\end{equation*}
+
+We know that such an $e$ is exists since $d$ is relatively prime to $\phi(n)$. The pair $(e, n)$ will serve as the public key, while the pair $(d, n)$ will serve as the private key.
+
+Let $M$ be a plaintext message encoded as a number. We insist that $M < n$. In the case where $M \geq n$, we will split $M$ into multiple chunks and send them separately. Furthermore, we insist that $M$ is relatively prime to $n$. In practice, this is a safe assumption since it is unlikely that $M$ is a multiple of $p$ or $q$. Regardless, we could easily check for this case since we have access to $p$ and $q$. If so, we can simply split $M$ further or add some padding until it becomes relatively prime to $n$.
+
+We generate the ciphertext $C$ by raising $M$ to $e$th power then taking modulo $n$. We can decipher $C$ to the plaintext $D$ by raising $C$ to the $d$th power then taking modulo $n$. Lastly, we can create the electronic signature $S$ by raising $M$ to the $d$th power then taking modulo $n$.
 \begin{align*}
-	e d \equiv 1 \mod \phi(n)
+    C \equiv M^e \mod n.
+ \\ D \equiv C^d \mod n.
+ \\ S \equiv M^d \mod n.
 \end{align*}
 
-We know that such an $e$ is exists since $gcd(d, \phi(n)) = 1$. The pair $(e, n)$ will serve as the public key, while the pair $(d, n)$ will serve as the private key. Although $n$ is publicly shared, its factors $p$ and $q$ are kept private.
 
-Let $M$ be a plaintext message encoded as a number. We insist that $M < n$. In the case where $M \geq n$, then we split $M$ into multiple chunks and send them separately. Furthermore, we insist that $M$ is relatively prime to $n$. In practice, this is a safe assumption since it is unlikely that $M$ is a multiple of $p$ or $q$. Regardless, we could easily check for this case since we have access to $p$ and $q$, then we can simply split $M$ further or add some padding until it is relatively prime to $n$.
-
-We can generate the ciphertext $C$ by raising $M$ to $e$th power then taking modulo $n$. Then, we can decipher $C$ to the plaintext $D$ by raising $C$ to the $d$th power then taking modulo $n$. Lastly, we can create the electronic signature $S$ by raising $M$ to the $d$th power then taking modulo $n$.
-\begin{align*}
-    C \equiv M^e \mod n
- \\ D \equiv C^d \mod n
- \\ S \equiv M^d \mod n
-\end{align*}
-
+\section{Mathematical Foundations}
 To illustrate the correctness of these of operations, we first need to discuss some results in number theory.
 
+\begin{theorem}
+\label{cong_thms}
+    If $a \equiv b \mod n$, then $c a \equiv c b \mod n$ and $a^k \equiv b^k \mod n$ for any positive integer $k$.
+\end{theorem}
 
-Theorem 2.1. If $a \equiv b \mod n$, then $c a \equiv c b \mod n$ and $a^k \equiv b^k \mod n$ for any positive integer $k$.
+\begin{theorem}
+    If $a$ and $b$ are relatively prime with $a \mid c$ and $b  \mid c$, then $a b \mid c$.
+\end{theorem}
 
-Theorem 2.2. If $a$ and $b$ are relatively prime with $a \mid c$ and $b  \mid c$, then $a b \mid c$.
+\begin{corollary}
+\label{cong_rel-prime}
+    If $m$ and $n$ are relatively prime with $a \equiv b \mod m$ and $a \equiv b \mod n$, then $a \equiv b \mod m n$.
+\end{corollary}
 
-Corollary 2.3. If $m$ and $n$ are relatively prime with $a \equiv b \mod m$ and $a \equiv b \mod n$, then $a \equiv b \mod m n$.
+\begin{theorem}
+\label{phi_prime}
+    If $p$ is prime, then $\phi(p) = p - 1$.
+\end{theorem}
 
-Theorem 2.4. If $p$ is prime, then $\phi(p) = p -1$.
+\begin{theorem}
+\label{phi_mult}
+    If $a$ and $b$ are relatively prime, then $\phi(a b) = \phi(a) \phi(b)$.
+\end{theorem}
 
-Theorem 2.5. If $a$ and $b$ are relatively prime, then $\phi(a b) = \phi(a) \phi(b)$.
+\begin{theorem}[Euler, 1763]
+\label{euler}
+    If $a$ is relatively prime to $b$, then $a^{\phi(b)} \equiv 1 \mod b$.
+\end{theorem}
 
-Theorem 2.6 (Euler, 1763). If $a$ is relatively prime to $b$, then $a^{\phi(b)} \equiv 1 \mod b$.
+We can now show that decrypting the ciphertext does indeed yield the original message. By the choice of $e$ and $d$,
+\begin{equation}
+\label{ed_id}
+    e d = k \phi(n) + 1 \text{ for some integer }k.
+\end{equation}
 
-We can apply these to our scenario and make several observations.
+\noindent Since $p$ and $q$ are distinct primes, we can use \ref{phi_prime} and \ref{phi_mult} to obtain
+\begin{equation}
+    \phi(n) = \phi(p q) = \phi(p) \phi(q) = (p - 1) (q - 1).
+\end{equation}
+
+\noindent Since $M$ and $p$ are relatively prime, we can apply \ref{euler} to obtain
+\begin{equation}
+    M^{\phi(p)} \equiv M^{p - 1} \equiv 1 \mod p.
+\end{equation}
+
+\noindent Furthermore, by \ref{cong_thms},
+\begin{align}
+    M^{k \phi(n)} \equiv (M^{p - 1})^{k (q - 1)} \equiv 1^{k (q - 1)} \equiv 1 \mod p.
+ \\ \label{Mmodp}
+    M^{k \phi(n) + 1} \equiv M (1) \equiv M \mod p.
+\end{align}
+
+\noindent We can apply similar arguments for $q$,
+\begin{equation}
+    \label{Mmodq}
+    M^{k \phi(n) + 1} \equiv M \mod q.
+\end{equation}
+
+\noindent Since $p$ and $q$ are distinct primes, we can apply \ref{cong_rel-prime} to \ref{Mmodp} and \ref{Mmodq}.
+\begin{equation}
+    \label{Mmodn}
+    M^{k \phi(n) + 1} \equiv M \mod n.
+\end{equation}
+
+\noindent The desired result is obtained by \ref{ed_id} and \ref{Mmodn}.
+\begin{equation}
+    \label{CD_id}
+    D \equiv C^d \equiv (M^e)^d  \equiv M^{e d} \equiv M^{k \phi(n) + 1} \equiv M \mod n.
+\end{equation}
 
 
-By our choice of $e$ and $d$, we have $e d = k \phi(n) + 1$ for some integer $k$.
+\section{Security}
+Let us consider the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Alice would take Bob’s public key $(e_B, n_B)$, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, and send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}.
 
-Since $p$ and $q$ are distinct primes,
-$\phi(n) = \phi(p q) = \phi(p) \phi(q) = (p - 1) (q - 1)$.
-
-Since $M$ and $p$ are relatively prime, $M^{\phi(p)} \equiv M^{p - 1} \equiv 1 \mod p$.
-
-We have $M^{k \phi(n)} \equiv (M^{p - 1})^{k (q - 1)} \equiv 1^{k (q - 1)} \equiv 1 \mod p$.
-
-Thus, $M^{e d} \equiv M^{k \phi(n) + 1} \equiv M (1) \equiv M \mod p$.
-
-Similarly for $q$, $M^{e d} \equiv M^{k \phi(n) + 1} \equiv M (1) \equiv M \mod q$.
-
-Hence, $M^{e d} \equiv M \mod p q$ equivalently, $M^{e d} \equiv M \mod n$.
-
-We have shown that the deciphered plaintext matches the original message. $D \equiv C^d \equiv (M^e)^d \equiv M^{e d} \equiv M \mod n$.
+Suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $e_B$, $n_B$, and $C$. She is unable to deciper $C$ since she does not have access to $d_B$.
 
 
-Now suppose that Alice wants to send a message $M$ to Bob. Alice would take Bob’s public key $(e_B, n_B)$ and use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$. When Bob receives $C$, he can then decrypt it to retrieve the original message $M \equiv D \equiv C^{d_B} \mod n_B$.
 
-Now suppose Eve who is an eavesdropper. She obtains a copy to $C$
-
-
-TODO: signatures
-
-How to solve for d with public data?
 
 
 \section{2Introduction}
