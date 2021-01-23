@@ -122,15 +122,6 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT fig1.eps
-INPUT ./fig1.eps
-INPUT ./fig1.eps
-INPUT ./fig1-eps-converted-to.pdf
-INPUT ./fig1-eps-converted-to.pdf
-INPUT ./fig1.eps
-INPUT ./fig1-eps-converted-to.pdf
-INPUT ./fig1-eps-converted-to.pdf
-INPUT ./fig1-eps-converted-to.pdf
 INPUT example.bbl
 INPUT example.bbl
 INPUT example.aux
