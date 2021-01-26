@@ -4,9 +4,10 @@ The top-level auxiliary file: example.aux
 The style file: ieeetr.bst
 Database file #1: IEEEabrv.bib
 Database file #2: icdp2009.bib
+Warning--I didn't find a database entry for "???"
 You've used 3 entries,
             1876 wiz_defined-function locations,
-            1022 strings with 14217 characters,
+            1023 strings with 14220 characters,
 and the built_in function-call counts, 845 in all, are:
 = -- 90
 > -- 23
@@ -45,3 +46,4 @@ warning$ -- 0
 while$ -- 9
 width$ -- 4
 write$ -- 33
+(There was 1 warning)
