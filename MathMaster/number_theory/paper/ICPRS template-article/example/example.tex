@@ -34,22 +34,17 @@
 
 \maketitle
 
+
 \abstract
-Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet in our activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses 
-
-Encryption prevents unwanted individuals from having access to these types of information. % WHERE IS RSA IN THIS ABSTRACT
-
+Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet to accomplish various activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses the RSA encryption algorithm, its mathematical foundations, and how it is used to protect sensitive information.
 \keywords
 Cryptography, Internet security, Prime numbers.
 
+
 \section{Introduction}
-This paper discusses paper of rivest ???
+The RSA encryption algorithm is a widely used encryption algorithm that secures sensitive data from “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{rivest1978method}. It is one of the earliest implementations of asymmetric encryption which allows users to establish a private communication over a public channel \cite{diffie1976new}. This is accomplished by having separate keys for encryption (public key) and decryption (private key). On the other hand, symmetric encryption uses the same key for encryption and decryption.
 
-The RSA encryption algorithm is a widely used encryption algorithm that secures sensitive data from “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{???}. It is one of the earliest implementations of public-key or asymmetric encryption which allows users to establish a private communication over a public channel \cite{???}. This is accomplished by having separate keys for encryption (public key) and decryption (private key). On the other hand, symmetric encryption uses the same key for encryption and decryption.
-
-Another key feature of RSA is the ability to create electronic signatures. Similar to a physical signature, an electronic signature provides a way to prove that a message originated from the sender \cite{???}. It also provides the means to show that the message was not tampered with.
-
-RSA uses Euler’s theorem to: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the original message, (c) generate electronic signatures.
+Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. RSA uses Euler’s theorem to: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the plaintext, (c) generate digital signatures.
 
 
 \section{Cryptographic Operations}
@@ -62,7 +57,7 @@ We know that such an $e$ is exists since $d$ is relatively prime to $\phi(n)$. T
 
 Let $M$ be a plaintext message encoded as a number. We insist that $M < n$. In the case where $M \geq n$, we will split $M$ into multiple chunks and send them separately. Furthermore, we insist that $M$ is relatively prime to $n$. In practice, this is a safe assumption since it is unlikely that $M$ is a multiple of $p$ or $q$. Regardless, we could easily check for this case since we have access to $p$ and $q$. If so, we can simply split $M$ further or add some padding until it becomes relatively prime to $n$.
 
-We generate the ciphertext $C$ by raising $M$ to $e$th power then taking modulo $n$. We can decipher $C$ to the plaintext $D$ by raising $C$ to the $d$th power then taking modulo $n$. Lastly, we can create the electronic signature $S$ by raising $M$ to the $d$th power then taking modulo $n$.
+We generate the ciphertext $C$ by raising $M$ to $e$th power then taking modulo $n$. We can decipher $C$ to the plaintext $D$ by raising $C$ to the $d$th power then taking modulo $n$. Lastly, we can create the digital signature $S$ by raising $M$ to the $d$th power then taking modulo $n$.
 \begin{align*}
     C \equiv M^e \mod n.
  \\ D \equiv C^d \mod n.
@@ -97,7 +92,7 @@ To illustrate the correctness of these of operations, we first need to discuss s
     If $a$ and $b$ are relatively prime, then $\phi(a b) = \phi(a) \phi(b)$.
 \end{theorem}
 
-\begin{theorem}[Euler, 1763 \cite{???}]
+\begin{theorem}[Euler's theorem \cite{burton2006elementary}]
 \label{euler}
     If $a$ is relatively prime to $b$, then $a^{\phi(b)} \equiv 1 \mod b$.
 \end{theorem}
@@ -151,7 +146,7 @@ We can now show that decrypting the ciphertext does indeed yield the original me
 
 
 \section{Application in RSA}
-We illustrate the application of these results in the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his public key $(e_B, n_B)$ and private key $(d_B, n_B)$, then publish the only public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, then send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{???} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for a sufficiently large value of $n_B$.
+We illustrate the application of these results in the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his public key $(e_B, n_B)$ and private key $(d_B, n_B)$, then publish the only public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, then send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{rivest1978method} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for a sufficiently large value of $n_B$.
 
 Hence, we are successful in establishing a private conversation over a public channel. This bypasses one of the biggest problems in symmetric encryption, namely, key distribution. This issue is due to the fact that two parties have to agree on which keys to use for encryption and decryption. If Alice and Bob were to use symmetric encryption, then Eve could simply make a copy of the key during the phase where Alice and Bob were exchanging keys. Eve can then decipher all future communication since the same key is used for both encryption and decryption.
 
@@ -161,6 +156,7 @@ We can confidently say that the message came from Alice since only she has acces
 
 
 \section{Conclusions}
+to do
 
 
 \bibliography{IEEEabrv, icdp2009}
