@@ -34,17 +34,16 @@
 
 \maketitle
 
-% TODO:
-% - signatures 
-
 \abstract
-Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet in our activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, social security number, and home addresses. Encryption prevents unwanted individuals from having access to these types of information. % WHERE IS RSA IN THIS ABSTRACT
+Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet in our activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses 
+
+Encryption prevents unwanted individuals from having access to these types of information. % WHERE IS RSA IN THIS ABSTRACT
 
 \keywords
 Cryptography, Internet security, Prime numbers.
 
 \section{Introduction}
-
+This paper discusses paper of rivest ???
 
 The RSA encryption algorithm is a widely used encryption algorithm that secures sensitive data from “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{???}. It is one of the earliest implementations of public-key or asymmetric encryption which allows users to establish a private communication over a public channel \cite{???}. This is accomplished by having separate keys for encryption (public key) and decryption (private key). On the other hand, symmetric encryption uses the same key for encryption and decryption.
 
@@ -144,14 +143,21 @@ We can now show that decrypting the ciphertext does indeed yield the original me
     D \equiv C^d \equiv (M^e)^d  \equiv M^{e d} \equiv M^{k \phi(n) + 1} \equiv M \mod n.
 \end{equation}
 
+\noindent A similar result is used in the implementation of signatures. This states that decrypting the message then encrypting it will also result in the original message.
+\begin{equation}
+    \label{SE_id}
+    S^e \equiv (M^d)^e \equiv M^{e d} \equiv M \mod n.
+\end{equation}
 
-\section{Private Communication}
-Let us consider the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his key pair $(e_B, n_B)$ and $(d_B, n_B)$, then publish the only public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, and send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{???} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for a sufficiently large value of $n_B$.
 
-Hence, we are successful in establishing a private conversation over a public channel. This bypasses one of the biggest problems in symmetric encryption, namely, key distribution. This issue is due to the fact that two parties have to agree on which keys to use for encryption and decryption. If Alice and Bob were to use symmetric encryption, then Eve can make a copy of the key during the exchange and use it to decipher future communication.
+\section{Application in RSA}
+We illustrate the application of these results in the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his public key $(e_B, n_B)$ and private key $(d_B, n_B)$, then publish the only public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, then send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{???} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for a sufficiently large value of $n_B$.
 
+Hence, we are successful in establishing a private conversation over a public channel. This bypasses one of the biggest problems in symmetric encryption, namely, key distribution. This issue is due to the fact that two parties have to agree on which keys to use for encryption and decryption. If Alice and Bob were to use symmetric encryption, then Eve could simply make a copy of the key during the phase where Alice and Bob were exchanging keys. Eve can then decipher all future communication since the same key is used for both encryption and decryption.
 
-\section{Electronic Signatures}
+Next, we consider the scenario where Alice wants to send a signed message $M$ to Bob. Alice can create a signature for this message by $S \equiv M^{d_A} \mod n$. She can send $S$ as an encrypted message to Bob as in the previous scenario, i.e., $S$ is encrypted by Alice with Bob's public key, then decrypted by Bob with his private key. Bob can recover the message from the signature by $M \equiv S^{e_A}$ as in \ref{SE_id}. 
+
+We can confidently say that the message came from Alice since only she has access to $d_A$, and so only she could have generated the signature $S$. Moreover, we can be confident that Bob did not modify the message $M$ into a tampered message $M'$. This is due to the fact that he is unable to produce the corresponding signature $S'$ for $M'$ since he does not have access to $d_A$. In other words, his knowledge of both $M$ and $S$ cannot be used to created forgeries.
 
 
 \section{Conclusions}
