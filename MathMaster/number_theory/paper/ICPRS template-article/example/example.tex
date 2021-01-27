@@ -27,7 +27,7 @@
 % This should produce references in the order they appear
 \bibliographystyle{ieeetr}
 
-\title{The RSA Encryption Algorithm}
+\title{The RSA Algorithm}
 
 \authorname{John Paul S. Guzman}
 \authoraddr{Mathematics Department, De La Salle University, 2401 Taft Ave., Manila 0922, Philippines}
@@ -36,21 +36,19 @@
 
 
 \abstract
-Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet to accomplish various activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses the RSA encryption algorithm, its mathematical foundations, and how it is used to protect sensitive information.
+Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet to accomplish various activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses the RSA algorithm, its mathematical foundations, and how it is used to protect sensitive information.
 \keywords
 Cryptography, Internet security, Prime numbers.
 
 
 \section{Introduction}
-The RSA encryption algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{diffie1976new}. Asymmetric encryption differs from the classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{???}. This allows the users to establish a private communication over a public channel. Furthermore, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{???}.
+The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{diffie1976new}. Asymmetric encryption differs from the classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{???}. This allows the users to establish a private communication over a public channel. Furthermore, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{???}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
 
-Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
-
-??? RSA uses Euler’s theorem to: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the plaintext, (c) generate digital signatures.
+// We will discuss how RSA: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the plaintext, (c) generate digital signatures. THEN We will discuss how to establish the correctness of RSA ... relies on Euler’s theorem along with the properties of congruences to perform its various cryptographic procedures. THEN sample scenario to illustrate stuff ...
 
 
-\section{Cryptographic Operations}
-In order to create the public key and private key, we need to choose two large distinct prime numbers $p$ and $q$ at random. Let $n$ be the product of $p$ and $q$. Next, pick a large random integer $d$ that is relatively prime to $\phi(n)$ where $\phi$ is the Euler totient function. Finally, we choose $e$ to be the multiplicative inverse of $d$ modulo $\phi(n)$.
+\section{Cryptographic Procedures}
+We begin with generating the public and private keys. We need to choose two large distinct prime numbers $p$ and $q$ at random. Let $n$ be the product of $p$ and $q$. Next, pick a large random integer $d$ that is relatively prime to $\phi(n)$ where $\phi$ is the Euler totient function. Finally, we choose $e$ to be the multiplicative inverse of $d$ modulo $\phi(n)$.
 \begin{equation*}
 	e d \equiv 1 \mod \phi(n).
 \end{equation*}
