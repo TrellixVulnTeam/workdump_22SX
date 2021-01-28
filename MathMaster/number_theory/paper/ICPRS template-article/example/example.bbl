@@ -1,16 +1,20 @@
 \begin{thebibliography}{1}
 
-\bibitem{diffie1976new}
-W.~Diffie and M.~Hellman, ``New directions in cryptography,'' {\em IEEE
-  transactions on Information Theory}, vol.~22, no.~6, pp.~644--654, 1976.
-
-\bibitem{burton2006elementary}
-D.~M. Burton, {\em Elementary number theory}.
-\newblock Tata McGraw-Hill Education, 2006.
-
 \bibitem{rivest1978method}
 R.~L. Rivest, A.~Shamir, and L.~Adleman, ``A method for obtaining digital
   signatures and public-key cryptosystems,'' {\em Communications of the ACM},
   vol.~21, no.~2, pp.~120--126, 1978.
+
+\bibitem{diffie1976new}
+W.~Diffie and M.~Hellman, ``New directions in cryptography,'' {\em IEEE
+  transactions on Information Theory}, vol.~22, no.~6, pp.~644--654, 1976.
+
+\bibitem{stallings1999cryptography}
+W.~Stallings, {\em Cryptography and Network Security: Principles and Practice}.
+\newblock Prentice Hall, 1999.
+
+\bibitem{burton2006elementary}
+D.~M. Burton, {\em Elementary number theory}.
+\newblock Tata McGraw-Hill Education, 2006.
 
 \end{thebibliography}

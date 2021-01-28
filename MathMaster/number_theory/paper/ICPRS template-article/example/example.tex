@@ -42,9 +42,9 @@ Cryptography, Internet security, Prime numbers.
 
 
 \section{Introduction}
-The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{diffie1976new}. Asymmetric encryption differs from the classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{???}. This allows the users to establish a private communication over a public channel. Furthermore, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing sensitive information \cite{???}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
+The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{rivest1978method}. Asymmetric encryption differs from the classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{diffie1976new}. This allows the users to establish a private communication over a public channel. Moreover, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing information \cite{stallings1999cryptography}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
 
-// We will discuss how RSA: (a) scramble or encrypt a message into ciphertext, (b) unscramble or decrypt ciphertext back to the plaintext, (c) generate digital signatures. THEN We will discuss how to establish the correctness of RSA ... relies on Euler’s theorem along with the properties of congruences to perform its various cryptographic procedures. THEN sample scenario to illustrate stuff ...
+We will discuss how RSA: (a) encrypts a message into ciphertext, (b) decrypts ciphertext back to plaintext, (c) generates digital signatures. Then, we show the correctness of these procedures using Euler’s theorem along with the properties of congruences. Lastly, we will apply these techniques in a sample scenario.
 
 
 \section{Cryptographic Procedures}
@@ -138,7 +138,7 @@ We can now show that decrypting the ciphertext does indeed yield the original me
     D \equiv C^d \equiv (M^e)^d  \equiv M^{e d} \equiv M^{k \phi(n) + 1} \equiv M \mod n.
 \end{equation}
 
-\noindent A similar result is used in the implementation of signatures. This states that decrypting the message then encrypting it will also result in the original message.
+\noindent A similar result is used in the implementation of signatures which states that decryption followed by encryption will also result in the original message.
 \begin{equation}
     \label{SE_id}
     S^e \equiv (M^d)^e \equiv M^{e d} \equiv M \mod n.
@@ -146,9 +146,9 @@ We can now show that decrypting the ciphertext does indeed yield the original me
 
 
 \section{Application in RSA}
-We illustrate the application of these results in the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his public key $(e_B, n_B)$ and private key $(d_B, n_B)$, then publish the only public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, then send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{rivest1978method} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for a sufficiently large value of $n_B$.
+We illustrate the application of these results in the following scenario. Suppose that Alice wants to send a message $M$ to Bob. Bob will generate his public key $(e_B, n_B)$ and private key $(d_B, n_B)$, then publish only the public key. Alice would take Bob’s public key, use it to create the ciphertext $C \equiv M^{e_B} \mod n_B$, then send it over. Bob can then recover the original message by $M \equiv C^{d_B} \mod n_B$ as in \ref{CD_id}. Now suppose Eve was eavesdropping in their conversation. This means that she would have a copy of the ciphertext $C$ and the public key $(e_B, n_B)$. However, she will be unable to decipher $C$ since she does not have access to $d_B$. It has been conjectured in \cite{rivest1978method} that finding $d_B$ from $(e_B, n_B)$ requires an exhaustive search, and so it is unfeasible for sufficiently large values of $n_B$.
 
-Hence, we are successful in establishing a private conversation over a public channel. This bypasses one of the biggest problems in symmetric encryption, namely, key distribution. This issue is due to the fact that two parties have to agree on which keys to use for encryption and decryption. If Alice and Bob were to use symmetric encryption, then Eve could simply make a copy of the key during the phase where Alice and Bob were exchanging keys. Eve can then decipher all future communication since the same key is used for both encryption and decryption.
+Hence, we are successful in establishing a private conversation over a public channel. This bypasses one of the biggest problems in symmetric encryption, namely, key distribution. This issue is due to the fact that two parties have to agree on which keys to use for encryption and decryption. If the same key is used for both encryption and decryption, then Eve can simply make a copy of this key during the phase where Alice and Bob were agreeing on the key. Eve will then be able to decipher all future communication between Alice and Bob.
 
 Next, we consider the scenario where Alice wants to send a signed message $M$ to Bob. Alice can create a signature for this message by $S \equiv M^{d_A} \mod n$. She can send $S$ as an encrypted message to Bob as in the previous scenario, i.e., $S$ is encrypted by Alice with Bob's public key, then decrypted by Bob with his private key. Bob can recover the message from the signature by $M \equiv S^{e_A}$ as in \ref{SE_id}. 
 
@@ -156,7 +156,7 @@ We can confidently say that the message came from Alice since only she has acces
 
 
 \section{Conclusions}
-to do
+we have to do
 
 
 \bibliography{IEEEabrv, icdp2009}
