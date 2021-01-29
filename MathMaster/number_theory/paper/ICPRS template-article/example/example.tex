@@ -42,7 +42,7 @@ Cryptography, Internet security, Prime numbers.
 
 
 \section{Introduction}
-The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{rivest1978method}. Asymmetric encryption differs from the classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{diffie1976new}. This allows the users to establish a private communication over a public channel. Moreover, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing information \cite{stallings1999cryptography}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, an digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
+The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{rivest1978method}. Asymmetric encryption differs from classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{diffie1976new}. This allows the users to establish a private communication over a public channel. Moreover, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing information \cite{stallings1999cryptography}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, a digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
 
 We will discuss how RSA: (a) encrypts a message into ciphertext, (b) decrypts ciphertext back to plaintext, (c) generates digital signatures. Then, we show the correctness of these procedures using Euler’s theorem along with the properties of congruences. Lastly, we will apply these techniques in a sample scenario.
 
@@ -53,7 +53,7 @@ We begin with generating the public and private keys. We need to choose two larg
 	e d \equiv 1 \mod \phi(n).
 \end{equation*}
 
-We know that such an $e$ is exists since $d$ is relatively prime to $\phi(n)$. The pair $(e, n)$ will serve as the public key, while the pair $(d, n)$ will serve as the private key.
+We know that such an $e$ exists since $d$ is relatively prime to $\phi(n)$. The pair $(e, n)$ will serve as the public key, while the pair $(d, n)$ will serve as the private key.
 
 Let $M$ be a plaintext message encoded as a number. We insist that $M < n$. In the case where $M \geq n$, we will split $M$ into multiple chunks and send them separately. Furthermore, we insist that $M$ is relatively prime to $n$. In practice, this is a safe assumption since it is unlikely that $M$ is a multiple of $p$ or $q$. Regardless, we could easily check for this case since we have access to $p$ and $q$. If so, we can simply split $M$ further or add some padding until it becomes relatively prime to $n$.
 
@@ -66,7 +66,7 @@ We generate the ciphertext $C$ by raising $M$ to $e$th power then taking modulo 
 
 
 \section{Mathematical Foundations}
-To illustrate the correctness of these of operations, we first need to discuss some results in number theory.
+To illustrate the correctness of these operations, we first need to discuss some results in number theory.
 
 \begin{theorem}
 \label{cong_thms}
@@ -152,7 +152,7 @@ Hence, we are successful in establishing a private conversation over a public ch
 
 Next, we consider the scenario where Alice wants to send a signed message $M$ to Bob. Alice can create a signature for this message by $S \equiv M^{d_A} \mod n$. She can send $S$ as an encrypted message to Bob as in the previous scenario, i.e., $S$ is encrypted by Alice with Bob's public key, then decrypted by Bob with his private key. Bob can recover the message from the signature by $M \equiv S^{e_A}$ as in \ref{SE_id}. 
 
-We can confidently say that the message came from Alice since only she has access to $d_A$, and so only she could have generated the signature $S$. Moreover, we can be confident that Bob did not modify the message $M$ into a tampered message $M'$. This is due to the fact that he is unable to produce the corresponding signature $S'$ for $M'$ since he does not have access to $d_A$. In other words, his knowledge of both $M$ and $S$ cannot be used to created forgeries.
+We can confidently say that the message came from Alice since only she has access to $d_A$, and so only she could have generated the signature $S$. Furthermore, we can be confident that Bob did not modify the message $M$ into a tampered message $M'$. This is due to the fact that he is unable to produce the corresponding signature $S'$ for $M'$ since he does not have access to $d_A$. In other words, his knowledge of both $M$ and $S$ cannot be used to create forgeries.
 
 
 \section{Conclusions}
