@@ -20,6 +20,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{illustration}[theorem]{Illustration}
 
 \begin{document}
 \noindent
@@ -99,6 +100,10 @@ To illustrate the correctness of these operations, we first need to discuss some
     If $a$ is relatively prime to $b$, then $a^{\phi(b)} \equiv 1 \mod b$.
 \end{theorem}
 
+\begin{illustration}
+	Note that 32 is relatively prime to 17. We can verify that $32^{\phi(17)} \equiv 32^{16} \equiv -2^{16} \equiv (-2^4)^4 \equiv 16^4 \equiv -1^4 \equiv 1 \mod 17$.
+\end{illustration}
+
 We can now show that decrypting the ciphertext does indeed yield the original message. By the choice of $e$ and $d$,
 \begin{equation}
 \label{ed_id}
@@ -110,7 +115,7 @@ We can now show that decrypting the ciphertext does indeed yield the original me
     \phi(n) = \phi(p q) = \phi(p) \phi(q) = (p - 1) (q - 1).
 \end{equation}
 
-\noindent Since $M$ and $p$ are relatively prime, we can apply \ref{euler} to obtain
+\noindent Recall that we have chosen $M$ to be relatively prime to $n$, and so it must also be relatively prime to $p$. Thus, we can apply \ref{euler} to obtain
 \begin{equation}
     M^{\phi(p)} \equiv M^{p - 1} \equiv 1 \mod p.
 \end{equation}
