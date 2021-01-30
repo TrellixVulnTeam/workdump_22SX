@@ -36,13 +36,13 @@
 
 
 \abstract
-Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet to accomplish various activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses the RSA algorithm, its mathematical foundations, and how it is used to protect sensitive information.
+Encryption is the process of scrambling information in such a way that it can only be read by select individuals. It is an essential tool as we rely on the internet to accomplish various activities such as online banking, transactions, and private messaging. In these activities, we are often required to communicate sensitive information like passwords, credit card information, home addresses, etc. This paper discusses the RSA algorithm, its mathematical foundations, and how it is used to encrypt sensitive information.
 \keywords
 Cryptography, Internet security, Prime numbers.
 
 
 \section{Introduction}
-The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{rivest1978method}. Asymmetric encryption differs from classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{diffie1976new}. This allows the users to establish a private communication over a public channel. Moreover, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing information \cite{stallings1999cryptography}. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, a digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
+The RSA algorithm is one of the earliest implementations of an asymmetric cryptosystem \cite{rivest1978method}. Asymmetric encryption differs from classical encryption as it uses separate keys for encryption (public key) and decryption (private key) \cite{diffie1976new}. This key pair is generated in such a way that exposing the public key will not compromise the security of the private key; thus, it enables two parties to establish a private communication over a public channel \cite{stallings1999cryptography}. In particular, it secures sensitive data from so-called “man-in-the-middle“ attacks wherein malicious third-party eavesdrops on the communication between two parties with the intent of stealing information. Another key feature of RSA is the ability to create digital signatures. Similar to a physical signature, a digital signature provides a way to prove that a message originated from the sender along with the means to show that the message was not tampered with \cite{diffie1976new}. 
 
 We will discuss how RSA: (a) encrypts a message into ciphertext, (b) decrypts ciphertext back to plaintext, (c) generates digital signatures. Then, we show the correctness of these procedures using Euler’s theorem along with the properties of congruences. Lastly, we will apply these techniques in a sample scenario.
 
@@ -120,7 +120,7 @@ We can now show that decrypting the ciphertext does indeed yield the original me
     M^{k \phi(n) + 1} \equiv M (1) \equiv M \mod p.
 \end{align}
 
-\noindent We can apply similar arguments for $q$,
+\noindent By applying similar arguments for $q$,
 \begin{equation}
     \label{Mmodq}
     M^{k \phi(n) + 1} \equiv M \mod q.
@@ -152,11 +152,11 @@ Hence, we are successful in establishing a private conversation over a public ch
 
 Next, we consider the scenario where Alice wants to send a signed message $M$ to Bob. Alice can create a signature for this message by $S \equiv M^{d_A} \mod n$. She can send $S$ as an encrypted message to Bob as in the previous scenario, i.e., $S$ is encrypted by Alice with Bob's public key, then decrypted by Bob with his private key. Bob can recover the message from the signature by $M \equiv S^{e_A}$ as in \ref{SE_id}. 
 
-We can confidently say that the message came from Alice since only she has access to $d_A$, and so only she could have generated the signature $S$. Furthermore, we can be confident that Bob did not modify the message $M$ into a tampered message $M'$. This is due to the fact that he is unable to produce the corresponding signature $S'$ for $M'$ since he does not have access to $d_A$. In other words, his knowledge of both $M$ and $S$ cannot be used to create forgeries.
+We can confidently say that the message came from Alice since only she has access to $d_A$, and so only she could have generated the signature $S$. Furthermore, we can be confident that Bob did not modify the message $M$ into a tampered message $M'$. This is due to the fact that he cannot produce the corresponding signature $S'$ for $M'$ since he does not have access to $d_A$. In other words, his knowledge of both $M$ and $S$ cannot be used to create forgeries.
 
 
 \section{Conclusions}
-we have to do
+In this paper, we discussed the RSA algorithm as it was proposed in \cite{rivest1978method}. In addition, we discussed asymmetric encryption and its motivations. Finally, we illustrated the usage of RSA in an a sample scenario.
 
 
 \bibliography{IEEEabrv, icdp2009}
