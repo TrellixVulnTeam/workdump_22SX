@@ -18,8 +18,9 @@ class TTSUtil:
         self.is_active = False
 
     def _on_activate(self):
+        logger.info('attempting: _on_activate')
         if not self.is_active:
-            logger.info('on_activate')
+            logger.info('executing: _on_activate')
             self.is_active = True
             text = self.text_interface.retrieve_text()
             self.tts.speak(text)
@@ -27,8 +28,9 @@ class TTSUtil:
             # self.is_active = False
 
     def _on_deactivate(self):
+        logger.info('attempting: _on_deactivate')
         if self.is_active:
-            logger.info('on_deactivate')
+            logger.info('executing: _on_deactivate')
             self.tts.stop()
             self.is_active = False
 
