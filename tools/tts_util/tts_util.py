@@ -1,4 +1,5 @@
 from text_interface import TextInferface
+from macro_interface import MacroInterface
 from tts import TTS
 from pynput import keyboard
 import logging
@@ -13,7 +14,10 @@ class TTSUtil:
     def __init__(self):
         self.activate_hotkey = "`"
         self.deactivate_hotkey = "<esc>"
+        self.toggle_highlight_hotkey = "<ctrl>+<f1>"
+        self.add_edit_highlight_hotkey = "<ctrl>+<f2>"
         self.text_interface = TextInferface()
+        self.macro_interface = MacroInterface()
         self.tts = TTS()
         self.is_active = False
 
@@ -39,6 +43,8 @@ class TTSUtil:
         hotkeys = {
             self.activate_hotkey: self._on_activate,
             self.deactivate_hotkey: self._on_deactivate,
+            self.toggle_highlight_hotkey: self.macro_interface.toggle_highlight,
+            self.add_edit_highlight_hotkey: self.macro_interface.add_edit_highlight,
         }
         with keyboard.GlobalHotKeys(hotkeys) as t:
             t.join()
