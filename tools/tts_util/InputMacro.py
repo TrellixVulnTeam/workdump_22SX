@@ -1,3 +1,4 @@
+from Macro import Macro
 from pynput import keyboard, mouse
 from time import sleep
 import logging
@@ -7,7 +8,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-class InputMacro:
+class InputMacro(Macro):
     def __init__(self):
         self.toggle_highlight_hotkey = "<shift>+!"
         self.add_edit_highlight_hotkey = "<shift>+@"

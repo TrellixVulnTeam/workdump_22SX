@@ -1,3 +1,4 @@
+from Macro import Macro
 from TextInterface import TextInferface
 import pyttsx3
 import logging
@@ -7,7 +8,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-class TTSMacro:
+class TTSMacro(Macro):
     def __init__(self):
         self.speak_hotkey = "`"
         self.stop_speaking_hotkey = "<esc>"
