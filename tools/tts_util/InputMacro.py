@@ -7,50 +7,52 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 
-class MacroInterface:
+class InputMacro:
     def __init__(self):
+        self.toggle_highlight_hotkey = "<shift>+!"
+        self.add_edit_highlight_hotkey = "<shift>+@"
         self.input_wait = 0.01
         self.load_wait = 0.5
         self.keyboard_controller = keyboard.Controller()
         self.mouse_controller = mouse.Controller()
 
+    @property
+    def hotkeys(self):
+        return {
+            self.toggle_highlight_hotkey: self.toggle_highlight,
+            self.add_edit_highlight_hotkey: self.add_edit_highlight,
+        }
 
-    def wait(self, duration=None):
+    def _wait(self, duration=None):
         duration = self.input_wait if duration is None else duration
         sleep(duration)
 
     def _click(self, button, count=1):
         for _ in range(count):
             self.mouse_controller.click(button)
-            self.wait()
+            self._wait()
 
     def _press(self, key, count=1):
         for _ in range(count):
             self.keyboard_controller.press(key)
-            self.wait()
+            self._wait()
 
-    def add_highlight(self):
-        logger.info("attempting: add_highlight")
-        self._click(mouse.Button.right)
-        self._press(keyboard.Key.down, 7)
-        self._press(keyboard.Key.enter)
-
-    def edit_highlight(self):
-        logger.info("attempting: edit_highlight")
+    def _edit_highlight(self):
+        logger.info("attempting: _edit_highlight")
         self._click(mouse.Button.right)
         self._press(keyboard.Key.down, 6)
         self._press(keyboard.Key.enter)
         self._press(keyboard.Key.down)
         self._press(keyboard.Key.enter)
 
-    def add_edit_highlight(self):
-        logger.info("attempting: add_edit_highlight")
-        self.add_highlight()
-        self.wait(self.load_wait)
-        self.edit_highlight()
-
     def toggle_highlight(self):
         logger.info("attempting: toggle_highlight")
         self._click(mouse.Button.right)
         self._press(keyboard.Key.down, 7)
         self._press(keyboard.Key.enter)
+
+    def add_edit_highlight(self):
+        logger.info("attempting: add_edit_highlight")
+        self.toggle_highlight()
+        self._wait(self.load_wait)
+        self._edit_highlight()

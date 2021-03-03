@@ -17,7 +17,7 @@ class TextInferface:
             ("  ", " "),
             ("∈", "in"),
             ("=", "equals"),
-            ("⊂", "proper subset"),
+            ("⊂", "subset"),
             ("⊆", "subset"),
             ("∩", "intersect"),
             ("∪", "union"),
