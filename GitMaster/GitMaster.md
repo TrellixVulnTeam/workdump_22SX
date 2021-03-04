@@ -379,4 +379,14 @@ AutoHotKey is a tool that allows users to trigger OS-level macros using specifie
 <!-- TEMP DUMP
 git ls-files --others --exclude-standard | grep .java$
 git add -u 
+
+BISECT === 
+git log --date=short --pretty=format:"%ad:%Cgreen%an:%Cred%h%d:%Creset%s" -- *EndpointResource.java*
+git bisect start
+...
+git bisect old febb623f7
+git bisect new HEAD
+...
+git bisect reset
+
 -->
