@@ -24,6 +24,11 @@ class InputMacro(Macro):
             self.add_edit_highlight_hotkey: self.add_edit_highlight,
         }
 
+    def _clear_hotkey(self, hotkey):
+        keys = keyboard.HotKey.parse(hotkey)
+        for key in keys:
+            self.keyboard_controller.release(key)
+
     def _wait(self, duration=None):
         duration = self.input_wait if duration is None else duration
         sleep(duration)
@@ -39,9 +44,8 @@ class InputMacro(Macro):
             self._wait()
 
     def _edit_highlight(self):
-        logger.info("attempting: _edit_highlight")
         self._click(mouse.Button.right)
-        self._press(keyboard.Key.down, 6)
+        self._press(keyboard.Key.down, 8)
         self._press(keyboard.Key.enter)
         self._press(keyboard.Key.down)
         self._press(keyboard.Key.enter)
@@ -49,11 +53,13 @@ class InputMacro(Macro):
     def toggle_highlight(self):
         logger.info("attempting: toggle_highlight")
         self._click(mouse.Button.right)
-        self._press(keyboard.Key.down, 7)
+        self._press(keyboard.Key.down, 9)
         self._press(keyboard.Key.enter)
+        self._clear_hotkey(self.toggle_highlight_hotkey)
 
     def add_edit_highlight(self):
         logger.info("attempting: add_edit_highlight")
         self.toggle_highlight()
         self._wait(self.load_wait)
         self._edit_highlight()
+        self._clear_hotkey(self.add_edit_highlight_hotkey)
